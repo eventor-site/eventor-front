@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sikyeojofront.status.dto.request.StatusRequest;
-import com.sikyeojofront.status.dto.response.GetStatusResponse;
+import com.eventorfront.status.dto.request.StatusRequest;
+import com.eventorfront.status.dto.response.GetStatusResponse;
 
 @FeignClient(name = "status-client", url = "http://localhost:8090/back/statuses")
 public interface StatusClient {

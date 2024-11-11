@@ -2,7 +2,7 @@ package com.eventorfront.statustype.service;
 
 import java.util.List;
 
-import com.sikyeojofront.statustype.dto.StatusTypeDto;
+import com.eventorfront.statustype.dto.StatusTypeDto;
 
 public interface StatusTypeService {
 

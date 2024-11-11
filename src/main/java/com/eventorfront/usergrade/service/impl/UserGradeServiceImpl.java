@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.sikyeojofront.usergrade.client.UserGradeClient;
-import com.sikyeojofront.usergrade.dto.UserGradeDto;
-import com.sikyeojofront.usergrade.service.UserGradeService;
+import com.eventorfront.usergrade.client.UserGradeClient;
+import com.eventorfront.usergrade.dto.UserGradeDto;
+import com.eventorfront.usergrade.service.UserGradeService;
 
 import lombok.RequiredArgsConstructor;
 

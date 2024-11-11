@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sikyeojofront.user.dto.response.GetUserByAddShopResponse;
-import com.sikyeojofront.user.service.UserService;
+import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
+import com.eventorfront.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 

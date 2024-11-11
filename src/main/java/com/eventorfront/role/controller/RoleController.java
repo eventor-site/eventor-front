@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sikyeojofront.role.dto.RoleDto;
-import com.sikyeojofront.role.service.RoleService;
+import com.eventorfront.role.dto.RoleDto;
+import com.eventorfront.role.service.RoleService;
 
 import lombok.RequiredArgsConstructor;
 

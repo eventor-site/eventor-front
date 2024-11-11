@@ -2,7 +2,7 @@ package com.eventorfront.usergrade.service;
 
 import java.util.List;
 
-import com.sikyeojofront.usergrade.dto.UserGradeDto;
+import com.eventorfront.usergrade.dto.UserGradeDto;
 
 public interface UserGradeService {
 

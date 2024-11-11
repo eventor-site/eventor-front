@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sikyeojofront.auth.dto.request.LoginRequest;
-import com.sikyeojofront.auth.dto.request.SignUpRequest;
-import com.sikyeojofront.auth.dto.response.LoginResponse;
+import com.eventorfront.auth.dto.request.LoginRequest;
+import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.auth.dto.response.LoginResponse;
 
 @FeignClient(name = "auth-feign-client", url = "http://localhost:8090")
 public interface AuthClient {

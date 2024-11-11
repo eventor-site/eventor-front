@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sikyeojofront.auth.dto.request.LoginRequest;
-import com.sikyeojofront.auth.dto.request.SignUpRequest;
-import com.sikyeojofront.auth.dto.response.LoginResponse;
-import com.sikyeojofront.auth.service.AuthService;
+import com.eventorfront.auth.dto.request.LoginRequest;
+import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.auth.dto.response.LoginResponse;
+import com.eventorfront.auth.service.AuthService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

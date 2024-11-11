@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.sikyeojofront.role.client.RoleClient;
-import com.sikyeojofront.role.dto.RoleDto;
-import com.sikyeojofront.role.service.RoleService;
+import com.eventorfront.role.client.RoleClient;
+import com.eventorfront.role.dto.RoleDto;
+import com.eventorfront.role.service.RoleService;
 
 import lombok.RequiredArgsConstructor;
 

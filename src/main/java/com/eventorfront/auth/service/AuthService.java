@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.ResponseEntity;
 
-import com.sikyeojofront.auth.dto.request.LoginRequest;
-import com.sikyeojofront.auth.dto.request.SignUpRequest;
-import com.sikyeojofront.auth.dto.response.LoginResponse;
+import com.eventorfront.auth.dto.request.LoginRequest;
+import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.auth.dto.response.LoginResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 
