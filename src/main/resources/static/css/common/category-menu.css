@@ -1,0 +1,50 @@
+.categories-container {
+    display: none;
+    position: absolute;
+    left: 20vw;
+    top: 47px;
+}
+
+#category-menu-button {
+    position: relative;
+    z-index: 3;
+    background-color: white;
+}
+
+.active {
+    border: 1px solid #797979;
+    border-bottom: 1px solid white;
+    border-radius: 8px 8px 0 0;
+}
+
+.monte-show {
+    display: block;
+    background-color: white;
+    border: 1px solid #797979;
+    border-radius: 0 8px 8px 8px;
+    padding: 0.5rem 1rem;
+    z-index: 2;
+}
+
+/* 메인 메뉴 아이템 각각의 서브 메뉴 위치 */
+.categories-container > div {
+    position: relative; /* 메인 메뉴에 상대적인 위치로 서브 메뉴 표시 */
+}
+
+.sub-menu {
+    display: none;
+    position: absolute;
+    left: 150%; /* 메인 메뉴 오른쪽에 표시 */
+    top: -10px; /* 메인 메뉴와 수평 정렬 */
+    background-color: white;
+    border: 1px solid #797979;
+    border-radius: 8px;
+    z-index: 1;
+    width: 200px;
+    padding: 0.5rem 1rem;
+}
+
+/* 활성화된 서브 메뉴 표시 */
+.show-sub-menu .sub-menu {
+    display: block;
+}

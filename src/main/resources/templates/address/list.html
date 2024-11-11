@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>시켜줘</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header th:insert="~{common/header}"></header>
+
+<div class="wrapper">
+    <div class="main-content">
+        <section id="page" class="top-container">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>주소 관리</h5>
+                </section>
+                <hr style="width: 100%"/>
+                <section id="page-body">
+                    <h3>주소 리스트</h3>
+                    <h3><a th:href="@{/addresses/create}" class="btn btn-primary">주소 추가</a></h3>
+                    <div th:if="${addresses.size() > 0}">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="inline-text">
+                                <th>번호</th>
+                                <th>우편번호</th>
+                                <th>기본주소</th>
+                                <th>상세주소</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="address, index : ${addresses}">
+                                <td th:text="${index.index + 1}">1</td>
+                                <td th:text="${address.postCode()}"></td>
+                                <td th:text="${address.base()}"></td>
+                                <td th:text="${address.detail()}"></td>
+                                <td style="display: flex; align-items: center;">
+                                    <a th:href="@{/addresses/update/{addressId} (addressId=${address.addressId()})}"
+                                       class="btn btn-warning inline-text">편집</a>
+                                    <form th:action="@{/addresses/{addressId} (addressId=${address.addressId()})}"
+                                          th:method="delete">
+                                        <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:if="${addresses.size() == 0}">
+                        <p>주소이 없습니다.</p>
+                    </div>
+                </section>
+            </section>
+
+        </section>
+    </div>
+</div>
+
+<footer th:insert="~{common/footer}"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

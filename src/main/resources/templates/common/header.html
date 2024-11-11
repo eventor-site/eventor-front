@@ -1,0 +1,59 @@
+<link rel="stylesheet" type="text/css" media="screen" href="/css/common/header.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<section id="header">
+    <div class="top-container">
+        <div class="first-container">
+            <div class="category-container">
+                <button id="category-menu-button" class="category-menu-button">
+                    <i class="fa-solid fa-bars"></i>
+                    <span class="menu-tag">카테고리</span>
+                </button>
+
+                <!-- 카테고리 메뉴 삽입 -->
+                <div th:insert="~{common/category-menu.html}"></div>
+            </div>
+
+            <div class="menu-button-container">
+                <a th:href="@{/favorites/me}">
+                    <div class="menu-button">
+                        <i class="fa-solid fa-heart"></i>
+                        <span class="menu-tag">찜</span>
+                    </div>
+                </a>
+                <a th:href="@{/carts/me}">
+                    <div class="menu-button">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="menu-tag">장바구니</span>
+                    </div>
+                </a>
+                <a th:href="@{/users/my-page}">
+                    <div class="menu-button">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="menu-tag">마이페이지</span>
+                    </div>
+                </a>
+                <div class="profile-container"></div>
+            </div>
+
+        </div>
+        <div class="second-container">
+            <form class="search-form" action="/back/search" method="get">
+                <a th:href="@{/start}" class="site-brand">
+                    <img class="logo-image" th:src="@{/image/ORITANG_BANNER_LIGHT.png}" alt="로고">
+                </a>
+                <label>
+                    <input class="search-input" type="text" name="query" placeholder="찾고 싶은 가게와 메뉴를 검색해보세요">
+                </label>
+                <button class="search-button" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+        <hr style="width: 100%"/>
+    </div>
+
+</section>
+
+<script src="/js/header/login.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
