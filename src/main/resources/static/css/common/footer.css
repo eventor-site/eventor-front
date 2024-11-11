@@ -1,0 +1,52 @@
+footer {
+    background-color: #343a40; /* 푸터 배경색 */
+    color: #fff; /* 텍스트 색상 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    position: relative; /* 상대 위치 */
+    width: 100%; /* 전체 너비 */
+    padding: 20px 0; /* 상하 패딩 추가 */
+    margin-top: auto; /* 푸터를 페이지 하단으로 밀어내기 */
+}
+
+.footer-container {
+    max-width: 1200px; /* 푸터 최대 너비 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+}
+
+.footer-row {
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: space-between; /* 좌우 정렬 */
+    align-items: center; /* 수직 정렬 */
+    flex-wrap: wrap; /* 필요 시 줄 바꿈 */
+}
+
+.footer-left, .footer-right {
+    flex: 1; /* 각 열이 동일한 너비를 가지도록 */
+    padding: 10px; /* 패딩 추가 */
+}
+
+.footer-left {
+    text-align: left; /* 왼쪽 정렬 */
+}
+
+.footer-right {
+    text-align: right; /* 오른쪽 정렬 */
+}
+
+.footer-bottom {
+    margin-top: 20px; /* 하단 텍스트와 위의 내용 사이의 여백 */
+    font-size: 14px; /* 하단 텍스트 크기 */
+}
+
+/* 반응형 설정 */
+@media (max-width: 768px) {
+    .footer-row {
+        flex-direction: column; /* 세로 정렬 */
+        align-items: center; /* 중앙 정렬 */
+    }
+
+    .footer-left, .footer-right {
+        text-align: center; /* 작은 화면에서 텍스트 중앙 정렬 */
+        padding: 5px; /* 패딩 줄이기 */
+    }
+}

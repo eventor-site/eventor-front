@@ -1,0 +1,76 @@
+/* 전체 헤더 스타일 */
+#header {
+    width: 100%;
+    position: relative;
+}
+
+/* 최상단 컨테이너 설정 */
+.top-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* 세로로 정렬 */
+}
+
+/* 첫 번째 컨테이너 설정 */
+.first-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.5rem;
+    background-color: #F2F2F2;
+}
+
+/* 카테고리 버튼 왼쪽 정렬 */
+.category-menu-button {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #797979;
+    background: none;
+    border: 2px black solid;
+    cursor: pointer;
+}
+
+/* 프로필과 메뉴 버튼 정렬 */
+.category-container {
+    display: flex;
+}
+
+/* 프로필과 메뉴 버튼 정렬 */
+.menu-button-container {
+    display: flex;
+    gap: 1rem;
+    margin-right: 1rem;
+}
+
+/* 두 번째 컨테이너 - 로고와 검색 영역 중앙 정렬 */
+.second-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo-image {
+    height: 4rem;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-input {
+    padding: 0 2rem 0 1rem;
+    width: 30rem;
+    height: 45px;
+    border: 1px solid #a8a8a8;
+    border-radius: 6px;
+}
+
+.search-button {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+}

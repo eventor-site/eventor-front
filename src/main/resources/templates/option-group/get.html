@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>시켜줘</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header th:insert="~{common/header}"></header>
+
+<div class="wrapper">
+    <div class="main-content">
+        <section id="page" class="top-container">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>옵션 그룹 관리</h5>
+                </section>
+                <hr style="width: 100%"/>
+                <section id="page-body" th:object="${optionGroup}">
+                    <h3>옵션 그룹 정보 상세</h3>
+
+                    <p><strong>옵션 그룹 이름:</strong> <span th:text="${optionGroup.name}"></span></p>
+                    <p><strong>옵션 필수 선택 개수:</strong> <span th:text="${optionGroup.requiredCount}"></span></p>
+
+
+                    <div class="d-flex justify-content-end">
+                        <a th:href="@{/shops/{shopId}/option-groups/{optionGroupId}/food-option-groups/manage (shopId=${shopId}, optionGroupId=${optionGroupId})}"
+                           class="btn btn-primary">옵션 그룹 할당</a>
+                        <a th:href="@{/shops/{shopId}/option-groups/{optionGroupId}/update (shopId=${shopId}, optionGroupId=${optionGroupId})}"
+                           class="btn btn-warning">편집</a>
+                        <form th:action="@{/shops/{shopId}/option-groups/{optionGroupId} (shopId=${shopId}, optionGroupId=${optionGroupId})}"
+                              th:method="delete">
+                            <button type="submit" class="btn btn-danger">삭제</button>
+                        </form>
+                        <a th:href="@{/shops/{shopId}/option-groups (shopId=${shopId})}"
+                           class="btn btn-secondary">옵션 그룹 리스트</a>
+                    </div>
+
+                    <hr style="width: 100%"/>
+                    <h3>옵션 리스트</h3>
+                    <h3>
+                        <a th:href="@{/shops/{shopId}/option-groups/{optionGroupId}/options/create (shopId=${shopId}, optionGroupId=${optionGroupId})}"
+                           class="btn btn-primary">옵션 추가</a></h3>
+                    <div th:if="${options.size() > 0}">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="inline-text">
+                                <th>번호</th>
+                                <th>옵션 이름</th>
+                                <th>가격</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="option, index : ${options}">
+                                <td th:text="${index.index + 1}"></td>
+                                <td th:text="${option.name}"></td>
+                                <td th:text="${#numbers.formatDecimal(option.price, 1, 'COMMA', 0, 'POINT')}"></td>
+
+                                <td style="display: flex; align-items: center;">
+                                    <a th:href="@{/shops/{shopId}/option-groups/{optionGroupId}/options/{optionId}/update (shopId=${shopId}, optionGroupId=${optionGroupId}, optionId=${option.optionId()})}"
+                                       class="btn btn-warning inline-text">편집</a>
+                                    <form th:action="@{/shops/{shopId}/option-groups/{optionGroupId}/options/{optionId} (shopId=${shopId}, optionGroupId=${optionGroupId}, optionId=${option.optionId()})}"
+                                          th:method="delete">
+                                        <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:if="${options.size() == 0}">
+                        <p>옵션이 없습니다.</p>
+                    </div>
+
+                </section>
+            </section>
+        </section>
+    </div>
+</div>
+
+<footer th:insert="~{common/footer}"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+
+    font-family: 'GMarketSans', sans-serif;
+    min-height: 100vh;
+    /*height: 100vh;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* wrapper 가 화면의 남은 높이를 차지하게 함 */
+}
+
+.main-content {
+    flex: 1;
+}
+
+
+/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+
+@font-face {
+    font-family: 'GMarketSans';
+    src: url("../fonts/GMarketSansTTF/GmarketSansTTFLight.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'GMarketSans';
+    src: url("../fonts/GMarketSansTTF/GmarketSansTTFBold.ttf") format('truetype');
+    font-weight: bold;
+}
+
+.top-container {
+    width: 100vw;
+    padding: 0 20vw;
+}
+
+hr {
+    width: 60vw;
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #333333;
+}
+
+input:focus {
+    outline: none;
+}
+
+#page {
+    width: 100%;
+    min-height: 50vh;
+    display: grid;
+    grid-template-columns: 2fr 9fr;
+    margin-bottom: 1rem;
+}
+
+#page-menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 1rem;
+    min-width: 186px;
+}
+
+#page-menu-container .my-page-menu-icon {
+    width: 2rem;
+    text-align: center;
+}
+
+#page-menu-container a {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 1rem;
+    font-size: 18px;
+    color: #797979;
+    /*border: 1px solid #a8a8a8;*/
+}
+
+#page-menu-container a:hover {
+    font-size: 1.2rem;
+    color: #333333;
+    border-top: 1px solid #F2F2F2;
+    border-bottom: 1px solid #F2F2F2;
+}
+
+#page-content {
+    width: 100%;
+    height: 100%;
+    border-left: 1px solid #c8c8c8;
+    padding: 1.1rem 1.1rem 1.1rem 2.1rem;
+}
+
+#page-header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+#page-body {
+    margin-top: 2rem;
+    padding: 0 1rem;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+#to-admin-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#to-admin-container a {
+    color: #a8a8a8;
+}
+
+#to-admin-container a:hover {
+    color: #333333;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1rem;
+    text-align: center;
+}
+
+table th {
+    color: #797979;
+}
