@@ -1,0 +1,33 @@
+package com.eventorfront.role.client;
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.sikyeojofront.role.dto.RoleDto;
+
+@FeignClient(name = "role-client", url = "http://localhost:8090/back/roles")
+public interface RoleClient {
+
+	@GetMapping
+	ResponseEntity<List<RoleDto>> getRoles();
+
+	@GetMapping("/{roleId}")
+	ResponseEntity<RoleDto> getRole(@PathVariable Long roleId);
+
+	@PostMapping
+	ResponseEntity<Void> createRole(@RequestBody RoleDto request);
+
+	@PutMapping("/{roleId}")
+	ResponseEntity<Void> updateRole(@PathVariable Long roleId, @RequestBody RoleDto request);
+
+	@DeleteMapping("/{roleId}")
+	ResponseEntity<Void> deleteRole(@PathVariable Long roleId);
+}
