@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.sikyeojofront.status.client.StatusClient;
-import com.sikyeojofront.status.dto.request.StatusRequest;
-import com.sikyeojofront.status.dto.response.GetStatusResponse;
-import com.sikyeojofront.status.service.StatusService;
+import com.eventorfront.status.client.StatusClient;
+import com.eventorfront.status.dto.request.StatusRequest;
+import com.eventorfront.status.dto.response.GetStatusResponse;
+import com.eventorfront.status.service.StatusService;
 
 import lombok.RequiredArgsConstructor;
 

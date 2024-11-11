@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.sikyeojofront.category.client.CategoryClient;
-import com.sikyeojofront.category.dto.request.CreateCategoryRequest;
-import com.sikyeojofront.category.dto.request.UpdateCategoryRequest;
-import com.sikyeojofront.category.dto.response.GetCategoryNameResponse;
-import com.sikyeojofront.category.dto.response.GetCategoryResponse;
-import com.sikyeojofront.category.service.CategoryService;
+import com.eventorfront.category.client.CategoryClient;
+import com.eventorfront.category.dto.request.CreateCategoryRequest;
+import com.eventorfront.category.dto.request.UpdateCategoryRequest;
+import com.eventorfront.category.dto.response.GetCategoryNameResponse;
+import com.eventorfront.category.dto.response.GetCategoryResponse;
+import com.eventorfront.category.service.CategoryService;
 
 import lombok.RequiredArgsConstructor;
 

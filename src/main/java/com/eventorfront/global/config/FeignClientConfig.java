@@ -3,7 +3,7 @@ package com.eventorfront.global.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.sikyeojofront.global.interceptor.FeignClientInterceptor;
+import com.eventorfront.global.interceptor.FeignClientInterceptor;
 
 import feign.Client;
 import feign.okhttp.OkHttpClient;

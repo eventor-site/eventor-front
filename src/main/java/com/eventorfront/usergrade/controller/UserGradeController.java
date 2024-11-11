@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sikyeojofront.usergrade.dto.UserGradeDto;
-import com.sikyeojofront.usergrade.service.UserGradeService;
+import com.eventorfront.usergrade.dto.UserGradeDto;
+import com.eventorfront.usergrade.service.UserGradeService;
 
 import lombok.RequiredArgsConstructor;
 

@@ -2,7 +2,7 @@ package com.eventorfront.role.service;
 
 import java.util.List;
 
-import com.sikyeojofront.role.dto.RoleDto;
+import com.eventorfront.role.dto.RoleDto;
 
 public interface RoleService {
 

@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.sikyeojofront.statustype.client.StatusTypeClient;
-import com.sikyeojofront.statustype.dto.StatusTypeDto;
-import com.sikyeojofront.statustype.service.StatusTypeService;
+import com.eventorfront.statustype.client.StatusTypeClient;
+import com.eventorfront.statustype.dto.StatusTypeDto;
+import com.eventorfront.statustype.service.StatusTypeService;
 
 import lombok.RequiredArgsConstructor;
 

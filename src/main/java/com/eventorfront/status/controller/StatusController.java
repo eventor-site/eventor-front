@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sikyeojofront.status.dto.request.StatusRequest;
-import com.sikyeojofront.status.service.StatusService;
-import com.sikyeojofront.statustype.service.StatusTypeService;
+import com.eventorfront.status.dto.request.StatusRequest;
+import com.eventorfront.status.service.StatusService;
+import com.eventorfront.statustype.service.StatusTypeService;
 
 import lombok.RequiredArgsConstructor;
 

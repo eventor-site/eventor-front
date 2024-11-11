@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sikyeojofront.statustype.dto.StatusTypeDto;
+import com.eventorfront.statustype.dto.StatusTypeDto;
 
 @FeignClient(name = "status-type-client", url = "http://localhost:8090/back/status-types")
 public interface StatusTypeClient {

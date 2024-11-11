@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.sikyeojofront.auth.client.AuthClient;
-import com.sikyeojofront.auth.dto.request.LoginRequest;
-import com.sikyeojofront.auth.dto.request.SignUpRequest;
-import com.sikyeojofront.auth.dto.response.LoginResponse;
-import com.sikyeojofront.auth.service.AuthService;
+import com.eventorfront.auth.client.AuthClient;
+import com.eventorfront.auth.dto.request.LoginRequest;
+import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.auth.dto.response.LoginResponse;
+import com.eventorfront.auth.service.AuthService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

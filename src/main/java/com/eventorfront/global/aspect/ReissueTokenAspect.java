@@ -23,7 +23,7 @@ public class ReissueTokenAspect {
 	 * Feign 클라이언트의 메서드가 반환된 후 실행되는 애프터 리턴 어드바이스입니다.
 	 * 응답에서 새로운 액세스 토큰과 리프레시 토큰을 추출하여 쿠키에 설정합니다.
 	 */
-	@AfterReturning(pointcut = "execution(* com.sikyeojofront..client..*(..))", returning = "responseEntity")
+	@AfterReturning(pointcut = "execution(* com.eventorfront..client..*(..))", returning = "responseEntity")
 	public void afterReturning(ResponseEntity<?> responseEntity) {
 		if (responseEntity != null) {
 

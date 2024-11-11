@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sikyeojofront.category.dto.request.CreateCategoryRequest;
-import com.sikyeojofront.category.dto.request.UpdateCategoryRequest;
-import com.sikyeojofront.category.dto.response.GetCategoryNameResponse;
-import com.sikyeojofront.category.service.CategoryService;
+import com.eventorfront.category.dto.request.CreateCategoryRequest;
+import com.eventorfront.category.dto.request.UpdateCategoryRequest;
+import com.eventorfront.category.dto.response.GetCategoryNameResponse;
+import com.eventorfront.category.service.CategoryService;
 
 import lombok.RequiredArgsConstructor;
 

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sikyeojofront.statustype.dto.StatusTypeDto;
-import com.sikyeojofront.statustype.service.StatusTypeService;
+import com.eventorfront.statustype.dto.StatusTypeDto;
+import com.eventorfront.statustype.service.StatusTypeService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.sikyeojofront.role.dto.RoleDto;
+import com.eventorfront.role.dto.RoleDto;
 
 @FeignClient(name = "role-client", url = "http://localhost:8090/back/roles")
 public interface RoleClient {

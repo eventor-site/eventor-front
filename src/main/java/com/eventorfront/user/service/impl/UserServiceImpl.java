@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.sikyeojofront.user.client.UserClient;
-import com.sikyeojofront.user.dto.response.GetUserByAddShopResponse;
-import com.sikyeojofront.user.service.UserService;
+import com.eventorfront.user.client.UserClient;
+import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
+import com.eventorfront.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 

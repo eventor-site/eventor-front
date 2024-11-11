@@ -2,8 +2,8 @@ package com.eventorfront.status.service;
 
 import java.util.List;
 
-import com.sikyeojofront.status.dto.request.StatusRequest;
-import com.sikyeojofront.status.dto.response.GetStatusResponse;
+import com.eventorfront.status.dto.request.StatusRequest;
+import com.eventorfront.status.dto.response.GetStatusResponse;
 
 public interface StatusService {
 
