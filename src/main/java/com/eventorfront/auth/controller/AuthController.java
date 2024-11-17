@@ -67,7 +67,7 @@ public class AuthController {
 		lastLoginAt = loginResponse.lastLoginAt();
 
 		if (accessToken != null) {
-			response.addCookie(createCookie("Authorization", accessToken));
+			response.addCookie(createCookie("Access-Token", accessToken));
 		}
 
 		if (refreshToken != null) {
@@ -85,7 +85,7 @@ public class AuthController {
 	@PostMapping("/logout")
 	public ResponseEntity<Void> logout(HttpServletResponse response) {
 		authService.logout();
-		revokeToken(response, "Authorization");
+		revokeToken(response, "Access-Token");
 		revokeToken(response, "Refresh-Token");
 		return ResponseEntity.ok().build();
 	}

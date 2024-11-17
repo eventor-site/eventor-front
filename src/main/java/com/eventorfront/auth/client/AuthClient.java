@@ -37,7 +37,7 @@ public interface AuthClient {
 
 	@PatchMapping("/api/users/last-login-at")
 	void updateLastLoginAt(
-		@RequestHeader("Authorization") String accessToken,
+		@RequestHeader("Access-Token") String accessToken,
 		@RequestHeader("Refresh-Token") String refreshToken,
 		@RequestBody LocalDateTime lastLoginAt
 	);

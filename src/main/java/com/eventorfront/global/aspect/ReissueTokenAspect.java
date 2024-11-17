@@ -27,11 +27,11 @@ public class ReissueTokenAspect {
 	public void afterReturning(ResponseEntity<?> responseEntity) {
 		if (responseEntity != null) {
 
-			String newAccessToken = responseEntity.getHeaders().getFirst("New-Authorization");
+			String newAccessToken = responseEntity.getHeaders().getFirst("New-Access-Token");
 			String newRefreshToken = responseEntity.getHeaders().getFirst("New-Refresh-Token");
 
 			if (newAccessToken != null) {
-				Cookie accessTokenCookie = new Cookie("Authorization", newAccessToken);
+				Cookie accessTokenCookie = new Cookie("Access-Token", newAccessToken);
 				accessTokenCookie.setHttpOnly(true);
 				accessTokenCookie.setPath("/");
 				getHttpServletResponse().addCookie(accessTokenCookie);
