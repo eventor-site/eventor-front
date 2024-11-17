@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
 		boolean hasRefreshToken = false;
 
 		for (Cookie cookie : cookies) {
-			if ("Authorization".equals(cookie.getName())) {
+			if ("Access-Token".equals(cookie.getName())) {
 				hasAccessToken = true;
 			}
 			if ("Refresh-Token".equals(cookie.getName())) {
