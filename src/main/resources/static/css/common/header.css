@@ -51,6 +51,14 @@
     padding: 1rem 0;
 }
 
+/* 세 번째 컨테이너 - 로고와 검색 영역 중앙 정렬 */
+.third-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+}
+
 .logo-image {
     height: 4rem;
 }

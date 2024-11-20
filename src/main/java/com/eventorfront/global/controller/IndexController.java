@@ -1,30 +1,43 @@
 package com.eventorfront.global.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.eventorfront.post.service.PostService;
+
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class IndexController {
+	private final PostService postService;
 
 	@GetMapping("/")
 	public String indexPage() {
 		return "index";
 	}
 
-	@GetMapping("/start")
-	public String startPage() {
-		return "start";
+	@GetMapping("/main")
+	public String mainPage(Model model) {
+		model.addAttribute("posts", postService.getPostsByCategoryName("전체"));
+		model.addAttribute("latestPosts", new ArrayList<>());
+		model.addAttribute("hotPosts", new ArrayList<>());
+		model.addAttribute("recommendedPosts", new ArrayList<>());
+		return "page/main";
+	}
+
+	@GetMapping("/users/admin")
+	public String adminPage() {
+		return "admin";
 	}
 
 	// @GetMapping("/")
 	// public String indexPage() {
 	// 	return "redirect:/main";
 	// }
-
-	@GetMapping("/api/users/admin")
-	public String adminPage() {
-		return "admin/admin-account";
-	}
 
 	@GetMapping("/api/users/me")
 	public String userPage() {
