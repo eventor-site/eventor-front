@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             credentials: 'include',
         }).then(response => {
             if (response.ok) {
-                window.location.href = '/start';
+                window.location.href = '/main';
             }
         }).catch(error => {
             console.error('로그아웃 중 오류 발생: ', error);

@@ -21,10 +21,10 @@
                         <span class="menu-tag">찜</span>
                     </div>
                 </a>
-                <a th:href="@{/carts/me}">
+                <a th:href="@{/users/admin}">
                     <div class="menu-button">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="menu-tag">장바구니</span>
+                        <i class="fa-solid fa-user"></i>
+                        <span class="menu-tag">관리자페이지</span>
                     </div>
                 </a>
                 <a th:href="@{/users/my-page}">
@@ -39,16 +39,24 @@
         </div>
         <div class="second-container">
             <form class="search-form" action="/back/search" method="get">
-                <a th:href="@{/start}" class="site-brand">
-                    <img class="logo-image" th:src="@{/image/ORITANG_BANNER_LIGHT.png}" alt="로고">
+                <a th:href="@{/main}" class="site-brand">
+                    <img class="logo-image" src="/image/free-icon-event.png" alt="로고">
                 </a>
                 <label>
-                    <input class="search-input" type="text" name="query" placeholder="찾고 싶은 가게와 메뉴를 검색해보세요">
+                    <input class="search-input" type="text" name="query" placeholder="통합 검색">
                 </label>
                 <button class="search-button" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
+        </div>
+        <div class="third-container">
+            <div>
+                <a th:href="@{/posts/all}" class="btn btn-info" style="width: 120px;">전체</a>
+                <a th:href="@{/posts(categoryName='공지')}" class="btn btn-primary" style="width: 120px;">공지</a>
+                <a th:href="@{/posts(categoryName='이벤트')}" class="btn btn-info" style="width: 120px;">이벤트</a>
+                <a th:href="@{/posts(categoryName='자유')}" class="btn btn-success" style="width: 120px;">자유</a>
+            </div>
         </div>
         <hr style="width: 100%"/>
     </div>

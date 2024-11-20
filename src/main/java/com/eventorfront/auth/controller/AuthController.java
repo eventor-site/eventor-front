@@ -76,7 +76,7 @@ public class AuthController {
 
 		authService.updateLastLoginAt(accessToken, refreshToken, lastLoginAt);
 
-		return "redirect:/start";
+		return "redirect:/main";
 	}
 
 	/**
