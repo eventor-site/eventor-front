@@ -45,10 +45,26 @@
 
             <hr style="width: 100%"/>
 
-            <article class="review-article">
-                <h1 class="sr-only">Tab Article</h1>
-                <p th:utext="${post.content}"></p>
-            </article>
+            <!-- 이미지 출력 -->
+            <div class="image-gallery">
+                <div th:each="image : ${post.images}" class="image-container">
+                    <!-- 이미지 -->
+                    <img th:src="${image.url}" alt="이미지"/>
+                </div>
+            </div>
+
+            <p th:utext="${post.content}"></p>
+
+            <hr style="width: 100%"/>
+
+            <!-- 첨부파일 -->
+            <div class="image-gallery" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <p>첨부파일</p>
+                <div th:each="image : ${post.images}" class="image-container" style="position: relative;">
+                    <!-- 이미지 파일명 -->
+                    <a th:href="${image.url}" th:text="${image.originalName}"></a>
+                </div>
+            </div>
 
 
             <div style="display: flex; align-items: center;">

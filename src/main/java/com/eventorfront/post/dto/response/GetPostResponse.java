@@ -1,6 +1,9 @@
 package com.eventorfront.post.dto.response;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.eventorfront.image.dto.response.GetImageResponse;
 
 import lombok.Builder;
 
@@ -15,5 +18,6 @@ public record GetPostResponse(
 	Long viewCount,
 	LocalDateTime createdAt,
 	Boolean isNotification,
+	List<GetImageResponse> images,
 	Boolean isWriter) {
 }

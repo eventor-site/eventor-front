@@ -2,6 +2,8 @@ package com.eventorfront.post.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
@@ -16,7 +18,7 @@ public interface PostService {
 
 	GetPostResponse getPost(Long postId);
 
-	CreatePostResponse createPost(CreatePostRequest request);
+	CreatePostResponse createPost(CreatePostRequest request, List<MultipartFile> files);
 
 	void updatePost(Long postId, UpdatePostRequest request);
 
