@@ -33,11 +33,26 @@
                 </div>
 
                 <div class="form-group">
-                    <!--                    <label for="content">내용</label>-->
+                    <label for="content">내용</label>
                     <div id="toastUi"></div>
                     <input type="hidden" id="content" name="content">
-                    <!--                    <textarea class="form-control" id="content" name="content" rows="10"></textarea>-->
                 </div>
+
+                <!-- 이미지 파일 선택 필드 추가 -->
+                <div class="form-group">
+                    <label for="files">이미지</label>
+                    <p>한파일당 최대 10MB 까지 업로드 가능하며, 최대 업로드 용량은 10MB 입니다.</p>
+                    <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif"</p>
+                    <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple>
+
+                    <div id="imagePreviewContainer" style="display: flex; gap: 10px; margin-top: 10px;"></div>
+
+                    <div>
+                        <p>파일 개수: <span id="fileCount">0</span></p>
+                        <p>총 용량: <span id="totalSize">0</span> MB</p>
+                    </div>
+                </div>
+
 
                 <div>
                     <label for="isNotification">알림 받기</label>
@@ -59,6 +74,7 @@
 
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/js/post/editor.js"></script>
+<script src="/js/post/imagePreview.js"></script>
 </body>
 
 </html>

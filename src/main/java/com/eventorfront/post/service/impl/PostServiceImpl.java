@@ -1,9 +1,12 @@
 package com.eventorfront.post.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.eventorfront.image.client.ImageClient;
 import com.eventorfront.post.client.PostClient;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
@@ -18,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 	private final PostClient postClient;
+	private final ImageClient imageClient;
 
 	@Override
 	public List<GetPostSimpleResponse> getPosts() {
@@ -35,8 +39,12 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public CreatePostResponse createPost(CreatePostRequest request) {
-		return postClient.createPost(request).getBody();
+	public CreatePostResponse createPost(CreatePostRequest request, List<MultipartFile> files) {
+		CreatePostResponse response = postClient.createPost(request).getBody();
+		if (!files.isEmpty()) {
+			imageClient.upload(files, "postimage", Objects.requireNonNull(response).postId());
+		}
+		return response;
 	}
 
 	@Override

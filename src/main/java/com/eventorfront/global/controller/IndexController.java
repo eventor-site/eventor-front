@@ -1,7 +1,5 @@
 package com.eventorfront.global.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +20,9 @@ public class IndexController {
 
 	@GetMapping("/main")
 	public String mainPage(Model model) {
-		model.addAttribute("posts", postService.getPostsByCategoryName("전체"));
-		model.addAttribute("latestPosts", new ArrayList<>());
-		model.addAttribute("hotPosts", new ArrayList<>());
-		model.addAttribute("recommendedPosts", new ArrayList<>());
+		model.addAttribute("latestPosts", postService.getPostsByCategoryName("전체"));
+		model.addAttribute("hotPosts", postService.getPostsByCategoryName("전체"));
+		model.addAttribute("recommendedPosts", postService.getPostsByCategoryName("전체"));
 		return "page/main";
 	}
 
