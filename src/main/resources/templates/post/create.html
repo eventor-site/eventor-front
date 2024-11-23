@@ -56,7 +56,10 @@
 
                 <div>
                     <label for="isNotification">알림 받기</label>
-                    <input type="checkbox" id="isNotification" name="isNotification">
+                    <!-- 기본값 false 를 전달하기 위한 hidden input -->
+                    <input type="hidden" name="isNotification" value="false">
+                    <!-- 체크되었을 때만 true 가 전달 -->
+                    <input type="checkbox" id="isNotification" name="isNotification" value="true">
                 </div>
 
                 <button type="submit" class="btn btn-primary">등록</button>

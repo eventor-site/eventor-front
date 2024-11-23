@@ -14,6 +14,12 @@ public interface PostService {
 
 	List<GetPostSimpleResponse> getPosts();
 
+	List<GetPostSimpleResponse> getHotEventPosts();
+
+	List<GetPostSimpleResponse> getLatestEventPosts();
+
+	List<GetPostSimpleResponse> getRecommendationEventPosts();
+
 	List<GetPostSimpleResponse> getPostsByCategoryName(String categoryName);
 
 	GetPostResponse getPost(Long postId);

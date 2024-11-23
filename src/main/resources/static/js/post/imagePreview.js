@@ -106,12 +106,6 @@ document.getElementById('form').addEventListener('submit', function (e) {
         }
     });
 
-    if (selectedFiles.length === 0) {
-        alert('업로드할 이미지를 선택하세요.');
-        e.preventDefault(); // 폼 제출 취소
-        return;
-    }
-
     // 선택된 파일을 새로 구성
     const dataTransfer = new DataTransfer();
     selectedFiles.forEach(file => dataTransfer.items.add(file));

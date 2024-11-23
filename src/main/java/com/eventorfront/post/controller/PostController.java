@@ -42,7 +42,7 @@ public class PostController {
 	public String getPosts(Model model) {
 		model.addAttribute("categoryName", "전체");
 		model.addAttribute("posts", postService.getPosts());
-		return "post/list";
+		return "post/all";
 	}
 
 	@GetMapping

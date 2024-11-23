@@ -20,9 +20,9 @@ public class IndexController {
 
 	@GetMapping("/main")
 	public String mainPage(Model model) {
-		model.addAttribute("latestPosts", postService.getPostsByCategoryName("전체"));
-		model.addAttribute("hotPosts", postService.getPostsByCategoryName("전체"));
-		model.addAttribute("recommendedPosts", postService.getPostsByCategoryName("전체"));
+		model.addAttribute("hotPosts", postService.getHotEventPosts());
+		model.addAttribute("latestPosts", postService.getLatestEventPosts());
+		model.addAttribute("recommendedPosts", postService.getRecommendationEventPosts());
 		return "page/main";
 	}
 

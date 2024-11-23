@@ -27,7 +27,7 @@
                     <p><strong>제목:</strong> <span th:text="${post.title}"></span></p>
                 </div>
                 <div class="right">
-                    <p><strong>작성자:</strong> <span th:text="${post.writer}"></span></p>
+                    <p><strong>작성자:</strong> <span th:text="${post.writer()}"></span></p>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
             </div>
 
 
-            <div style="display: flex; align-items: center;">
+            <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
                 <a th:href="@{/posts/{postId}/update (postId=${post.postId()})}"
                    class="btn btn-warning inline-text">수정</a>
                 <form th:action="@{/posts/{postId} (postId=${post.postId()})}" th:method="delete">
