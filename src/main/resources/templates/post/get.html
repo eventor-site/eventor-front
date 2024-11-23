@@ -58,7 +58,8 @@
             <hr style="width: 100%"/>
 
             <!-- 첨부파일 -->
-            <div class="image-gallery" style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <div th:if="${!post.images().isEmpty()}" class="image-gallery"
+                 style="display: flex; flex-wrap: wrap; gap: 10px;">
                 <p>첨부파일</p>
                 <div th:each="image : ${post.images}" class="image-container" style="position: relative;">
                     <!-- 이미지 파일명 -->

@@ -3,9 +3,9 @@
 }
 
 .event-slider {
-    margin: 0 auto;
-    padding: 10px;
-    max-width: 90%;
+    overflow: visible !important; /* 화살표가 잘리지 않도록 */
+    position: relative;
+    padding: 0 50px; /* 화살표 공간 확보 */
 }
 
 .event-card {
@@ -18,7 +18,7 @@
 
 .event-card img {
     width: 100%;
-    height: 200px;
+    height: 400px;
     object-fit: cover;
 }
 
@@ -32,27 +32,72 @@
     margin-bottom: 10px;
 }
 
-/* 슬라이더 화살표 스타일 */
-.slick-prev, .slick-next {
-    font-size: 30px; /* 화살표 크기 */
-    color: #000; /* 화살표 색상 */
-    background-color: rgba(255, 255, 255, 0.5); /* 배경 색상 */
-    border-radius: 50%; /* 원형으로 만들기 */
-    padding: 10px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
+.slick-prev i, .slick-next i {
+    font-size: 50px; /* 아이콘 크기 */
+    color: #858484; /* 기본 색상 */
+    background-color: rgba(255, 255, 255, 0.8); /* 배경색 */
+    border-radius: 50%; /* 둥근 화살표 */
+    top: 50%; /* 슬라이더의 높이를 기준으로 수직 중앙 */
+    transform: translateY(-50%); /* 실제 위치를 중앙으로 보정 */
 }
 
 .slick-prev {
-    left: 10px; /* 왼쪽 화살표 위치 */
+    left: -40px; /* 왼쪽 화살표 위치 */
 }
 
 .slick-next {
-    right: 10px; /* 오른쪽 화살표 위치 */
+    right: -40px; /* 오른쪽 화살표 위치 */
 }
 
-.slick-prev:hover, .slick-next:hover {
-    background-color: rgba(0, 0, 0, 0.5); /* 호버 시 배경색 변화 */
+.slick-prev:hover i, .slick-next:hover i {
+    color: rgb(71, 71, 71); /* 호버 시 아이콘 색상 변경 */
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .event-slider {
+        padding: 0 20px; /* 좁은 화면에서는 여백 감소 */
+    }
+
+    .event-card img {
+        height: 300px; /* 이미지 높이 축소 */
+    }
+
+    .slick-prev i, .slick-next i {
+        font-size: 40px; /* 화살표 크기 축소 */
+    }
+
+    .slick-prev {
+        left: -25px; /* 좁은 화면에서 화살표 위치 조정 */
+    }
+
+    .slick-next {
+        right: -25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .event-slider {
+        padding: 0 10px; /* 더 좁은 화면에서 여백 최소화 */
+    }
+
+    .event-card img {
+        height: 250px; /* 이미지 높이 더 축소 */
+    }
+
+    .event-card-title {
+        font-size: 14px; /* 제목 크기 축소 */
+    }
+
+    .slick-prev i, .slick-next i {
+        font-size: 30px; /* 화살표 크기 축소 */
+    }
+
+    .slick-prev {
+        left: -15px; /* 모바일 화살표 위치 조정 */
+    }
+
+    .slick-next {
+        right: -15px;
+    }
 }

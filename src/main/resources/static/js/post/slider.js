@@ -7,8 +7,8 @@ $(document).ready(function () {
         arrows: true,
         autoplay: true,
         autoplaySpeed: 3000,
-        prevArrow: '<button type="button" class="slick-prev">←</button>', // 왼쪽 화살표
-        nextArrow: '<button type="button" class="slick-next">→</button>', // 오른쪽 화살표
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-caret-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-caret-right"></i></button>',
         responsive: [
             {
                 breakpoint: 768,
