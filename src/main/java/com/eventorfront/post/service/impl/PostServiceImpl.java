@@ -29,6 +29,21 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public List<GetPostSimpleResponse> getHotEventPosts() {
+		return postClient.getHotEventPosts().getBody();
+	}
+
+	@Override
+	public List<GetPostSimpleResponse> getLatestEventPosts() {
+		return postClient.getLatestEventPosts().getBody();
+	}
+
+	@Override
+	public List<GetPostSimpleResponse> getRecommendationEventPosts() {
+		return postClient.getRecommendationEventPosts().getBody();
+	}
+
+	@Override
 	public List<GetPostSimpleResponse> getPostsByCategoryName(String categoryName) {
 		return postClient.getPostsByCategoryName(categoryName).getBody();
 	}

@@ -2,12 +2,18 @@
     margin-bottom: 50px;
 }
 
+.event-slider {
+    margin: 0 auto;
+    padding: 10px;
+    max-width: 90%;
+}
+
 .event-card {
-    margin: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .event-card img {
@@ -18,11 +24,35 @@
 
 .event-card-body {
     padding: 10px;
-    text-align: center;
 }
 
 .event-card-title {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+/* 슬라이더 화살표 스타일 */
+.slick-prev, .slick-next {
+    font-size: 30px; /* 화살표 크기 */
+    color: #000; /* 화살표 색상 */
+    background-color: rgba(255, 255, 255, 0.5); /* 배경 색상 */
+    border-radius: 50%; /* 원형으로 만들기 */
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.slick-prev {
+    left: 10px; /* 왼쪽 화살표 위치 */
+}
+
+.slick-next {
+    right: 10px; /* 오른쪽 화살표 위치 */
+}
+
+.slick-prev:hover, .slick-next:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* 호버 시 배경색 변화 */
 }

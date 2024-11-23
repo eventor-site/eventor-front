@@ -19,5 +19,5 @@ public record GetPostResponse(
 	LocalDateTime createdAt,
 	Boolean isNotification,
 	List<GetImageResponse> images,
-	Boolean isWriter) {
+	Boolean isAuthorized) {
 }

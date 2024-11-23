@@ -24,6 +24,15 @@ public interface PostClient {
 	@GetMapping("/all")
 	ResponseEntity<List<GetPostSimpleResponse>> getPosts();
 
+	@GetMapping("/event/hot")
+	ResponseEntity<List<GetPostSimpleResponse>> getHotEventPosts();
+
+	@GetMapping("/event/latest")
+	ResponseEntity<List<GetPostSimpleResponse>> getLatestEventPosts();
+
+	@GetMapping("/event/recommendation")
+	ResponseEntity<List<GetPostSimpleResponse>> getRecommendationEventPosts();
+
 	@GetMapping
 	ResponseEntity<List<GetPostSimpleResponse>> getPostsByCategoryName(@RequestParam String categoryName);
 
