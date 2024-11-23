@@ -69,6 +69,13 @@
     gap: 0.5rem;
 }
 
+.site-name {
+    font-family: 'Headland One', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    color: #333;
+}
+
 .search-input {
     padding: 0 2rem 0 1rem;
     width: 30rem;
@@ -81,4 +88,84 @@
     font-size: 1.5rem;
     background: none;
     border: none;
+}
+
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .first-container {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .category-menu-button {
+        font-size: 1.2rem;
+    }
+
+    .category-container {
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu-button-container {
+        margin-right: 0;
+        gap: 0.5rem;
+    }
+
+    /* 두 번째 컨테이너 */
+    .second-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .third-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .logo-image {
+        height: 3rem;
+    }
+
+    .site-name {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .search-form {
+        width: 100%;
+        gap: 0.3rem;
+        justify-content: space-between;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0 1rem;
+        font-size: 14px;
+    }
+
+    .search-button {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-name {
+        font-size: 28px;
+    }
+
+    .search-input {
+        padding: 0 1rem;
+        font-size: 13px;
+    }
+
+    .search-button {
+        font-size: 1.2rem;
+    }
+
+    .logo-image {
+        height: 2.5rem;
+    }
 }

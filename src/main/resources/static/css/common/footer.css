@@ -38,15 +38,36 @@ footer {
     font-size: 14px; /* 하단 텍스트 크기 */
 }
 
-/* 반응형 설정 */
+
+/* 반응형 디자인 */
 @media (max-width: 768px) {
     .footer-row {
-        flex-direction: column; /* 세로 정렬 */
-        align-items: center; /* 중앙 정렬 */
+        flex-direction: column; /* 세로로 쌓이게 변경 */
+        align-items: flex-start; /* 왼쪽 정렬 */
     }
 
     .footer-left, .footer-right {
-        text-align: center; /* 작은 화면에서 텍스트 중앙 정렬 */
-        padding: 5px; /* 패딩 줄이기 */
+        text-align: left; /* 모든 내용 왼쪽 정렬 */
+        flex: none; /* flex 속성 제거 */
+        width: 100%; /* 너비 100%로 설정 */
+        padding: 8px; /* 패딩 조정 */
+    }
+
+    .footer-bottom {
+        font-size: 12px; /* 하단 텍스트 크기 조정 */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-row {
+        padding: 10px 0; /* 여백 추가 */
+    }
+
+    .footer-left, .footer-right {
+        text-align: center; /* 모바일에서는 텍스트 중앙 정렬 */
+    }
+
+    .footer-bottom {
+        font-size: 12px; /* 하단 텍스트 크기 조정 */
     }
 }
