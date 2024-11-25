@@ -11,5 +11,6 @@ public record GetPostSimpleResponse(
 	String title,
 	Long recommendationCount,
 	Long viewCount,
-	LocalDateTime createdAt) {
+	LocalDateTime createdAt,
+	Boolean isAuthorized) {
 }

@@ -48,7 +48,7 @@ public class PostController {
 	@GetMapping
 	public String getPostsByCategoryName(Model model, @RequestParam String categoryName) {
 		model.addAttribute("categoryName", categoryName);
-		model.addAttribute("posts", postService.getPostsByCategoryName(categoryName));
+		model.addAttribute("response", postService.getPostsByCategoryName(categoryName));
 		return "post/list";
 	}
 

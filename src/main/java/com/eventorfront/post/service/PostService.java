@@ -7,20 +7,22 @@ import org.springframework.web.multipart.MultipartFile;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
+import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
+import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 
 public interface PostService {
 
 	List<GetPostSimpleResponse> getPosts();
 
-	List<GetPostSimpleResponse> getHotEventPosts();
+	List<GetMainPostResponse> getHotEventPosts();
 
-	List<GetPostSimpleResponse> getLatestEventPosts();
+	List<GetMainPostResponse> getLatestEventPosts();
 
-	List<GetPostSimpleResponse> getRecommendationEventPosts();
+	List<GetMainPostResponse> getRecommendationEventPosts();
 
-	List<GetPostSimpleResponse> getPostsByCategoryName(String categoryName);
+	GetPostsByCategoryNameResponse getPostsByCategoryName(String categoryName);
 
 	GetPostResponse getPost(Long postId);
 

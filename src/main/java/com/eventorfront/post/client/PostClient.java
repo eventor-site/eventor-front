@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
+import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
+import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 
 @FeignClient(name = "post-client", url = "http://localhost:8090/back/posts")
 public interface PostClient {
@@ -25,16 +27,16 @@ public interface PostClient {
 	ResponseEntity<List<GetPostSimpleResponse>> getPosts();
 
 	@GetMapping("/event/hot")
-	ResponseEntity<List<GetPostSimpleResponse>> getHotEventPosts();
+	ResponseEntity<List<GetMainPostResponse>> getHotEventPosts();
 
 	@GetMapping("/event/latest")
-	ResponseEntity<List<GetPostSimpleResponse>> getLatestEventPosts();
+	ResponseEntity<List<GetMainPostResponse>> getLatestEventPosts();
 
 	@GetMapping("/event/recommendation")
-	ResponseEntity<List<GetPostSimpleResponse>> getRecommendationEventPosts();
+	ResponseEntity<List<GetMainPostResponse>> getRecommendationEventPosts();
 
 	@GetMapping
-	ResponseEntity<List<GetPostSimpleResponse>> getPostsByCategoryName(@RequestParam String categoryName);
+	ResponseEntity<GetPostsByCategoryNameResponse> getPostsByCategoryName(@RequestParam String categoryName);
 
 	@GetMapping("/{postId}")
 	ResponseEntity<GetPostResponse> getPost(@PathVariable Long postId);
