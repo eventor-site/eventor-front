@@ -33,7 +33,8 @@
                         <div class="event-card">
                             <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
-                                <img src="/image/free-icon-event.png" alt="이벤트 이미지">
+                                <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
+                                <img th:if="${post.imageUrl == null}" src="/image/free-icon-event.png" alt="이벤트 이미지">
                             </a>
                             <div class="event-card-body">
                                 <div class="event-card-title" th:text="${post.title}"></div>
@@ -51,7 +52,8 @@
                         <div class="event-card">
                             <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
-                                <img src="/image/free-icon-event.png" alt="이벤트 이미지">
+                                <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
+                                <img th:if="${post.imageUrl == null}" src="/image/free-icon-event.png" alt="이벤트 이미지">
                             </a>
                             <div class="event-card-body">
                                 <div class="event-card-title" th:text="${post.title}"></div>
@@ -69,7 +71,8 @@
                         <div class="event-card">
                             <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
-                                <img src="/image/free-icon-event.png" alt="이벤트 이미지">
+                                <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
+                                <img th:if="${post.imageUrl == null}" src="/image/free-icon-event.png" alt="이벤트 이미지">
                             </a>
                             <div class="event-card-body">
                                 <div class="event-card-title" th:text="${post.title}"></div>

@@ -11,8 +11,10 @@ import com.eventorfront.post.client.PostClient;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
+import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
+import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,22 +31,22 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<GetPostSimpleResponse> getHotEventPosts() {
+	public List<GetMainPostResponse> getHotEventPosts() {
 		return postClient.getHotEventPosts().getBody();
 	}
 
 	@Override
-	public List<GetPostSimpleResponse> getLatestEventPosts() {
+	public List<GetMainPostResponse> getLatestEventPosts() {
 		return postClient.getLatestEventPosts().getBody();
 	}
 
 	@Override
-	public List<GetPostSimpleResponse> getRecommendationEventPosts() {
+	public List<GetMainPostResponse> getRecommendationEventPosts() {
 		return postClient.getRecommendationEventPosts().getBody();
 	}
 
 	@Override
-	public List<GetPostSimpleResponse> getPostsByCategoryName(String categoryName) {
+	public GetPostsByCategoryNameResponse getPostsByCategoryName(String categoryName) {
 		return postClient.getPostsByCategoryName(categoryName).getBody();
 	}
 

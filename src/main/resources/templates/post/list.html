@@ -20,8 +20,9 @@
         <div class="top-container2">
             <h5>카테고리: <span th:text="${categoryName}"></span></h5>
             <hr style="width: 100%"/>
-            <h3><a th:href="@{/posts/create(categoryName=${categoryName})}" class="btn btn-primary">게시글 작성</a></h3>
-            <div th:if="${posts.size() > 0}">
+            <h3><a th:if="${response.isAuthorized}" th:href="@{/posts/create(categoryName=${categoryName})}"
+                   class="btn btn-primary">게시글 작성</a></h3>
+            <div th:if="${response.data().size() > 0}">
                 <table class="table table-bordered">
                     <thead>
                     <tr class="inline-text">
@@ -33,7 +34,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="post, index : ${posts}">
+                    <tr th:each="post, index : ${response.data()}">
                         <td>
                             <!-- 제목을 클릭하면 해당 게시글로 이동 -->
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}" th:text="${post.title}"></a>
@@ -46,7 +47,7 @@
                     </tbody>
                 </table>
             </div>
-            <div th:if="${posts.size() == 0}">
+            <div th:if="${response.data().size() == 0}">
                 <p>게시글이 없습니다.</p>
             </div>
         </div>
