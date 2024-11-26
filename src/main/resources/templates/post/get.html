@@ -76,6 +76,48 @@
                 </form>
             </div>
 
+            <hr style="width: 100%"/>
+
+            <!-- 댓글 섹션 -->
+            <div class="comment-section">
+                <h5>댓글</h5>
+                <hr style="width: 100%"/>
+
+                <!--                &lt;!&ndash; 댓글 리스트 &ndash;&gt;-->
+                <!--                <div th:each="comment : ${post.comments}" class="comment">-->
+                <!--                    <p>-->
+                <!--                        <strong th:text="${comment.writer}"></strong> <span-->
+                <!--                            th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>-->
+                <!--                    </p>-->
+                <!--                    <p th:utext="${comment.content}"></p>-->
+                <!--                    <hr style="width: 100%"/>-->
+                <!--                </div>-->
+
+                <!--                &lt;!&ndash; 댓글 작성 폼 &ndash;&gt;-->
+                <!--                <div class="comment-form" style="margin-top: 20px;">-->
+                <!--                    <h6>댓글 작성</h6>-->
+                <!--                    <form th:action="@{/posts/{postId}/comments (postId=${post.postId()})}" th:method="post">-->
+                <!--                        <div class="form-group">-->
+                <!--                            <textarea class="form-control" name="content" rows="3" placeholder="댓글을 작성하세요..."-->
+                <!--                                      required></textarea>-->
+                <!--                        </div>-->
+                <!--                        <button type="submit" class="btn btn-primary">댓글 등록</button>-->
+                <!--                    </form>-->
+                <!--                </div>-->
+
+                <!--                <div th:if="${currentUser != null}" class="comment-form" style="margin-top: 20px;">-->
+                <!--                    &lt;!&ndash; 댓글 작성 폼 &ndash;&gt;-->
+                <!--                </div>-->
+                <!--                <div th:if="${currentUser == null}">-->
+                <!--                    <p>댓글을 작성하려면 로그인하세요.</p>-->
+                <!--                </div>-->
+
+                <!-- 댓글 작성 폼 -->
+                <div class="comment-form-container">
+                    <!-- JavaScript가 동적으로 렌더링 -->
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
@@ -86,6 +128,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/js/post/token.js"></script>
 
 </body>
 </html>
