@@ -32,3 +32,13 @@
     max-height: 100%; /* 컨테이너 크기를 초과하지 않음 */
     display: block;
 }
+
+.recommend-container {
+    display: flex; /* flexbox 레이아웃 사용 */
+    align-items: center; /* 세로 가운데 정렬 */
+    gap: 10px; /* 요소 간 간격 */
+}
+
+.recommend-container p {
+    margin: 0; /* 기본 여백 제거 */
+}

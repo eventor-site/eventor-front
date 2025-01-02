@@ -30,5 +30,9 @@ public interface PostService {
 
 	void updatePost(Long postId, UpdatePostRequest request);
 
+	void recommendPost(Long postId);
+
+	void disrecommendPost(Long postId);
+
 	void deletePost(Long postId);
 }
