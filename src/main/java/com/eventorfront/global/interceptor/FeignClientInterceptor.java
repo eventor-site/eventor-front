@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 김태환
  * Feign 클라이언트의 요청을 가로채고 수정하는 인터셉터입니다.
  * 이 클래스는 현재 요청의 쿠키에서 `Access-Token` 및 `Refresh-Token` 값을 추출하여
  * Feign 클라이언트의 요청 헤더에 추가합니다.
@@ -23,8 +22,6 @@ public class FeignClientInterceptor implements RequestInterceptor {
 	/**
 	 * 요청 템플릿에 현재 요청의 쿠키에서 추출한 `Access-Token` 및 `Refresh-Token` 값을
 	 * 헤더로 추가합니다.
-	 *
-	 * @param template 수정할 Feign 요청 템플릿
 	 */
 	@Override
 	public void apply(RequestTemplate template) {

@@ -70,6 +70,16 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public void recommendPost(Long postId) {
+		postClient.recommendPost(postId);
+	}
+
+	@Override
+	public void disrecommendPost(Long postId) {
+		postClient.disrecommendPost(postId);
+	}
+
+	@Override
 	public void deletePost(Long postId) {
 		postClient.deletePost(postId);
 	}

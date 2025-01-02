@@ -55,6 +55,17 @@
 
             <p th:utext="${post.content}"></p>
 
+            <div class="recommend-container">
+                <p>추천수: <span class="recommendation-count" th:text="${post.recommendationCount}"></span></p>
+                <form th:action="@{/posts/{postId}/recommend (postId=${post.postId})}" th:method="put">
+                    <button class="btn btn-sm btn-outline-primary">추천</button>
+                </form>
+                <form th:action="@{/posts/{postId}/disrecommendPost (postId=${post.postId})}" th:method="put">
+                    <button class="btn btn-sm btn-outline-primary">비추천</button>
+                </form>
+            </div>
+
+
             <hr style="width: 100%"/>
 
             <!-- 첨부파일 -->
@@ -66,7 +77,6 @@
                     <a th:href="${image.url}" th:text="${image.originalName}"></a>
                 </div>
             </div>
-
 
             <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
                 <a th:href="@{/posts/{postId}/update (postId=${post.postId()})}"
@@ -83,39 +93,62 @@
                 <h5>댓글</h5>
                 <hr style="width: 100%"/>
 
-                <!--                &lt;!&ndash; 댓글 리스트 &ndash;&gt;-->
-                <!--                <div th:each="comment : ${post.comments}" class="comment">-->
-                <!--                    <p>-->
-                <!--                        <strong th:text="${comment.writer}"></strong> <span-->
-                <!--                            th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>-->
-                <!--                    </p>-->
-                <!--                    <p th:utext="${comment.content}"></p>-->
-                <!--                    <hr style="width: 100%"/>-->
-                <!--                </div>-->
+                <!-- 댓글 리스트 -->
+                <div th:each="comment : ${comments}" class="comment">
+                    <!-- 상위 댓글 출력 -->
+                    <div th:if="${comment.parentCommentId == null}">
+                        <div>
+                            <strong th:text="${comment.writer}"></strong>
+                            <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
 
-                <!--                &lt;!&ndash; 댓글 작성 폼 &ndash;&gt;-->
-                <!--                <div class="comment-form" style="margin-top: 20px;">-->
-                <!--                    <h6>댓글 작성</h6>-->
-                <!--                    <form th:action="@{/posts/{postId}/comments (postId=${post.postId()})}" th:method="post">-->
-                <!--                        <div class="form-group">-->
-                <!--                            <textarea class="form-control" name="content" rows="3" placeholder="댓글을 작성하세요..."-->
-                <!--                                      required></textarea>-->
-                <!--                        </div>-->
-                <!--                        <button type="submit" class="btn btn-primary">댓글 등록</button>-->
-                <!--                    </form>-->
-                <!--                </div>-->
+                            <div class="recommend-container">
+                                <p>추천수: <span class="recommendation-count"
+                                              th:text="${comment.recommendationCount}"></span></p>
+                                <form th:action="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
+                                      th:method="put">
+                                    <button class="btn btn-sm btn-outline-primary">추천</button>
+                                </form>
+                                <form th:action="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
+                                      th:method="put">
+                                    <button class="btn btn-sm btn-outline-primary">비추천</button>
+                                </form>
+                            </div>
 
-                <!--                <div th:if="${currentUser != null}" class="comment-form" style="margin-top: 20px;">-->
-                <!--                    &lt;!&ndash; 댓글 작성 폼 &ndash;&gt;-->
-                <!--                </div>-->
-                <!--                <div th:if="${currentUser == null}">-->
-                <!--                    <p>댓글을 작성하려면 로그인하세요.</p>-->
-                <!--                </div>-->
+                        </div>
+
+                        <p th:utext="${comment.content}"></p>
+                        <hr style="width: 100%"/>
+
+                        <!-- 해당 상위 댓글의 대댓글들을 출력 -->
+                        <div th:each="childComment : ${comments}">
+                            <div th:if="${childComment.parentCommentId == comment.commentId}"
+                                 style="margin-left: 20px;">
+                                <p>
+                                    <strong th:text="${childComment.writer}"></strong>
+                                    <span th:text="${#temporals.format(childComment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                                </p>
+                                <p th:utext="${childComment.content}"></p>
+                                <hr style="width: 100%"/>
+
+                                <!-- 해당 대댓글의 하위 대댓글들 출력 -->
+                                <div th:each="grandchildComment : ${comments}">
+                                    <div th:if="${grandchildComment.parentCommentId == childComment.commentId}"
+                                         style="margin-left: 40px;">
+                                        <p>
+                                            <strong th:text="${grandchildComment.writer}"></strong>
+                                            <span th:text="${#temporals.format(grandchildComment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                                        </p>
+                                        <p th:utext="${grandchildComment.content}"></p>
+                                        <hr style="width: 100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- 댓글 작성 폼 -->
-                <div class="comment-form-container">
-                    <!-- JavaScript가 동적으로 렌더링 -->
-                </div>
+                <div class="comment-form-container" th:data-post-id="${post.postId}"></div>
 
             </div>
         </div>
@@ -129,6 +162,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/js/post/token.js"></script>
+<!--<script src="/js/post/recommend.js"></script>-->
 
 </body>
 </html>
