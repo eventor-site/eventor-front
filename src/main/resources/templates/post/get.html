@@ -56,13 +56,19 @@
             <p th:utext="${post.content}"></p>
 
             <div class="recommend-container">
-                <p>추천수: <span class="recommendation-count" th:text="${post.recommendationCount}"></span></p>
-                <form th:action="@{/posts/{postId}/recommend (postId=${post.postId})}" th:method="put">
-                    <button class="btn btn-sm btn-outline-primary">추천</button>
-                </form>
-                <form th:action="@{/posts/{postId}/disrecommendPost (postId=${post.postId})}" th:method="put">
-                    <button class="btn btn-sm btn-outline-primary">비추천</button>
-                </form>
+                <p>추천수: <span th:text="${post.recommendationCount}"></span></p>
+                <button class="btn btn-sm btn-outline-primary"
+                        th:data-url="@{/posts/{postId}/recommend (postId=${post.postId})}"
+                        data-method="PUT"
+                        onclick="setupAlertBox(this)">추천
+                </button>
+
+                <button class="btn btn-sm btn-outline-primary"
+                        th:data-url="@{/posts/{postId}/disrecommend (postId=${post.postId})}"
+                        data-method="PUT"
+                        onclick="setupAlertBox(this)">비추천
+                </button>
+
             </div>
 
 
@@ -102,16 +108,19 @@
                             <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
 
                             <div class="recommend-container">
-                                <p>추천수: <span class="recommendation-count"
-                                              th:text="${comment.recommendationCount}"></span></p>
-                                <form th:action="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
-                                      th:method="put">
-                                    <button class="btn btn-sm btn-outline-primary">추천</button>
-                                </form>
-                                <form th:action="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
-                                      th:method="put">
-                                    <button class="btn btn-sm btn-outline-primary">비추천</button>
-                                </form>
+                                <button class="btn btn-sm btn-outline-primary"
+                                        th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId()})}"
+                                        data-method="PUT"
+                                        onclick="setupAlertBox(this)">추천
+                                </button>
+                                <span th:text="${comment.recommendationCount}"></span>
+
+                                <button class="btn btn-sm btn-outline-primary"
+                                        th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId()})}"
+                                        data-method="PUT"
+                                        onclick="setupAlertBox(this)">비추천
+                                </button>
+                                <span th:text="${comment.decommendationCount}"></span>
                             </div>
 
                         </div>
@@ -150,6 +159,12 @@
                 <!-- 댓글 작성 폼 -->
                 <div class="comment-form-container" th:data-post-id="${post.postId}"></div>
 
+                <!-- 단순 알림 박스 -->
+                <div id="alertBox" class="alert-box">
+                    <span id="alertMessage"></span>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -162,7 +177,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/js/post/token.js"></script>
-<!--<script src="/js/post/recommend.js"></script>-->
+<script src="/js/common/alert-box.js"></script>
 
 </body>
 </html>

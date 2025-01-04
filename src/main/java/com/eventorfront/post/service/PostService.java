@@ -2,6 +2,7 @@ package com.eventorfront.post.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eventorfront.post.dto.request.CreatePostRequest;
@@ -30,9 +31,9 @@ public interface PostService {
 
 	void updatePost(Long postId, UpdatePostRequest request);
 
-	void recommendPost(Long postId);
+	ResponseEntity<String> recommendPost(Long postId);
 
-	void disrecommendPost(Long postId);
+	ResponseEntity<String> disrecommendPost(Long postId);
 
 	void deletePost(Long postId);
 }

@@ -11,5 +11,6 @@ public record GetCommentResponse(
 	String writer,
 	String content,
 	Long recommendationCount,
+	Long decommendationCount,
 	LocalDateTime createdAt) {
 }

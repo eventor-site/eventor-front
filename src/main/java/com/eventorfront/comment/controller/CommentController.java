@@ -1,5 +1,6 @@
 package com.eventorfront.comment.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,24 +46,22 @@ public class CommentController {
 	}
 
 	@PutMapping("/{commentId}/recommend")
-	public String recommendComment(@PathVariable Long postId, @PathVariable Long commentId,
+	public ResponseEntity<String> recommendComment(@PathVariable Long postId, @PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			commentService.recommendComment(postId, commentId);
-			return "redirect:/posts/" + postId;
+			return commentService.recommendComment(postId, commentId);
 		} else {
-			return "redirect:/auth/login";
+			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
 	}
 
 	@PutMapping("/{commentId}/disrecommend")
-	public String disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId,
+	public ResponseEntity<String> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			commentService.disrecommendComment(postId, commentId);
-			return "redirect:/posts/" + postId;
+			return commentService.disrecommendComment(postId, commentId);
 		} else {
-			return "redirect:/auth/login";
+			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
 	}
 

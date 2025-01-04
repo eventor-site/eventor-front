@@ -48,10 +48,10 @@ public interface PostClient {
 	ResponseEntity<Void> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request);
 
 	@PutMapping("/{postId}/recommend")
-	ResponseEntity<Void> recommendPost(@PathVariable Long postId);
+	ResponseEntity<String> recommendPost(@PathVariable Long postId);
 
 	@PutMapping("/{postId}/disrecommend")
-	ResponseEntity<Void> disrecommendPost(@PathVariable Long postId);
+	ResponseEntity<String> disrecommendPost(@PathVariable Long postId);
 
 	@DeleteMapping("/{postId}")
 	ResponseEntity<Void> deletePost(@PathVariable Long postId);
