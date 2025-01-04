@@ -2,6 +2,8 @@ package com.eventorfront.comment.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
 import com.eventorfront.comment.dto.request.UpdateCommentRequest;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
@@ -14,9 +16,9 @@ public interface CommentService {
 
 	void updateComment(Long postId, Long commentId, UpdateCommentRequest request);
 
-	void recommendComment(Long postId, Long commentId);
+	ResponseEntity<String> recommendComment(Long postId, Long commentId);
 
-	void disrecommendComment(Long postId, Long commentId);
+	ResponseEntity<String> disrecommendComment(Long postId, Long commentId);
 
 	void deleteComment(Long postId, Long commentId);
 }

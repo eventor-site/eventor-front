@@ -3,6 +3,7 @@ package com.eventorfront.post.service.impl;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -70,13 +71,13 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public void recommendPost(Long postId) {
-		postClient.recommendPost(postId);
+	public ResponseEntity<String> recommendPost(Long postId) {
+		return postClient.recommendPost(postId);
 	}
 
 	@Override
-	public void disrecommendPost(Long postId) {
-		postClient.disrecommendPost(postId);
+	public ResponseEntity<String> disrecommendPost(Long postId) {
+		return postClient.disrecommendPost(postId);
 	}
 
 	@Override

@@ -29,10 +29,10 @@ public interface CommentClient {
 		@RequestBody UpdateCommentRequest request);
 
 	@PutMapping("/{postId}/comments/{commentId}/recommend")
-	ResponseEntity<Void> recommendComment(@PathVariable Long postId, @PathVariable Long commentId);
+	ResponseEntity<String> recommendComment(@PathVariable Long postId, @PathVariable Long commentId);
 
 	@PutMapping("/{postId}/comments/{commentId}/disrecommend")
-	ResponseEntity<Void> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId);
+	ResponseEntity<String> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId);
 
 	@DeleteMapping("/{postId}/comments/{commentId}")
 	ResponseEntity<Void> deleteComment(@PathVariable Long postId, @PathVariable Long commentId);

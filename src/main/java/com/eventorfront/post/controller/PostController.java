@@ -2,6 +2,7 @@ package com.eventorfront.post.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -83,22 +84,20 @@ public class PostController {
 	}
 
 	@PutMapping("/{postId}/recommend")
-	public String recommendPost(@PathVariable Long postId, HttpServletRequest request) {
+	public ResponseEntity<String> recommendPost(@PathVariable Long postId, HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			postService.recommendPost(postId);
-			return "redirect:/posts/" + postId;
+			return postService.recommendPost(postId);
 		} else {
-			return "redirect:/auth/login";
+			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
 	}
 
-	@PutMapping("/{postId}/disrecommendPost")
-	public String disrecommendPost(@PathVariable Long postId, HttpServletRequest request) {
+	@PutMapping("/{postId}/disrecommend")
+	public ResponseEntity<String> disrecommendPost(@PathVariable Long postId, HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			postService.disrecommendPost(postId);
-			return "redirect:/posts/" + postId;
+			return postService.disrecommendPost(postId);
 		} else {
-			return "redirect:/auth/login";
+			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
 	}
 

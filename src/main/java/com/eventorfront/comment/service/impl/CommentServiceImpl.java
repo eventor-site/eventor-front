@@ -2,6 +2,7 @@ package com.eventorfront.comment.service.impl;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.comment.client.CommentClient;
@@ -33,13 +34,13 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void recommendComment(Long postId, Long commentId) {
-		commentClient.recommendComment(postId, commentId);
+	public ResponseEntity<String> recommendComment(Long postId, Long commentId) {
+		return commentClient.recommendComment(postId, commentId);
 	}
 
 	@Override
-	public void disrecommendComment(Long postId, Long commentId) {
-		commentClient.disrecommendComment(postId, commentId);
+	public ResponseEntity<String> disrecommendComment(Long postId, Long commentId) {
+		return commentClient.disrecommendComment(postId, commentId);
 	}
 
 	@Override
