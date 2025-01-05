@@ -100,58 +100,52 @@
                 <hr style="width: 100%"/>
 
                 <!-- 댓글 리스트 -->
-                <div th:each="comment : ${comments}" class="comment">
-                    <!-- 상위 댓글 출력 -->
-                    <div th:if="${comment.parentCommentId == null}">
+                <div th:if="${comment.parentCommentId == null}" th:each="comment : ${comments}">
+                    <!-- 재귀 호출 시작 -->
+                    <div th:fragment="commentTree">
                         <div>
-                            <strong th:text="${comment.writer}"></strong>
-                            <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
-
+                            <div>
+                                <strong th:text="${comment.writer}"></strong>
+                                <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                            </div>
                             <div class="recommend-container">
                                 <button class="btn btn-sm btn-outline-primary"
-                                        th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId()})}"
+                                        th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
                                         data-method="PUT"
                                         onclick="setupAlertBox(this)">추천
                                 </button>
                                 <span th:text="${comment.recommendationCount}"></span>
 
                                 <button class="btn btn-sm btn-outline-primary"
-                                        th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId()})}"
+                                        th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
                                         data-method="PUT"
                                         onclick="setupAlertBox(this)">비추천
                                 </button>
                                 <span th:text="${comment.decommendationCount}"></span>
+
+                                <!-- 대댓글 작성 버튼 -->
+                                <button class="btn btn-sm btn-outline-primary">대댓글 작성</button>
                             </div>
 
+                            <p th:utext="${comment.content}"></p>
+
+                            <div class="sub-comment-form-container"
+                                 th:data-post-id="${post.postId}"
+                                 th:data-comment-id="${comment.commentId}"></div>
                         </div>
 
-                        <p th:utext="${comment.content}"></p>
                         <hr style="width: 100%"/>
 
-                        <!-- 해당 상위 댓글의 대댓글들을 출력 -->
-                        <div th:each="childComment : ${comments}">
-                            <div th:if="${childComment.parentCommentId == comment.commentId}"
-                                 style="margin-left: 20px;">
-                                <p>
-                                    <strong th:text="${childComment.writer}"></strong>
-                                    <span th:text="${#temporals.format(childComment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
-                                </p>
-                                <p th:utext="${childComment.content}"></p>
-                                <hr style="width: 100%"/>
-
-                                <!-- 해당 대댓글의 하위 대댓글들 출력 -->
-                                <div th:each="grandchildComment : ${comments}">
-                                    <div th:if="${grandchildComment.parentCommentId == childComment.commentId}"
-                                         style="margin-left: 40px;">
-                                        <p>
-                                            <strong th:text="${grandchildComment.writer}"></strong>
-                                            <span th:text="${#temporals.format(grandchildComment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
-                                        </p>
-                                        <p th:utext="${grandchildComment.content}"></p>
-                                        <hr style="width: 100%"/>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- 대댓글 출력 -->
+                        <div th:if="${comment.childComments != null && !comment.childComments.isEmpty()}"
+                             style="margin-left: 20px;">
+                            <!-- 재귀 호출 -->
+                            <th:block th:each="childComment : ${comment.childComments}">
+                                <th:block th:with="comment=${childComment}"
+                                          th:include="this :: commentTree"
+                                          th:remove="tag">
+                                </th:block>
+                            </th:block>
                         </div>
                     </div>
                 </div>
@@ -159,12 +153,11 @@
                 <!-- 댓글 작성 폼 -->
                 <div class="comment-form-container" th:data-post-id="${post.postId}"></div>
 
-                <!-- 단순 알림 박스 -->
-                <div id="alertBox" class="alert-box">
-                    <span id="alertMessage"></span>
-                </div>
-
-
+            </div>
+            
+            <!-- 단순 알림 박스 -->
+            <div id="alertBox" class="alert-box">
+                <span id="alertMessage"></span>
             </div>
         </div>
     </div>
@@ -176,7 +169,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="/js/post/token.js"></script>
+<script src="/js/post/comment.js"></script>
+<script src="/js/post/sub-comment.js"></script>
 <script src="/js/common/alert-box.js"></script>
 
 </body>
