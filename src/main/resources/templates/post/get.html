@@ -142,7 +142,7 @@
                             <!-- 재귀 호출 -->
                             <th:block th:each="childComment : ${comment.childComments}">
                                 <th:block th:with="comment=${childComment}"
-                                          th:include="this :: commentTree"
+                                          th:insert="~{this :: commentTree}"
                                           th:remove="tag">
                                 </th:block>
                             </th:block>
@@ -154,7 +154,7 @@
                 <div class="comment-form-container" th:data-post-id="${post.postId}"></div>
 
             </div>
-            
+
             <!-- 단순 알림 박스 -->
             <div id="alertBox" class="alert-box">
                 <span id="alertMessage"></span>
