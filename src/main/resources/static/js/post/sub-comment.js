@@ -6,17 +6,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // 이벤트 위임 방식으로 "댓글 작성" 버튼 처리
     commentSection.addEventListener("click", function (event) {
+        const button = event.target;
+
+        // 해당 댓글의 postId와 commentId 가져오기
+        const commentContainer = button.closest(".recommend-container").parentElement;
+        const postId = commentContainer.querySelector(".sub-comment-form-container").dataset.postId;
+        const commentId = commentContainer.querySelector(".sub-comment-form-container").dataset.commentId;
+
+        // 해당 댓글 아래의 sub-comment-form-container 찾기
+        const subCommentContainer = commentContainer.querySelector(".sub-comment-form-container");
+
         // 클릭된 요소가 "댓글 작성" 버튼인지 확인
         if (event.target.classList.contains("btn-outline-primary") && event.target.textContent.trim() === "대댓글 작성") {
-            const button = event.target;
-
-            // 해당 댓글의 postId와 commentId 가져오기
-            const commentContainer = button.closest(".recommend-container").parentElement;
-            const postId = commentContainer.querySelector(".sub-comment-form-container").dataset.postId;
-            const commentId = commentContainer.querySelector(".sub-comment-form-container").dataset.commentId;
-
-            // 해당 댓글 아래의 sub-comment-form-container 찾기
-            const subCommentContainer = commentContainer.querySelector(".sub-comment-form-container");
 
             // 기존 폼이 존재하면 폼 삭제 (토글 동작)
             if (subCommentContainer.innerHTML.trim() !== "") {
@@ -43,6 +44,30 @@ document.addEventListener("DOMContentLoaded", async function () {
                 `;
             }
 
+        } else if (event.target.classList.contains("btn-warning") && event.target.textContent.trim() === "수정") {
+
+            // 기존 폼이 존재하면 폼 삭제 (토글 동작)
+            if (subCommentContainer.innerHTML.trim() !== "") {
+                subCommentContainer.innerHTML = "";
+                return;
+            }
+
+            // 댓글 수정 폼 생성 및 추가
+            if (hasTokens) {
+                subCommentContainer.innerHTML = `
+            <form class="comment-form" id="commentForm" action="/posts/${postId}/comments/${commentId}" method="post">
+                <input type="hidden" name="_method" value="PUT" />
+                <div class="form-group">
+                    <textarea class="form-control" name="content" rows="3" placeholder="수정할 내용을 작성하세요..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">댓글 수정</button>
+            </form>
+        `;
+            } else {
+                subCommentContainer.innerHTML = `
+            <p>댓글을 수정하려면 <a href="/auth/login">로그인</a>하세요.</p>
+        `;
+            }
         }
     });
 });
