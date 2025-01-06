@@ -104,39 +104,40 @@
                     <!-- 재귀 호출 시작 -->
                     <div th:fragment="commentTree">
                         <div>
-                            <div>
-                                <strong th:text="${comment.writer}"></strong>
-                                <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
-                            </div>
-                            <div class="recommend-container">
-                                <button class="btn btn-sm btn-outline-primary"
-                                        th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
-                                        data-method="PUT"
-                                        onclick="setupAlertBox(this)">추천
-                                </button>
-                                <span th:text="${comment.recommendationCount}"></span>
+                            <div th:if="${!comment.isDeleted}">
+                                <div>
+                                    <strong th:text="${comment.writer}"></strong>
+                                    <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                                </div>
+                                <div class="recommend-container">
+                                    <button class="btn btn-sm btn-outline-primary"
+                                            th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
+                                            data-method="PUT"
+                                            onclick="setupAlertBox(this)">추천
+                                    </button>
+                                    <span th:text="${comment.recommendationCount}"></span>
 
-                                <button class="btn btn-sm btn-outline-primary"
-                                        th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
-                                        data-method="PUT"
-                                        onclick="setupAlertBox(this)">비추천
-                                </button>
-                                <span th:text="${comment.decommendationCount}"></span>
+                                    <button class="btn btn-sm btn-outline-primary"
+                                            th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
+                                            data-method="PUT"
+                                            onclick="setupAlertBox(this)">비추천
+                                    </button>
+                                    <span th:text="${comment.decommendationCount}"></span>
 
-                                <!-- 대댓글 작성 버튼 -->
-                                <button class="btn btn-sm btn-outline-primary">대댓글 작성</button>
+                                    <!-- 대댓글 작성 버튼 -->
+                                    <button class="btn btn-sm btn-outline-primary">대댓글 작성</button>
 
-                                <div th:if="${comment.isAuthorized}" style="display: flex; align-items: center;">
-                                    <button class="btn btn-warning inline-text">수정</button>
-                                    <form th:action="@{/posts/{postId}/comments/{commentId} (postId=${post.postId}, commentId=${comment.commentId})}"
-                                          th:method="delete">
-                                        <button type="submit" class="btn btn-danger inline-text">삭제</button>
-                                    </form>
+                                    <div th:if="${comment.isAuthorized}" style="display: flex; align-items: center;">
+                                        <button class="btn btn-warning inline-text">수정</button>
+                                        <form th:action="@{/posts/{postId}/comments/{commentId} (postId=${post.postId}, commentId=${comment.commentId})}"
+                                              th:method="delete">
+                                            <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-
+                            
                             <p th:utext="${comment.content}"></p>
-
 
                             <div class="sub-comment-form-container"
                                  th:data-post-id="${post.postId}"

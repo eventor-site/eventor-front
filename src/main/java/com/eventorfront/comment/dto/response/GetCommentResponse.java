@@ -15,5 +15,6 @@ public record GetCommentResponse(
 	Long decommendationCount,
 	List<GetCommentResponse> childComments,
 	LocalDateTime createdAt,
-	Boolean isAuthorized) {
+	Boolean isAuthorized,
+	Boolean isDeleted) {
 }
