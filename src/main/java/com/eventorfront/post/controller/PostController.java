@@ -64,6 +64,12 @@ public class PostController {
 		return "post/list";
 	}
 
+	@GetMapping("/me")
+	public String getPostsByUserId(Model model) {
+		model.addAttribute("posts", postService.getPostsByUserId());
+		return "post/me";
+	}
+
 	@GetMapping("/{postId}")
 	public String getPost(Model model, @PathVariable Long postId) {
 		model.addAttribute("post", postService.getPost(postId));

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.eventorfront.auth.dto.request.UpdateLastLoginTimeRequest;
 import com.eventorfront.user.client.UserClient;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
@@ -33,11 +32,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUser(UpdateUserRequest request) {
 		userClient.updateUser(request);
-	}
-
-	@Override
-	public void updateLastLoginTime(UpdateLastLoginTimeRequest request) {
-		userClient.updateLastLoginTime(request);
 	}
 
 	@Override
