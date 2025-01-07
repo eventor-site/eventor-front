@@ -18,9 +18,9 @@ import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.dto.request.UpdateLastLoginTimeRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.user.service.UserService;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -70,11 +70,11 @@ public class AuthController {
 		lastLoginTime = loginResponse.lastLoginTime();
 
 		if (accessToken != null) {
-			response.addCookie(createCookie("Access-Token", accessToken));
+			response.addCookie(CookieUtil.createCookie("Access-Token", accessToken));
 		}
 
 		if (refreshToken != null) {
-			response.addCookie(createCookie("Refresh-Token", refreshToken));
+			response.addCookie(CookieUtil.createCookie("Refresh-Token", refreshToken));
 		}
 
 		userService.updateLastLoginTime(new UpdateLastLoginTimeRequest(lastLoginTime));
@@ -86,11 +86,11 @@ public class AuthController {
 	 * 로그아웃 요청을 처리합니다.
 	 */
 	@PostMapping("/logout")
-	public ResponseEntity<Void> logout(HttpServletResponse response) {
+	public String logout(HttpServletResponse response) {
 		authService.logout();
-		revokeToken(response, "Access-Token");
-		revokeToken(response, "Refresh-Token");
-		return ResponseEntity.ok().build();
+		CookieUtil.revokeToken(response, "Access-Token");
+		CookieUtil.revokeToken(response, "Refresh-Token");
+		return "redirect:/auth/login";
 	}
 
 	/**
@@ -101,24 +101,4 @@ public class AuthController {
 		return ResponseEntity.status(HttpStatus.OK).body(authService.hasTokensInCookie(request));
 	}
 
-	/**
-	 * 주어진 키와 값을 사용하여 쿠키를 생성합니다.
-	 */
-	private Cookie createCookie(String key, String value) {
-		Cookie cookie = new Cookie(key, URLEncoder.encode(value, StandardCharsets.UTF_8));
-		cookie.setPath("/");
-		cookie.setHttpOnly(true);
-		return cookie;
-	}
-
-	/**
-	 * 주어진 쿠키 이름을 사용하여 토큰을 무효화합니다.
-	 */
-	private void revokeToken(HttpServletResponse response, String cookieName) {
-		Cookie revokedTokenCookie = new Cookie(cookieName, "");
-		revokedTokenCookie.setHttpOnly(true);
-		revokedTokenCookie.setMaxAge(0);
-		revokedTokenCookie.setPath("/");
-		response.addCookie(revokedTokenCookie);
-	}
 }
