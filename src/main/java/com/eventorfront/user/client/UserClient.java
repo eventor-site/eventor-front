@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.auth.dto.request.UpdateLastLoginTimeRequest;
+import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
 import com.eventorfront.user.dto.response.GetUserResponse;
@@ -27,4 +28,8 @@ public interface UserClient {
 
 	@PutMapping("/me/lastLoginTime")
 	ResponseEntity<Void> updateLastLoginTime(UpdateLastLoginTimeRequest request);
+
+	@PutMapping("/me/password")
+	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
+
 }

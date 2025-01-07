@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
 import com.eventorfront.user.service.UserService;
@@ -46,9 +47,20 @@ public class UserController {
 		return "user/update";
 	}
 
+	@GetMapping("/me/modifyPasswordForm")
+	public String modifyPasswordForm() {
+		return "user/modifyPasswordForm";
+	}
+
 	@PutMapping("/me")
 	public String updateUser(@ModelAttribute UpdateUserRequest request) {
 		userService.updateUser(request);
+		return "redirect:/users/me";
+	}
+
+	@PutMapping("/me/password")
+	public String modifyPassword(@ModelAttribute ModifyPasswordRequest request) {
+		userService.modifyPassword(request);
 		return "redirect:/users/me";
 	}
 

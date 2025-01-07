@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const button = event.target;
 
         // 해당 댓글의 postId와 commentId 가져오기
-        const commentContainer = button.closest(".recommend-container").parentElement;
+        const commentContainer = button.closest(".comment-container").parentElement;
         const postId = commentContainer.querySelector(".sub-comment-form-container").dataset.postId;
         const commentId = commentContainer.querySelector(".sub-comment-form-container").dataset.commentId;
 
