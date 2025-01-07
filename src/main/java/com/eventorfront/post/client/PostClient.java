@@ -38,6 +38,9 @@ public interface PostClient {
 	@GetMapping
 	ResponseEntity<GetPostsByCategoryNameResponse> getPostsByCategoryName(@RequestParam String categoryName);
 
+	@GetMapping("/me")
+	ResponseEntity<List<GetPostSimpleResponse>> getPostsByUserId();
+
 	@GetMapping("/{postId}")
 	ResponseEntity<GetPostResponse> getPost(@PathVariable Long postId);
 

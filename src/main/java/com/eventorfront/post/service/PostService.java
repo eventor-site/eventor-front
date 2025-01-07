@@ -25,6 +25,8 @@ public interface PostService {
 
 	GetPostsByCategoryNameResponse getPostsByCategoryName(String categoryName);
 
+	List<GetPostSimpleResponse> getPostsByUserId();
+
 	GetPostResponse getPost(Long postId);
 
 	CreatePostResponse createPost(CreatePostRequest request, List<MultipartFile> files);

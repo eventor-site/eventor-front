@@ -2,7 +2,6 @@ package com.eventorfront.auth.controller;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.request.SignUpRequest;
-import com.eventorfront.auth.dto.request.UpdateLastLoginTimeRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.global.util.CookieUtil;
@@ -59,7 +57,6 @@ public class AuthController {
 
 		String accessToken;
 		String refreshToken;
-		LocalDateTime lastLoginTime;
 
 		if (Objects.isNull(loginResponse)) {
 			return "redirect:/auth/login?error=" + URLEncoder.encode("로그인 실패", StandardCharsets.UTF_8);
@@ -67,7 +64,6 @@ public class AuthController {
 
 		accessToken = loginResponse.accessToken();
 		refreshToken = loginResponse.refreshToken();
-		lastLoginTime = loginResponse.lastLoginTime();
 
 		if (accessToken != null) {
 			response.addCookie(CookieUtil.createCookie("Access-Token", accessToken));
@@ -76,8 +72,6 @@ public class AuthController {
 		if (refreshToken != null) {
 			response.addCookie(CookieUtil.createCookie("Refresh-Token", refreshToken));
 		}
-
-		userService.updateLastLoginTime(new UpdateLastLoginTimeRequest(lastLoginTime));
 
 		return "redirect:/main";
 	}

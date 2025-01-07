@@ -52,6 +52,11 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public List<GetPostSimpleResponse> getPostsByUserId() {
+		return postClient.getPostsByUserId().getBody();
+	}
+
+	@Override
 	public GetPostResponse getPost(Long postId) {
 		return postClient.getPost(postId).getBody();
 	}

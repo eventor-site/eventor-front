@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import com.eventorfront.auth.dto.request.UpdateLastLoginTimeRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
@@ -16,8 +15,6 @@ public interface UserService {
 	GetUserResponse getUserInfo();
 
 	void updateUser(UpdateUserRequest request);
-
-	void updateLastLoginTime(UpdateLastLoginTimeRequest request);
 
 	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
 

@@ -30,9 +30,4 @@ public class IndexController {
 	// public String indexPage() {
 	// 	return "redirect:/main";
 	// }
-
-	@GetMapping("/template")
-	public String showTemplate() {
-		return "menu-template";
-	}
 }
