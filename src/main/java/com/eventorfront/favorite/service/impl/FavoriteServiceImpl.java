@@ -22,8 +22,8 @@ public class FavoriteServiceImpl implements FavoriteService {
 	}
 
 	@Override
-	public ResponseEntity<String> createFavorite(Long postId) {
-		return favoriteClient.createFavorite(postId);
+	public ResponseEntity<String> createOrDeleteFavorite(Long postId) {
+		return favoriteClient.createOrDeleteFavorite(postId);
 	}
 
 	@Override

@@ -24,8 +24,8 @@ public class FavoriteController {
 	}
 
 	@PostMapping("/posts/{postId}/favorites")
-	public ResponseEntity<String> createFavorite(@PathVariable Long postId) {
-		return favoriteService.createFavorite(postId);
+	public ResponseEntity<String> createOrDeleteFavorite(@PathVariable Long postId) {
+		return favoriteService.createOrDeleteFavorite(postId);
 	}
 
 	@DeleteMapping("/{favoriteId}")
