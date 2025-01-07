@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
 	public ResponseEntity<String> modifyPassword(ModifyPasswordRequest request) {
 		return userClient.modifyPassword(request);
 	}
+
+	@Override
+	public void withdrawUser() {
+		userClient.withdrawUser();
+	}
 }

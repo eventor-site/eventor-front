@@ -21,4 +21,6 @@ public interface UserService {
 
 	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
 
+	void withdrawUser();
+
 }
