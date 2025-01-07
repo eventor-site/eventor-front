@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/image/free-icon-event.png" type="image/x-icon">
+    <title>이벤터</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/user/me.css"/>
+</head>
+
+<body>
+
+<header th:insert="~{common/header}"></header>
+
+<div class="wrapper">
+    <div class="main-content">
+        <section id="page" class="top-container">
+            <section id="page-menu-container" th:insert="~{common/user-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>회원 정보 수정</h5>
+                </section>
+
+                <div class="container my-page-container">
+                    <!-- Update User Info Form -->
+                    <form th:action="@{/users/me}" th:method="put" id="updateUserForm">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6>회원 정보 수정</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="name">이름</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           th:value="${user.name}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nickname">닉네임</label>
+                                    <input type="text" class="form-control" id="nickname" name="nickname"
+                                           th:value="${user.nickname}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">이메일</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                           th:value="${user.email}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">전화번호</label>
+                                    <input type="text" class="form-control" id="phone" name="phone"
+                                           th:value="${user.phone}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="birth">생년월일</label>
+                                    <input type="date" class="form-control" id="birth" name="birth"
+                                           th:value="${user.birth}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gender">성별</label>
+                                    <select class="form-control" id="gender" name="gender" required>
+                                        <option value="남" th:selected="${user.gender == '남'}">남</option>
+                                        <option value="여" th:selected="${user.gender == '여'}">여</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">수정</button>
+                            <a class="btn btn-secondary" href="javascript:history.back()">취소</a>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </section>
+    </div>
+</div>
+
+<footer th:insert="~{common/footer}"></footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

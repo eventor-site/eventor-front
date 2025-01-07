@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.auth.dto.request.UpdateLastLoginTimeRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.user.service.UserService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/auth")
 public class AuthController {
 	private final AuthService authService;
+	private final UserService userService;
 
 	@GetMapping("/login")
 	public String login() {
@@ -56,7 +59,7 @@ public class AuthController {
 
 		String accessToken;
 		String refreshToken;
-		LocalDateTime lastLoginAt;
+		LocalDateTime lastLoginTime;
 
 		if (Objects.isNull(loginResponse)) {
 			return "redirect:/auth/login?error=" + URLEncoder.encode("로그인 실패", StandardCharsets.UTF_8);
@@ -64,7 +67,7 @@ public class AuthController {
 
 		accessToken = loginResponse.accessToken();
 		refreshToken = loginResponse.refreshToken();
-		lastLoginAt = loginResponse.lastLoginAt();
+		lastLoginTime = loginResponse.lastLoginTime();
 
 		if (accessToken != null) {
 			response.addCookie(createCookie("Access-Token", accessToken));
@@ -74,7 +77,7 @@ public class AuthController {
 			response.addCookie(createCookie("Refresh-Token", refreshToken));
 		}
 
-		authService.updateLastLoginAt(accessToken, refreshToken, lastLoginAt);
+		userService.updateLastLoginTime(new UpdateLastLoginTimeRequest(lastLoginTime));
 
 		return "redirect:/main";
 	}

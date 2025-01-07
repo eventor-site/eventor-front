@@ -26,20 +26,10 @@ public class IndexController {
 		return "page/main";
 	}
 
-	@GetMapping("/users/admin")
-	public String adminPage() {
-		return "admin";
-	}
-
 	// @GetMapping("/")
 	// public String indexPage() {
 	// 	return "redirect:/main";
 	// }
-
-	@GetMapping("/api/users/me")
-	public String userPage() {
-		return "user/user-account";
-	}
 
 	@GetMapping("/template")
 	public String showTemplate() {
