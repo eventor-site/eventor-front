@@ -109,7 +109,7 @@
                 <div th:if="${comment.parentCommentId == null}" th:each="comment : ${comments}">
                     <!-- 재귀 호출 시작 -->
                     <div th:fragment="commentTree">
-                        <div>
+                        <div class="comment-container">
                             <div th:if="${!comment.isDeleted}">
                                 <div>
                                     <strong th:text="${comment.writer}"></strong>
@@ -171,10 +171,10 @@
 
             </div>
 
-            <!-- 단순 알림 박스 -->
-            <div id="alertBox" class="alert-box">
-                <span id="alertMessage"></span>
-            </div>
+            <!--            &lt;!&ndash; 단순 알림 박스 &ndash;&gt;-->
+            <!--            <div id="alertBox" class="alert-box">-->
+            <!--                <span id="alertMessage"></span>-->
+            <!--            </div>-->
         </div>
     </div>
 </div>
@@ -187,7 +187,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/js/post/comment.js"></script>
 <script src="/js/post/sub-comment.js"></script>
-<script src="/js/common/alert-box.js"></script>
 
 </body>
 </html>
