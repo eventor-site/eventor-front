@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/get.css"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -69,6 +70,11 @@
                         onclick="setupAlertBox(this)">비추천
                 </button>
 
+                <button class="btn btn-sm btn-outline-primary"
+                        th:data-url="@{/posts/{postId}/favorites (postId=${post.postId})}"
+                        data-method="Post"
+                        onclick="setupAlertBox(this)">❤️
+                </button>
             </div>
 
 
@@ -136,7 +142,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <p th:utext="${comment.content}"></p>
 
                             <div class="sub-comment-form-container"
