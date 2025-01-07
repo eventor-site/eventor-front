@@ -18,7 +18,7 @@ public interface FavoriteClient {
 	ResponseEntity<List<GetPostSimpleResponse>> getFavoritesByUserId();
 
 	@PostMapping("/post/{postId}/favorites")
-	ResponseEntity<String> createFavorite(@PathVariable Long postId);
+	ResponseEntity<String> createOrDeleteFavorite(@PathVariable Long postId);
 
 	@DeleteMapping("/{favoriteId}")
 	ResponseEntity<String> deleteFavorite(@PathVariable Long favoriteId);

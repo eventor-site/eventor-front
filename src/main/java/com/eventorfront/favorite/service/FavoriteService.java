@@ -10,7 +10,7 @@ public interface FavoriteService {
 
 	List<GetPostSimpleResponse> getFavoritesByUserId();
 
-	ResponseEntity<String> createFavorite(Long postId);
+	ResponseEntity<String> createOrDeleteFavorite(Long postId);
 
 	ResponseEntity<String> deleteFavorite(Long favoriteId);
 }
