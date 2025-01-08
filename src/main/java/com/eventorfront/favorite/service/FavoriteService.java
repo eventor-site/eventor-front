@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import com.eventorfront.post.dto.response.GetPostSimpleResponse;
+import com.eventorfront.favorite.dto.response.GetFavoriteResponse;
 
 public interface FavoriteService {
 
-	List<GetPostSimpleResponse> getFavoritesByUserId();
+	List<GetFavoriteResponse> getFavoritesByUserId();
 
 	ResponseEntity<String> createOrDeleteFavorite(Long postId);
 

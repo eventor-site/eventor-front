@@ -32,9 +32,8 @@
                             <tr class="inline-text">
                                 <th>제목</th>
                                 <th>작성자</th>
-                                <th>조회수</th>
-                                <th>추천수</th>
-                                <th>날짜</th>
+                                <th>좋아요한 시간</th>
+                                <th>삭제</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -45,15 +44,20 @@
                                        th:text="${post.title}"></a>
                                 </td>
                                 <td th:text="${post.writer}"></td>
-                                <td th:text="${post.viewCount}"></td>
-                                <td th:text="${post.recommendationCount}"></td>
                                 <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td>
+                                    <form th:action="@{/favorites/{favoriteId} (favoriteId=${post.favoriteId})}"
+                                          th:method="delete">
+                                        <button class="btn btn-sm btn-outline-primary">삭제</button>
+                                    </form>
+
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <div th:if="${posts.size() == 0}">
-                        <p>게시글이 없습니다.</p>
+                        <p>좋아요한 게시글이 없습니다.</p>
                     </div>
 
                 </section>

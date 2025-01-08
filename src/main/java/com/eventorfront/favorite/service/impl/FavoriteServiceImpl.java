@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.favorite.client.FavoriteClient;
+import com.eventorfront.favorite.dto.response.GetFavoriteResponse;
 import com.eventorfront.favorite.service.FavoriteService;
-import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +17,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 	private final FavoriteClient favoriteClient;
 
 	@Override
-	public List<GetPostSimpleResponse> getFavoritesByUserId() {
+	public List<GetFavoriteResponse> getFavoritesByUserId() {
 		return favoriteClient.getFavoritesByUserId().getBody();
 	}
 
