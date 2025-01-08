@@ -10,7 +10,7 @@
     text-align: left;
 }
 
-.email-input-container, .code-input-container {
+.email-input-container, .certification-container {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -29,4 +29,14 @@
 .gender-options {
     display: flex;
     gap: 1rem;
+}
+
+.match {
+    color: green;
+    font-weight: bold;
+}
+
+.mismatch {
+    color: red;
+    font-weight: bold;
 }

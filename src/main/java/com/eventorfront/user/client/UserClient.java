@@ -6,9 +6,11 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
@@ -22,6 +24,9 @@ public interface UserClient {
 
 	@GetMapping("/me")
 	ResponseEntity<GetUserResponse> getUserInfo();
+
+	@PostMapping("/signUp/checkIdentifier")
+	ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request);
 
 	@PutMapping("/me")
 	ResponseEntity<Void> updateUser(UpdateUserRequest request);

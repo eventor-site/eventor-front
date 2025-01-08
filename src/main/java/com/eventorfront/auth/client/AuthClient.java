@@ -24,13 +24,13 @@ public interface AuthClient {
 	@PostMapping("/auth/logout")
 	ResponseEntity<Void> logout();
 
-	@PostMapping("/back/users/sign-up")
+	@PostMapping("/back/users/signUp")
 	ResponseEntity<Void> signup(@RequestBody SignUpRequest signUpRequest);
 
-	@PostMapping("/back/users/send-email/sign-up")
+	@PostMapping("/back/users/send-email/signUp")
 	ResponseEntity<Void> sendEmailSignUp(@RequestParam("email") String email);
 
-	@GetMapping("/back/users/check-email/sign-up")
+	@GetMapping("/back/users/check-email/signUp")
 	ResponseEntity<Void> checkEmailSignUp(
 		@RequestParam("email") String email, @RequestParam("certifyCode") String certifyCode
 	);

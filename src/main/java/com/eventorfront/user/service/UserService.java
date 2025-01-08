@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
@@ -17,6 +18,8 @@ public interface UserService {
 	void updateUser(UpdateUserRequest request);
 
 	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
+
+	ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request);
 
 	void withdrawUser();
 

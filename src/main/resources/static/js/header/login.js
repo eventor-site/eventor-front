@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('sign-up')?.addEventListener('click', event => {
         event.preventDefault();
-        window.location.href = '/auth/sign-up';
+        window.location.href = '/auth/signUp';
     });
 });
 
