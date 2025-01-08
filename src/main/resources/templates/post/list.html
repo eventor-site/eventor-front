@@ -18,7 +18,15 @@
 <div class="wrapper">
     <div class="main-content">
         <div class="top-container2">
-            <h5>카테고리: <span th:text="${categoryName}"></span></h5>
+
+            <h5>카테고리: <span th:text="${categoryName}"></span>
+                <button class="btn btn-sm btn-outline-primary"
+                        th:data-url="@{/categories/{categoryName}/bookmarks (categoryName=${categoryName})}"
+                        data-method="post"
+                        onclick="setupAlertBox(this)">⭐
+                </button>
+            </h5>
+
             <hr style="width: 100%"/>
             <h3><a th:if="${response.isAuthorized}" th:href="@{/posts/create(categoryName=${categoryName})}"
                    class="btn btn-primary">게시글 작성</a></h3>
