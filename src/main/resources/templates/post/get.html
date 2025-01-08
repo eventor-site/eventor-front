@@ -22,7 +22,7 @@
             <h5>카테고리: <span th:text="${post.categoryName}"></span></h5>
             <hr style="width: 100%"/>
 
-            <div class="post-header d-flex align-items-center">
+            <div th:if="${post.categoryName} == '이벤트'" class="post-header d-flex align-items-center">
                 <div class="left">
                     <span style="margin-right: 10px; font-weight: bold;">이벤트 시작 시간:</span>
                     <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"
