@@ -18,6 +18,8 @@ public record GetPostResponse(
 	Long viewCount,
 	LocalDateTime createdAt,
 	Boolean isNotification,
+	LocalDateTime startTime,
+	LocalDateTime endTime,
 	List<GetImageResponse> images,
 	Boolean isAuthorized) {
 }

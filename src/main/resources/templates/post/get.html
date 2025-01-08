@@ -22,6 +22,24 @@
             <h5>카테고리: <span th:text="${post.categoryName}"></span></h5>
             <hr style="width: 100%"/>
 
+            <div class="post-header d-flex align-items-center">
+                <div class="left">
+                    <span style="margin-right: 10px; font-weight: bold;">이벤트 시작 시간:</span>
+                    <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"
+                          style="margin-right: 20px;"></span>
+
+                    <span style="margin-right: 10px; font-weight: bold;">이벤트 종료 시간:</span>
+                    <span th:text="${#temporals.format(post.endTime, 'yyyy-MM-dd HH:mm')}"
+                          style="margin-right: 20px;" id="endTime" th:data-end-time="${post.endTime}"></span>
+
+                </div>
+                <div class="right">
+                    <span style="margin-right: 10px; font-weight: bold;">남은 시간:</span>
+                    <span id="remainingTime" style="font-weight: bold; color: red;">계산 중...</span>
+                </div>
+            </div>
+
+
             <!-- 첫 번째 줄: 제목 왼쪽, 작성자 오른쪽 -->
             <div class="post-header">
                 <div class="left">
@@ -187,6 +205,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/js/post/comment.js"></script>
 <script src="/js/post/sub-comment.js"></script>
+<script src="/js/post/remainingTime.js"></script>
 
 </body>
 </html>
