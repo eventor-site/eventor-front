@@ -28,8 +28,9 @@ public class FavoriteController {
 		return favoriteService.createOrDeleteFavorite(postId);
 	}
 
-	@DeleteMapping("/{favoriteId}")
-	public ResponseEntity<String> deleteFavorite(@PathVariable Long favoriteId) {
-		return favoriteService.deleteFavorite(favoriteId);
+	@DeleteMapping("/favorites/{favoriteId}")
+	public String deleteFavorite(@PathVariable Long favoriteId) {
+		favoriteService.deleteFavorite(favoriteId);
+		return "redirect:/users/me/favorites";
 	}
 }

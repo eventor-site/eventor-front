@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.eventorfront.post.dto.response.GetPostSimpleResponse;
+import com.eventorfront.favorite.dto.response.GetFavoriteResponse;
 
 @FeignClient(name = "favorite-client", url = "http://localhost:8090/back")
 public interface FavoriteClient {
 
 	@GetMapping("/users/me/favorites")
-	ResponseEntity<List<GetPostSimpleResponse>> getFavoritesByUserId();
+	ResponseEntity<List<GetFavoriteResponse>> getFavoritesByUserId();
 
 	@PostMapping("/post/{postId}/favorites")
 	ResponseEntity<String> createOrDeleteFavorite(@PathVariable Long postId);
