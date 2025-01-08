@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (newPassword.value === confirmPassword.value) {
             feedback.textContent = "비밀번호가 일치합니다.";
-            feedback.className = "password-match";
+            feedback.className = "match";
         } else {
             feedback.textContent = "비밀번호가 일치하지 않습니다.";
-            feedback.className = "password-mismatch";
+            feedback.className = "mismatch";
         }
     }
 

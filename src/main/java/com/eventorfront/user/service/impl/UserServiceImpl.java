@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.user.client.UserClient;
+import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
@@ -37,6 +38,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public ResponseEntity<String> modifyPassword(ModifyPasswordRequest request) {
 		return userClient.modifyPassword(request);
+	}
+
+	@Override
+	public ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request) {
+		return userClient.checkIdentifier(request);
 	}
 
 	@Override

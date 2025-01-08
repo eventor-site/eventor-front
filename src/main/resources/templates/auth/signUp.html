@@ -16,19 +16,23 @@
 
 <div class="wrapper">
     <div class="main-content">
-        <form class="signup-form-container" id="sign-up-form" action="/auth/sign-up" method="post">
+        <form class="signup-form-container" id="sign-up-form" action="/auth/signUp" method="post">
             <h5 class="text-center mb-4">회원가입</h5>
 
             <div class="form-group">
                 <input id="identifier" type="text" name="identifier" class="form-control" placeholder="아이디" required>
+                <small id="identifierFeedback" class="form-text text-muted"></small>
             </div>
 
             <div class="form-group">
-                <input id="password" type="password" name="password" class="form-control" placeholder="비밀번호" required>
+                <input id="newPassword" type="password" name="newPassword" class="form-control" placeholder="비밀번호"
+                       required>
             </div>
 
             <div class="form-group">
-                <input id="password-confirm" type="password" class="form-control" placeholder="비밀번호 확인" required>
+                <input id="confirmPassword" type="password" name="confirmPassword" class="form-control"
+                       placeholder="비밀번호 확인" required>
+                <small id="passwordFeedback" class="form-text"></small>
             </div>
 
             <div class="form-group">
@@ -78,6 +82,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="/js/user/checkIdentifier.js"></script>
+<script src="/js/user/confirmPassword.js"></script>
 
 </body>
 

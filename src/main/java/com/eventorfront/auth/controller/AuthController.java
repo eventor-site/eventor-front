@@ -40,12 +40,12 @@ public class AuthController {
 		return "auth/login";
 	}
 
-	@GetMapping("/sign-up")
+	@GetMapping("/signUp")
 	public String signUp() {
-		return "auth/sign-up";
+		return "auth/signUp";
 	}
 
-	@PostMapping("/sign-up")
+	@PostMapping("/signUp")
 	public String signUp(@ModelAttribute SignUpRequest signUpRequest) {
 		authService.signUp(signUpRequest);
 		return "redirect:/auth/login";
