@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/image/free-icon-event.png" type="image/x-icon">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div th:insert="~{common/header}"></div>
+
+<div style="margin:120px">
+    <div style="margin-bottom: 10px">
+        <h1>인증 코드 메일입니다.</h1>
+        <br/>
+        <h3 style="text-align: center;"> 아래 코드를 사이트에 입력해주십시오</h3>
+    </div>
+    <div style="text-align: center;">
+        <h2 style="color: crimson;" th:text="${code}"></h2>
+    </div>
+    <br/>
+</div>
+<footer th:insert="~{common/footer}"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
