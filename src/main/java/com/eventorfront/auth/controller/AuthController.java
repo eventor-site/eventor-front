@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.eventorfront.auth.dto.request.LoginRequest;
-import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.global.util.CookieUtil;
-import com.eventorfront.user.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,22 +31,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/auth")
 public class AuthController {
 	private final AuthService authService;
-	private final UserService userService;
 
 	@GetMapping("/login")
 	public String login() {
 		return "auth/login";
-	}
-
-	@GetMapping("/signUp")
-	public String signUp() {
-		return "auth/signUp";
-	}
-
-	@PostMapping("/signUp")
-	public String signUp(@ModelAttribute SignUpRequest signUpRequest) {
-		authService.signUp(signUpRequest);
-		return "redirect:/auth/login";
 	}
 
 	@PostMapping("/login")

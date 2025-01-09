@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.user.client.UserClient;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
@@ -48,5 +49,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void withdrawUser() {
 		userClient.withdrawUser();
+	}
+
+	@Override
+	public ResponseEntity<Void> signUp(SignUpRequest signUpRequest) {
+		return userClient.signup(signUpRequest);
+	}
+
+	@Override
+	public ResponseEntity<String> sendEmail(String email) {
+		return userClient.sendEmail(email);
+	}
+
+	@Override
+	public ResponseEntity<String> checkEmail(String email, String certifyCode) {
+		return userClient.checkEmail(email, certifyCode);
 	}
 }

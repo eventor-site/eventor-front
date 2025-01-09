@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
@@ -36,5 +38,15 @@ public interface UserClient {
 
 	@DeleteMapping("/me")
 	ResponseEntity<Void> withdrawUser();
+
+	@PostMapping("/signUp")
+	ResponseEntity<Void> signup(@RequestBody SignUpRequest signUpRequest);
+
+	@PostMapping("/signUp/sendEmail")
+	ResponseEntity<String> sendEmail(@RequestParam("email") String email);
+
+	@GetMapping("/signUp/checkEmail")
+	ResponseEntity<String> checkEmail(@RequestParam("email") String email,
+		@RequestParam("certifyCode") String certifyCode);
 
 }

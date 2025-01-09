@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
@@ -83,6 +84,28 @@ public class UserController {
 		CookieUtil.revokeToken(response, "Access-Token");
 		CookieUtil.revokeToken(response, "Refresh-Token");
 		return "redirect:/auth/login";
+	}
+
+	@GetMapping("/signUp")
+	public String signUp() {
+		return "user/signUp";
+	}
+
+	@PostMapping("/signUp")
+	public String signUp(@ModelAttribute SignUpRequest signUpRequest) {
+		userService.signUp(signUpRequest);
+		return "redirect:/auth/login";
+	}
+
+	@PostMapping("/signUp/sendEmail")
+	ResponseEntity<String> sendEmail(@RequestParam("email") String email) {
+		return userService.sendEmail(email);
+	}
+
+	@GetMapping("/signUp/checkEmail")
+	ResponseEntity<String> checkEmail(@RequestParam("email") String email,
+		@RequestParam("certifyCode") String certifyCode) {
+		return userService.checkEmail(email, certifyCode);
 	}
 
 }
