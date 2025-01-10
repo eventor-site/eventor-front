@@ -1,0 +1,16 @@
+package com.eventorfront.commentreport.dto.response;
+
+import java.time.LocalDateTime;
+
+import lombok.Builder;
+
+@Builder
+public record GetCommentReportResponse(
+	Long commentReportId,
+	Long postId,
+	Long commentId,
+	String writer,
+	String content,
+	LocalDateTime createdAt,
+	String reportTypeName) {
+}

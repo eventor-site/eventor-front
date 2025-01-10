@@ -32,6 +32,6 @@ public class PostReportController {
 	@DeleteMapping("/postReports/{postReportId}")
 	public String deletePostReport(@PathVariable Long postReportId) {
 		postReportService.deletePostReport(postReportId);
-		return "redirect:/users/admin/postReports";
+		return "redirect:/postReports";
 	}
 }
