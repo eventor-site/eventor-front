@@ -143,7 +143,7 @@
                 <div th:if="${comment.parentCommentId == null}" th:each="comment : ${comments}">
                     <!-- 재귀 호출 시작 -->
                     <div th:fragment="commentTree">
-                        <div class="comment-container">
+                        <div class="comment-container" th:id="${comment.commentId}">
                             <div th:if="${!comment.isDeleted}">
                                 <div>
                                     <img class="userGrade"

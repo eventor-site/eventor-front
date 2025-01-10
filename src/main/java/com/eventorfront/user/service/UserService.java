@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
@@ -23,6 +24,8 @@ public interface UserService {
 	ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request);
 
 	void withdrawUser();
+
+	List<GetCommentResponse> getCommentsByUserId();
 
 	ResponseEntity<Void> signup(SignUpRequest signupRequest);
 

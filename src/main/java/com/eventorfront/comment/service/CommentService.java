@@ -6,11 +6,14 @@ import org.springframework.http.ResponseEntity;
 
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
 import com.eventorfront.comment.dto.request.UpdateCommentRequest;
+import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 
 public interface CommentService {
 
 	List<GetCommentResponse> getCommentsByPostId(Long postId);
+
+	List<GetCommentByUserIdResponse> getCommentsByUserId();
 
 	void createComment(Long postId, CreateCommentRequest request);
 

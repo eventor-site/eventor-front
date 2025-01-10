@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.user.client.UserClient;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
@@ -49,6 +50,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void withdrawUser() {
 		userClient.withdrawUser();
+	}
+
+	@Override
+	public List<GetCommentResponse> getCommentsByUserId() {
+		return List.of();
 	}
 
 	@Override

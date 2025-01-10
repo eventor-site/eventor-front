@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.eventorfront.comment.client.CommentClient;
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
 import com.eventorfront.comment.dto.request.UpdateCommentRequest;
+import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.comment.service.CommentService;
 
@@ -21,6 +22,11 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<GetCommentResponse> getCommentsByPostId(Long postId) {
 		return commentClient.getCommentsByPostId(postId).getBody();
+	}
+
+	@Override
+	public List<GetCommentByUserIdResponse> getCommentsByUserId() {
+		return commentClient.getCommentsByUserId().getBody();
 	}
 
 	@Override

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
@@ -21,31 +20,30 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/posts/{postId}/comments")
 public class CommentController {
 	private final CommentService commentService;
 	private final AuthService authService;
 
-	@GetMapping
-	public String getComments(@PathVariable Long postId, Model model) {
-		model.addAttribute("comments", commentService.getCommentsByPostId(postId));
-		return "comment/list";
+	@GetMapping("/users/me/comments")
+	public String getCommentsByUserId(Model model) {
+		model.addAttribute("comments", commentService.getCommentsByUserId());
+		return "comment/me";
 	}
 
-	@PostMapping
+	@PostMapping("/posts/{postId}/comments")
 	public String createComment(@PathVariable Long postId, @ModelAttribute CreateCommentRequest request) {
 		commentService.createComment(postId, request);
 		return "redirect:/posts/" + postId;
 	}
 
-	@PutMapping("/{commentId}")
+	@PutMapping("/posts/{postId}/comments/{commentId}")
 	public String updateComment(@PathVariable Long postId, @PathVariable Long commentId,
 		@ModelAttribute UpdateCommentRequest request) {
 		commentService.updateComment(postId, commentId, request);
 		return "redirect:/posts/" + postId;
 	}
 
-	@PutMapping("/{commentId}/recommend")
+	@PutMapping("/posts/{postId}/comments/{commentId}/recommend")
 	public ResponseEntity<String> recommendComment(@PathVariable Long postId, @PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
@@ -55,7 +53,7 @@ public class CommentController {
 		}
 	}
 
-	@PutMapping("/{commentId}/disrecommend")
+	@PutMapping("/posts/{postId}/comments/{commentId}/disrecommend")
 	public ResponseEntity<String> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
@@ -65,7 +63,7 @@ public class CommentController {
 		}
 	}
 
-	@DeleteMapping("/{commentId}")
+	@DeleteMapping("/posts/{postId}/comments/{commentId}")
 	public String deleteComment(@PathVariable Long postId, @PathVariable Long commentId) {
 		commentService.deleteComment(postId, commentId);
 		return "redirect:/posts/" + postId;
