@@ -159,6 +159,11 @@ table th {
     color: #797979;
 }
 
+.userGrade {
+    width: 30px; /* 너비 설정 */
+    height: 30px; /* 높이 설정 */
+    object-fit: cover; /* 이미지가 비율을 유지하면서 잘리도록 설정 */
+}
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {

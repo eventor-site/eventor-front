@@ -47,7 +47,12 @@
                             <!-- 제목을 클릭하면 해당 게시글로 이동 -->
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}" th:text="${post.title}"></a>
                         </td>
-                        <td th:text="${post.writer}"></td>
+                        <td>
+                            <img class="userGrade"
+                                 th:src="@{/profile/{userGradeName}.png (userGradeName=${post.userGradeName()})}"
+                                 alt="프로필">
+                            <span class="ml-2" th:text="${post.writer}"></span>
+                        </td>
                         <td th:text="${post.viewCount}"></td>
                         <td th:text="${post.recommendationCount}"></td>
                         <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
