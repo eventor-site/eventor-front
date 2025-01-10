@@ -38,6 +38,16 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(userService.searchUserById(keyword));
 	}
 
+	@GetMapping("/recover/identifier")
+	public String recoverIdentifierPage() {
+		return "user/recoverIdentifierForm";
+	}
+
+	@GetMapping("/recover/password")
+	public String recoverPasswordPage() {
+		return "user/recoverPasswordForm";
+	}
+
 	@GetMapping("/admin")
 	public String adminPage() {
 		return "user/admin";
@@ -60,7 +70,7 @@ public class UserController {
 		return "user/modifyPasswordForm";
 	}
 
-	@PostMapping("/signUp/checkIdentifier")
+	@PostMapping("/signup/checkIdentifier")
 	public ResponseEntity<String> checkIdentifier(@ModelAttribute CheckIdentifierRequest request) {
 		return userService.checkIdentifier(request);
 	}
@@ -86,26 +96,36 @@ public class UserController {
 		return "redirect:/auth/login";
 	}
 
-	@GetMapping("/signUp")
-	public String signUp() {
-		return "user/signUp";
+	@GetMapping("/signup")
+	public String signup() {
+		return "user/signup";
 	}
 
-	@PostMapping("/signUp")
-	public String signUp(@ModelAttribute SignUpRequest signUpRequest) {
-		userService.signUp(signUpRequest);
+	@PostMapping("/signup")
+	public String signup(@ModelAttribute SignUpRequest signupRequest) {
+		userService.signup(signupRequest);
 		return "redirect:/auth/login";
 	}
 
-	@PostMapping("/signUp/sendEmail")
+	@PostMapping("/signup/sendEmail")
 	ResponseEntity<String> sendEmail(@RequestParam("email") String email) {
 		return userService.sendEmail(email);
 	}
 
-	@GetMapping("/signUp/checkEmail")
+	@GetMapping("/signup/checkEmail")
 	ResponseEntity<String> checkEmail(@RequestParam("email") String email,
 		@RequestParam("certifyCode") String certifyCode) {
 		return userService.checkEmail(email, certifyCode);
+	}
+
+	@PostMapping("/recover/identifier")
+	ResponseEntity<String> recoverIdentifier(@RequestParam String email) {
+		return userService.recoverIdentifier(email);
+	}
+
+	@PostMapping("/recover/password")
+	ResponseEntity<String> recoverPassword(@RequestParam String identifier) {
+		return userService.recoverPassword(identifier);
 	}
 
 }

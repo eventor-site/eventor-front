@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/image/free-icon-event.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
     <title>이벤터</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main/main.css"/>
@@ -44,7 +44,7 @@
                             <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
                                 <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
-                                <img th:if="${post.imageUrl == null}" src="/image/free-icon-event.png" alt="이벤트 이미지">
+                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
                             </a>
                             <div class="event-card-body">
                                 <div class="event-card-title" th:text="${post.title}"></div>
@@ -63,7 +63,7 @@
                             <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
                                 <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
-                                <img th:if="${post.imageUrl == null}" src="/image/free-icon-event.png" alt="이벤트 이미지">
+                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
                             </a>
                             <div class="event-card-body">
                                 <div class="event-card-title" th:text="${post.title}"></div>
@@ -82,7 +82,7 @@
                             <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
                                 <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
-                                <img th:if="${post.imageUrl == null}" src="/image/free-icon-event.png" alt="이벤트 이미지">
+                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
                             </a>
                             <div class="event-card-body">
                                 <div class="event-card-title" th:text="${post.title}"></div>

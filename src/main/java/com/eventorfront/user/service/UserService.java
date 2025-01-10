@@ -24,10 +24,14 @@ public interface UserService {
 
 	void withdrawUser();
 
-	ResponseEntity<Void> signUp(SignUpRequest signUpRequest);
+	ResponseEntity<Void> signup(SignUpRequest signupRequest);
 
 	ResponseEntity<String> sendEmail(String email);
 
 	ResponseEntity<String> checkEmail(String email, String certifyCode);
+
+	ResponseEntity<String> recoverIdentifier(String email);
+
+	ResponseEntity<String> recoverPassword(String identifier);
 
 }
