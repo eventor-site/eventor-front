@@ -24,6 +24,12 @@ public class CommentController {
 	private final CommentService commentService;
 	private final AuthService authService;
 
+	@GetMapping("/users/admin/comments")
+	public String getComments(Model model) {
+		model.addAttribute("comments", commentService.getComments());
+		return "comment/admin";
+	}
+
 	@GetMapping("/users/me/comments")
 	public String getCommentsByUserId(Model model) {
 		model.addAttribute("comments", commentService.getCommentsByUserId());

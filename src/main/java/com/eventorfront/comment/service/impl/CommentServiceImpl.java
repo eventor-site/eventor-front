@@ -25,6 +25,11 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
+	public List<GetCommentByUserIdResponse> getComments() {
+		return commentClient.getComments().getBody();
+	}
+
+	@Override
 	public List<GetCommentByUserIdResponse> getCommentsByUserId() {
 		return commentClient.getCommentsByUserId().getBody();
 	}
