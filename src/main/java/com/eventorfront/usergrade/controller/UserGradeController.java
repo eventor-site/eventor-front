@@ -17,26 +17,26 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/user-grades")
+@RequestMapping("/userGrades")
 public class UserGradeController {
 	private final UserGradeService userGradeService;
-	private static final String REDIRECT_URL = "redirect:/user-grades";
+	private static final String REDIRECT_URL = "redirect:/userGrades";
 
 	@GetMapping("/create")
 	public String createUserGradeForm() {
-		return "user-grade/create";
+		return "userGrade/create";
 	}
 
 	@GetMapping("/update/{userGradeId}")
 	public String updateUserGradeForm(@PathVariable Long userGradeId, Model model) {
 		model.addAttribute("userGrade", userGradeService.getUserGrade(userGradeId));
-		return "user-grade/update";
+		return "userGrade/update";
 	}
 
 	@GetMapping
 	public String getUserGrades(Model model) {
 		model.addAttribute("userGrades", userGradeService.getUserGrades());
-		return "user-grade/list";
+		return "userGrade/list";
 	}
 
 	@PostMapping

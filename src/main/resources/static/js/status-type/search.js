@@ -4,7 +4,7 @@ $(document).ready(function () {
         const query = $(this).val();
         if (query.length > 0) { // 한 글자 이상 입력 시 검색
             $.ajax({
-                url: '/status-types/search',
+                url: '/statusTypes/search',
                 type: 'GET',
                 data: {keyword: query},
                 success: function (data) {

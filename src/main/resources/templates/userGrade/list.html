@@ -26,7 +26,7 @@
                 <hr style="width: 100%"/>
                 <section id="page-body">
                     <h3>유저 등급 리스트</h3>
-                    <h3><a th:href="@{/user-grades/create}" class="btn btn-primary">유저 등급 추가</a></h3>
+                    <h3><a th:href="@{/userGrades/create}" class="btn btn-primary">유저 등급 추가</a></h3>
                     <div th:if="${userGrades.size() > 0}">
                         <table class="table table-bordered">
                             <thead>
@@ -45,9 +45,9 @@
                                 <td th:text="${#numbers.formatDecimal(userGrade.minAmount(), 1, 'COMMA', 0, 'POINT')}"></td>
                                 <td th:text="${#numbers.formatDecimal(userGrade.maxAmount(), 1, 'COMMA', 0, 'POINT')}"></td>
                                 <td style="display: flex; align-items: center;">
-                                    <a th:href="@{/user-grades/update/{userGradeId} (userGradeId=${userGrade.userGradeId()})}"
+                                    <a th:href="@{/userGrades/update/{userGradeId} (userGradeId=${userGrade.userGradeId()})}"
                                        class="btn btn-warning inline-text">편집</a>
-                                    <form th:action="@{/user-grades/{userGradeId} (userGradeId=${userGrade.userGradeId()})}"
+                                    <form th:action="@{/userGrades/{userGradeId} (userGradeId=${userGrade.userGradeId()})}"
                                           th:method="delete">
                                         <button type="submit" class="btn btn-danger inline-text">삭제</button>
                                     </form>

@@ -26,22 +26,23 @@
                 </section>
                 <hr style="width: 100%"/>
                 <section id="page-body">
-                    <h3>유저 등급 추가 폼</h3>
-                    <form action="/user-grades" method="post">
+                    <h3>유저 등급 수정 폼</h3>
+                    <form th:action="@{/userGrades/{userGradeId} (userGradeId=${userGrade.userGradeId})}"
+                          th:method="put" th:object="${userGrade}">
                         <div class="form-group">
                             <label for="name">유저 등급 이름</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" required>
                         </div>
                         <div class="form-group">
                             <label for="minAmount">최소 기준 금액</label>
-                            <input type="number" class="form-control" id="minAmount" name="minAmount" required>
+                            <input type="number" class="form-control" id="minAmount" th:field="*{minAmount}" required>
                         </div>
                         <div class="form-group">
                             <label for="maxAmount">최대 기준 금액</label>
-                            <input type="number" class="form-control" id="maxAmount" name="maxAmount" required>
+                            <input type="number" class="form-control" id="maxAmount" th:field="*{maxAmount}" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">추가</button>
+                        <button type="submit" class="btn btn-primary">수정</button>
                         <a class="btn btn-secondary" onclick="history.back()">취소</a>
                     </form>
                 </section>

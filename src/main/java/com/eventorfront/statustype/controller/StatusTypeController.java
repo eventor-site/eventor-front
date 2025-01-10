@@ -23,20 +23,20 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/status-types")
+@RequestMapping("/statusTypes")
 public class StatusTypeController {
 	private final StatusTypeService statusTypeService;
-	private static final String REDIRECT_URL = "redirect:/status-types";
+	private static final String REDIRECT_URL = "redirect:/statusTypes";
 
 	@GetMapping("/create")
 	public String createStatusTypeForm() {
-		return "status-type/create";
+		return "statusType/create";
 	}
 
 	@GetMapping("/update/{statusTypeId}")
 	public String updateStatusTypeForm(@PathVariable Long statusTypeId, Model model) {
 		model.addAttribute("statusType", statusTypeService.getStatusType(statusTypeId));
-		return "status-type/update";
+		return "statusType/update";
 	}
 
 	@GetMapping("/search")
@@ -47,7 +47,7 @@ public class StatusTypeController {
 	@GetMapping
 	public String getStatusTypes(Model model) {
 		model.addAttribute("statusTypes", statusTypeService.getStatusTypes());
-		return "status-type/list";
+		return "statusType/list";
 	}
 
 	@PostMapping
