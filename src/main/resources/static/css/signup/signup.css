@@ -16,7 +16,7 @@
     gap: 0.5rem;
 }
 
-.form-control, .btn, .email-input-container input {
+.form-control, .email-input-container input {
     width: 100%;
 }
 

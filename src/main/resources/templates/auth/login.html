@@ -5,11 +5,12 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon"
-          href="/image/free-icon-event.png"
+          href="/image/logo.png"
           type="image/x-icon">
     <title>로그인 페이지</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/auth/login.css"/>
 </head>
 
 <body>
@@ -34,34 +35,30 @@
                                placeholder="비밀번호를 입력해주세요" required>
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary btn-block">로그인</button>
+                        <button type="submit" id="loginButton" class="btn btn-primary btn-block" onclick="login()">로그인
+                        </button>
                     </div>
 
                     <hr style="width: 100%"/>
 
-                    <div class="row justify-content-center mt-4">
-                        <div class="col-md-4">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <a href="/oauth2/authorization/google" class="btn btn-success">Google 로그인</a>
-                                </div>
-                            </div>
+                    <div class="oauth-container">
+                        <div class="login-button">
+                            <a href="/oauth2/authorization/google" class="btn-oauth">Google 로그인</a>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <a href="/oauth2/authorization/naver" class="btn btn-success">Naver 로그인</a>
-                                </div>
-                            </div>
+                        <div class="login-button">
+                            <a href="/oauth2/authorization/naver" class="btn-oauth">Naver 로그인</a>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <a href="/oauth2/authorization/kakao" class="btn btn-success">Kakao 로그인</a>
-                                </div>
-                            </div>
+                        <div class="login-button">
+                            <a href="/oauth2/authorization/kakao" class="btn-oauth">Kakao 로그인</a>
                         </div>
+                    </div>
 
+                    <hr style="width: 100%"/>
+
+                    <div class="form-group text-center">
+                        <a href="/users/recover/identifier" class="btn-oauth">아이디 찾기</a>
+                        <a href="/users/recover/password" class="btn-oauth">비밀번호 찾기</a>
+                        <a href="/users/signup" class="btn-oauth">회원가입</a>
                     </div>
 
                 </form>

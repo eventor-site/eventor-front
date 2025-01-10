@@ -27,9 +27,6 @@ public interface UserClient {
 	@GetMapping("/me")
 	ResponseEntity<GetUserResponse> getUserInfo();
 
-	@PostMapping("/signUp/checkIdentifier")
-	ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request);
-
 	@PutMapping("/me")
 	ResponseEntity<Void> updateUser(UpdateUserRequest request);
 
@@ -39,14 +36,22 @@ public interface UserClient {
 	@DeleteMapping("/me")
 	ResponseEntity<Void> withdrawUser();
 
-	@PostMapping("/signUp")
-	ResponseEntity<Void> signup(@RequestBody SignUpRequest signUpRequest);
+	@PostMapping("/signup")
+	ResponseEntity<Void> signup(@RequestBody SignUpRequest signupRequest);
 
-	@PostMapping("/signUp/sendEmail")
+	@PostMapping("/signup/checkIdentifier")
+	ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request);
+
+	@PostMapping("/signup/sendEmail")
 	ResponseEntity<String> sendEmail(@RequestParam("email") String email);
 
-	@GetMapping("/signUp/checkEmail")
+	@GetMapping("/signup/checkEmail")
 	ResponseEntity<String> checkEmail(@RequestParam("email") String email,
 		@RequestParam("certifyCode") String certifyCode);
 
+	@PostMapping("/recover/identifier")
+	ResponseEntity<String> recoverIdentifier(@RequestParam String email);
+
+	@PostMapping("/recover/password")
+	ResponseEntity<String> recoverPassword(@RequestParam String identifier);
 }

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData();
         formData.append('identifier', identifier);
 
-        fetch('/users/signUp/checkIdentifier', {
+        fetch('/users/signup/checkIdentifier', {
             method: 'POST',
             body: formData,
         })

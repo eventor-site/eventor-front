@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ResponseEntity<Void> signUp(SignUpRequest signUpRequest) {
-		return userClient.signup(signUpRequest);
+	public ResponseEntity<Void> signup(SignUpRequest signupRequest) {
+		return userClient.signup(signupRequest);
 	}
 
 	@Override
@@ -64,5 +64,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public ResponseEntity<String> checkEmail(String email, String certifyCode) {
 		return userClient.checkEmail(email, certifyCode);
+	}
+
+	@Override
+	public ResponseEntity<String> recoverIdentifier(String email) {
+		return userClient.recoverIdentifier(email);
+	}
+
+	@Override
+	public ResponseEntity<String> recoverPassword(String identifier) {
+		return userClient.recoverPassword(identifier);
 	}
 }

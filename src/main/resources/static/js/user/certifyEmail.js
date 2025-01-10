@@ -2,7 +2,7 @@ const sendEmail = async () => {
     const email = document.getElementById('email').value
 
     const response = await fetch(
-        `/users/signUp/sendEmail?email=${encodeURI(email)}`,
+        `/users/signup/sendEmail?email=${encodeURI(email)}`,
         {method: 'POST'}
     );
 
@@ -30,14 +30,14 @@ const certifySignUpCode = async () => {
     const signupButton = document.getElementById('signupButton');
     const updateButton = document.getElementById('updateButton');
 
-    const response = await fetch(`/users/signUp/checkEmail?email=${encodeURI(email)}&certifyCode=${code}`);
+    const response = await fetch(`/users/signup/checkEmail?email=${encodeURI(email)}&certifyCode=${code}`);
     const message = await response.text();
 
     if (message === '인증되었습니다.') {
         alert(message);
         emailInput.setAttribute('readonly', 'true');
         codeInput.setAttribute('readonly', 'true');
-        
+
         // 회원가입 버튼 활성화
         if (signupButton) {
             signupButton.removeAttribute('disabled');
