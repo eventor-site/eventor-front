@@ -22,6 +22,9 @@ public interface CommentClient {
 	@GetMapping("/posts/{postId}/comments")
 	ResponseEntity<List<GetCommentResponse>> getCommentsByPostId(@PathVariable Long postId);
 
+	@GetMapping("/users/admin/comments")
+	ResponseEntity<List<GetCommentByUserIdResponse>> getComments();
+
 	@GetMapping("/users/me/comments")
 	ResponseEntity<List<GetCommentByUserIdResponse>> getCommentsByUserId();
 

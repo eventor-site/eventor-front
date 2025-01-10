@@ -13,6 +13,8 @@ public interface CommentService {
 
 	List<GetCommentResponse> getCommentsByPostId(Long postId);
 
+	List<GetCommentByUserIdResponse> getComments();
+
 	List<GetCommentByUserIdResponse> getCommentsByUserId();
 
 	void createComment(Long postId, CreateCommentRequest request);
