@@ -42,3 +42,9 @@
 .recommend-container p {
     margin: 0; /* 기본 여백 제거 */
 }
+
+.userGrade {
+    width: 30px; /* 너비 설정 */
+    height: 30px; /* 높이 설정 */
+    object-fit: cover; /* 이미지가 비율을 유지하면서 잘리도록 설정 */
+}
