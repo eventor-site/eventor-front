@@ -41,11 +41,7 @@
                             <label for="maxAmount">최대 기준 금액</label>
                             <input type="number" class="form-control" id="maxAmount" th:field="*{maxAmount}" required>
                         </div>
-                        <div class="form-group">
-                            <label for="pointRate">적립 비율 (%)</label>
-                            <input type="number" step="0.01" class="form-control" id="pointRate" th:field="*{pointRate}"
-                                   required>
-                        </div>
+                        
                         <button type="submit" class="btn btn-primary">수정</button>
                         <a class="btn btn-secondary" onclick="history.back()">취소</a>
                     </form>

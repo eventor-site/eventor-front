@@ -15,6 +15,7 @@ public record GetCommentResponse(
 	Long decommendationCount,
 	List<GetCommentResponse> childComments,
 	LocalDateTime createdAt,
+	String userGradeName,
 	Boolean isAuthorized,
 	Boolean isDeleted) {
 }

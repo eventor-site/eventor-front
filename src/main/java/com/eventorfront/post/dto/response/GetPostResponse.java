@@ -21,5 +21,6 @@ public record GetPostResponse(
 	LocalDateTime startTime,
 	LocalDateTime endTime,
 	List<GetImageResponse> images,
+	String userGradeName,
 	Boolean isAuthorized) {
 }

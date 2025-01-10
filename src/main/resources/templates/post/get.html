@@ -46,6 +46,9 @@
                     <p><strong>제목:</strong> <span th:text="${post.title}"></span></p>
                 </div>
                 <div class="right">
+                    <img class="userGrade"
+                         th:src="@{/profile/{userGradeName}.png (userGradeName=${post.userGradeName()})}"
+                         alt="프로필">
                     <p><strong>작성자:</strong> <span th:text="${post.writer()}"></span></p>
                 </div>
             </div>
@@ -130,6 +133,9 @@
                         <div class="comment-container">
                             <div th:if="${!comment.isDeleted}">
                                 <div>
+                                    <img class="userGrade"
+                                         th:src="@{/profile/{userGradeName}.png (userGradeName=${comment.userGradeName()})}"
+                                         alt="프로필">
                                     <strong th:text="${comment.writer}"></strong>
                                     <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
                                 </div>
