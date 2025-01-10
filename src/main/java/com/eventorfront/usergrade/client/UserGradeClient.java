@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.eventorfront.usergrade.dto.UserGradeDto;
 
-@FeignClient(name = "user-grade-client", url = "http://localhost:8090/back/user-grades")
+@FeignClient(name = "userGrade-client", url = "http://localhost:8090/back/userGrades")
 public interface UserGradeClient {
 
 	@GetMapping

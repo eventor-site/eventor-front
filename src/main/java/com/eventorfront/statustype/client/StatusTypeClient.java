@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.statustype.dto.StatusTypeDto;
 
-@FeignClient(name = "status-type-client", url = "http://localhost:8090/back/status-types")
+@FeignClient(name = "statusType-client", url = "http://localhost:8090/back/statusTypes")
 public interface StatusTypeClient {
 
 	@GetMapping("/search")

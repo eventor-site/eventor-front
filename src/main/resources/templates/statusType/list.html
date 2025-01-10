@@ -26,7 +26,7 @@
                 <hr style="width: 100%"/>
                 <section id="page-body">
                     <h3>상태유형 리스트</h3>
-                    <h3><a th:href="@{/status-types/create}" class="btn btn-primary">상태유형 추가</a></h3>
+                    <h3><a th:href="@{/statusTypes/create}" class="btn btn-primary">상태유형 추가</a></h3>
                     <div th:if="${statusTypes.size() > 0}">
                         <table class="table table-bordered">
                             <thead>
@@ -41,9 +41,9 @@
                                 <td th:text="${index.index + 1}">1</td>
                                 <td th:text="${statusType.name()}">상태 유형 이름</td>
                                 <td style="display: flex; align-items: center;">
-                                    <a th:href="@{/status-types/update/{statusTypeId} (statusTypeId=${statusType.statusTypeId()})}"
+                                    <a th:href="@{/statusTypes/update/{statusTypeId} (statusTypeId=${statusType.statusTypeId()})}"
                                        class="btn btn-warning inline-text">편집</a>
-                                    <form th:action="@{/status-types/{statusTypeId} (statusTypeId=${statusType.statusTypeId()})}"
+                                    <form th:action="@{/statusTypes/{statusTypeId} (statusTypeId=${statusType.statusTypeId()})}"
                                           th:method="delete">
                                         <button type="submit" class="btn btn-danger inline-text">삭제</button>
                                     </form>
