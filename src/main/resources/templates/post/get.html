@@ -96,6 +96,19 @@
                         data-method="Post"
                         onclick="setupAlertBox(this)">❤️
                 </button>
+
+                <button class="btn btn-sm btn-outline-primary" id="reportButton"
+                        th:data-url="@{/posts/{postId}/postReports (postId=${post.postId})}"
+                        data-method="POST">
+                    🚨
+                </button>
+                <div class="popup" id="reportPopup">
+                    <p><strong>[신고유형]</strong></p>
+                    <a data-report-type="정치" onclick="submitReport(this)">- 정치</a>
+                    <a data-report-type="성인물" onclick="submitReport(this)">- 성인물</a>
+                    <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
+                </div>
+
             </div>
 
 
@@ -212,6 +225,7 @@
 <script src="/js/post/comment.js"></script>
 <script src="/js/post/sub-comment.js"></script>
 <script src="/js/post/remainingTime.js"></script>
+<script src="/js/post/report.js"></script>
 
 </body>
 </html>

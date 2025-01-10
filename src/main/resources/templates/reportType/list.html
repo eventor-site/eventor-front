@@ -21,34 +21,29 @@
             <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
             <section id="page-content">
                 <section id="page-header">
-                    <h5>옵션 그룹 관리</h5>
+                    <h5>신고 유형 관리</h5>
                 </section>
                 <hr style="width: 100%"/>
                 <section id="page-body">
-                    <h3>옵션 그룹 리스트</h3>
-                    <h3><a th:href="@{/shops/{shopId}/option-groups/create (shopId=${shopId})}" class="btn btn-primary">옵션
-                        그룹 추가</a></h3>
-                    <div th:if="${optionGroups.size() > 0}">
+                    <h3>신고 유형 리스트</h3>
+                    <h3><a th:href="@{/reportTypes/create}" class="btn btn-primary">신고 유형 추가</a></h3>
+                    <div th:if="${reportTypes.size() > 0}">
                         <table class="table table-bordered">
                             <thead>
                             <tr class="inline-text">
                                 <th>번호</th>
-                                <th>옵션 그룹 이름</th>
-                                <th>옵션 필수 선택 개수</th>
+                                <th>신고 유형 이름</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="optionGroup, index : ${optionGroups}">
+                            <tr th:each="reportType, index : ${reportTypes}">
                                 <td th:text="${index.index + 1}">1</td>
-                                <td th:text="${optionGroup.name}">옵션 그룹 이름</td>
-                                <td th:text="${optionGroup.requiredCount}">옵션 필수 선택 개수</td>
+                                <td th:text="${reportType.name()}">신고 유형 이름</td>
                                 <td style="display: flex; align-items: center;">
-                                    <a th:href="@{/shops/{shopId}/option-groups/{optionGroupId} (shopId=${shopId}, optionGroupId=${optionGroup.optionGroupId})}"
-                                       class="btn btn-info inline-text">보기</a>
-                                    <a th:href="@{/shops/{shopId}/option-groups/{optionGroupId}/update (shopId=${shopId}, optionGroupId=${optionGroup.optionGroupId})}"
+                                    <a th:href="@{/reportTypes/{reportTypeId}/update (reportTypeId=${reportType.reportTypeId()})}"
                                        class="btn btn-warning inline-text">편집</a>
-                                    <form th:action="@{/shops/{shopId}/option-groups/{optionGroupId} (shopId=${shopId}, optionGroupId=${optionGroup.optionGroupId})}"
+                                    <form th:action="@{/reportTypes/{reportTypeId} (reportTypeId=${reportType.reportTypeId()})}"
                                           th:method="delete">
                                         <button type="submit" class="btn btn-danger inline-text">삭제</button>
                                     </form>
@@ -57,8 +52,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div th:if="${optionGroups.size() == 0}">
-                        <p>옵션이 없습니다.</p>
+                    <div th:if="${reportTypes.size() == 0}">
+                        <p>신고 유형이 없습니다.</p>
                     </div>
                 </section>
             </section>
