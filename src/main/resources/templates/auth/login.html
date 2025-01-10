@@ -34,6 +34,14 @@
                         <input id="password" type="password" name="password" class="form-control"
                                placeholder="비밀번호를 입력해주세요" required>
                     </div>
+
+                    <div class="form-group">
+                        <!-- 로그인 실패 메시지 출력 -->
+                        <div th:if="${message}" class="text-danger">
+                            <small th:text="${message}"></small>
+                        </div>
+                    </div>
+
                     <div class="form-group text-center">
                         <button type="submit" id="loginButton" class="btn btn-primary btn-block" onclick="login()">로그인
                         </button>
