@@ -35,8 +35,8 @@ spring:
             scope: email, profile
 
           naver:
-            client-id: cgGN328xW6zu6RuWM1OL
-            client-secret: jgXHTjiAQR
+            client-id: ejuqElNzORS4on3ES6SH
+            client-secret: tWXeuJkBYi
             redirect-uri: https://sikyeojo.shop/login/oauth2/code/naver
             authorization-grant-type: authorization_code
             client-name: Naver
@@ -62,7 +62,7 @@ spring:
             token-uri: https://kauth.kakao.com/oauth/token
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
-            
+
 logging:
   file:
     path: ./logs
