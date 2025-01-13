@@ -19,71 +19,75 @@
 <div class="wrapper">
     <div class="main-content">
 
-        <section id="page" class="top-container">
-            <section id="page-menu-container" th:insert="~{common/user-menu.html}"></section>
-            <section id="page-content">
-                <section id="page-header">
-                    <h5>마이 페이지</h5>
+        <div class="body-container">
+            <section id="page">
+                <section id="page-menu-container" th:insert="~{common/user-menu.html}"></section>
+                <section id="page-content">
+                    <section id="page-header">
+                        <h5>마이 페이지</h5>
+                    </section>
+
+                    <div class="container my-page-container">
+                        <!-- User Basic Info -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6>회원 정보</h6>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>아이디:</strong> <span th:text="${user.identifier}"></span></p>
+                                <p><strong>이름:</strong> <span th:text="${user.name}"></span></p>
+                                <p><strong>닉네임:</strong> <span th:text="${user.nickname}"></span></p>
+                                <p><strong>이메일:</strong> <span th:text="${user.email}"></span></p>
+                                <p><strong>전화번호:</strong> <span th:text="${user.phone}"></span></p>
+                                <p><strong>생년월일:</strong> <span th:text="${user.birth}"></span></p>
+                                <p><strong>성별:</strong> <span th:text="${user.gender}"></span></p>
+                            </div>
+                        </div>
+
+                        <!-- User Status & Grade -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6>회원 상태, 등급, 권한</h6>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>회원 상태:</strong> <span th:text="${user.statusName}"></span></p>
+                                <p><strong>회원 등급:</strong> <span th:text="${user.userGradeName}"></span></p>
+                                <p><strong>회원 권한:</strong> <span th:text="${user.userRoles}"></span></p>
+                            </div>
+                        </div>
+
+                        <!-- User Activity Info -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6>활동 정보</h6>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>회원 가입일:</strong> <span
+                                        th:text="${#temporals.format(user.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                                </p>
+                                <p><strong>최근 로그인 시간:</strong> <span
+                                        th:text="${#temporals.format(user.lastLoginTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                                </p>
+                                <p><strong>정보 수정 시간:</strong> <span
+                                        th:text="${#temporals.format(user.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center;">
+                        <a th:href="@{/users/me/update}"
+                           class="btn btn-info inline-text">회원 정보 수정</a>
+                        <a th:href="@{/users/me/modifyPasswordForm}"
+                           class="btn btn-warning inline-text">비밀번호 변경</a>
+                        <form th:action="@{/users/me}" th:method="delete">
+                            <button type="submit" class="btn btn-danger inline-text">탈퇴</button>
+                        </form>
+                    </div>
+
                 </section>
-
-                <div class="container my-page-container">
-                    <!-- User Basic Info -->
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h6>회원 정보</h6>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>아이디:</strong> <span th:text="${user.identifier}"></span></p>
-                            <p><strong>이름:</strong> <span th:text="${user.name}"></span></p>
-                            <p><strong>닉네임:</strong> <span th:text="${user.nickname}"></span></p>
-                            <p><strong>이메일:</strong> <span th:text="${user.email}"></span></p>
-                            <p><strong>전화번호:</strong> <span th:text="${user.phone}"></span></p>
-                            <p><strong>생년월일:</strong> <span th:text="${user.birth}"></span></p>
-                            <p><strong>성별:</strong> <span th:text="${user.gender}"></span></p>
-                        </div>
-                    </div>
-
-                    <!-- User Status & Grade -->
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h6>회원 상태, 등급, 권한</h6>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>회원 상태:</strong> <span th:text="${user.statusName}"></span></p>
-                            <p><strong>회원 등급:</strong> <span th:text="${user.userGradeName}"></span></p>
-                            <p><strong>회원 권한:</strong> <span th:text="${user.userRoles}"></span></p>
-                        </div>
-                    </div>
-
-                    <!-- User Activity Info -->
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h6>활동 정보</h6>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>회원 가입일:</strong> <span
-                                    th:text="${#temporals.format(user.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
-                            <p><strong>최근 로그인 시간:</strong> <span
-                                    th:text="${#temporals.format(user.lastLoginTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                            </p>
-                            <p><strong>정보 수정 시간:</strong> <span
-                                    th:text="${#temporals.format(user.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="display: flex; align-items: center;">
-                    <a th:href="@{/users/me/update}"
-                       class="btn btn-info inline-text">회원 정보 수정</a>
-                    <a th:href="@{/users/me/modifyPasswordForm}"
-                       class="btn btn-warning inline-text">비밀번호 변경</a>
-                    <form th:action="@{/users/me}" th:method="delete">
-                        <button type="submit" class="btn btn-danger inline-text">탈퇴</button>
-                    </form>
-                </div>
-
             </section>
-        </section>
+        </div>
     </div>
 </div>
 

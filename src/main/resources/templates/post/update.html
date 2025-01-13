@@ -17,7 +17,7 @@
 
 <div class="wrapper">
     <div class="main-content">
-        <div class="top-container2">
+        <div class="body-container">
             <h5>카테고리: <span th:text="${post.categoryName}">전체</span></h5>
             <hr style="width: 100%"/>
             <form th:action="@{/posts/{postId} (postId=${post.postId})}" th:method="put" id="form"

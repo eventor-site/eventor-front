@@ -18,63 +18,64 @@
 <div class="wrapper">
     <div class="main-content">
 
-        <section id="page" class="top-container">
-            <section id="page-menu-container" th:insert="~{common/user-menu.html}"></section>
-            <section id="page-content">
-                <section id="page-header">
-                    <h5>내 좋아요 목록</h5>
-                </section>
-                <hr style="width: 100%"/>
-                <section id="page-body">
-                    <div th:if="${posts.size() > 0}">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr class="inline-text">
-                                <th>제목</th>
-                                <th>작성자</th>
-                                <th>좋아요한 시간</th>
-                                <th>삭제</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="post, index : ${posts}">
-                                <td>
-                                    <!-- 제목을 클릭하면 해당 게시글로 이동 -->
-                                    <a th:href="@{/posts/{postId} (postId=${post.postId()})}"
-                                       th:text="${post.title}"></a>
-                                </td>
-                                <td th:text="${post.writer}"></td>
-                                <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
-                                <td>
-                                    <form th:action="@{/favorites/{favoriteId} (favoriteId=${post.favoriteId})}"
-                                          th:method="delete">
-                                        <button class="btn btn-sm btn-outline-primary">삭제</button>
-                                    </form>
+        <div class="body-container">
+            <section id="page">
+                <section id="page-menu-container" th:insert="~{common/user-menu.html}"></section>
+                <section id="page-content">
+                    <section id="page-header">
+                        <h5>내 좋아요 목록</h5>
+                    </section>
+                    <hr style="width: 100%"/>
+                    <section id="page-body">
+                        <div th:if="${posts.size() > 0}">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="inline-text">
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>좋아요한 시간</th>
+                                    <th>삭제</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="post, index : ${posts}">
+                                    <td>
+                                        <!-- 제목을 클릭하면 해당 게시글로 이동 -->
+                                        <a th:href="@{/posts/{postId} (postId=${post.postId()})}"
+                                           th:text="${post.title}"></a>
+                                    </td>
+                                    <td th:text="${post.writer}"></td>
+                                    <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <td>
+                                        <form th:action="@{/favorites/{favoriteId} (favoriteId=${post.favoriteId})}"
+                                              th:method="delete">
+                                            <button class="btn btn-sm btn-outline-primary">삭제</button>
+                                        </form>
 
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div th:if="${posts.size() == 0}">
-                        <p>좋아요한 게시글이 없습니다.</p>
-                    </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if="${posts.size() == 0}">
+                            <p>좋아요한 게시글이 없습니다.</p>
+                        </div>
 
+                    </section>
                 </section>
+
             </section>
 
-        </section>
 
-
+        </div>
     </div>
-</div>
 
-<footer th:insert="~{/common/footer}"></footer>
+    <footer th:insert="~{/common/footer}"></footer>
 
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

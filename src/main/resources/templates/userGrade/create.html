@@ -18,44 +18,45 @@
 <div class="wrapper">
     <div class="main-content">
 
-        <section id="page" class="top-container">
-            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
-            <section id="page-content">
-                <section id="page-header">
-                    <h5>유저 등급 관리</h5>
-                </section>
-                <hr style="width: 100%"/>
-                <section id="page-body">
-                    <h3>유저 등급 추가 폼</h3>
-                    <form action="/userGrades" method="post">
-                        <div class="form-group">
-                            <label for="name">유저 등급 이름</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="minAmount">최소 기준 금액</label>
-                            <input type="number" class="form-control" id="minAmount" name="minAmount" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="maxAmount">최대 기준 금액</label>
-                            <input type="number" class="form-control" id="maxAmount" name="maxAmount" required>
-                        </div>
+        <div class="body-container">
+            <section id="page">
+                <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+                <section id="page-content">
+                    <section id="page-header">
+                        <h5>유저 등급 관리</h5>
+                    </section>
+                    <hr style="width: 100%"/>
+                    <section id="page-body">
+                        <h3>유저 등급 추가 폼</h3>
+                        <form action="/userGrades" method="post">
+                            <div class="form-group">
+                                <label for="name">유저 등급 이름</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="minAmount">최소 기준 금액</label>
+                                <input type="number" class="form-control" id="minAmount" name="minAmount" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="maxAmount">최대 기준 금액</label>
+                                <input type="number" class="form-control" id="maxAmount" name="maxAmount" required>
+                            </div>
 
-                        <button type="submit" class="btn btn-primary">추가</button>
-                        <a class="btn btn-secondary" onclick="history.back()">취소</a>
-                    </form>
+                            <button type="submit" class="btn btn-primary">추가</button>
+                            <a class="btn btn-secondary" onclick="history.back()">취소</a>
+                        </form>
+                    </section>
                 </section>
             </section>
-        </section>
 
+        </div>
     </div>
-</div>
 
-<footer th:insert="~{common/footer}"></footer>
+    <footer th:insert="~{common/footer}"></footer>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

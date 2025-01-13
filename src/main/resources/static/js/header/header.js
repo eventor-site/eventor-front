@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (hasTokens) {
         profileContainer.innerHTML = '<button class="btn btn-sm btn-outline-primary" id="logout">로그아웃</button>';
     } else {
-        profileContainer.innerHTML = '<button class="btn btn-sm btn-outline-primary" id="login">로그인</button>'
-            + '<button class="btn btn-sm btn-outline-primary" id="sign-up">회원가입</button>';
+        profileContainer.innerHTML = '<button class="btn btn-sm btn-outline-primary" id="login">로그인</button>';
     }
 
     document.getElementById('logout')?.addEventListener('click', event => {

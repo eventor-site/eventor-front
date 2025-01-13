@@ -41,12 +41,7 @@ html, body {
     font-weight: bold;
 }
 
-.top-container {
-    width: 100vw;
-    padding: 0 20vw;
-}
-
-.top-container2 {
+.body-container {
     width: 60%;
     margin: 0 auto;
     padding: 1rem;
@@ -163,56 +158,4 @@ table th {
     width: 30px; /* 너비 설정 */
     height: 30px; /* 높이 설정 */
     object-fit: cover; /* 이미지가 비율을 유지하면서 잘리도록 설정 */
-}
-
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    body {
-        font-size: 16px;
-    }
-
-    .top-container {
-        padding: 0 5vw;
-    }
-
-    .top-container2 {
-        width: 90%;
-    }
-
-    hr {
-        width: 90vw;
-    }
-
-    #page {
-        display: flex;
-        flex-direction: column;
-    }
-
-    #page-menu-container {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        margin-right: 0;
-    }
-
-    #page-menu-container a {
-        width: 100%;
-        text-align: center;
-        font-size: 16px;
-    }
-
-    #page-content {
-        padding: 1rem;
-        border-left: none;
-    }
-
-    #page-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    table {
-        font-size: 14px;
-    }
 }
