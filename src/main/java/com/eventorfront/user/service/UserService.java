@@ -9,11 +9,11 @@ import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
-import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
+import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.dto.response.GetUserResponse;
 
 public interface UserService {
-	List<GetUserByAddShopResponse> searchUserById(String keyword);
+	List<GetUserByIdentifier> searchUserByIdentifier(String keyword);
 
 	GetUserResponse getUserInfo();
 

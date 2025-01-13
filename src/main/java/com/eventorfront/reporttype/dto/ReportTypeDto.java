@@ -2,5 +2,6 @@ package com.eventorfront.reporttype.dto;
 
 public record ReportTypeDto(
 	Long reportTypeId,
-	String name) {
+	String name,
+	Long day) {
 }

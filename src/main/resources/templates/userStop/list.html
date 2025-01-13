@@ -21,31 +21,35 @@
             <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
             <section id="page-content">
                 <section id="page-header">
-                    <h5>신고 유형 관리</h5>
+                    <h5>회원 정지 관리</h5>
                 </section>
                 <hr style="width: 100%"/>
                 <section id="page-body">
-                    <h3>신고 유형 리스트</h3>
-                    <h3><a th:href="@{/reportTypes/create}" class="btn btn-primary">신고 유형 추가</a></h3>
-                    <div th:if="${reportTypes.size() > 0}">
+                    <h3>회원 정지 리스트</h3>
+                    <h3><a th:href="@{/userStops/create}" class="btn btn-primary">회원 정지 추가</a></h3>
+                    <div th:if="${userStops.size() > 0}">
                         <table class="table table-bordered">
                             <thead>
                             <tr class="inline-text">
                                 <th>번호</th>
-                                <th>신고 유형 이름</th>
-                                <th>정지 일수</th>
+                                <th>회원 아이디</th>
+                                <th>회원 정지 유형</th>
+                                <th>회원 정지 일수</th>
+                                <th>정지 시작 시간</th>
+                                <th>정지 종료 시간</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="reportType, index : ${reportTypes}">
-                                <td th:text="${index.index + 1}">1</td>
-                                <td th:text="${reportType.name()}">신고 유형 이름</td>
-                                <td th:text="${reportType.day()}">정지 일수</td>
+                            <tr th:each="userStop, index : ${userStops}">
+                                <td th:text="${index.index + 1}"></td>
+                                <td th:text="${userStop.identifier}"></td>
+                                <td th:text="${userStop.reportTypeName}"></td>
+                                <td th:text="${userStop.day}"></td>
+                                <td th:text="${#temporals.format(userStop.startTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td th:text="${#temporals.format(userStop.endTime, 'yyyy-MM-dd HH:mm')}"></td>
                                 <td style="display: flex; align-items: center;">
-                                    <a th:href="@{/reportTypes/{reportTypeId}/update (reportTypeId=${reportType.reportTypeId()})}"
-                                       class="btn btn-warning inline-text">편집</a>
-                                    <form th:action="@{/reportTypes/{reportTypeId} (reportTypeId=${reportType.reportTypeId()})}"
+                                    <form th:action="@{/userStops/{userStopId} (userStopId=${userStop.userStopId})}"
                                           th:method="delete">
                                         <button type="submit" class="btn btn-danger inline-text">삭제</button>
                                     </form>
@@ -54,8 +58,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div th:if="${reportTypes.size() == 0}">
-                        <p>신고 유형이 없습니다.</p>
+                    <div th:if="${userStops.size() == 0}">
+                        <p>회원 정지이 없습니다.</p>
                     </div>
                 </section>
             </section>

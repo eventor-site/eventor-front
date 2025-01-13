@@ -21,22 +21,32 @@
             <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
             <section id="page-content">
                 <section id="page-header">
-                    <h5>신고 유형 관리</h5>
+                    <h5>회원 정지 관리</h5>
                 </section>
                 <hr style="width: 100%"/>
                 <section id="page-body">
-                    <h3>신고 유형 추가 폼</h3>
-                    <form action="/reportTypes" method="post">
+                    <h3>회원 정지 추가 폼</h3>
+
+                    <form action="/userStops" method="post">
                         <div class="form-group">
-                            <label for="name">신고 유형 이름</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <label for="reportTypeId">신고 유형</label>
+                            <select class="form-control" id="reportTypeId" name="reportTypeId" required>
+                                <option value="" disabled selected>신고유형을 선택하세요</option>
+                                <option th:each="reportType : ${reportTypes}"
+                                        th:value="${reportType.reportTypeId}"
+                                        th:text="${reportType.name} + ' (' + ${reportType.day} + '일)'"></option>
+                            </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="name">정지 일수</label>
-                            <input type="text" class="form-control" id="day" name="day" required>
+                            <label for="identifier">회원 ID</label>
+                            <input type="text" class="form-control" id="identifier" name="identifier"
+                                   placeholder="회원 ID를 입력해 주세요"
+                                   required>
+                            <div id="idResults" class="list-group"></div> <!-- 검색 결과 출력 영역 -->
                         </div>
-                        
+
+
                         <button type="submit" class="btn btn-primary">추가</button>
                         <a class="btn btn-secondary" onclick="history.back()">취소</a>
                     </form>
@@ -51,6 +61,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/js/user/search.js"></script>
 </body>
 
 </html>

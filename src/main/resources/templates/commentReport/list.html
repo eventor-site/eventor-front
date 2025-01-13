@@ -32,7 +32,7 @@
                             <tr class="inline-text">
                                 <th>신고유형</th>
                                 <th>내용</th>
-                                <th>작성자</th>
+                                <th>작성자 ID</th>
                                 <th>신고한 시간</th>
                                 <th>삭제</th>
                             </tr>
@@ -45,7 +45,7 @@
                                     <a th:href="@{/posts/{postId} (postId=${commentReport.postId})} + '#' + ${commentReport.commentId}"
                                        th:text="${commentReport.content}"></a>
                                 </td>
-                                <td th:text="${commentReport.writer}"></td>
+                                <td th:text="${commentReport.identifier}"></td>
                                 <td th:text="${#temporals.format(commentReport.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
                                 <td>
                                     <form th:action="@{/commentReports/{commentReportId} (commentReportId=${commentReport.commentReportId})}"
