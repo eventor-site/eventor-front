@@ -17,41 +17,43 @@
 
 <div class="wrapper">
     <div class="main-content">
-        <section id="page" class="top-container">
-            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
-            <section id="page-content">
-                <section id="page-header">
-                    <h5>카테고리 관리</h5>
-                </section>
-                <hr style="width: 100%"/>
-                <section id="page-body">
-                    <h3>카테고리 추가 폼</h3>
-                    <form action="/categories" method="post">
-                        <div class="form-group">
-                            <label for="parentCategoryName">상위 카테고리 이름</label>
-                            <input type="text" class="form-control" id="parentCategoryName" name="parentCategoryName"
-                                   placeholder="키워드를 입력해 주세요">
-                            <div id="categoryResults" class="list-group"></div> <!-- 검색 결과 출력 영역 -->
-                        </div>
-                        <div class="form-group">
-                            <label for="name">카테고리 이름</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">추가</button>
-                        <a class="btn btn-secondary" onclick="history.back()">취소</a>
-                    </form>
+        <div class="body-container">
+            <section id="page">
+                <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+                <section id="page-content">
+                    <section id="page-header">
+                        <h5>카테고리 관리</h5>
+                    </section>
+                    <hr style="width: 100%"/>
+                    <section id="page-body">
+                        <h3>카테고리 추가 폼</h3>
+                        <form action="/categories" method="post">
+                            <div class="form-group">
+                                <label for="parentCategoryName">상위 카테고리 이름</label>
+                                <input type="text" class="form-control" id="parentCategoryName"
+                                       name="parentCategoryName"
+                                       placeholder="키워드를 입력해 주세요">
+                                <div id="categoryResults" class="list-group"></div> <!-- 검색 결과 출력 영역 -->
+                            </div>
+                            <div class="form-group">
+                                <label for="name">카테고리 이름</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">추가</button>
+                            <a class="btn btn-secondary" onclick="history.back()">취소</a>
+                        </form>
+                    </section>
                 </section>
             </section>
-        </section>
+        </div>
     </div>
-</div>
 
-<footer th:insert="~{common/footer}"></footer>
+    <footer th:insert="~{common/footer}"></footer>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="/js/category/search.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/category/search.js"></script>
 </body>
 
 </html>

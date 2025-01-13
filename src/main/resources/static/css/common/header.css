@@ -14,21 +14,32 @@
 /* 첫 번째 컨테이너 설정 */
 .first-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    height: 2.5rem;
-    background-color: #F2F2F2;
+    padding: 1rem 0;
+    background: #A5FF93;
 }
 
-/* 카테고리 버튼 왼쪽 정렬 */
-.category-menu-button {
+/* 두 번째 컨테이너 - 로고와 검색 영역 중앙 정렬 */
+.second-container {
     display: flex;
+    justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
-    color: #797979;
-    background: none;
-    border: 2px black solid;
-    cursor: pointer;
+    height: 2.5rem;
+    background-color: #FF6600;
+    gap: 1rem; /* 요소 간 좌우 간격 설정 (1rem: 간격 조정 가능) */
+    color: black; /* 글씨 색깔을 검정색으로 */;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+.second-container a {
+    color: black; /* 링크 글씨도 검정색으로 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.second-container a:hover {
+    text-decoration: underline; /* 링크 호버 시 밑줄 추가 (선택 사항) */
 }
 
 /* 프로필과 메뉴 버튼 정렬 */
@@ -43,21 +54,6 @@
     margin-right: 1rem;
 }
 
-/* 두 번째 컨테이너 - 로고와 검색 영역 중앙 정렬 */
-.second-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 0;
-}
-
-/* 세 번째 컨테이너 - 로고와 검색 영역 중앙 정렬 */
-.third-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 0;
-}
 
 .logo-image {
     height: 4rem;
@@ -70,10 +66,10 @@
 }
 
 .site-name {
-    font-family: 'Headland One', sans-serif;
+    font-family: 'Headland One', serif;
     font-size: 60px;
     font-weight: bold;
-    color: #333;
+    color: black;
 }
 
 .search-input {
@@ -88,84 +84,4 @@
     font-size: 1.5rem;
     background: none;
     border: none;
-}
-
-
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    .first-container {
-        flex-direction: column;
-        align-items: flex-start;
-        height: auto;
-    }
-
-    .category-menu-button {
-        font-size: 1.2rem;
-    }
-
-    .category-container {
-        margin-top: 1rem;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .menu-button-container {
-        margin-right: 0;
-        gap: 0.5rem;
-    }
-
-    /* 두 번째 컨테이너 */
-    .second-container {
-        flex-direction: column;
-        padding: 1rem;
-    }
-
-    .third-container {
-        flex-direction: column;
-        padding: 1rem;
-    }
-
-    .logo-image {
-        height: 3rem;
-    }
-
-    .site-name {
-        font-size: 36px;
-        text-align: center;
-    }
-
-    .search-form {
-        width: 100%;
-        gap: 0.3rem;
-        justify-content: space-between;
-    }
-
-    .search-input {
-        width: 100%;
-        padding: 0 1rem;
-        font-size: 14px;
-    }
-
-    .search-button {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .site-name {
-        font-size: 28px;
-    }
-
-    .search-input {
-        padding: 0 1rem;
-        font-size: 13px;
-    }
-
-    .search-button {
-        font-size: 1.2rem;
-    }
-
-    .logo-image {
-        height: 2.5rem;
-    }
 }

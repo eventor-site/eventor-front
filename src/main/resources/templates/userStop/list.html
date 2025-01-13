@@ -17,62 +17,63 @@
 
 <div class="wrapper">
     <div class="main-content">
-        <section id="page" class="top-container">
-            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
-            <section id="page-content">
-                <section id="page-header">
-                    <h5>회원 정지 관리</h5>
+        <div class="body-container">
+            <section id="page">
+                <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+                <section id="page-content">
+                    <section id="page-header">
+                        <h5>회원 정지 관리</h5>
+                    </section>
+                    <hr style="width: 100%"/>
+                    <section id="page-body">
+                        <h3>회원 정지 리스트</h3>
+                        <h3><a th:href="@{/userStops/create}" class="btn btn-primary">회원 정지 추가</a></h3>
+                        <div th:if="${userStops.size() > 0}">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="inline-text">
+                                    <th>번호</th>
+                                    <th>회원 아이디</th>
+                                    <th>회원 정지 유형</th>
+                                    <th>회원 정지 일수</th>
+                                    <th>정지 시작 시간</th>
+                                    <th>정지 종료 시간</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="userStop, index : ${userStops}">
+                                    <td th:text="${index.index + 1}"></td>
+                                    <td th:text="${userStop.identifier}"></td>
+                                    <td th:text="${userStop.reportTypeName}"></td>
+                                    <td th:text="${userStop.day}"></td>
+                                    <td th:text="${#temporals.format(userStop.startTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <td th:text="${#temporals.format(userStop.endTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <td style="display: flex; align-items: center;">
+                                        <form th:action="@{/userStops/{userStopId} (userStopId=${userStop.userStopId})}"
+                                              th:method="delete">
+                                            <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if="${userStops.size() == 0}">
+                            <p>회원 정지이 없습니다.</p>
+                        </div>
+                    </section>
                 </section>
-                <hr style="width: 100%"/>
-                <section id="page-body">
-                    <h3>회원 정지 리스트</h3>
-                    <h3><a th:href="@{/userStops/create}" class="btn btn-primary">회원 정지 추가</a></h3>
-                    <div th:if="${userStops.size() > 0}">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr class="inline-text">
-                                <th>번호</th>
-                                <th>회원 아이디</th>
-                                <th>회원 정지 유형</th>
-                                <th>회원 정지 일수</th>
-                                <th>정지 시작 시간</th>
-                                <th>정지 종료 시간</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="userStop, index : ${userStops}">
-                                <td th:text="${index.index + 1}"></td>
-                                <td th:text="${userStop.identifier}"></td>
-                                <td th:text="${userStop.reportTypeName}"></td>
-                                <td th:text="${userStop.day}"></td>
-                                <td th:text="${#temporals.format(userStop.startTime, 'yyyy-MM-dd HH:mm')}"></td>
-                                <td th:text="${#temporals.format(userStop.endTime, 'yyyy-MM-dd HH:mm')}"></td>
-                                <td style="display: flex; align-items: center;">
-                                    <form th:action="@{/userStops/{userStopId} (userStopId=${userStop.userStopId})}"
-                                          th:method="delete">
-                                        <button type="submit" class="btn btn-danger inline-text">삭제</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div th:if="${userStops.size() == 0}">
-                        <p>회원 정지이 없습니다.</p>
-                    </div>
-                </section>
+
             </section>
-
-        </section>
+        </div>
     </div>
-</div>
 
-<footer th:insert="~{common/footer}"></footer>
+    <footer th:insert="~{common/footer}"></footer>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

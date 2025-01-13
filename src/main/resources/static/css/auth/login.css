@@ -1,27 +1,172 @@
-.oauth-container {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.container-fluid {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* 버튼 간격 */
+    margin: 0;
+    padding: 0;
 }
 
-.login-button a {
-    display: block;
-    width: 100%; /* 버튼 넓이 최대 */
-    padding: 10px; /* 버튼 높이 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    font-size: 16px; /* 텍스트 크기 */
-    box-sizing: border-box; /* 패딩 포함한 넓이 계산 */
+.header {
+    background-color: #FF6600;
+    border: 5px solid black;
+    padding: 20px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Headland One', serif; /* Headland One 폰트 적용 */
+    color: black;
 }
 
-.btn-oauth {
-    background-color: #6c757d; /* 회색 배경 */
-    border-color: #6c757d; /* 회색 테두리 */
-    color: white; /* 텍스트 색 */
+.content {
+    flex: 1;
+    display: flex;
+}
+
+.icon-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 5px solid black;
+    border-bottom: 2px solid black;
+}
+
+.form-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-bottom: 2px solid black;
+}
+
+.form-section::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: black;
+    transform: translateY(-50%);
+}
+
+.upper-form,
+.lower-form {
+    width: 80%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.upper-form input,
+.upper-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #000000;
+    border-radius: 4px;
+}
+
+.upper-form button {
+    background-color: yellow;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.upper-form button:hover {
+    background-color: gold;
+}
+
+.oauth-buttons {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.oauth-buttons .oauth-button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.oauth-buttons .kakao {
+    background-color: #fae100;
+}
+
+.oauth-buttons .kakao:hover {
+    background-color: #e0c700; /* 호버 시 황금색으로 변경 */
+}
+
+.oauth-buttons .naver {
+    background-color: green;
+    color: white;
+}
+
+.oauth-buttons .naver:hover {
+    background-color: darkgreen; /* 호버 시 어두운 초록색으로 변경 */
+    color: lightgray; /* 텍스트 색상을 밝은 회색으로 변경 */
+}
+
+.oauth-buttons .google {
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.oauth-buttons .google:hover {
+    background-color: #f0f0f0; /* 호버 시 연한 회색으로 변경 */
+    border-color: #999; /* 테두리 색상을 진한 회색으로 변경 */
+}
+
+.footer-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-links a {
+    margin: 0 10px;
     text-decoration: none;
-    border-radius: 5px; /* 버튼 모서리 둥글게 */
+    font-size: 14px;
+    color: blue;
 }
 
-.btn-oauth:hover {
-    background-color: #5a6268; /* 호버 시 어두운 회색 */
-    border-color: #545b62;
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.text-danger {
+    color: red;
 }

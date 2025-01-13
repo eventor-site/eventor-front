@@ -1,48 +1,15 @@
 <link rel="stylesheet" type="text/css" media="screen" href="/css/common/header.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Headland+One&display=swap" rel="stylesheet">
 
 <section id="header">
     <div class="top-container">
         <div class="first-container">
-            <div class="category-container">
-                <button id="category-menu-button" class="category-menu-button">
-                    <i class="fa-solid fa-bars"></i>
-                    <span class="menu-tag">카테고리</span>
-                </button>
-
-                <!-- 카테고리 메뉴 삽입 -->
-                <div th:insert="~{common/category-menu.html}"></div>
-            </div>
-
-            <div class="menu-button-container">
-                <a th:href="@{/users/me/favorites}">
-                    <div class="menu-button">
-                        <i class="fa-solid fa-heart"></i>
-                        <span class="menu-tag">좋아요</span>
-                    </div>
-                </a>
-                <a th:href="@{/users/admin}">
-                    <div class="menu-button">
-                        <i class="fa-solid fa-user"></i>
-                        <span class="menu-tag">관리자페이지</span>
-                    </div>
-                </a>
-                <a th:href="@{/users/me}">
-                    <div class="menu-button">
-                        <i class="fa-solid fa-user"></i>
-                        <span class="menu-tag">마이페이지</span>
-                    </div>
-                </a>
-                <div class="profile-container"></div>
-            </div>
-
-        </div>
-        <div class="second-container">
             <form class="search-form" action="/back/search" method="get">
-                <a href="/main" class="site-name">Eventor</a>
                 <a href="/main" class="site-brand">
                     <img class="logo-image" src="/image/logo.png" alt="로고">
                 </a>
+                <a href="/main" class="site-name">EVENTOR</a>
                 <label>
                     <input class="search-input" type="text" name="query" placeholder="통합 검색">
                 </label>
@@ -51,16 +18,38 @@
                 </button>
             </form>
         </div>
+
+        <div class="second-container">
+            <a id="category-menu-button">
+                <i class="fa-solid fa-bars"></i>
+                <span>카테고리</span>
+            </a>
+
+            <!--                &lt;!&ndash; 카테고리 메뉴 삽입 &ndash;&gt;-->
+            <!--                <div th:insert="~{common/category-menu.html}"></div>-->
+
+            <a th:href="@{/posts(categoryName='공지')}">공지</a>
+            <a th:href="@{/posts(categoryName='자유')}">자유</a>
+            <a th:href="@{/posts(categoryName='이벤트')}">이벤트</a>
+            <a th:href="@{/posts(categoryName='맛집')}">맛집</a>
+
+            <a th:href="@{/users/admin}">
+                <i class="fa-solid fa-user"></i>
+                <span class="menu-tag">관리자페이지</span>
+            </a>
+            <a th:href="@{/users/me}">
+                <i class="fa-solid fa-user"></i>
+                <span class="menu-tag">마이페이지</span>
+            </a>
+            <div class="profile-container"></div>
+
+
+        </div>
         <div class="third-container">
             <div>
-                <a th:href="@{/posts/all}" class="btn btn-info" style="width: 120px;">전체</a>
-                <a th:href="@{/posts(categoryName='공지')}" class="btn btn-primary" style="width: 120px;">공지</a>
-                <a th:href="@{/posts(categoryName='이벤트')}" class="btn btn-info" style="width: 120px;">이벤트</a>
-                <a th:href="@{/posts(categoryName='자유')}" class="btn btn-success" style="width: 120px;">자유</a>
-                <a th:href="@{/posts(categoryName='맛집')}" class="btn btn-danger" style="width: 120px;">맛집</a>
+
             </div>
         </div>
-        <hr style="width: 100%"/>
     </div>
 
 </section>

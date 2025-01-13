@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+}
+
+.container {
+    width: 600px;
+    border: 2px solid black;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    background-color: orange;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    width: 100%;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.icon img {
+    width: 100px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container button {
+    width: 80%;
+    padding: 10px;
+    background-color: yellow;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-container button:hover {
+    background-color: gold;
+}
+
+.oauth-buttons {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.oauth-buttons .oauth-button {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.oauth-buttons .kakao {
+    background-color: yellow;
+}
+
+.oauth-buttons .naver {
+    background-color: green;
+    color: white;
+}
+
+.oauth-buttons .google {
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.footer-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 14px;
+    color: blue;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
