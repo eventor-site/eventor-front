@@ -11,7 +11,7 @@ import com.eventorfront.user.client.UserClient;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
-import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
+import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.dto.response.GetUserResponse;
 import com.eventorfront.user.service.UserService;
 
@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
 	private final UserClient userClient;
 
 	@Override
-	public List<GetUserByAddShopResponse> searchUserById(String keyword) {
-		return userClient.searchUserById(keyword).getBody();
+	public List<GetUserByIdentifier> searchUserByIdentifier(String keyword) {
+		return userClient.searchUserByIdentifier(keyword).getBody();
 	}
 
 	@Override

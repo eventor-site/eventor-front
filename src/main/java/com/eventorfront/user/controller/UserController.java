@@ -20,7 +20,7 @@ import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
-import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
+import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.service.UserService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,8 +34,8 @@ public class UserController {
 	private final AuthService authService;
 
 	@GetMapping("/search")
-	public ResponseEntity<List<GetUserByAddShopResponse>> searchUserById(@RequestParam String keyword) {
-		return ResponseEntity.status(HttpStatus.OK).body(userService.searchUserById(keyword));
+	public ResponseEntity<List<GetUserByIdentifier>> searchUserByIdentifier(@RequestParam String keyword) {
+		return ResponseEntity.status(HttpStatus.OK).body(userService.searchUserByIdentifier(keyword));
 	}
 
 	@GetMapping("/recover/identifier")

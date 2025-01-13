@@ -15,14 +15,14 @@ import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
-import com.eventorfront.user.dto.response.GetUserByAddShopResponse;
+import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.dto.response.GetUserResponse;
 
 @FeignClient(name = "user-client", url = "http://localhost:8090/back/users")
 public interface UserClient {
 
 	@GetMapping("/search")
-	ResponseEntity<List<GetUserByAddShopResponse>> searchUserById(@RequestParam String keyword);
+	ResponseEntity<List<GetUserByIdentifier>> searchUserByIdentifier(@RequestParam String keyword);
 
 	@GetMapping("/me")
 	ResponseEntity<GetUserResponse> getUserInfo();
