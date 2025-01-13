@@ -47,6 +47,12 @@ html, body {
     padding: 1rem;
 }
 
+.main-page-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
 hr {
     width: 60vw;
     margin: 0;
