@@ -1,0 +1,6 @@
+#idResults {
+    position: absolute;
+    z-index: 1000; /* 다른 콘텐츠 위에 표시되도록 z-index 조정 */
+    max-height: 300px; /* 검색 결과가 너무 길어지지 않도록 제한 */
+    overflow-y: auto; /* 스크롤 추가 */
+}

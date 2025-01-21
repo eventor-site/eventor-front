@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.eventorfront.userstop.client.UserStopClient;
 import com.eventorfront.userstop.dto.UserStopDto;
+import com.eventorfront.userstop.dto.response.GetUserStopByIdentifierResponse;
 import com.eventorfront.userstop.dto.response.GetUserStopResponse;
 import com.eventorfront.userstop.service.UserStopService;
 
@@ -24,6 +25,11 @@ public class UserStopServiceImpl implements UserStopService {
 	@Override
 	public List<GetUserStopResponse> getUserStops() {
 		return userStopClient.getUserStops().getBody();
+	}
+
+	@Override
+	public List<GetUserStopByIdentifierResponse> getUserStopsByIdentifier(String identifier) {
+		return userStopClient.getUserStopsByIdentifier(identifier).getBody();
 	}
 
 	@Override

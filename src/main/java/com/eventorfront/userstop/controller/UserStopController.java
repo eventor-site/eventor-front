@@ -1,5 +1,7 @@
 package com.eventorfront.userstop.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,9 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eventorfront.reporttype.service.ReportTypeService;
 import com.eventorfront.userstop.dto.UserStopDto;
+import com.eventorfront.userstop.dto.response.GetUserStopByIdentifierResponse;
 import com.eventorfront.userstop.service.UserStopService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +45,12 @@ public class UserStopController {
 	public String getUserStops(Model model) {
 		model.addAttribute("userStops", userStopService.getUserStops());
 		return "userStop/list";
+	}
+
+	@GetMapping("/users")
+	@ResponseBody
+	public List<GetUserStopByIdentifierResponse> getUserStopsByIdentifier(@RequestParam String identifier) {
+		return userStopService.getUserStopsByIdentifier(identifier);
 	}
 
 	@PostMapping
