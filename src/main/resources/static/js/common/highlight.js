@@ -14,15 +14,15 @@ document.addEventListener("DOMContentLoaded", function () {
             // 하이라이트 적용
             commentElement.classList.add("highlight");
 
-            // 1초 후에 fade-out 클래스를 추가하여 하이라이트가 점차 옅어지도록 설정
+            // 5초 후에 fade-out 클래스를 추가하여 하이라이트가 점차 옅어지도록 설정
             setTimeout(function () {
                 commentElement.classList.add("fade-out");
-            }, 1000);
+            }, 5000);
 
-            // 3초 후에 완전히 하이라이트 제거
+            // 10초 후에 완전히 하이라이트 제거
             setTimeout(function () {
                 commentElement.classList.remove("highlight", "fade-out");
-            }, 4000);
+            }, 10000);
         }
     }
 });
