@@ -5,5 +5,6 @@ import lombok.Builder;
 @Builder
 public record UserStopDto(
 	String identifier,
-	Long reportTypeId) {
+	Long reportTypeId,
+	Long stopDay) {
 }

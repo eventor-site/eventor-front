@@ -35,8 +35,14 @@
                                     <option value="" disabled selected>신고유형을 선택하세요</option>
                                     <option th:each="reportType : ${reportTypes}"
                                             th:value="${reportType.reportTypeId}"
-                                            th:text="${reportType.name} + ' (' + ${reportType.day} + '일)'"></option>
+                                            th:text="${reportType.name}"></option>
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="stopDay">정지 일수</label>
+                                <input type="number" class="form-control" id="stopDay" name="stopDay"
+                                       placeholder="정지 일수를 입력해 주세요" required>
                             </div>
 
                             <div class="form-group">
@@ -46,6 +52,8 @@
                                        required>
                                 <div id="idResults" class="list-group"></div> <!-- 검색 결과 출력 영역 -->
                             </div>
+
+
 
 
                             <button type="submit" class="btn btn-primary">추가</button>
