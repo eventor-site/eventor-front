@@ -27,6 +27,11 @@ public class CommentReportServiceImpl implements CommentReportService {
 	}
 
 	@Override
+	public void confirmCommentReport(Long postId, Long commentId, Long commentReportId) {
+		commentReportClient.confirmCommentReport(postId, commentId, commentReportId);
+	}
+
+	@Override
 	public ResponseEntity<String> deleteCommentReport(Long commentReportId) {
 		return commentReportClient.deleteCommentReport(commentReportId);
 	}

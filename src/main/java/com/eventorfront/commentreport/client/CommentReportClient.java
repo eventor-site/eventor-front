@@ -21,6 +21,10 @@ public interface CommentReportClient {
 	@PostMapping("/comments/{commentId}/commentReports")
 	ResponseEntity<String> createCommentReport(@PathVariable Long commentId, @RequestParam String reportTypeName);
 
+	@GetMapping("/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm")
+	ResponseEntity<Void> confirmCommentReport(@PathVariable Long postId, @PathVariable Long commentId,
+		@PathVariable Long commentReportId);
+
 	@DeleteMapping("/commentReports/{commentReportId}")
 	ResponseEntity<String> deleteCommentReport(@PathVariable Long commentReportId);
 }

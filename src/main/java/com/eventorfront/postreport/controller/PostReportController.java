@@ -29,6 +29,12 @@ public class PostReportController {
 		return postReportService.createPostReport(postId, reportTypeName);
 	}
 
+	@GetMapping("/posts/{postId}/postReports/{postReportId}/confirm")
+	public String confirmPostReport(@PathVariable Long postId, @PathVariable Long postReportId) {
+		postReportService.confirmPostReport(postId, postReportId);
+		return "redirect:/posts/" + postId;
+	}
+
 	@DeleteMapping("/postReports/{postReportId}")
 	public String deletePostReport(@PathVariable Long postReportId) {
 		postReportService.deletePostReport(postReportId);

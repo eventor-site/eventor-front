@@ -12,5 +12,7 @@ public interface PostReportService {
 
 	ResponseEntity<String> createPostReport(Long postId, String reportTypeName);
 
+	void confirmPostReport(Long postId, Long postReportId);
+
 	ResponseEntity<String> deletePostReport(Long postReportId);
 }
