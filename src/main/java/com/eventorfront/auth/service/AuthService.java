@@ -3,6 +3,7 @@ package com.eventorfront.auth.service;
 import org.springframework.http.ResponseEntity;
 
 import com.eventorfront.auth.dto.request.LoginRequest;
+import com.eventorfront.auth.dto.request.OauthSignUpRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,5 +23,9 @@ public interface AuthService {
 	 * HTTP 요청에 쿠키로 토큰이 포함되어 있는지 확인합니다.
 	 */
 	boolean hasTokensInCookie(HttpServletRequest request);
+
+	ResponseEntity<String> naverAuthorization(String registrationId);
+
+	ResponseEntity<LoginResponse> oauthSignup(OauthSignUpRequest request);
 
 }

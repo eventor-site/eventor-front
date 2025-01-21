@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
@@ -81,4 +83,23 @@ public class AuthController {
 		return ResponseEntity.status(HttpStatus.OK).body(authService.hasTokensInCookie(request));
 	}
 
+	@GetMapping("/oauth2/authorization/{registrationId}")
+	public String oauthAuthorization(@PathVariable String registrationId) {
+		return authService.naverAuthorization(registrationId).getBody();
+	}
+
+	@GetMapping("/oauth2/login")
+	public String oauthSignup(@RequestParam String accessToken, @RequestParam String refreshToken,
+		HttpServletResponse response) {
+
+		if (accessToken != null) {
+			response.addCookie(CookieUtil.createCookie("Access-Token", accessToken));
+		}
+
+		if (refreshToken != null) {
+			response.addCookie(CookieUtil.createCookie("Refresh-Token", refreshToken));
+		}
+
+		return "redirect:/main";
+	}
 }
