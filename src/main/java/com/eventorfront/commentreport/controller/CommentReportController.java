@@ -30,6 +30,13 @@ public class CommentReportController {
 		return commentReportService.createCommentReport(commentId, reportTypeName);
 	}
 
+	@GetMapping("/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm")
+	public String confirmCommentReport(@PathVariable Long postId, @PathVariable Long commentId,
+		@PathVariable Long commentReportId) {
+		commentReportService.confirmCommentReport(postId, commentReportId, commentReportId);
+		return "redirect:/posts/" + postId + "#" + commentId;
+	}
+
 	@DeleteMapping("/commentReports/{commentReportId}")
 	public String deleteCommentReport(@PathVariable Long commentReportId) {
 		commentReportService.deleteCommentReport(commentReportId);

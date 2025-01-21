@@ -21,6 +21,9 @@ public interface PostReportClient {
 	@PostMapping("/posts/{postId}/postReports")
 	ResponseEntity<String> createPostReport(@PathVariable Long postId, @RequestParam String reportTypeName);
 
+	@GetMapping("/posts/{postId}/postReports/{postReportId}/confirm")
+	ResponseEntity<Void> confirmPostReport(@PathVariable Long postId, @PathVariable Long postReportId);
+
 	@DeleteMapping("/postReports/{postReportId}")
 	ResponseEntity<String> deletePostReport(@PathVariable Long postReportId);
 }

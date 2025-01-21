@@ -27,6 +27,11 @@ public class PostReportServiceImpl implements PostReportService {
 	}
 
 	@Override
+	public void confirmPostReport(Long postId, Long postReportId) {
+		postReportClient.confirmPostReport(postId, postReportId);
+	}
+
+	@Override
 	public ResponseEntity<String> deletePostReport(Long postReportId) {
 		return postReportClient.deletePostReport(postReportId);
 	}

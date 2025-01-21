@@ -12,5 +12,7 @@ public interface CommentReportService {
 
 	ResponseEntity<String> createCommentReport(Long commentId, String reportTypeName);
 
+	void confirmCommentReport(Long postId, Long commentId, Long commentReportId);
+
 	ResponseEntity<String> deleteCommentReport(Long commentReportId);
 }
