@@ -9,7 +9,7 @@ public record GetUserStopResponse(
 	Long userStopId,
 	String identifier,
 	String reportTypeName,
-	Long day,
+	Long stopDay,
 	LocalDateTime startTime,
 	LocalDateTime endTime) {
 
