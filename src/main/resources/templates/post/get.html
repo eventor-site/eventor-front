@@ -20,7 +20,9 @@
 <div class="wrapper">
     <div class="main-content">
         <div class="body-container">
-            <h5>카테고리: <span th:text="${post.categoryName}"></span></h5>
+            <h5>카테고리: <span id="categoryName" th:data-category-name="${post.categoryName}"
+                            th:text="${post.categoryName}"></span></h5>
+            
             <hr style="width: 100%"/>
 
             <div th:if="${post.categoryName} == '이벤트'" class="post-header d-flex align-items-center">
