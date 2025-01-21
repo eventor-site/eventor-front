@@ -1,5 +1,4 @@
 const categoryName = document.getElementById("categoryName").getAttribute("data-category-name");
-console.log(categoryName); // '이벤트' 또는 다른 카테고리 값
 
 function updateRemainingTime() {
 
