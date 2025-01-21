@@ -19,50 +19,51 @@
     <div class="main-content">
 
         <div class="body-container">
-<section id="page">
-            <section id="page-menu-container" th:insert="~{common/user-menu.html}"></section>
-            <section id="page-content">
-                <section id="page-header">
-                    <h5>내 즐겨찾기 목록</h5>
-                </section>
-                <hr style="width: 100%"/>
-                <section id="page-body">
-                    <div th:if="${bookmarks.size() > 0}">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr class="inline-text">
-                                <th>카테고리 이름</th>
-                                <th>삭제</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="bookmark, index : ${bookmarks}">
-                                <td>
-                                    <!-- 제목을 클릭하면 해당 게시글로 이동 -->
-                                    <a th:href="@{/posts (categoryName=${bookmark.categoryName()})}"
-                                       th:text="${bookmark.categoryName()}"></a>
-                                </td>
-                                <td>
-                                    <form th:action="@{/bookmarks/{bookmarkId} (bookmarkId=${bookmark.bookmarkId})}"
-                                          th:method="delete">
-                                        <button class="btn btn-sm btn-outline-primary">삭제</button>
-                                    </form>
+            <section id="page">
+                <section id="page-menu-container" th:insert="~{common/user-menu.html}"></section>
+                <section id="page-content">
+                    <section id="page-header">
+                        <h5>내 즐겨찾기 목록</h5>
+                    </section>
+                    <hr style="width: 100%"/>
+                    <section id="page-body">
+                        <div th:if="${bookmarks.size() > 0}">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="inline-text">
+                                    <th>카테고리 이름</th>
+                                    <th>삭제</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="bookmark, index : ${bookmarks}">
+                                    <td>
+                                        <!-- 제목을 클릭하면 해당 게시글로 이동 -->
+                                        <a th:href="@{/posts (categoryName=${bookmark.categoryName()})}"
+                                           th:text="${bookmark.categoryName()}"></a>
+                                    </td>
+                                    <td>
+                                        <form th:action="@{/bookmarks/{bookmarkId} (bookmarkId=${bookmark.bookmarkId})}"
+                                              th:method="delete">
+                                            <button class="btn btn-sm btn-outline-primary">삭제</button>
+                                        </form>
 
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div th:if="${bookmarks.size() == 0}">
-                        <p>즐겨찾기한 카테고리가 없습니다.</p>
-                    </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if="${bookmarks.size() == 0}">
+                            <p>즐겨찾기한 카테고리가 없습니다.</p>
+                        </div>
 
+                    </section>
                 </section>
+
             </section>
 
-        </section>
 
-
+        </div>
     </div>
 </div>
 

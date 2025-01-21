@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.userstop.dto.UserStopDto;
+import com.eventorfront.userstop.dto.response.GetUserStopByIdentifierResponse;
 import com.eventorfront.userstop.dto.response.GetUserStopResponse;
 
 @FeignClient(name = "userStop-client", url = "http://localhost:8090/back/userStops")
@@ -19,6 +21,9 @@ public interface UserStopClient {
 
 	@GetMapping
 	ResponseEntity<List<GetUserStopResponse>> getUserStops();
+
+	@GetMapping("/users")
+	ResponseEntity<List<GetUserStopByIdentifierResponse>> getUserStopsByIdentifier(@RequestParam String identifier);
 
 	@GetMapping("/{userStopId}")
 	ResponseEntity<UserStopDto> getUserStop(@PathVariable Long userStopId);
