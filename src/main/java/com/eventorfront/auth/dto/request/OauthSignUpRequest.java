@@ -3,11 +3,12 @@ package com.eventorfront.auth.dto.request;
 import lombok.Builder;
 
 @Builder
-public record SignUpRequest(
+public record OauthSignUpRequest(
+	String oauthId,
 	String identifier,
 	String password,
 	String name,
-	String nickname,
+	String nickName,
 	String email,
 	String birth,
 	String gender,

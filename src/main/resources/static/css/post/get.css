@@ -20,7 +20,7 @@
 .image-container {
     position: relative;
     max-width: 100%; /* 본문을 벗어나지 않도록 제한 */
-    max-height: 600px; /* 이미지 최대 높이 제한 */
+    /*max-height: 600px; !* 이미지 최대 높이 제한 *!*/
     overflow: hidden; /* 컨테이너 크기 초과 이미지는 숨김 */
 }
 

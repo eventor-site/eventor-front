@@ -40,7 +40,7 @@ public interface UserClient {
 	ResponseEntity<Void> signup(@RequestBody SignUpRequest signupRequest);
 
 	@PostMapping("/signup/checkIdentifier")
-	ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request);
+	ResponseEntity<String> checkIdentifier(@RequestBody CheckIdentifierRequest request);
 
 	@PostMapping("/signup/sendEmail")
 	ResponseEntity<String> sendEmail(@RequestParam("email") String email);

@@ -51,6 +51,17 @@ body {
     border-bottom: 2px solid black;
 }
 
+.icon-section a {
+    display: inline-block; /* a 요소를 inline-block으로 설정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.icon-section img {
+    /*width: 600px; !* 원하는 너비 *!*/
+    /*height: auto; !* 비율 유지 *!*/
+    display: block; /* img를 block으로 설정하여 부모 안에 맞춤 */
+}
+
 .form-section {
     flex: 1;
     display: flex;
