@@ -42,18 +42,6 @@
     text-decoration: underline; /* 링크 호버 시 밑줄 추가 (선택 사항) */
 }
 
-/* 프로필과 메뉴 버튼 정렬 */
-.category-container {
-    display: flex;
-}
-
-/* 프로필과 메뉴 버튼 정렬 */
-.menu-button-container {
-    display: flex;
-    gap: 1rem;
-    margin-right: 1rem;
-}
-
 
 .logo-image {
     height: 4rem;
