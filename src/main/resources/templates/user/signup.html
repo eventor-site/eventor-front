@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
+    <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
+    <title>이벤터</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/signup/signup.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -41,6 +42,7 @@
 
             <div class="form-group">
                 <input id="nickname" type="text" name="nickname" class="form-control" placeholder="닉네임" required>
+                <small id="nicknameFeedback" class="form-text text-muted"></small>
             </div>
 
             <div class="form-group">
@@ -90,7 +92,10 @@
 
 <script src="/js/user/checkIdentifier.js"></script>
 <script src="/js/user/confirmPassword.js"></script>
+<script src="/js/user/checkNickname.js"></script>
 <script src="/js/user/certifyEmail.js"></script>
+<script src="/js/user/checkSignupCondition.js"></script>
+
 
 </body>
 

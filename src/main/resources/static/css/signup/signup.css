@@ -30,13 +30,3 @@
     display: flex;
     gap: 1rem;
 }
-
-.match {
-    color: green;
-    font-weight: bold;
-}
-
-.mismatch {
-    color: red;
-    font-weight: bold;
-}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
+import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
@@ -30,17 +31,23 @@ public interface UserClient {
 	@PutMapping("/me")
 	ResponseEntity<Void> updateUser(UpdateUserRequest request);
 
-	@PutMapping("/me/password")
-	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
-
 	@DeleteMapping("/me")
 	ResponseEntity<Void> withdrawUser();
+
+	@PostMapping("/me/checkNickname")
+	ResponseEntity<String> meCheckNickname(@RequestBody CheckNicknameRequest request);
+
+	@PutMapping("/me/password")
+	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
 
 	@PostMapping("/signup")
 	ResponseEntity<Void> signup(@RequestBody SignUpRequest signupRequest);
 
 	@PostMapping("/signup/checkIdentifier")
 	ResponseEntity<String> checkIdentifier(@RequestBody CheckIdentifierRequest request);
+
+	@PostMapping("/signup/checkNickname")
+	ResponseEntity<String> checkNickname(@RequestBody CheckNicknameRequest request);
 
 	@PostMapping("/signup/sendEmail")
 	ResponseEntity<String> sendEmail(@RequestParam("email") String email);
