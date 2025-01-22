@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 import lombok.Builder;
 
 @Builder
-public record UserGradeDto(
-	Long userGradeId,
+public record GradeDto(
+	Long gradeId,
 	String name,
 	BigDecimal minAmount,
 	BigDecimal maxAmount,

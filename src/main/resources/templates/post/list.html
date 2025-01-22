@@ -47,8 +47,8 @@
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}" th:text="${post.title}"></a>
                         </td>
                         <td>
-                            <img class="userGrade"
-                                 th:src="@{/profile/{userGradeName}.png (userGradeName=${post.userGradeName()})}"
+                            <img class="grade"
+                                 th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
                                  alt="프로필">
                             <span class="ml-2" th:text="${post.writer}"></span>
                         </td>

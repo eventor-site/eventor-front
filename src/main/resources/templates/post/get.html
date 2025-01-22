@@ -22,7 +22,7 @@
         <div class="body-container">
             <h5>카테고리: <span id="categoryName" th:data-category-name="${post.categoryName}"
                             th:text="${post.categoryName}"></span></h5>
-            
+
             <hr style="width: 100%"/>
 
             <div th:if="${post.categoryName} == '이벤트'" class="post-header d-flex align-items-center">
@@ -49,8 +49,8 @@
                     <p><strong>제목:</strong> <span th:text="${post.title}"></span></p>
                 </div>
                 <div class="right">
-                    <img class="userGrade"
-                         th:src="@{/profile/{userGradeName}.png (userGradeName=${post.userGradeName()})}"
+                    <img class="grade"
+                         th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
                          alt="프로필">
                     <p><strong>작성자:</strong> <span th:text="${post.writer()}"></span></p>
                 </div>
@@ -150,8 +150,8 @@
                         <div class="comment-container" th:id="${comment.commentId}">
                             <div th:if="${!comment.isDeleted}">
                                 <div>
-                                    <img class="userGrade"
-                                         th:src="@{/profile/{userGradeName}.png (userGradeName=${comment.userGradeName()})}"
+                                    <img class="grade"
+                                         th:src="@{/profile/{gradeName}.png (gradeName=${comment.gradeName()})}"
                                          alt="프로필">
                                     <strong th:text="${comment.writer}"></strong>
                                     <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>

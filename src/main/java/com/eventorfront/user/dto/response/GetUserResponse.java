@@ -15,7 +15,7 @@ public record GetUserResponse(
 	LocalDate birth,
 	String gender,
 	String statusName,
-	String userGradeName,
+	String gradeName,
 	String userRoles,
 	LocalDateTime createdAt,
 	LocalDateTime updatedTime,
