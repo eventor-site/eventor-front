@@ -22,33 +22,33 @@
                 <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
                 <section id="page-content">
                     <section id="page-header">
-                        <h5>유저 등급 관리</h5>
+                        <h5>등급 관리</h5>
                     </section>
                     <hr style="width: 100%"/>
                     <section id="page-body">
-                        <h3>유저 등급 리스트</h3>
-                        <h3><a th:href="@{/userGrades/create}" class="btn btn-primary">유저 등급 추가</a></h3>
-                        <div th:if="${userGrades.size() > 0}">
+                        <h3>등급 리스트</h3>
+                        <h3><a th:href="@{/grades/create}" class="btn btn-primary">등급 추가</a></h3>
+                        <div th:if="${grades.size() > 0}">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr class="inline-text">
                                     <th>번호</th>
-                                    <th>유저 등급 이름</th>
+                                    <th>등급 이름</th>
                                     <th>이상</th>
                                     <th>미만</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="userGrade, index : ${userGrades}">
+                                <tr th:each="grade, index : ${grades}">
                                     <td th:text="${index.index + 1}">1</td>
-                                    <td th:text="${userGrade.name()}"></td>
-                                    <td th:text="${#numbers.formatDecimal(userGrade.minAmount(), 1, 'COMMA', 0, 'POINT')}"></td>
-                                    <td th:text="${#numbers.formatDecimal(userGrade.maxAmount(), 1, 'COMMA', 0, 'POINT')}"></td>
+                                    <td th:text="${grade.name()}"></td>
+                                    <td th:text="${#numbers.formatDecimal(grade.minAmount(), 1, 'COMMA', 0, 'POINT')}"></td>
+                                    <td th:text="${#numbers.formatDecimal(grade.maxAmount(), 1, 'COMMA', 0, 'POINT')}"></td>
                                     <td style="display: flex; align-items: center;">
-                                        <a th:href="@{/userGrades/update/{userGradeId} (userGradeId=${userGrade.userGradeId()})}"
+                                        <a th:href="@{/grades/update/{gradeId} (gradeId=${grade.gradeId()})}"
                                            class="btn btn-warning inline-text">편집</a>
-                                        <form th:action="@{/userGrades/{userGradeId} (userGradeId=${userGrade.userGradeId()})}"
+                                        <form th:action="@{/grades/{gradeId} (gradeId=${grade.gradeId()})}"
                                               th:method="delete">
                                             <button type="submit" class="btn btn-danger inline-text">삭제</button>
                                         </form>
@@ -57,8 +57,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div th:if="${userGrades.size() == 0}">
-                            <p>유저 등급이 없습니다.</p>
+                        <div th:if="${grades.size() == 0}">
+                            <p>등급이 없습니다.</p>
                         </div>
                     </section>
                 </section>
