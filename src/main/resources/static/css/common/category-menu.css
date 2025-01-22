@@ -1,84 +1,42 @@
-.categories-container {
-    display: none;
-    position: absolute;
-    left: 20vw;
-    top: 47px;
+/* 상위 카테고리 컨테이너 */
+.category-menu {
+    display: flex; /* 상위 카테고리들을 가로로 배치 */
+    gap: 1rem; /* 간격 설정 */
+    position: relative; /* 하위 카테고리 위치 기준 설정 */
 }
 
-#category-menu-button {
-    position: relative;
-    z-index: 3;
-    background-color: white;
+/* 상위 카테고리 항목 */
+.category-item {
+    position: relative; /* 하위 카테고리를 이 항목 기준으로 배치 */
+    padding: 10px;
+    cursor: pointer;
 }
 
-.active {
-    border: 1px solid #797979;
-    border-bottom: 1px solid white;
-    border-radius: 8px 8px 0 0;
+/* 하위 카테고리 */
+.sub-category {
+    display: none; /* 기본적으로 숨김 */
+    position: absolute; /* 상위 카테고리를 기준으로 위치 */
+    top: 100%; /* 상위 카테고리 바로 아래에 표시 */
+    left: 0; /* 상위 카테고리와 왼쪽 정렬 */
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    width: 110px;
+    z-index: 10;
 }
 
-.monte-show {
+/* 하위 카테고리 링크 */
+.sub-category a {
+    padding: 10px;
+    text-decoration: none;
     display: block;
-    background-color: white;
-    border: 1px solid #797979;
-    border-radius: 0 8px 8px 8px;
-    padding: 0.5rem 1rem;
-    z-index: 2;
+    color: black;
 }
 
-/* 메인 메뉴 아이템 각각의 서브 메뉴 위치 */
-.categories-container > div {
-    position: relative; /* 메인 메뉴에 상대적인 위치로 서브 메뉴 표시 */
+.sub-category a:hover {
+    background-color: #ddd;
 }
 
-.sub-menu {
-    display: none;
-    position: absolute;
-    left: 150%; /* 메인 메뉴 오른쪽에 표시 */
-    top: -10px; /* 메인 메뉴와 수평 정렬 */
-    background-color: white;
-    border: 1px solid #797979;
-    border-radius: 8px;
-    z-index: 1;
-    width: 200px;
-    padding: 0.5rem 1rem;
-}
-
-/* 활성화된 서브 메뉴 표시 */
-.show-sub-menu .sub-menu {
+/* 상위 카테고리에 마우스를 올렸을 때 하위 카테고리 표시 */
+.category-item:hover .sub-category {
     display: block;
-}
-
-
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    .footer-row {
-        flex-direction: column; /* 세로로 쌓이게 변경 */
-        align-items: flex-start; /* 왼쪽 정렬 */
-    }
-
-    .footer-left, .footer-right {
-        text-align: left; /* 모든 내용 왼쪽 정렬 */
-        flex: none; /* flex 속성 제거 */
-        width: 100%; /* 너비 100%로 설정 */
-        padding: 8px; /* 패딩 조정 */
-    }
-
-    .footer-bottom {
-        font-size: 12px; /* 하단 텍스트 크기 조정 */
-    }
-}
-
-@media (max-width: 480px) {
-    .footer-row {
-        padding: 10px 0; /* 여백 추가 */
-    }
-
-    .footer-left, .footer-right {
-        text-align: center; /* 모바일에서는 텍스트 중앙 정렬 */
-    }
-
-    .footer-bottom {
-        font-size: 12px; /* 하단 텍스트 크기 조정 */
-    }
 }

@@ -1,39 +1,17 @@
-const categoryMenuButton = document.getElementById('category-menu-button');
-const parentCategoriesContainer = document.querySelector('.categories-container');
+document.querySelectorAll('.category-item').forEach(item => {
+    item.addEventListener('mouseenter', function () {
+        const subCategory = this.nextElementSibling;
+        if (subCategory && subCategory.classList.contains('sub-category')) {
+            // 하위 카테고리 위치를 동적으로 설정하지 않아도
+            // `position: absolute`와 `top: 100%`, `left: 0`으로 이미 아래에 표시됨
+            subCategory.style.display = 'block';
+        }
+    });
 
-categoryMenuButton.addEventListener('click', () => {
-    if (parentCategoriesContainer.classList.contains('monte-show')) {
-        parentCategoriesContainer.classList.remove('monte-show');
-        categoryMenuButton.classList.remove('active');
-    } else {
-        parentCategoriesContainer.classList.add('monte-show');
-        categoryMenuButton.classList.add('active');
-    }
-});
-
-document.querySelectorAll('.categories-container > div').forEach(item => {
-    const categoryLink = item.querySelector('a');
-    const subMenu = item.querySelector('.sub-menu');
-
-    if (categoryLink && subMenu) {
-        categoryLink.addEventListener('mouseenter', () => {
-            item.classList.add('show-sub-menu');
-        });
-
-        categoryLink.addEventListener('mouseleave', () => {
-            setTimeout(() => {
-                if (!item.querySelector('.sub-menu:hover')) {
-                    item.classList.remove('show-sub-menu');
-                }
-            }, 100);
-        });
-
-        subMenu.addEventListener('mouseenter', () => {
-            item.classList.add('show-sub-menu');
-        });
-
-        subMenu.addEventListener('mouseleave', () => {
-            item.classList.remove('show-sub-menu');
-        });
-    }
+    item.addEventListener('mouseleave', function () {
+        const subCategory = this.nextElementSibling;
+        if (subCategory && subCategory.classList.contains('sub-category')) {
+            subCategory.style.display = 'none';
+        }
+    });
 });
