@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
     <title>이벤터</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
@@ -43,6 +43,7 @@
                                         <label for="nickname">닉네임</label>
                                         <input type="text" class="form-control" id="nickname" name="nickname"
                                                th:value="${user.nickname}" required>
+                                        <small id="nicknameFeedback" class="form-text text-muted"></small>
                                     </div>
 
                                     <div class="form-group">
@@ -59,7 +60,7 @@
 
                                     <div class="form-group" id="verify-code-row" style="display: none">
                                         <div class="email-input-container">
-                                            <input id="certify-code" type="text" placeholder="인증번호를 입력해주세요" required>
+                                            <input id="certify-code" type="text" placeholder="인증번호를 입력해주세요">
                                             <button type="button" class="btn btn-sm btn-outline-primary"
                                                     onclick="certifySignUpCode()">인증번호 확인
                                             </button>
@@ -106,7 +107,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="/js/user/certifyEmail.js"></script>
+
+<script src="/js/user/update.js"></script>
+
 
 </body>
 </html>

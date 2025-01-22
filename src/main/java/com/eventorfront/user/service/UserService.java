@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
+import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
@@ -19,9 +20,13 @@ public interface UserService {
 
 	void updateUser(UpdateUserRequest request);
 
+	ResponseEntity<String> meCheckNickname(CheckNicknameRequest request);
+
 	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
 
 	ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request);
+
+	ResponseEntity<String> checkNickname(CheckNicknameRequest request);
 
 	void withdrawUser();
 

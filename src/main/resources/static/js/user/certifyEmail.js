@@ -1,3 +1,6 @@
+// 각 조건의 상태를 추적하는 변수
+let isEmailCertified = false;
+
 const sendEmail = async () => {
     const email = document.getElementById('email').value
 
@@ -27,8 +30,6 @@ const certifySignUpCode = async () => {
     const email = emailInput.value;
     const codeInput = document.getElementById('certify-code');
     const code = codeInput.value;
-    const signupButton = document.getElementById('signupButton');
-    const updateButton = document.getElementById('updateButton');
 
     const response = await fetch(`/users/signup/checkEmail?email=${encodeURI(email)}&certifyCode=${code}`);
     const message = await response.text();
@@ -37,19 +38,12 @@ const certifySignUpCode = async () => {
         alert(message);
         emailInput.setAttribute('readonly', 'true');
         codeInput.setAttribute('readonly', 'true');
-
-        // 회원가입 버튼 활성화
-        if (signupButton) {
-            signupButton.removeAttribute('disabled');
-        }
-
-        // 수정폼일 경우 updateButton 활성화
-        if (updateButton) {
-            updateButton.removeAttribute('disabled');
-        }
+        isEmailCertified = true;
     } else {
         alert(message);
+        isEmailCertified = false;
     }
+    updateSignupButtonState();
 }
 
 let isEditingEmail = false; // 상태를 추적하는 변수

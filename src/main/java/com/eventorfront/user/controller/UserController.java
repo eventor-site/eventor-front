@@ -18,6 +18,7 @@ import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
+import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
@@ -75,10 +76,20 @@ public class UserController {
 		return userService.checkIdentifier(request);
 	}
 
+	@PostMapping("/signup/checkNickname")
+	public ResponseEntity<String> checkNickname(@ModelAttribute CheckNicknameRequest request) {
+		return userService.checkNickname(request);
+	}
+
 	@PutMapping("/me")
 	public String updateUser(@ModelAttribute UpdateUserRequest request) {
 		userService.updateUser(request);
 		return "redirect:/users/me";
+	}
+
+	@PostMapping("/me/checkNickname")
+	ResponseEntity<String> meCheckNickname(@ModelAttribute CheckNicknameRequest request) {
+		return userService.meCheckNickname(request);
 	}
 
 	@PutMapping("/me/password")

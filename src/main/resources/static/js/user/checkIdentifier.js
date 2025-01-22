@@ -1,3 +1,6 @@
+// 각 조건의 상태를 추적하는 변수
+let isIdentifierValid = false;
+
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('identifier').addEventListener('blur', function () {
         const identifier = this.value.trim();
@@ -6,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!identifier) {
             feedbackElement.textContent = '아이디를 입력해주세요.';
             feedbackElement.className = "mismatch";
+            updateSignupButtonState();
             return;
         }
 
@@ -21,14 +25,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (message === '사용 가능한 아이디 입니다.') {
                     feedbackElement.textContent = message;
                     feedbackElement.className = "match";
+                    isIdentifierValid = true;
                 } else {
                     feedbackElement.textContent = message;
                     feedbackElement.className = "mismatch";
+                    isIdentifierValid = false;
                 }
+                updateSignupButtonState();
             })
             .catch(error => {
                 feedbackElement.textContent = '오류가 발생했습니다. 다시 시도해주세요.';
                 feedbackElement.style.setProperty('color', 'red', 'important');
+                isIdentifierValid = false;
+                updateSignupButtonState();
                 console.error(error);
             });
     });

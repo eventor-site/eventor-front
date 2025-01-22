@@ -9,6 +9,7 @@ import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.user.client.UserClient;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
+import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
@@ -38,6 +39,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public ResponseEntity<String> meCheckNickname(CheckNicknameRequest request) {
+		return userClient.meCheckNickname(request);
+	}
+
+	@Override
 	public ResponseEntity<String> modifyPassword(ModifyPasswordRequest request) {
 		return userClient.modifyPassword(request);
 	}
@@ -45,6 +51,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request) {
 		return userClient.checkIdentifier(request);
+	}
+
+	@Override
+	public ResponseEntity<String> checkNickname(CheckNicknameRequest request) {
+		return userClient.checkNickname(request);
 	}
 
 	@Override
