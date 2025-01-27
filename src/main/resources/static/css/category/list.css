@@ -1,0 +1,23 @@
+.category-container {
+    margin-left: 0; /* 기본 여백 */
+}
+
+.category-container.depth-1 {
+    margin-left: 20px; /* 1단계 깊이 */
+}
+
+.category-container.depth-2 {
+    margin-left: 40px; /* 2단계 깊이 */
+}
+
+.category-container.depth-3 {
+    margin-left: 60px; /* 3단계 깊이 */
+}
+
+.category-container.depth-4 {
+    margin-left: 80px; /* 3단계 깊이 */
+}
+
+.category-container.depth-5 {
+    margin-left: 100px; /* 3단계 깊이 */
+}

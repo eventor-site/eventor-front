@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.eventorfront.category.client.CategoryClient;
 import com.eventorfront.category.dto.request.CreateCategoryRequest;
 import com.eventorfront.category.dto.request.UpdateCategoryRequest;
+import com.eventorfront.category.dto.response.GetCategoryListResponse;
 import com.eventorfront.category.dto.response.GetCategoryNameResponse;
 import com.eventorfront.category.dto.response.GetCategoryResponse;
 import com.eventorfront.category.service.CategoryService;
@@ -24,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<GetCategoryResponse> getCategories() {
+	public List<GetCategoryListResponse> getCategories() {
 		return categoryClient.getCategories().getBody();
 	}
 

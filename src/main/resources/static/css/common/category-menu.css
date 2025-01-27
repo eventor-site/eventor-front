@@ -20,7 +20,7 @@
     left: 0; /* 상위 카테고리와 왼쪽 정렬 */
     background-color: #f8f8f8;
     border: 1px solid #ddd;
-    width: 110px;
+    width: 120px;
     z-index: 10;
 }
 

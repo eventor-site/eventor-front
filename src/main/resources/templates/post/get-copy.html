@@ -144,65 +144,79 @@
                 <hr style="width: 100%"/>
 
                 <!-- 댓글 리스트 -->
-                <div th:each="comment : ${comments}" th:class="'comment-container depth-' + ${comment.depth}"
-                     th:data-depth="${comment.depth}"
-                     th:id="${comment.commentId}">
-                    <div class="comment-container" th:id="${comment.commentId}">
-                        <div>
-                            <img class="grade"
-                                 th:src="@{/profile/{gradeName}.png (gradeName=${comment.gradeName()})}"
-                                 alt="프로필">
-                            <strong th:text="${comment.writer}"></strong>
-                            <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
-                        </div>
-                        <div class="recommend-container">
-                            <button class="btn btn-sm btn-outline-primary"
-                                    th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
-                                    data-method="PUT"
-                                    onclick="setupAlertBox(this)">추천
-                            </button>
-                            <span th:text="${comment.recommendationCount}"></span>
+                <div th:if="${comment.parentCommentId == null}" th:each="comment : ${comments}">
+                    <!-- 재귀 호출 시작 -->
+                    <div th:fragment="commentTree">
+                        <div class="comment-container" th:id="${comment.commentId}">
+                            <div th:if="${!comment.isDeleted}">
+                                <div>
+                                    <img class="grade"
+                                         th:src="@{/profile/{gradeName}.png (gradeName=${comment.gradeName()})}"
+                                         alt="프로필">
+                                    <strong th:text="${comment.writer}"></strong>
+                                    <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                                </div>
+                                <div class="recommend-container">
+                                    <button class="btn btn-sm btn-outline-primary"
+                                            th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
+                                            data-method="PUT"
+                                            onclick="setupAlertBox(this)">추천
+                                    </button>
+                                    <span th:text="${comment.recommendationCount}"></span>
 
-                            <button class="btn btn-sm btn-outline-primary"
-                                    th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
-                                    data-method="PUT"
-                                    onclick="setupAlertBox(this)">비추천
-                            </button>
-                            <span th:text="${comment.decommendationCount}"></span>
+                                    <button class="btn btn-sm btn-outline-primary"
+                                            th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
+                                            data-method="PUT"
+                                            onclick="setupAlertBox(this)">비추천
+                                    </button>
+                                    <span th:text="${comment.decommendationCount}"></span>
 
-                            <!-- 대댓글 작성 버튼 -->
-                            <button class="btn btn-sm btn-outline-primary">대댓글 작성</button>
+                                    <!-- 대댓글 작성 버튼 -->
+                                    <button class="btn btn-sm btn-outline-primary">대댓글 작성</button>
 
-                            <button class="btn btn-sm btn-outline-primary report-button"
-                                    th:data-url="@{/comments/{commentId}/commentReports (commentId=${comment.commentId})}"
-                                    data-method="POST">
-                                🚨
-                            </button>
-                            <div class="popup report-popup">
-                                <p><strong>[신고유형]</strong></p>
-                                <a data-report-type="정치" onclick="submitReport(this)">- 정치</a>
-                                <a data-report-type="성인물" onclick="submitReport(this)">- 성인물</a>
-                                <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
+                                    <button class="btn btn-sm btn-outline-primary report-button"
+                                            th:data-url="@{/comments/{commentId}/commentReports (commentId=${comment.commentId})}"
+                                            data-method="POST">
+                                        🚨
+                                    </button>
+                                    <div class="popup report-popup">
+                                        <p><strong>[신고유형]</strong></p>
+                                        <a data-report-type="정치" onclick="submitReport(this)">- 정치</a>
+                                        <a data-report-type="성인물" onclick="submitReport(this)">- 성인물</a>
+                                        <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
+                                    </div>
+
+                                    <div th:if="${comment.isAuthorized}" style="display: flex; align-items: center;">
+                                        <button class="btn btn-warning inline-text">수정</button>
+                                        <form th:action="@{/posts/{postId}/comments/{commentId} (postId=${post.postId}, commentId=${comment.commentId})}"
+                                              th:method="delete">
+                                            <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div th:if="${comment.isAuthorized}" style="display: flex; align-items: center;">
-                                <button class="btn btn-warning inline-text">수정</button>
-                                <form th:action="@{/posts/{postId}/comments/{commentId} (postId=${post.postId}, commentId=${comment.commentId})}"
-                                      th:method="delete">
-                                    <button type="submit" class="btn btn-danger inline-text">삭제</button>
-                                </form>
-                            </div>
+                            <p th:utext="${comment.content}"></p>
+
+                            <div class="sub-comment-form-container"
+                                 th:data-post-id="${post.postId}"
+                                 th:data-comment-id="${comment.commentId}"></div>
                         </div>
 
-                        <p th:utext="${comment.content}"></p>
+                        <hr style="width: 100%"/>
 
-                        <div class="sub-comment-form-container"
-                             th:data-post-id="${post.postId}"
-                             th:data-comment-id="${comment.commentId}"></div>
+                        <!-- 대댓글 출력 -->
+                        <div th:if="${comment.childComments != null && !comment.childComments.isEmpty()}"
+                             style="margin-left: 20px;">
+                            <!-- 재귀 호출 -->
+                            <th:block th:each="childComment : ${comment.childComments}">
+                                <th:block th:with="comment=${childComment}"
+                                          th:insert="~{this :: commentTree}"
+                                          th:remove="tag">
+                                </th:block>
+                            </th:block>
+                        </div>
                     </div>
-
-                    <hr style="width: 100%"/>
-
                 </div>
 
                 <!-- 댓글 작성 폼 -->
@@ -225,7 +239,6 @@
 <script src="/js/post/remainingTime.js"></script>
 <script src="/js/post/report.js"></script>
 <script src="/js/common/highlight.js"></script>
-
 
 </body>
 </html>

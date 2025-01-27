@@ -1,0 +1,71 @@
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-header .left, .post-header .right {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 이미지 갤러리 스타일 */
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 개별 이미지 컨테이너 */
+.image-container {
+    position: relative;
+    max-width: 100%; /* 본문을 벗어나지 않도록 제한 */
+    /*max-height: 600px; !* 이미지 최대 높이 제한 *!*/
+    overflow: hidden; /* 컨테이너 크기 초과 이미지는 숨김 */
+}
+
+/* 이미지 스타일 */
+.image-container img {
+    width: auto; /* 이미지 원래 비율 유지 */
+    height: auto; /* 이미지 원래 비율 유지 */
+    max-width: 100%; /* 컨테이너 크기를 초과하지 않음 */
+    max-height: 100%; /* 컨테이너 크기를 초과하지 않음 */
+    display: block;
+}
+
+.recommend-container {
+    display: flex; /* flexbox 레이아웃 사용 */
+    align-items: center; /* 세로 가운데 정렬 */
+    gap: 10px; /* 요소 간 간격 */
+}
+
+.recommend-container p {
+    margin: 0; /* 기본 여백 제거 */
+}
+
+.popup {
+    display: none; /* 기본적으로 숨김 */
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    width: 200px;
+}
+
+.popup a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.popup a:hover {
+    background-color: #f0f0f0;
+}
+
+
