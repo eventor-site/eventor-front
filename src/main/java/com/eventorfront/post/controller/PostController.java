@@ -78,8 +78,7 @@ public class PostController {
 	}
 
 	@PostMapping
-	public String createPost(@ModelAttribute CreatePostRequest request,
-		@RequestParam("files") List<MultipartFile> files) {
+	public String createPost(@ModelAttribute CreatePostRequest request, List<MultipartFile> files) {
 		return "redirect:/posts/" + postService.createPost(request, files).postId();
 	}
 

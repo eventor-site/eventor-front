@@ -27,7 +27,8 @@
                     <input type="hidden" id="categoryName" name="categoryName" th:value="${categoryName}">
                 </div>
 
-                <div th:if="${categoryName} == '이벤트'" class="form-group d-flex align-items-center">
+                <div th:if="${categoryName != '자유' and categoryName != '공지' and categoryName != '맛집'}"
+                     class="form-group d-flex align-items-center">
                     <label for="startTime" style="margin-right: 10px;">이벤트 시작 시간</label>
                     <input type="datetime-local" class="form-control" id="startTime" name="startTime"
                            style="width: 200px; margin-right: 20px;" required>

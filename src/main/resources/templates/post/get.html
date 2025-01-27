@@ -144,8 +144,7 @@
                 <hr style="width: 100%"/>
 
                 <!-- 댓글 리스트 -->
-                <div th:each="comment : ${comments}" th:class="'comment-container depth-' + ${comment.depth}"
-                     th:data-depth="${comment.depth}"
+                <div th:each="comment : ${comments}" th:class="'depth-' + ${comment.depth}"
                      th:id="${comment.commentId}">
                     <div class="comment-container" th:id="${comment.commentId}">
                         <div>

@@ -1,7 +1,6 @@
 package com.eventorfront.comment.dto.response;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import lombok.Builder;
 
@@ -13,9 +12,8 @@ public record GetCommentResponse(
 	String content,
 	Long recommendationCount,
 	Long decommendationCount,
-	List<GetCommentResponse> childComments,
 	LocalDateTime createdAt,
 	String gradeName,
 	Boolean isAuthorized,
-	Boolean isDeleted) {
+	Long depth) {
 }
