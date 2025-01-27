@@ -64,6 +64,12 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public CreatePostResponse createPost(CreatePostRequest request, List<MultipartFile> files) {
 		CreatePostResponse response = postClient.createPost(request).getBody();
+
+		// 파일이 비어 있거나 파일 크기가 0인 파일 필터링
+		files = files.stream()
+			.filter(file -> file != null && !file.isEmpty() && file.getSize() > 0)
+			.toList();
+
 		if (!files.isEmpty()) {
 			imageClient.upload(files, "postimage", Objects.requireNonNull(response).postId());
 		}

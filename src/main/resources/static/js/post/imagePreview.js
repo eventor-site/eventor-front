@@ -7,9 +7,9 @@ document.getElementById('files').addEventListener('change', function () {
     fileCountElement.textContent = ""; // 파일 개수 초기화
     totalSizeElement.textContent = ""; // 총 용량 초기화
 
-    const files = Array.from(this.files);
+    let files = this.files.length > 0 ? Array.from(this.files) : null; // 파일이 없으면 null 로 설정
 
-    if (files.length === 0) return; // 파일이 없으면 아무것도 하지 않음
+    if (files === null) return; // 파일이 없으면 아무것도 하지 않음
 
     let totalSize = 0;
     files.forEach((file, index) => {
