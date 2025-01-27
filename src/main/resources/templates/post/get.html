@@ -25,7 +25,8 @@
 
             <hr style="width: 100%"/>
 
-            <div th:if="${post.categoryName} == '이벤트'" class="post-header d-flex align-items-center">
+            <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집'}"
+                 class="post-header d-flex align-items-center">
                 <div class="left">
                     <span style="margin-right: 10px; font-weight: bold;">이벤트 시작 시간:</span>
                     <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"
