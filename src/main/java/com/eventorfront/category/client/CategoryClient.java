@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.category.dto.request.CreateCategoryRequest;
 import com.eventorfront.category.dto.request.UpdateCategoryRequest;
+import com.eventorfront.category.dto.response.GetCategoryListResponse;
 import com.eventorfront.category.dto.response.GetCategoryNameResponse;
 import com.eventorfront.category.dto.response.GetCategoryResponse;
 
@@ -24,7 +25,7 @@ public interface CategoryClient {
 	ResponseEntity<List<GetCategoryNameResponse>> searchCategories(@RequestParam String keyword);
 
 	@GetMapping
-	ResponseEntity<List<GetCategoryResponse>> getCategories();
+	ResponseEntity<List<GetCategoryListResponse>> getCategories();
 
 	@GetMapping("/{categoryId}")
 	ResponseEntity<GetCategoryResponse> getCategory(@PathVariable Long categoryId);
