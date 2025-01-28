@@ -56,6 +56,21 @@
                             </div>
                         </div>
 
+                        <!-- User SNS Info -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6>연동 정보</h6>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>연동 SNS:</strong> <span
+                                        th:text="${user.oauthType}"></span>
+                                </p>
+                                <p><strong>연동 시간:</strong> <span
+                                        th:text="${#temporals.format(user.connectTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                                </p>
+                            </div>
+                        </div>
+
                         <!-- User Activity Info -->
                         <div class="card mb-4">
                             <div class="card-header">
