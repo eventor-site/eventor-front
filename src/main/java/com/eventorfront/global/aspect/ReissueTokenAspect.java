@@ -8,6 +8,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +36,9 @@ public class ReissueTokenAspect {
 				accessTokenCookie.setHttpOnly(true);
 				accessTokenCookie.setPath("/");
 				getHttpServletResponse().addCookie(accessTokenCookie);
+
+				// 현재 요청에 새로운 쿠키 정보 반영
+				updateRequestCookies("Access-Token", newAccessToken);
 			}
 
 			if (newRefreshToken != null) {
@@ -42,8 +46,26 @@ public class ReissueTokenAspect {
 				refreshTokenCookie.setHttpOnly(true);
 				refreshTokenCookie.setPath("/");
 				getHttpServletResponse().addCookie(refreshTokenCookie);
+
+				// 현재 요청에 새로운 쿠키 정보 반영
+				updateRequestCookies("Refresh-Token", newRefreshToken);
 			}
 		}
+	}
+
+	/**
+	 * 현재 요청에 새로운 토큰 정보를 반영합니다.
+	 */
+	private void updateRequestCookies(String cookieName, String cookieValue) {
+		HttpServletRequest request = getHttpServletRequest();
+
+		// 요청에 업데이트된 토큰 정보 반영
+		request.setAttribute(cookieName, cookieValue);
+	}
+
+	private HttpServletRequest getHttpServletRequest() {
+		ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+		return attr.getRequest();
 	}
 
 	/**

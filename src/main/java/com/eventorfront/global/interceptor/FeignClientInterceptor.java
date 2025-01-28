@@ -31,7 +31,10 @@ public class FeignClientInterceptor implements RequestInterceptor {
 			HttpServletRequest request = attributes.getRequest();
 			Cookie[] cookies = request.getCookies();
 
-			if (cookies != null) {
+			if (request.getAttribute("Access-Token") != null) {
+				template.header("Access-Token", request.getAttribute("Access-Token").toString());
+				template.header("Refresh-Token", request.getAttribute("Access-Token").toString());
+			} else if (cookies != null) {
 				for (Cookie cookie : cookies) {
 					if ("Access-Token".equals(cookie.getName())) {
 						template.header("Access-Token", cookie.getValue());
