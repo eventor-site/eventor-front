@@ -17,6 +17,8 @@ public record GetUserResponse(
 	String statusName,
 	String gradeName,
 	String userRoles,
+	String oauthType,
+	LocalDateTime connectTime,
 	LocalDateTime createdAt,
 	LocalDateTime updatedTime,
 	LocalDateTime lastLoginTime
