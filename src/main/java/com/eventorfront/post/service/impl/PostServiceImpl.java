@@ -47,6 +47,11 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public List<GetMainPostResponse> getHotPostsByCategoryName(String categoryName) {
+		return postClient.getHotPostsByCategoryName(categoryName).getBody();
+	}
+
+	@Override
 	public GetPostsByCategoryNameResponse getPostsByCategoryName(String categoryName) {
 		return postClient.getPostsByCategoryName(categoryName).getBody();
 	}

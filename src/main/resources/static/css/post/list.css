@@ -1,0 +1,57 @@
+.event-section {
+    margin-bottom: 50px;
+}
+
+.event-slider {
+    overflow: visible !important; /* 화살표가 잘리지 않도록 */
+    position: relative;
+    padding: 0 50px; /* 화살표 공간 확보 */
+}
+
+.event-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 10px;
+}
+
+.event-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.event-card-body {
+    padding: 10px;
+}
+
+.event-card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.slick-prev i, .slick-next i {
+    font-size: 50px; /* 아이콘 크기 */
+    color: #858484; /* 기본 색상 */
+    background-color: rgba(255, 255, 255, 0.8); /* 배경색 */
+    border-radius: 50%; /* 둥근 화살표 */
+    top: 50%; /* 슬라이더의 높이를 기준으로 수직 중앙 */
+    transform: translateY(-50%); /* 실제 위치를 중앙으로 보정 */
+}
+
+.slick-prev {
+    left: -40px; /* 왼쪽 화살표 위치 */
+}
+
+.slick-next {
+    right: -40px; /* 오른쪽 화살표 위치 */
+}
+
+.slick-prev:hover i, .slick-next:hover i {
+    color: rgb(71, 71, 71); /* 호버 시 아이콘 색상 변경 */
+}
+
+
