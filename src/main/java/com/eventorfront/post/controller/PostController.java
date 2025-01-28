@@ -20,6 +20,7 @@ import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.service.PostService;
+import com.eventorfront.user.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class PostController {
 	private final PostService postService;
 	private final CommentService commentService;
 	private final AuthService authService;
+	private final UserService userService;
 
 	@GetMapping("/create")
 	public String createPostForm(@RequestParam String categoryName, Model model) {
@@ -60,8 +62,9 @@ public class PostController {
 	@GetMapping
 	public String getPostsByCategoryName(Model model, @RequestParam String categoryName) {
 		model.addAttribute("categoryName", categoryName);
+		model.addAttribute("isAuthorized", userService.meCheckRoles() || categoryName.equals("자유"));
 		model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName));
-		model.addAttribute("response", postService.getPostsByCategoryName(categoryName));
+		model.addAttribute("data", postService.getPostsByCategoryName(categoryName));
 		return "post/list";
 	}
 

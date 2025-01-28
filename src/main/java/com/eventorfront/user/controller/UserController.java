@@ -71,20 +71,19 @@ public class UserController {
 		return "user/modifyPasswordForm";
 	}
 
-	@PostMapping("/signup/checkIdentifier")
-	public ResponseEntity<String> checkIdentifier(@ModelAttribute CheckIdentifierRequest request) {
-		return userService.checkIdentifier(request);
-	}
-
-	@PostMapping("/signup/checkNickname")
-	public ResponseEntity<String> checkNickname(@ModelAttribute CheckNicknameRequest request) {
-		return userService.checkNickname(request);
-	}
-
 	@PutMapping("/me")
 	public String updateUser(@ModelAttribute UpdateUserRequest request) {
 		userService.updateUser(request);
 		return "redirect:/users/me";
+	}
+
+	@DeleteMapping("/me")
+	public String withdrawUser(HttpServletResponse response) {
+		userService.withdrawUser();
+		authService.logout();
+		CookieUtil.revokeToken(response, "Access-Token");
+		CookieUtil.revokeToken(response, "Refresh-Token");
+		return "redirect:/auth/login";
 	}
 
 	@PostMapping("/me/checkNickname")
@@ -98,15 +97,6 @@ public class UserController {
 		return "redirect:/users/me";
 	}
 
-	@DeleteMapping("/me")
-	public String withdrawUser(HttpServletResponse response) {
-		userService.withdrawUser();
-		authService.logout();
-		CookieUtil.revokeToken(response, "Access-Token");
-		CookieUtil.revokeToken(response, "Refresh-Token");
-		return "redirect:/auth/login";
-	}
-
 	@GetMapping("/signup")
 	public String signup() {
 		return "user/signup";
@@ -116,6 +106,16 @@ public class UserController {
 	public String signup(@ModelAttribute SignUpRequest signupRequest) {
 		userService.signup(signupRequest);
 		return "redirect:/auth/login";
+	}
+
+	@PostMapping("/signup/checkIdentifier")
+	public ResponseEntity<String> checkIdentifier(@ModelAttribute CheckIdentifierRequest request) {
+		return userService.checkIdentifier(request);
+	}
+
+	@PostMapping("/signup/checkNickname")
+	public ResponseEntity<String> checkNickname(@ModelAttribute CheckNicknameRequest request) {
+		return userService.checkNickname(request);
 	}
 
 	@PostMapping("/signup/sendEmail")

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
@@ -39,7 +40,7 @@ public interface PostClient {
 	ResponseEntity<List<GetMainPostResponse>> getHotPostsByCategoryName(@RequestParam String categoryName);
 
 	@GetMapping
-	ResponseEntity<GetPostsByCategoryNameResponse> getPostsByCategoryName(@RequestParam String categoryName);
+	ApiResponse<List<GetPostsByCategoryNameResponse>> getPostsByCategoryName(@RequestParam String categoryName);
 
 	@GetMapping("/me")
 	ResponseEntity<List<GetPostSimpleResponse>> getPostsByUserId();

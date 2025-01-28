@@ -9,14 +9,13 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/list.css"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-</head>
 
+</head>
 <body>
 
 <header th:insert="~{common/header}"></header>
@@ -34,7 +33,7 @@
             </h5>
 
             <hr style="width: 100%"/>
-            <h3><a th:if="${response.isAuthorized}" th:href="@{/posts/create(categoryName=${categoryName})}"
+            <h3><a th:if="${isAuthorized}" th:href="@{/posts/create(categoryName=${categoryName})}"
                    class="btn btn-primary">게시글 작성</a></h3>
 
             <div class="event-section">
@@ -42,7 +41,6 @@
                 <div class="event-slider">
                     <div th:if="${hotPosts.size() > 0}" th:each="post : ${hotPosts}">
                         <div class="event-card">
-                            <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
                             <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
                                 <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
                                 <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
@@ -56,37 +54,27 @@
                 </div>
             </div>
 
-            <div th:if="${response.data().size() > 0}">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr class="inline-text">
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>조회수</th>
-                        <th>추천수</th>
-                        <th>날짜</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="post, index : ${response.data()}">
-                        <td>
-                            <!-- 제목을 클릭하면 해당 게시글로 이동 -->
-                            <a th:href="@{/posts/{postId} (postId=${post.postId()})}" th:text="${post.title}"></a>
-                        </td>
-                        <td>
-                            <img class="grade"
-                                 th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
-                                 alt="프로필">
-                            <span class="ml-2" th:text="${post.writer}"></span>
-                        </td>
-                        <td th:text="${post.viewCount}"></td>
-                        <td th:text="${post.recommendationCount}"></td>
-                        <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <!-- 게시글 목록 -->
+            <div class="post-list" th:if="${data.size() > 0}">
+                <a th:each="post : ${data}" th:href="@{/posts/{postId}(postId=${post.postId()})}" class="post-card">
+                    <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="썸네일">
+                    <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
+                    <div class="post-card-body">
+                        <div class="post-card-title" th:text="${post.title}"></div>
+                        <div class="post-card-meta">
+                            <img th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}" alt="프로필">
+                            <span th:text="${post.writer}"></span>
+                        </div>
+                        <div class="post-card-stats">
+                            <span>조회수: <span th:text="${post.viewCount}"></span></span>
+                            <span>추천수: <span th:text="${post.recommendationCount}"></span></span>
+                        </div>
+                        <div class="post-card-date"
+                             th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
+                    </div>
+                </a>
             </div>
-            <div th:if="${response.data().size() == 0}">
+            <div th:if="${data.size() == 0}">
                 <p>게시글이 없습니다.</p>
             </div>
         </div>

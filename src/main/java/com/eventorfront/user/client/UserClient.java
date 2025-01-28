@@ -34,6 +34,9 @@ public interface UserClient {
 	@DeleteMapping("/me")
 	ResponseEntity<Void> withdrawUser();
 
+	@GetMapping("/me/checkRoles")
+	public ResponseEntity<Boolean> meCheckRoles();
+
 	@PostMapping("/me/checkNickname")
 	ResponseEntity<String> meCheckNickname(@RequestBody CheckNicknameRequest request);
 
