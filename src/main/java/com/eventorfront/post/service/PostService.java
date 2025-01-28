@@ -23,6 +23,8 @@ public interface PostService {
 
 	List<GetMainPostResponse> getRecommendationEventPosts();
 
+	List<GetMainPostResponse> getHotPostsByCategoryName(String categoryName);
+
 	GetPostsByCategoryNameResponse getPostsByCategoryName(String categoryName);
 
 	List<GetPostSimpleResponse> getPostsByUserId();
