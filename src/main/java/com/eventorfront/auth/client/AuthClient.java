@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.eventorfront.auth.dto.request.LoginRequest;
-import com.eventorfront.auth.dto.request.OauthSignUpRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 
 @FeignClient(name = "auth-feign-client", url = "http://localhost:8090")
@@ -21,8 +20,5 @@ public interface AuthClient {
 	ResponseEntity<Void> logout();
 
 	@GetMapping("/oauth2/authorization/{registrationId}")
-	ResponseEntity<String> naverAuthorization(@PathVariable String registrationId);
-
-	@PostMapping("/oauth2/signup")
-	ResponseEntity<LoginResponse> oauthSignup(OauthSignUpRequest oauthSignUpRequest);
+	ResponseEntity<String> oauthAuthorization(@PathVariable String registrationId);
 }

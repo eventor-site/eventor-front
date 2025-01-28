@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.eventorfront.auth.client.AuthClient;
 import com.eventorfront.auth.dto.request.LoginRequest;
-import com.eventorfront.auth.dto.request.OauthSignUpRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 import com.eventorfront.auth.service.AuthService;
 
@@ -51,12 +50,8 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public ResponseEntity<String> naverAuthorization(String registrationId) {
-		return authClient.naverAuthorization(registrationId);
-	}
-
-	public ResponseEntity<LoginResponse> oauthSignup(OauthSignUpRequest oauthSignUpRequest) {
-		return authClient.oauthSignup(oauthSignUpRequest);
+	public ResponseEntity<String> oauthAuthorization(String registrationId) {
+		return authClient.oauthAuthorization(registrationId);
 	}
 
 }

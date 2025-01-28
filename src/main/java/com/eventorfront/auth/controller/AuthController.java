@@ -85,7 +85,7 @@ public class AuthController {
 
 	@GetMapping("/oauth2/authorization/{registrationId}")
 	public String oauthAuthorization(@PathVariable String registrationId) {
-		return authService.naverAuthorization(registrationId).getBody();
+		return authService.oauthAuthorization(registrationId).getBody();
 	}
 
 	@GetMapping("/oauth2/login")
