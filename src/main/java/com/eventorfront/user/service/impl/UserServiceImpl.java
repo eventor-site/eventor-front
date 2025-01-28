@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
-import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.user.client.UserClient;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
@@ -39,6 +38,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void withdrawUser() {
+		userClient.withdrawUser();
+	}
+
+	@Override
+	public Boolean meCheckRoles() {
+		return userClient.meCheckRoles().getBody();
+	}
+
+	@Override
 	public ResponseEntity<String> meCheckNickname(CheckNicknameRequest request) {
 		return userClient.meCheckNickname(request);
 	}
@@ -49,6 +58,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public ResponseEntity<Void> signup(SignUpRequest signupRequest) {
+		return userClient.signup(signupRequest);
+	}
+
+	@Override
 	public ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request) {
 		return userClient.checkIdentifier(request);
 	}
@@ -56,21 +70,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public ResponseEntity<String> checkNickname(CheckNicknameRequest request) {
 		return userClient.checkNickname(request);
-	}
-
-	@Override
-	public void withdrawUser() {
-		userClient.withdrawUser();
-	}
-
-	@Override
-	public List<GetCommentResponse> getCommentsByUserId() {
-		return List.of();
-	}
-
-	@Override
-	public ResponseEntity<Void> signup(SignUpRequest signupRequest) {
-		return userClient.signup(signupRequest);
 	}
 
 	@Override

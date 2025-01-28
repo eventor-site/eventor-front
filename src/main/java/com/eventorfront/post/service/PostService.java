@@ -25,7 +25,7 @@ public interface PostService {
 
 	List<GetMainPostResponse> getHotPostsByCategoryName(String categoryName);
 
-	GetPostsByCategoryNameResponse getPostsByCategoryName(String categoryName);
+	List<GetPostsByCategoryNameResponse> getPostsByCategoryName(String categoryName);
 
 	List<GetPostSimpleResponse> getPostsByUserId();
 
