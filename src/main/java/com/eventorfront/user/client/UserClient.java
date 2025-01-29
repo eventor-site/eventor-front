@@ -15,6 +15,7 @@ import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
+import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.dto.response.GetUserResponse;
@@ -53,7 +54,7 @@ public interface UserClient {
 	ResponseEntity<String> checkNickname(@RequestBody CheckNicknameRequest request);
 
 	@PostMapping("/signup/sendEmail")
-	ResponseEntity<String> sendEmail(@RequestBody CheckIdentifierRequest request);
+	ResponseEntity<String> sendEmail(@RequestBody SendCodeRequest request);
 
 	@GetMapping("/signup/checkEmail")
 	ResponseEntity<String> checkEmail(@RequestParam("email") String email,

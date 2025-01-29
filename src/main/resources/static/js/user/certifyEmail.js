@@ -19,7 +19,7 @@ const sendEmail = async () => {
     disableCertifyButton(60);
 
     const formData = new FormData();
-    formData.append('identifier', identifier);
+    formData.append('email', identifier);
 
     const response = await fetch('/users/signup/sendEmail', {
         method: 'POST',

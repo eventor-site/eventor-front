@@ -30,7 +30,7 @@ const toggleEmailEdit = () => {
         changeButton.textContent = '인증번호'; // 버튼 이름 변경
         codeInput.setAttribute('required', 'true'); // 인증번호 필수 입력 설정
         isEditingEmail = true; // 상태 업데이트
-        
+
     } else {
         // '인증번호' 상태 → 인증 요청 실행
         sendEmail(); // 이메일 인증번호 요청
@@ -111,10 +111,13 @@ function showInputSignUpCode() {
 const sendEmail = async () => {
     const email = document.getElementById('email').value
 
-    const response = await fetch(
-        `/users/signup/sendEmail?email=${encodeURI(email)}`,
-        {method: 'POST'}
-    );
+    const formData = new FormData();
+    formData.append('email', email);
+
+    const response = await fetch('/users/signup/sendEmail', {
+        method: 'POST',
+        body: formData,
+    })
 
     const message = await response.text();
 
