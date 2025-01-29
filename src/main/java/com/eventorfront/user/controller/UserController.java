@@ -103,8 +103,8 @@ public class UserController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute SignUpRequest signupRequest) {
-		userService.signup(signupRequest);
+	public String signup(@ModelAttribute SignUpRequest request) {
+		userService.signup(request);
 		return "redirect:/auth/login";
 	}
 
@@ -119,8 +119,8 @@ public class UserController {
 	}
 
 	@PostMapping("/signup/sendEmail")
-	ResponseEntity<String> sendEmail(@RequestParam("email") String email) {
-		return userService.sendEmail(email);
+	ResponseEntity<String> sendEmail(@ModelAttribute CheckIdentifierRequest request) {
+		return userService.sendEmail(request);
 	}
 
 	@GetMapping("/signup/checkEmail")

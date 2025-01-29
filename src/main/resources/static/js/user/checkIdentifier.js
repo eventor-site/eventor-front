@@ -9,6 +9,17 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!identifier) {
             feedbackElement.textContent = '아이디를 입력해주세요.';
             feedbackElement.className = "mismatch";
+            isIdentifierValid = false;
+            updateSignupButtonState();
+            return;
+        }
+
+        // 이메일 형식 검사를 위한 정규표현식
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(identifier)) {
+            feedbackElement.textContent = '유효한 이메일 형식이 아닙니다.';
+            feedbackElement.className = "mismatch";
+            isIdentifierValid = false;
             updateSignupButtonState();
             return;
         }

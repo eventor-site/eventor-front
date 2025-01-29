@@ -73,8 +73,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ResponseEntity<String> sendEmail(String email) {
-		return userClient.sendEmail(email);
+	public ResponseEntity<String> sendEmail(CheckIdentifierRequest request) {
+		return userClient.sendEmail(request);
 	}
 
 	@Override

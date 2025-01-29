@@ -1,32 +1,57 @@
 // 각 조건의 상태를 추적하는 변수
 let isEmailCertified = false;
+// 인증 버튼과 관련된 요소 선택
+const certifyButton = document.getElementById('certify-button');
+
+// 타이머 변수
+let certifyTimer = null; // 인증 버튼 타이머
 
 const sendEmail = async () => {
-    const email = document.getElementById('email').value
+    const identifier = document.getElementById('identifier').value
+    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 정규식
 
-    const response = await fetch(
-        `/users/signup/sendEmail?email=${encodeURI(email)}`,
-        {method: 'POST'}
-    );
+    if (!emailRegex.test(identifier)) {
+        alert("유효한 이메일 형식이 아닙니다.");
+        return;
+    }
+
+    // 인증 버튼 비활성화 및 1분 카운트다운
+    disableCertifyButton(60);
+
+    const formData = new FormData();
+    formData.append('identifier', identifier);
+
+    const response = await fetch('/users/signup/sendEmail', {
+        method: 'POST',
+        body: formData,
+    })
 
     const message = await response.text();
+    alert(message);
 
-    if (message === email + '로 인증 번호를 전송했습니다.') {
-        alert(message);
-        showInputSignUpCode();
-    } else {
-        alert(message);
-        document.getElementById('email').value = '';
-    }
 }
 
-const showInputSignUpCode = () => {
-    const codeInputRow = document.getElementById('verify-code-row');
-    codeInputRow.style.display = '';
+// 인증 버튼 비활성화 및 카운트다운 함수
+function disableCertifyButton(seconds) {
+    certifyButton.disabled = true; // 버튼 비활성화
+    let remainingTime = seconds;
+
+    // 1초마다 카운트다운
+    certifyTimer = setInterval(() => {
+        certifyButton.textContent = `재전송 (${remainingTime}초)`;
+        remainingTime--;
+
+        // 카운트다운 종료
+        if (remainingTime < 0) {
+            clearInterval(certifyTimer);
+            certifyButton.textContent = '인증번호';
+            certifyButton.disabled = false; // 버튼 활성화
+        }
+    }, 1000);
 }
 
 const certifySignUpCode = async () => {
-    const emailInput = document.getElementById('email');
+    const emailInput = document.getElementById('identifier');
     const email = emailInput.value;
     const codeInput = document.getElementById('certify-code');
     const code = codeInput.value;
@@ -45,24 +70,3 @@ const certifySignUpCode = async () => {
     }
     updateSignupButtonState();
 }
-
-let isEditingEmail = false; // 상태를 추적하는 변수
-
-const toggleEmailEdit = () => {
-    const emailInput = document.getElementById('email');
-    const changeButton = document.getElementById('changeButton');
-    const updateButton = document.getElementById('updateButton');
-
-    if (!isEditingEmail) {
-        // '변경' 상태 → 수정 가능 상태로 변경
-        showInputSignUpCode();
-        updateButton.setAttribute('disabled', 'true'); // 비활성화
-        emailInput.removeAttribute('readonly'); // 입력 가능
-        emailInput.focus(); // 입력칸에 포커스
-        changeButton.textContent = '인증번호'; // 버튼 이름 변경
-        isEditingEmail = true; // 상태 업데이트
-    } else {
-        // '인증번호' 상태 → 입력 비활성화 및 버튼 비활성화
-        sendEmail(); // 인증번호 요청 함수 호출
-    }
-};

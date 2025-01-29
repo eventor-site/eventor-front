@@ -11,6 +11,7 @@ public record SignUpRequest(
 	String email,
 	String birth,
 	String gender,
-	String phone) {
+	String phone,
+	String certifyCode) {
 }
 
