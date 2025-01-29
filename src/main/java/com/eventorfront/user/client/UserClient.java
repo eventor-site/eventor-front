@@ -53,7 +53,7 @@ public interface UserClient {
 	ResponseEntity<String> checkNickname(@RequestBody CheckNicknameRequest request);
 
 	@PostMapping("/signup/sendEmail")
-	ResponseEntity<String> sendEmail(@RequestParam("email") String email);
+	ResponseEntity<String> sendEmail(@RequestBody CheckIdentifierRequest request);
 
 	@GetMapping("/signup/checkEmail")
 	ResponseEntity<String> checkEmail(@RequestParam("email") String email,

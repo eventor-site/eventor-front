@@ -33,7 +33,7 @@ public interface UserService {
 
 	ResponseEntity<String> checkNickname(CheckNicknameRequest request);
 
-	ResponseEntity<String> sendEmail(String email);
+	ResponseEntity<String> sendEmail(CheckIdentifierRequest request);
 
 	ResponseEntity<String> checkEmail(String email, String certifyCode);
 
