@@ -10,6 +10,7 @@ import com.eventorfront.user.client.UserClient;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
+import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.dto.response.GetUserResponse;
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ResponseEntity<String> sendEmail(CheckIdentifierRequest request) {
+	public ResponseEntity<String> sendEmail(SendCodeRequest request) {
 		return userClient.sendEmail(request);
 	}
 

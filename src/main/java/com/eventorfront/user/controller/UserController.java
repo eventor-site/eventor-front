@@ -20,6 +20,7 @@ import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
+import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.service.UserService;
@@ -119,7 +120,7 @@ public class UserController {
 	}
 
 	@PostMapping("/signup/sendEmail")
-	ResponseEntity<String> sendEmail(@ModelAttribute CheckIdentifierRequest request) {
+	ResponseEntity<String> sendEmail(@ModelAttribute SendCodeRequest request) {
 		return userService.sendEmail(request);
 	}
 
