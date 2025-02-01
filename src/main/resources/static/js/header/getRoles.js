@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', async () => {
     let profileContainer = document.querySelector('.profile-container');
 
-    const hasTokens = await checkTokens();
+    const roles = await getRoles();
 
     const adminPageLink = document.getElementById("adminPageLink");
     const myPageLink = document.getElementById("myPageLink");
 
-    if (hasTokens.includes("admin")) {
+    if (roles.includes("admin")) {
         // 로그인한 경우
         profileContainer.innerHTML = '<button class="btn btn-sm btn-outline-primary" id="logout">로그아웃</button>';
         adminPageLink.style.display = 'inline-block';  // 관리자페이지 링크 표시
         myPageLink.style.display = 'inline-block';    // 마이페이지 링크 표시
-    } else if (hasTokens.includes("member")) {
+    } else if (roles.includes("member")) {
         profileContainer.innerHTML = '<button class="btn btn-sm btn-outline-primary" id="logout">로그아웃</button>';
         myPageLink.style.display = 'inline-block';    // 마이페이지 링크 표시
     } else {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             credentials: 'include',
         }).then(response => {
             if (response.ok) {
-                window.location.href = '/auth/login';
+                window.location.href = '/main';
             }
         }).catch(error => {
             console.error('로그아웃 중 오류 발생: ', error);
@@ -47,13 +47,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = '/auth/login';
     });
 
-    document.getElementById('sign-up')?.addEventListener('click', event => {
-        event.preventDefault();
-        window.location.href = '/users/signup';
-    });
 });
 
-const checkTokens = async () => {
+const getRoles = async () => {
     try {
         const response = await fetch('/users/me/Roles', {
             method: 'GET'
