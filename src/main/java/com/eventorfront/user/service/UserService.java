@@ -22,7 +22,9 @@ public interface UserService {
 
 	void withdrawUser();
 
-	Boolean meCheckRoles();
+	boolean meCheckRoles(String roleName);
+
+	List<String> meRoles();
 
 	ResponseEntity<String> meCheckNickname(CheckNicknameRequest request);
 

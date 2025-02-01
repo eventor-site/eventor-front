@@ -62,7 +62,7 @@ public class PostController {
 	@GetMapping
 	public String getPostsByCategoryName(Model model, @RequestParam String categoryName) {
 		model.addAttribute("categoryName", categoryName);
-		model.addAttribute("isAuthorized", userService.meCheckRoles() || categoryName.equals("자유"));
+		model.addAttribute("isAuthorized", userService.meCheckRoles("admin") || categoryName.equals("자유"));
 		model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName));
 		model.addAttribute("data", postService.getPostsByCategoryName(categoryName));
 		return "post/list";

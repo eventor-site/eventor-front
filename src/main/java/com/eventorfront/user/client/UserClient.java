@@ -36,7 +36,10 @@ public interface UserClient {
 	ResponseEntity<Void> withdrawUser();
 
 	@GetMapping("/me/checkRoles")
-	public ResponseEntity<Boolean> meCheckRoles();
+	ResponseEntity<Boolean> meCheckRoles(@RequestParam String roleName);
+
+	@GetMapping("/me/Roles")
+	ResponseEntity<List<String>> meRoles();
 
 	@PostMapping("/me/checkNickname")
 	ResponseEntity<String> meCheckNickname(@RequestBody CheckNicknameRequest request);

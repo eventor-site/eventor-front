@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.global.exception.AccessDeniedException;
 import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
@@ -52,7 +53,11 @@ public class UserController {
 
 	@GetMapping("/admin")
 	public String adminPage() {
-		return "user/admin";
+		if (userService.meCheckRoles("admin")) {
+			return "user/admin";
+		} else {
+			throw new AccessDeniedException();
+		}
 	}
 
 	@GetMapping("/me")
@@ -96,6 +101,11 @@ public class UserController {
 	public String modifyPassword(@ModelAttribute ModifyPasswordRequest request) {
 		userService.modifyPassword(request);
 		return "redirect:/users/me";
+	}
+
+	@GetMapping("/me/Roles")
+	public ResponseEntity<List<String>> getRoles() {
+		return ResponseEntity.ok(userService.meRoles());
 	}
 
 	@GetMapping("/signup")
