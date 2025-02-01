@@ -37,7 +37,7 @@
     display: flex;
     justify-content: space-between; /* 왼쪽과 오른쪽 정렬 */
     align-items: center;
-    width: 70%;
+    width: 60%;
 }
 
 .category-menu {
