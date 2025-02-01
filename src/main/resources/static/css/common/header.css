@@ -33,6 +33,24 @@
     border-bottom: 3px solid black;
 }
 
+.second-container-content {
+    display: flex;
+    justify-content: space-between; /* 왼쪽과 오른쪽 정렬 */
+    align-items: center;
+    width: 80%;
+}
+
+.category-menu {
+    flex-shrink: 0; /* 크기 고정 */
+}
+
+.right-menu {
+    display: flex;
+    gap: 10px; /* 요소 간 간격 */
+    align-items: center;
+}
+
+
 .second-container a {
     color: black; /* 링크 글씨도 검정색으로 */
     text-decoration: none; /* 링크 밑줄 제거 */
