@@ -72,7 +72,7 @@ public class AuthController {
 		authService.logout();
 		CookieUtil.revokeToken(response, "Access-Token");
 		CookieUtil.revokeToken(response, "Refresh-Token");
-		return "redirect:/auth/login";
+		return "redirect:/main";
 	}
 
 	/**

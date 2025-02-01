@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 댓글 섹션에서 이벤트 위임
     const commentSection = document.querySelector(".comment-section");
 
-    const hasTokens = await checkTokens();
+    const roles = await getRoles();
 
     // 이벤트 위임 방식으로 "댓글 작성" 버튼 처리
     commentSection.addEventListener("click", function (event) {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
             // 대댓글 폼 생성 및 추가
-            if (hasTokens.includes("member")) {
+            if (roles.includes("member")) {
                 subCommentContainer.innerHTML = `
                 <form class="comment-form" action="/posts/${postId}/comments" method="post">
                     <!-- hidden 필드로 commentId 전송 -->
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
             // 댓글 수정 폼 생성 및 추가
-            if (hasTokens) {
+            if (roles) {
                 subCommentContainer.innerHTML = `
             <form class="comment-form" id="commentForm" action="/posts/${postId}/comments/${commentId}" method="post">
                 <input type="hidden" name="_method" value="PUT" />
