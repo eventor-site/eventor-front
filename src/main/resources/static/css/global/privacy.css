@@ -43,15 +43,13 @@
 }
 
 .content-section h6 {
-    color: #333;
     font-weight: bold;
     font-size: 1.2rem;
 }
 
 .content-section p,
 .content-section ul {
-    font-size: 1rem;
-    color: #555;
+    font-size: 1rem
 }
 
 .content-section ul {
@@ -64,7 +62,6 @@
 
 h5 {
     font-size: 2rem;
-    color: #333;
     font-weight: bold;
     margin-bottom: 20px;
 }
