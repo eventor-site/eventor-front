@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
             // 대댓글 폼 생성 및 추가
-            if (hasTokens) {
+            if (hasTokens.includes("member")) {
                 subCommentContainer.innerHTML = `
                 <form class="comment-form" action="/posts/${postId}/comments" method="post">
                     <!-- hidden 필드로 commentId 전송 -->

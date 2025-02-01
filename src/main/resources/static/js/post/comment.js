@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const hasTokens = await checkTokens();
 
     // 댓글 작성 폼 업데이트
-    if (hasTokens) {
+    if (hasTokens.includes("member")) {
         commentFormContainer.innerHTML = `
             <form class="comment-form" id="commentForm" action="/posts/${postId}/comments" method="post">
                 <div class="form-group">

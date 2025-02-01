@@ -22,11 +22,11 @@
         <div class="second-container">
             <div th:insert="~{common/category-menu}"></div>
 
-            <a th:href="@{/users/admin}">
+            <a id="adminPageLink" th:href="@{/users/admin}" style="display:none;">
                 <i class="fa-solid fa-user"></i>
                 <span class="menu-tag">관리자페이지</span>
             </a>
-            <a th:href="@{/users/me}">
+            <a id="myPageLink" th:href="@{/users/me}" style="display:none;">
                 <i class="fa-solid fa-user"></i>
                 <span class="menu-tag">마이페이지</span>
             </a>

@@ -44,8 +44,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Boolean meCheckRoles() {
-		return userClient.meCheckRoles().getBody();
+	public boolean meCheckRoles(String roleName) {
+		return Boolean.TRUE.equals(userClient.meCheckRoles(roleName).getBody());
+	}
+
+	@Override
+	public List<String> meRoles() {
+		return userClient.meRoles().getBody();
 	}
 
 	@Override
