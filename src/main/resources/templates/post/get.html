@@ -98,7 +98,8 @@
                 <button class="btn btn-sm btn-outline-primary"
                         th:data-url="@{/posts/{postId}/favorites (postId=${post.postId})}"
                         data-method="Post"
-                        onclick="setupAlertBox(this)">❤️
+                        onclick="setupAlertBox(this)">
+                    <i class="fa-solid fa-heart" style="color: red"></i>
                 </button>
 
                 <button class="btn btn-sm btn-outline-primary report-button"
