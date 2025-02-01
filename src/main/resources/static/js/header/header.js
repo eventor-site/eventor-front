@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     let profileContainer = document.querySelector('.profile-container');
 
-    const roles = await getRoles();
+    const roles = await header();
 
     const adminPageLink = document.getElementById("adminPageLink");
     const myPageLink = document.getElementById("myPageLink");
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
-const getRoles = async () => {
+const header = async () => {
     try {
         const response = await fetch('/users/me/Roles', {
             method: 'GET'

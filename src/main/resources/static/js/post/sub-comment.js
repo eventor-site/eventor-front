@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // 댓글 섹션에서 이벤트 위임
     const commentSection = document.querySelector(".comment-section");
 
-    const roles = await getRoles();
+    const roles = await header();
 
     // 이벤트 위임 방식으로 "댓글 작성" 버튼 처리
     commentSection.addEventListener("click", function (event) {
