@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.comment.service.CommentService;
+import com.eventorfront.global.exception.AccessDeniedException;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.service.PostService;
@@ -36,8 +37,13 @@ public class PostController {
 
 	@GetMapping("/create")
 	public String createPostForm(@RequestParam String categoryName, Model model) {
-		model.addAttribute("categoryName", categoryName);
-		return "post/create";
+		if (userService.meCheckRoles("member")) {
+			model.addAttribute("categoryName", categoryName);
+			return "post/create";
+		} else {
+			throw new AccessDeniedException();
+		}
+
 	}
 
 	@GetMapping("/{postId}/update")
@@ -61,8 +67,11 @@ public class PostController {
 
 	@GetMapping
 	public String getPostsByCategoryName(Model model, @RequestParam String categoryName) {
+		List<String> roles = userService.meRoles();
 		model.addAttribute("categoryName", categoryName);
-		model.addAttribute("isAuthorized", userService.meCheckRoles("admin") || categoryName.equals("자유"));
+		model.addAttribute("isAuthorized",
+			roles.contains("admin") || (roles.contains("member") && List.of("자유", "핫딜", "맛집").contains(categoryName))
+		);
 		model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName));
 		model.addAttribute("data", postService.getPostsByCategoryName(categoryName));
 		return "post/list";
