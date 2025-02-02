@@ -39,7 +39,7 @@
                 </div>
                 <div class="right">
                     <span style="margin-right: 10px; font-weight: bold;">남은 시간:</span>
-                    <span id="remainingTime" style="font-weight: bold; color: red;">계산 중...</span>
+                    <span id="remainingTime" style="font-weight: bold; color: red;">마감</span>
                 </div>
             </div>
 
@@ -95,11 +95,13 @@
                         onclick="setupAlertBox(this)">비추천
                 </button>
 
+                <!-- 좋아요 -->
                 <button class="btn btn-sm btn-outline-primary"
                         th:data-url="@{/posts/{postId}/favorites (postId=${post.postId})}"
                         data-method="Post"
-                        onclick="setupAlertBox(this)">
-                    <i class="fa-solid fa-heart" style="color: red"></i>
+                        onclick="favorite(this)">
+                    <i id="favoriteIcon" class="fa-solid fa-heart"
+                       th:style="${post.isFavorite} ? 'color: red' : 'color: grey'"></i>
                 </button>
 
                 <button class="btn btn-sm btn-outline-primary report-button"
@@ -226,6 +228,7 @@
 <script src="/js/post/remainingTime.js"></script>
 <script src="/js/post/report.js"></script>
 <script src="/js/common/highlight.js"></script>
+<script src="/js/post/favorite.js"></script>
 
 
 </body>
