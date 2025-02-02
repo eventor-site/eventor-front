@@ -23,53 +23,56 @@
             <h5>카테고리: <span id="categoryName" th:data-category-name="${post.categoryName}"
                             th:text="${post.categoryName}"></span></h5>
 
-            <hr style="width: 100%"/>
-
-            <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집'}"
-                 class="post-header d-flex align-items-center">
-                <div class="left">
-                    <span style="margin-right: 10px; font-weight: bold;">이벤트 시작 시간:</span>
-                    <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"
-                          style="margin-right: 20px;"></span>
-
-                    <span style="margin-right: 10px; font-weight: bold;">이벤트 종료 시간:</span>
-                    <span th:text="${#temporals.format(post.endTime, 'yyyy-MM-dd HH:mm')}"
-                          style="margin-right: 20px;" id="endTime" th:data-end-time="${post.endTime}"></span>
-
-                </div>
-                <div class="right">
-                    <span style="margin-right: 10px; font-weight: bold;">남은 시간:</span>
-                    <span id="remainingTime" style="font-weight: bold; color: red;">마감</span>
-                </div>
-            </div>
-
-
-            <!-- 첫 번째 줄: 제목 왼쪽, 작성자 오른쪽 -->
             <div class="post-header">
-                <div class="left">
-                    <p><strong>제목:</strong> <span th:text="${post.title}"></span></p>
+                <!-- 이벤트 시간 및 남은 시간 -->
+                <div class="event-time"
+                     th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집'}">
+                    <div class="left">
+                        <span class="label">이벤트 시작 시간:</span>
+                        <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"></span>
+                    </div>
+                    <div class="left">
+                        <span class="label">이벤트 종료 시간:</span>
+                        <span id="endTime" th:data-end-time="${post.endTime}"
+                              th:text="${#temporals.format(post.endTime, 'yyyy-MM-dd HH:mm')}"></span>
+                    </div>
+                    <div class="right">
+                        <span class="label">남은 시간:</span>
+                        <span id="remainingTime" class="remaining-time">계산중...</span>
+                    </div>
                 </div>
-                <div class="right">
-                    <img class="grade"
-                         th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
-                         alt="프로필">
-                    <p><strong>작성자:</strong> <span th:text="${post.writer()}"></span></p>
+
+                <hr style="width: 100%"
+                    th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집'}"/>
+
+                <!-- 제목 및 작성시간 -->
+                <div class="title-section">
+                    <div class="left">
+                        <p><strong class="label">제목:</strong> <span th:text="${post.title}"></span></p>
+                    </div>
+                    <div class="right">
+                        <p><strong class="label">작성시간:</strong>
+                            <span th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                        </p>
+                    </div>
+                </div>
+
+                <hr style="width: 100%"/>
+
+                <!-- 작성자 및 조회수, 추천수 -->
+                <div class="author-section">
+                    <div class="left">
+                        <img class="grade" th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
+                             alt="프로필">
+                        <p><strong class="label">작성자:</strong> <span th:text="${post.writer()}"></span></p>
+                    </div>
+                    <div class="right">
+                        <p><strong class="label">조회수:</strong> <span th:text="${post.viewCount}"></span></p>
+                        <p><strong class="label">추천수:</strong> <span th:text="${post.recommendationCount}"></span></p>
+                        <p><strong class="label">댓글수:</strong> <span th:text="${comments.size()}"></span></p>
+                    </div>
                 </div>
             </div>
-
-            <!-- 두 번째 줄: 조회수와 추천수 왼쪽, 작성시간 오른쪽 -->
-            <div class="post-header">
-                <div class="left">
-                    <p><strong>조회수:</strong> <span th:text="${post.viewCount}"></span></p>
-                    <p><strong>추천수:</strong> <span th:text="${post.recommendationCount}"></span></p>
-                </div>
-                <div class="right">
-                    <p><strong>작성시간:</strong> <span
-                            th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
-                </div>
-            </div>
-
-            <hr style="width: 100%"/>
 
             <!-- 이미지 출력 -->
             <div class="image-gallery">
@@ -82,7 +85,6 @@
             <p th:utext="${post.content}"></p>
 
             <div class="recommend-container">
-                <p>추천수: <span th:text="${post.recommendationCount}"></span></p>
                 <button class="btn btn-sm btn-outline-primary"
                         th:data-url="@{/posts/{postId}/recommend (postId=${post.postId})}"
                         data-method="PUT"
@@ -117,6 +119,7 @@
                     <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
                 </div>
 
+                <a class="btn-sm btn-secondary" onclick="history.back()">뒤로가기</a>
             </div>
 
 
@@ -144,7 +147,8 @@
 
             <!-- 댓글 섹션 -->
             <div class="comment-section">
-                <h5>댓글</h5>
+                <h5>댓글 <span th:text="${comments.size()}"></span> 개</h5>
+
                 <hr style="width: 100%"/>
 
                 <!-- 댓글 리스트 -->

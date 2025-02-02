@@ -1,12 +1,52 @@
 .post-header {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.post-header .event-time,
+.post-header .title-section,
+.post-header .author-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.post-header .left, .post-header .right {
+.post-header .left,
+.post-header .right {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-header .label {
+    font-weight: 600;
+    color: #555555;
+    margin-right: 5px;
+}
+
+.post-header .remaining-time {
+    font-weight: 600;
+    color: #ff4444;
+    background-color: #fff0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ffcccc;
+}
+
+.post-header img.grade {
+    width: 40px;
+    height: 40px;
+    padding: 2px;
+}
+
+.post-header p {
+    margin: 0;
+    font-size: 16px;
+    color: #333333;
 }
 
 /* 이미지 갤러리 스타일 */
@@ -36,6 +76,7 @@
 .recommend-container {
     display: flex; /* flexbox 레이아웃 사용 */
     align-items: center; /* 세로 가운데 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
     gap: 10px; /* 요소 간 간격 */
 }
 
