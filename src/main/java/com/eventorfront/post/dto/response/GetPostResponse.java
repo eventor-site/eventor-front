@@ -22,5 +22,6 @@ public record GetPostResponse(
 	LocalDateTime endTime,
 	List<GetImageResponse> images,
 	String gradeName,
-	Boolean isAuthorized) {
+	Boolean isAuthorized,
+	Boolean isFavorite) {
 }
