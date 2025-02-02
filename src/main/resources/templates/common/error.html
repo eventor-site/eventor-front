@@ -1,35 +1,51 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="ko">
 
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>책 파는 오리탕집</title>
+    <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
+    <title>이벤터</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 
-
 <body>
-<header th:insert="~{common/header}"></header>
 
-<section id="error-container" style="display: grid; place-items: center">
-    <div style="width: 33%; display: grid; place-items: center">
-        <h5 style="color: #d50000">ERROR</h5>
-        <br/>
-        <p style="color: #333333; word-wrap: break-word" th:text="${message != null ? 'Message: '+ message : ''}"></p>
-        <br/>
-        <p style="color: #333333; word-wrap: break-word"
-           th:text="${status != null ? 'Status Code: ' + status : ''}"></p>
-        <br/>
-        <p style="color: #333333; word-wrap: break-word"
-           th:text="${timestamp != null ? 'Timestamp: ' + timestamp : ''}"></p>
-        <br/>
-        <a href="javascript:history.back()">돌아가기</a>
+<div th:insert="~{common/header}"></div>
+
+<div class="wrapper">
+    <div class="main-content">
+        <div class="body-container">
+            <div class="row justify-content-center no-gutters">
+                <div class="col-md-6">
+                    <section id="error-container" style="display: grid; place-items: center">
+
+                        <h5 style="color: #d50000">ERROR</h5>
+                        <br/>
+                        <p style="color: #333333; word-wrap: break-word"
+                           th:text="${message != null ? 'Message: '+ message : ''}"></p>
+                        <br/>
+                        <p style="color: #333333; word-wrap: break-word"
+                           th:text="${status != null ? 'Status Code: ' + status : ''}"></p>
+                        <br/>
+                        <p style="color: #333333; word-wrap: break-word"
+                           th:text="${timestamp != null ? 'Timestamp: ' + timestamp : ''}"></p>
+                        <br/>
+                        <a href="javascript:history.back()">돌아가기</a>
+
+                    </section>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
+</div>
 
-<footer th:insert="~{common/footer.html}"></footer>
+<footer th:insert="~{common/footer}"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
