@@ -74,17 +74,21 @@
                 </div>
             </div>
 
-            <!-- 이미지 출력 -->
-            <div class="image-gallery">
-                <div th:each="image : ${post.images}" class="image-container">
-                    <!-- 이미지 -->
-                    <img th:src="${image.url}" alt="이미지"/>
+            <!-- 게시글 내용 몸통 -->
+            <div class="post-body">
+
+                <!-- 이미지 출력 -->
+                <div class="image-gallery">
+                    <div th:each="image : ${post.images}" class="image-container">
+                        <!-- 이미지 -->
+                        <img th:src="${image.url}" alt="이미지"/>
+                    </div>
                 </div>
+
+                <p th:utext="${post.content}"></p>
             </div>
 
-            <p th:utext="${post.content}"></p>
-
-            <div class="recommend-container">
+            <div class="post-recommend-container">
                 <button class="btn btn-sm btn-outline-primary"
                         th:data-url="@{/posts/{postId}/recommend (postId=${post.postId})}"
                         data-method="PUT"
@@ -120,6 +124,15 @@
                 </div>
 
                 <a class="btn-sm btn-secondary" onclick="history.back()">뒤로가기</a>
+
+                <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
+                    <button th:href="@{/posts/{postId}/update (postId=${post.postId()})}"
+                            class="btn-sm btn-warning inline-text">수정
+                    </button>
+                    <form th:action="@{/posts/{postId} (postId=${post.postId()})}" th:method="delete">
+                        <button type="submit" class="btn-sm btn-danger inline-text">삭제</button>
+                    </form>
+                </div>
             </div>
 
 
@@ -133,14 +146,6 @@
                     <!-- 이미지 파일명 -->
                     <a th:href="${image.url}" th:text="${image.originalName}"></a>
                 </div>
-            </div>
-
-            <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
-                <a th:href="@{/posts/{postId}/update (postId=${post.postId()})}"
-                   class="btn btn-warning inline-text">수정</a>
-                <form th:action="@{/posts/{postId} (postId=${post.postId()})}" th:method="delete">
-                    <button type="submit" class="btn btn-danger inline-text">삭제</button>
-                </form>
             </div>
 
             <hr style="width: 100%"/>
@@ -162,7 +167,7 @@
                             <strong th:text="${comment.writer}"></strong>
                             <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
                         </div>
-                        <div class="recommend-container">
+                        <div class="comment-recommend-container">
                             <button class="btn btn-sm btn-outline-primary"
                                     th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
                                     data-method="PUT"
