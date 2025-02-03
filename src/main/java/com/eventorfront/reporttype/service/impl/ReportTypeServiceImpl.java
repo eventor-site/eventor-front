@@ -2,6 +2,8 @@ package com.eventorfront.reporttype.service.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.reporttype.client.ReportTypeClient;
@@ -23,6 +25,11 @@ public class ReportTypeServiceImpl implements ReportTypeService {
 	@Override
 	public List<ReportTypeDto> getReportTypes() {
 		return reportTypeClient.getReportTypes().getBody();
+	}
+
+	@Override
+	public Page<ReportTypeDto> getReportTypes(Pageable pageable) {
+		return reportTypeClient.getReportTypes(pageable).getBody();
 	}
 
 	@Override

@@ -28,7 +28,7 @@
                     <section id="page-body">
                         <h3>신고 유형 리스트</h3>
                         <h3><a th:href="@{/reportTypes/create}" class="btn btn-primary">신고 유형 추가</a></h3>
-                        <div th:if="${reportTypes.size() > 0}">
+                        <div th:if="${objects.getTotalElements() > 0}">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr class="inline-text">
@@ -38,7 +38,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="reportType, index : ${reportTypes}">
+                                <tr th:each="reportType, index : ${objects}">
                                     <td th:text="${index.index + 1}">1</td>
                                     <td th:text="${reportType.name()}">신고 유형 이름</td>
                                     <td style="display: flex; align-items: center;">
@@ -53,9 +53,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div th:if="${reportTypes.size() == 0}">
+                        <div th:if="${objects.getTotalElements() == 0}">
                             <p>신고 유형이 없습니다.</p>
                         </div>
+
+                        <!-- 페이징 처리 시작-->
+                        <div th:insert="~{common/paging.html}"></div>
+                        <!-- 페이징 처리 끝-->
                     </section>
                 </section>
 

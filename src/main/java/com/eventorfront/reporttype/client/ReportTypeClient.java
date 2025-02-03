@@ -3,6 +3,9 @@ package com.eventorfront.reporttype.client;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +21,9 @@ public interface ReportTypeClient {
 
 	@GetMapping
 	ResponseEntity<List<ReportTypeDto>> getReportTypes();
+
+	@GetMapping("/paging")
+	ResponseEntity<Page<ReportTypeDto>> getReportTypes(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/{reportTypeId}")
 	ResponseEntity<ReportTypeDto> getReportType(@PathVariable Long reportTypeId);
