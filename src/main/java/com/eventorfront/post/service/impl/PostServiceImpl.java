@@ -3,6 +3,8 @@ package com.eventorfront.post.service.impl;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,11 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List<GetPostSimpleResponse> getPosts() {
 		return postClient.getPosts().getBody();
+	}
+
+	@Override
+	public Page<GetPostSimpleResponse> getPosts(Pageable pageable) {
+		return postClient.getPosts(pageable).getBody();
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package com.eventorfront.post.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +18,8 @@ import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 public interface PostService {
 
 	List<GetPostSimpleResponse> getPosts();
+
+	Page<GetPostSimpleResponse> getPosts(Pageable pageable);
 
 	List<GetMainPostResponse> getHotEventPosts();
 
