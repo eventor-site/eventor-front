@@ -3,6 +3,8 @@ package com.eventorfront.usergrade.client;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,9 @@ public interface GradeClient {
 
 	@GetMapping
 	ResponseEntity<List<GradeDto>> getGrades();
+
+	@GetMapping("/paging")
+	ResponseEntity<Page<GradeDto>> getGrades(Pageable pageable);
 
 	@GetMapping("/{gradeId}")
 	ResponseEntity<GradeDto> getGrade(@PathVariable Long gradeId);

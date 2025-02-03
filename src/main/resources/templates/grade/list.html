@@ -28,7 +28,7 @@
                     <section id="page-body">
                         <h3>등급 리스트</h3>
                         <h3><a th:href="@{/grades/create}" class="btn btn-primary">등급 추가</a></h3>
-                        <div th:if="${grades.size() > 0}">
+                        <div th:if="${objects.getTotalElements() > 0}">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr class="inline-text">
@@ -40,7 +40,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="grade, index : ${grades}">
+                                <tr th:each="grade, index : ${objects}">
                                     <td th:text="${index.index + 1}">1</td>
                                     <td th:text="${grade.name()}"></td>
                                     <td th:text="${#numbers.formatDecimal(grade.minAmount(), 1, 'COMMA', 0, 'POINT')}"></td>
@@ -57,9 +57,15 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div th:if="${grades.size() == 0}">
+
+                        <div th:if="${objects.getTotalElements() == 0}">
                             <p>등급이 없습니다.</p>
                         </div>
+
+                        <!-- 페이징 처리 시작-->
+                        <div th:insert="~{common/paging.html}"></div>
+                        <!-- 페이징 처리 끝-->
+
                     </section>
                 </section>
 

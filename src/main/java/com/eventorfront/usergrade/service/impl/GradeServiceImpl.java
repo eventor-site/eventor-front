@@ -2,6 +2,8 @@ package com.eventorfront.usergrade.service.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.usergrade.client.GradeClient;
@@ -23,6 +25,11 @@ public class GradeServiceImpl implements GradeService {
 	@Override
 	public List<GradeDto> getGrades() {
 		return gradeClient.getGrades().getBody();
+	}
+
+	@Override
+	public Page<GradeDto> getGrades(Pageable pageable) {
+		return gradeClient.getGrades(pageable).getBody();
 	}
 
 	@Override
