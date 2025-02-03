@@ -13,6 +13,7 @@ import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
+import com.eventorfront.user.dto.response.GetUserByUserId;
 import com.eventorfront.user.dto.response.GetUserResponse;
 import com.eventorfront.user.service.UserService;
 
@@ -26,6 +27,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<GetUserByIdentifier> searchUserByIdentifier(String keyword) {
 		return userClient.searchUserByIdentifier(keyword).getBody();
+	}
+
+	@Override
+	public List<GetUserByUserId> searchUserByUserId(Long userId) {
+		return userClient.searchUserByUserId(userId).getBody();
 	}
 
 	@Override

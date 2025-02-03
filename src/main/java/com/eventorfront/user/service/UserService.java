@@ -11,10 +11,13 @@ import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
+import com.eventorfront.user.dto.response.GetUserByUserId;
 import com.eventorfront.user.dto.response.GetUserResponse;
 
 public interface UserService {
 	List<GetUserByIdentifier> searchUserByIdentifier(String keyword);
+
+	List<GetUserByUserId> searchUserByUserId(Long userId);
 
 	GetUserResponse getUserInfo();
 

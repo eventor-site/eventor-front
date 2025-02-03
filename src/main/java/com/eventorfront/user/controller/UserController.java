@@ -24,6 +24,7 @@ import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
+import com.eventorfront.user.dto.response.GetUserByUserId;
 import com.eventorfront.user.service.UserService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,6 +40,11 @@ public class UserController {
 	@GetMapping("/search")
 	public ResponseEntity<List<GetUserByIdentifier>> searchUserByIdentifier(@RequestParam String keyword) {
 		return ResponseEntity.status(HttpStatus.OK).body(userService.searchUserByIdentifier(keyword));
+	}
+
+	@GetMapping("/search/userId")
+	public ResponseEntity<List<GetUserByUserId>> searchUserByUserId(@RequestParam Long userId) {
+		return ResponseEntity.status(HttpStatus.OK).body(userService.searchUserByUserId(userId));
 	}
 
 	@GetMapping("/recover/identifier")

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eventorfront.reporttype.service.ReportTypeService;
 import com.eventorfront.userstop.dto.UserStopDto;
-import com.eventorfront.userstop.dto.response.GetUserStopByIdentifierResponse;
+import com.eventorfront.userstop.dto.response.GetUserStopByUserIdResponse;
 import com.eventorfront.userstop.service.UserStopService;
 
 import lombok.RequiredArgsConstructor;
@@ -49,8 +49,8 @@ public class UserStopController {
 
 	@GetMapping("/users")
 	@ResponseBody
-	public List<GetUserStopByIdentifierResponse> getUserStopsByIdentifier(@RequestParam String identifier) {
-		return userStopService.getUserStopsByIdentifier(identifier);
+	public List<GetUserStopByUserIdResponse> getUserStopsByUserId(@RequestParam Long userId) {
+		return userStopService.getUserStopsByUserId(userId);
 	}
 
 	@PostMapping
