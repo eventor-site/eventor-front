@@ -42,15 +42,15 @@
                                 <tbody>
                                 <tr th:each="grade, index : ${objects}">
                                     <td th:text="${index.index + 1}">1</td>
-                                    <td th:text="${grade.name()}"></td>
-                                    <td th:text="${#numbers.formatDecimal(grade.minAmount(), 1, 'COMMA', 0, 'POINT')}"></td>
-                                    <td th:text="${#numbers.formatDecimal(grade.maxAmount(), 1, 'COMMA', 0, 'POINT')}"></td>
+                                    <td th:text="${grade.name}"></td>
+                                    <td th:text="${#numbers.formatDecimal(grade.minAmount, 1, 'COMMA', 0, 'POINT')}"></td>
+                                    <td th:text="${#numbers.formatDecimal(grade.maxAmount, 1, 'COMMA', 0, 'POINT')}"></td>
                                     <td style="display: flex; align-items: center;">
-                                        <a th:href="@{/grades/update/{gradeId} (gradeId=${grade.gradeId()})}"
-                                           class="btn btn-warning inline-text">편집</a>
-                                        <form th:action="@{/grades/{gradeId} (gradeId=${grade.gradeId()})}"
+                                        <a th:href="@{/grades/update/{gradeId} (gradeId=${grade.gradeId})}"
+                                           class="btn btn-sm btn-warning inline-text">편집</a>
+                                        <form th:action="@{/grades/{gradeId} (gradeId=${grade.gradeId})}"
                                               th:method="delete">
-                                            <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                            <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
                                         </form>
                                     </td>
                                 </tr>

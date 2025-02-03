@@ -39,10 +39,10 @@
                                 <div style="display: flex; align-items: center;">
                                     <div style="margin-right: 10px" th:text="${category.name}">카테고리 이름</div>
                                     <a th:href="@{/categories/update/{categoryId} (categoryId=${category.categoryId})}"
-                                       class="btn btn-warning inline-text">편집</a>
+                                       class="btn btn-sm btn-warning inline-text">편집</a>
                                     <form th:action="@{/categories/{categoryId} (categoryId=${category.categoryId})}"
                                           th:method="delete">
-                                        <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                        <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
                                     </form>
                                 </div>
                                 <hr style="width: 100%"/>

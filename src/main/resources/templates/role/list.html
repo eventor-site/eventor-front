@@ -43,10 +43,10 @@
                                     <td th:text="${role.name()}">권한 이름</td>
                                     <td style="display: flex; align-items: center;">
                                         <a th:href="@{/roles/{roleId}/update (roleId=${role.roleId()})}"
-                                           class="btn btn-warning inline-text">편집</a>
+                                           class="btn btn-sm btn-warning inline-text">편집</a>
                                         <form th:action="@{/roles/{roleId} (roleId=${role.roleId()})}"
                                               th:method="delete">
-                                            <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                            <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
                                         </form>
                                     </td>
                                 </tr>

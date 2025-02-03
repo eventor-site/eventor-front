@@ -45,10 +45,10 @@
                                     <td th:text="${status.name()}">상태 이름</td>
                                     <td style="display: flex; align-items: center;">
                                         <a th:href="@{/statuses/update/{statusId} (statusId=${status.statusId()})}"
-                                           class="btn btn-warning inline-text">편집</a>
+                                           class="btn btn-sm btn-warning inline-text">편집</a>
                                         <form th:action="@{/statuses/{statusId} (statusId=${status.statusId()})}"
                                               th:method="delete">
-                                            <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                            <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
                                         </form>
                                     </td>
                                 </tr>
