@@ -2,6 +2,8 @@ package com.eventorfront.category.service.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.category.client.CategoryClient;
@@ -27,6 +29,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<GetCategoryListResponse> getCategories() {
 		return categoryClient.getCategories().getBody();
+	}
+
+	@Override
+	public Page<GetCategoryListResponse> getCategories(Pageable pageable) {
+		return categoryClient.getCategories(pageable).getBody();
 	}
 
 	@Override

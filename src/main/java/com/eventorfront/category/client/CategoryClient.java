@@ -3,6 +3,8 @@ package com.eventorfront.category.client;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,9 @@ public interface CategoryClient {
 
 	@GetMapping
 	ResponseEntity<List<GetCategoryListResponse>> getCategories();
+
+	@GetMapping("/page")
+	ResponseEntity<Page<GetCategoryListResponse>> getCategories(Pageable pageable);
 
 	@GetMapping("/{categoryId}")
 	ResponseEntity<GetCategoryResponse> getCategory(@PathVariable Long categoryId);
