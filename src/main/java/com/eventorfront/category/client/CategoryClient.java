@@ -29,7 +29,7 @@ public interface CategoryClient {
 	@GetMapping
 	ResponseEntity<List<GetCategoryListResponse>> getCategories();
 
-	@GetMapping("/page")
+	@GetMapping("/paging")
 	ResponseEntity<Page<GetCategoryListResponse>> getCategories(Pageable pageable);
 
 	@GetMapping("/{categoryId}")
