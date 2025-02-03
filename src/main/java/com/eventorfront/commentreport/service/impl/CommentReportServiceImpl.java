@@ -1,7 +1,7 @@
 package com.eventorfront.commentreport.service.impl;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,8 @@ public class CommentReportServiceImpl implements CommentReportService {
 	private final CommentReportClient commentReportClient;
 
 	@Override
-	public List<GetCommentReportResponse> getCommentReports() {
-		return commentReportClient.getCommentReports().getBody();
+	public Page<GetCommentReportResponse> getCommentReports(Pageable pageable) {
+		return commentReportClient.getCommentReports(pageable).getBody();
 	}
 
 	@Override

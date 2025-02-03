@@ -1,7 +1,7 @@
 package com.eventorfront.postreport.service.impl;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,8 @@ public class PostReportServiceImpl implements PostReportService {
 	private final PostReportClient postReportClient;
 
 	@Override
-	public List<GetPostReportResponse> getPostReports() {
-		return postReportClient.getPostReports().getBody();
+	public Page<GetPostReportResponse> getPostReports(Pageable pageable) {
+		return postReportClient.getPostReports(pageable).getBody();
 	}
 
 	@Override
