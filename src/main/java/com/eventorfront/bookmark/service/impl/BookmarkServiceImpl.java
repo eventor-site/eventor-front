@@ -2,6 +2,8 @@ package com.eventorfront.bookmark.service.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,11 @@ public class BookmarkServiceImpl implements BookmarkService {
 	@Override
 	public List<GetBookmarkResponse> getBookmarksByUserId() {
 		return favoriteClient.getBookmarksByUserId().getBody();
+	}
+
+	@Override
+	public Page<GetBookmarkResponse> getBookmarksByUserId(Pageable pageable) {
+		return favoriteClient.getBookmarksByUserId(pageable).getBody();
 	}
 
 	@Override
