@@ -17,42 +17,60 @@
 
 <div class="wrapper">
     <div class="main-content">
+
         <div class="body-container">
-            <h5>전체</h5>
-            <hr style="width: 100%"/>
-            <div th:if="${posts.size() > 0}">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr class="inline-text">
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>조회수</th>
-                        <th>추천수</th>
-                        <th>날짜</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="post, index : ${posts}">
-                        <td>
-                            <!-- 제목을 클릭하면 해당 게시글로 이동 -->
-                            <a th:href="@{/posts/{postId} (postId=${post.postId()})}" th:text="${post.title}"></a>
-                        </td>
-                        <td>
-                            <img class="grade"
-                                 th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
-                                 alt="프로필">
-                            <span class="ml-2" th:text="${post.writer}"></span>
-                        </td>
-                        <td th:text="${post.viewCount}"></td>
-                        <td th:text="${post.recommendationCount}"></td>
-                        <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div th:if="${posts.size() == 0}">
-                <p>게시글이 없습니다.</p>
-            </div>
+            <section id="page">
+                <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+                <section id="page-content">
+                    <section id="page-header">
+                        <h5>전체 게시글</h5>
+                    </section>
+                    <hr style="width: 100%"/>
+                    <section id="page-body">
+                        <div th:if="${objects.getTotalElements() > 0}">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="inline-text">
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>조회수</th>
+                                    <th>추천수</th>
+                                    <th>날짜</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="post, index : ${objects}">
+                                    <td>
+                                        <!-- 제목을 클릭하면 해당 게시글로 이동 -->
+                                        <a th:href="@{/posts/{postId} (postId=${post.postId()})}"
+                                           th:text="${post.title}"></a>
+                                    </td>
+                                    <td>
+                                        <img class="grade"
+                                             th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
+                                             alt="프로필">
+                                        <span class="ml-2" th:text="${post.writer}"></span>
+                                    </td>
+                                    <td th:text="${post.viewCount}"></td>
+                                    <td th:text="${post.recommendationCount}"></td>
+                                    <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if="${objects.getTotalElements() == 0}">
+                            <p>게시글이 없습니다.</p>
+                        </div>
+
+                        <!-- 페이징 처리 시작-->
+                        <div th:insert="~{common/paging.html}"></div>
+                        <!-- 페이징 처리 끝-->
+
+                    </section>
+                </section>
+
+            </section>
+
         </div>
     </div>
 </div>

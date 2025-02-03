@@ -3,6 +3,8 @@ package com.eventorfront.post.client;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,9 @@ public interface PostClient {
 
 	@GetMapping("/all")
 	ResponseEntity<List<GetPostSimpleResponse>> getPosts();
+
+	@GetMapping("/all/paging")
+	ResponseEntity<Page<GetPostSimpleResponse>> getPosts(Pageable pageable);
 
 	@GetMapping("/event/hot")
 	ResponseEntity<List<GetMainPostResponse>> getHotEventPosts();

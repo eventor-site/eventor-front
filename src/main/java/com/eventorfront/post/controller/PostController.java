@@ -2,6 +2,9 @@ package com.eventorfront.post.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.exception.AccessDeniedException;
+import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
+import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.service.PostService;
 import com.eventorfront.user.service.UserService;
 
@@ -52,16 +57,18 @@ public class PostController {
 		return "post/update";
 	}
 
-	@GetMapping("{postId}/comments/{commentId}/update")
+	@GetMapping("/{postId}/comments/{commentId}/update")
 	public String updateCommentForm(@PathVariable Long commentId, Model model, @PathVariable Long postId) {
 		model.addAttribute("post", postService.getPost(postId));
 		return "post/update";
 	}
 
 	@GetMapping("/all")
-	public String getPosts(Model model) {
+	public String getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetPostSimpleResponse> posts = postService.getPosts(pageable);
 		model.addAttribute("categoryName", "전체");
-		model.addAttribute("posts", postService.getPosts());
+		model.addAttribute("objects", posts);
+		PagingModel.pagingProcessing(pageable, model, posts, "/posts/all", 10);
 		return "post/all";
 	}
 
