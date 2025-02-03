@@ -27,7 +27,7 @@
                     </section>
                     <hr style="width: 100%"/>
                     <section id="page-body">
-                        <div th:if="${posts.size() > 0}">
+                        <div th:if="${objects.getTotalElements() > 0}">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr class="inline-text">
@@ -38,7 +38,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="post, index : ${posts}">
+                                <tr th:each="post, index : ${objects}">
                                     <td>
                                         <!-- 제목을 클릭하면 해당 게시글로 이동 -->
                                         <a th:href="@{/posts/{postId} (postId=${post.postId()})}"
@@ -57,9 +57,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div th:if="${posts.size() == 0}">
+                        <div th:if="${objects.getTotalElements() == 0}">
                             <p>좋아요한 게시글이 없습니다.</p>
                         </div>
+
+                        <!-- 페이징 처리 시작-->
+                        <div th:insert="~{common/paging.html}"></div>
+                        <!-- 페이징 처리 끝-->
 
                     </section>
                 </section>

@@ -1,14 +1,14 @@
 package com.eventorfront.favorite.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import com.eventorfront.favorite.dto.response.GetFavoriteResponse;
 
 public interface FavoriteService {
 
-	List<GetFavoriteResponse> getFavoritesByUserId();
+	Page<GetFavoriteResponse> getFavoritesByUserId(Pageable pageable);
 
 	ResponseEntity<String> createOrDeleteFavorite(Long postId);
 

@@ -1,7 +1,7 @@
 package com.eventorfront.favorite.service.impl;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,8 @@ public class FavoriteServiceImpl implements FavoriteService {
 	private final FavoriteClient favoriteClient;
 
 	@Override
-	public List<GetFavoriteResponse> getFavoritesByUserId() {
-		return favoriteClient.getFavoritesByUserId().getBody();
+	public Page<GetFavoriteResponse> getFavoritesByUserId(Pageable pageable) {
+		return favoriteClient.getFavoritesByUserId(pageable).getBody();
 	}
 
 	@Override
