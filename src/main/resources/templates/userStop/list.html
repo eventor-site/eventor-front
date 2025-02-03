@@ -28,40 +28,46 @@
                     <section id="page-body">
                         <h3>회원 정지 리스트</h3>
                         <h3><a th:href="@{/userStops/create}" class="btn btn-primary">회원 정지 추가</a></h3>
-                        <div th:if="${userStops.size() > 0}">
+                        <div th:if="${objects.getTotalElements() > 0}">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr class="inline-text">
                                     <th>번호</th>
-                                    <th>회원 아이디</th>
-                                    <th>회원 정지 유형</th>
-                                    <th>회원 정지 일수</th>
-                                    <th>정지 시작 시간</th>
-                                    <th>정지 종료 시간</th>
+                                    <th>회원 고유 ID</th>
+                                    <th>유형</th>
+                                    <th>정지 일수</th>
+                                    <th>시작 시간</th>
+                                    <th>종료 시간</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="userStop, index : ${userStops}">
+                                <tr th:each="userStop, index : ${objects}">
                                     <td th:text="${index.index + 1}"></td>
-                                    <td th:text="${userStop.identifier}"></td>
+                                    <td th:text="${userStop.userId}"></td>
                                     <td th:text="${userStop.reportTypeName}"></td>
                                     <td th:text="${userStop.stopDay}"></td>
                                     <td th:text="${#temporals.format(userStop.startTime, 'yyyy-MM-dd HH:mm')}"></td>
                                     <td th:text="${#temporals.format(userStop.endTime, 'yyyy-MM-dd HH:mm')}"></td>
-                                    <td style="display: flex; align-items: center;">
+                                    <td>
                                         <form th:action="@{/userStops/{userStopId} (userStopId=${userStop.userStopId})}"
                                               th:method="delete">
-                                            <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                            <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
                                         </form>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div th:if="${userStops.size() == 0}">
+
+                        <div th:if="${objects.getTotalElements() == 0}">
                             <p>회원 정지이 없습니다.</p>
                         </div>
+
+                        <!-- 페이징 처리 시작-->
+                        <div th:insert="~{common/paging.html}"></div>
+                        <!-- 페이징 처리 끝-->
+
                     </section>
                 </section>
 

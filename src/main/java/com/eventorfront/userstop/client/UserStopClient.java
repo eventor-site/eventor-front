@@ -3,6 +3,9 @@ package com.eventorfront.userstop.client;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +22,8 @@ import com.eventorfront.userstop.dto.response.GetUserStopResponse;
 @FeignClient(name = "userStop-client", url = "http://localhost:8090/back/userStops")
 public interface UserStopClient {
 
-	@GetMapping
-	ResponseEntity<List<GetUserStopResponse>> getUserStops();
+	@GetMapping("/paging")
+	ResponseEntity<Page<GetUserStopResponse>> getUserStops(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/users")
 	ResponseEntity<List<GetUserStopByUserIdResponse>> getUserStopsByUserId(@RequestParam Long userId);
