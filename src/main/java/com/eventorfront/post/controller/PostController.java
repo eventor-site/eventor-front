@@ -91,8 +91,10 @@ public class PostController {
 	}
 
 	@GetMapping("/me")
-	public String getPostsByUserId(Model model) {
-		model.addAttribute("posts", postService.getPostsByUserId());
+	public String getPostsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetPostSimpleResponse> posts = postService.getPostsByUserId(pageable);
+		model.addAttribute("objects", posts);
+		PagingModel.pagingProcessing(pageable, model, posts, "/posts/me", 10);
 		return "post/me";
 	}
 

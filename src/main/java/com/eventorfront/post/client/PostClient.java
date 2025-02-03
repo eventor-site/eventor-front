@@ -48,8 +48,9 @@ public interface PostClient {
 	@GetMapping
 	ApiResponse<List<GetPostsByCategoryNameResponse>> getPostsByCategoryName(@RequestParam String categoryName);
 
-	@GetMapping("/me")
-	ResponseEntity<List<GetPostSimpleResponse>> getPostsByUserId();
+	@GetMapping("/me/paging")
+	ResponseEntity<Page<GetPostSimpleResponse>> getPostsByUserId(
+		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/{postId}")
 	ResponseEntity<GetPostResponse> getPost(@PathVariable Long postId);
