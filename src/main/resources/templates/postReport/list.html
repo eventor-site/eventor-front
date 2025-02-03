@@ -23,7 +23,7 @@
                 <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
                 <section id="page-content">
                     <section id="page-header">
-                        <h5>신고 목록</h5>
+                        <h5>신고 게시글 목록</h5>
                     </section>
                     <hr style="width: 100%"/>
                     <section id="page-body">
@@ -33,7 +33,7 @@
                                 <tr class="inline-text">
                                     <th>신고유형</th>
                                     <th>제목</th>
-                                    <th>작성자 ID</th>
+                                    <th>회원 고유 ID</th>
                                     <th>신고한 시간</th>
                                     <th>확인여부</th>
                                     <th></th>
@@ -47,7 +47,7 @@
                                         <a th:href="@{/posts/{postId}/postReports/{postReportId}/confirm (postId=${postReport.postId()}, postReportId=${postReport.postReportId()})}"
                                            th:text="${postReport.title}"></a>
                                     </td>
-                                    <td th:text="${postReport.identifier}"></td>
+                                    <td th:text="${postReport.userId}"></td>
                                     <td th:text="${#temporals.format(postReport.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
                                     <td>
                                         <span th:if="${postReport.isChecked}">⭕</span>

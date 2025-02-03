@@ -18,6 +18,7 @@ import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
+import com.eventorfront.user.dto.response.GetUserByUserId;
 import com.eventorfront.user.dto.response.GetUserResponse;
 
 @FeignClient(name = "user-client", url = "http://localhost:8090/back/users")
@@ -25,6 +26,9 @@ public interface UserClient {
 
 	@GetMapping("/search")
 	ResponseEntity<List<GetUserByIdentifier>> searchUserByIdentifier(@RequestParam String keyword);
+
+	@GetMapping("/search/userId")
+	ResponseEntity<List<GetUserByUserId>> searchUserByUserId(@RequestParam Long userId);
 
 	@GetMapping("/me")
 	ResponseEntity<GetUserResponse> getUserInfo();
