@@ -1,5 +1,8 @@
 package com.eventorfront.status.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.status.dto.request.StatusRequest;
+import com.eventorfront.status.dto.response.GetStatusResponse;
 import com.eventorfront.status.service.StatusService;
 import com.eventorfront.statustype.service.StatusTypeService;
 
@@ -38,8 +43,10 @@ public class StatusController {
 	}
 
 	@GetMapping
-	public String getStatuses(Model model) {
-		model.addAttribute("statuses", statusService.getStatuses());
+	public String getStatuses(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetStatusResponse> statuses = statusService.getStatuses(pageable);
+		model.addAttribute("objects", statuses);
+		PagingModel.pagingProcessing(pageable, model, statuses, "/statuses", 10);
 		return "status/list";
 	}
 

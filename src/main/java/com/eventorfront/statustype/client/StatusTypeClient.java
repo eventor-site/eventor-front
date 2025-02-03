@@ -3,6 +3,9 @@ package com.eventorfront.statustype.client;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,9 @@ public interface StatusTypeClient {
 
 	@GetMapping
 	ResponseEntity<List<StatusTypeDto>> getStatusTypes();
+
+	@GetMapping("/paging")
+	ResponseEntity<Page<StatusTypeDto>> getStatusTypes(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/{statusTypeId}")
 	ResponseEntity<StatusTypeDto> getStatusType(@PathVariable Long statusTypeId);
