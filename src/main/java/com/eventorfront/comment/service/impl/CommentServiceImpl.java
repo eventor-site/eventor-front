@@ -1,7 +1,7 @@
 package com.eventorfront.comment.service.impl;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +20,18 @@ public class CommentServiceImpl implements CommentService {
 	private final CommentClient commentClient;
 
 	@Override
-	public List<GetCommentResponse> getCommentsByPostId(Long postId) {
-		return commentClient.getCommentsByPostId(postId).getBody();
+	public Page<GetCommentResponse> getCommentsByPostId(Pageable pageable, Long postId) {
+		return commentClient.getCommentsByPostId(pageable, postId).getBody();
 	}
 
 	@Override
-	public List<GetCommentByUserIdResponse> getComments() {
-		return commentClient.getComments().getBody();
+	public Page<GetCommentByUserIdResponse> getComments(Pageable pageable) {
+		return commentClient.getComments(pageable).getBody();
 	}
 
 	@Override
-	public List<GetCommentByUserIdResponse> getCommentsByUserId() {
-		return commentClient.getCommentsByUserId().getBody();
+	public Page<GetCommentByUserIdResponse> getCommentsByUserId(Pageable pageable) {
+		return commentClient.getCommentsByUserId(pageable).getBody();
 	}
 
 	@Override

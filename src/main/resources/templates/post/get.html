@@ -69,7 +69,7 @@
                     <div class="right">
                         <p><strong class="label">조회수:</strong> <span th:text="${post.viewCount}"></span></p>
                         <p><strong class="label">추천수:</strong> <span th:text="${post.recommendationCount}"></span></p>
-                        <p><strong class="label">댓글수:</strong> <span th:text="${comments.size()}"></span></p>
+                        <p><strong class="label">댓글수:</strong> <span th:text="${objects.getTotalElements()}"></span></p>
                     </div>
                 </div>
             </div>
@@ -152,12 +152,12 @@
 
             <!-- 댓글 섹션 -->
             <div class="comment-section">
-                <h5>댓글 <span th:text="${comments.size()}"></span> 개</h5>
+                <h5>댓글 <span th:text="${objects.getTotalElements()}"></span> 개</h5>
 
                 <hr style="width: 100%"/>
 
                 <!-- 댓글 리스트 -->
-                <div th:each="comment : ${comments}" th:class="'depth-' + ${comment.depth}"
+                <div th:each="comment : ${objects}" th:class="'depth-' + ${comment.depth}"
                      th:id="${comment.commentId}">
                     <div class="comment-container" th:id="${comment.commentId}">
                         <div>
@@ -219,8 +219,11 @@
 
                 <!-- 댓글 작성 폼 -->
                 <div class="comment-form-container" th:data-post-id="${post.postId}"></div>
-
             </div>
+
+            <!-- 페이징 처리 시작-->
+            <div th:insert="~{common/paging.html}"></div>
+            <!-- 페이징 처리 끝-->
 
         </div>
     </div>

@@ -1,7 +1,5 @@
 package com.eventorfront.role.service.impl;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,18 +16,13 @@ public class RoleServiceImpl implements RoleService {
 	private final RoleClient roleClient;
 
 	@Override
-	public RoleDto getRole(Long roleId) {
-		return roleClient.getRole(roleId).getBody();
-	}
-
-	@Override
-	public List<RoleDto> getRoles() {
-		return roleClient.getRoles().getBody();
-	}
-
-	@Override
 	public Page<RoleDto> getRoles(Pageable pageable) {
 		return roleClient.getRoles(pageable).getBody();
+	}
+
+	@Override
+	public RoleDto getRole(Long roleId) {
+		return roleClient.getRole(roleId).getBody();
 	}
 
 	@Override

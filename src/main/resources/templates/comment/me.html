@@ -27,7 +27,7 @@
                     </section>
                     <hr style="width: 100%"/>
                     <section id="page-body">
-                        <div th:if="${comments.size() > 0}">
+                        <div th:if="${objects.getTotalElements() > 0}">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr class="inline-text">
@@ -39,7 +39,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="comment, index : ${comments}">
+                                <tr th:each="comment, index : ${objects}">
                                     <td>
                                         <!-- 제목을 클릭하면 해당 게시글로 이동, 댓글 ID를 앵커로 포함 -->
                                         <a th:href="@{/posts/{postId} (postId=${comment.postId})} + '#' + ${comment.commentId}"
@@ -55,9 +55,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div th:if="${comments.size() == 0}">
+                        <div th:if="${objects.getTotalElements() == 0}">
                             <p>댓글이 없습니다.</p>
                         </div>
+
+                        <!-- 페이징 처리 시작-->
+                        <div th:insert="~{common/paging.html}"></div>
+                        <!-- 페이징 처리 끝-->
 
                     </section>
                 </section>

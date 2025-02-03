@@ -27,11 +27,6 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<GetCategoryListResponse> getCategories() {
-		return categoryClient.getCategories().getBody();
-	}
-
-	@Override
 	public Page<GetCategoryListResponse> getCategories(Pageable pageable) {
 		return categoryClient.getCategories(pageable).getBody();
 	}
