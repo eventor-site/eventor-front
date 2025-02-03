@@ -2,6 +2,8 @@ package com.eventorfront.statustype.service.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.statustype.client.StatusTypeClient;
@@ -28,6 +30,11 @@ public class StatusTypeServiceImpl implements StatusTypeService {
 	@Override
 	public List<StatusTypeDto> getStatusTypes() {
 		return statusTypeClient.getStatusTypes().getBody();
+	}
+
+	@Override
+	public Page<StatusTypeDto> getStatusTypes(Pageable pageable) {
+		return statusTypeClient.getStatusTypes(pageable).getBody();
 	}
 
 	@Override

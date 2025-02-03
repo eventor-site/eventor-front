@@ -2,6 +2,9 @@ package com.eventorfront.statustype.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.statustype.dto.StatusTypeDto;
 import com.eventorfront.statustype.service.StatusTypeService;
 
@@ -45,8 +49,10 @@ public class StatusTypeController {
 	}
 
 	@GetMapping
-	public String getStatusTypes(Model model) {
-		model.addAttribute("statusTypes", statusTypeService.getStatusTypes());
+	public String getStatusTypes(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<StatusTypeDto> statusTypes = statusTypeService.getStatusTypes(pageable);
+		model.addAttribute("objects", statusTypes);
+		PagingModel.pagingProcessing(pageable, model, statusTypes, "/statusTypes", 10);
 		return "statusType/list";
 	}
 
