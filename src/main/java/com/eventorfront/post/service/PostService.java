@@ -31,7 +31,7 @@ public interface PostService {
 
 	List<GetPostsByCategoryNameResponse> getPostsByCategoryName(String categoryName);
 
-	List<GetPostSimpleResponse> getPostsByUserId();
+	Page<GetPostSimpleResponse> getPostsByUserId(Pageable pageable);
 
 	GetPostResponse getPost(Long postId);
 

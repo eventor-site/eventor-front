@@ -64,8 +64,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<GetPostSimpleResponse> getPostsByUserId() {
-		return postClient.getPostsByUserId().getBody();
+	public Page<GetPostSimpleResponse> getPostsByUserId(Pageable pageable) {
+		return postClient.getPostsByUserId(pageable).getBody();
 	}
 
 	@Override
