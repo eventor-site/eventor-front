@@ -1,8 +1,9 @@
 package com.eventorfront.comment.client;
 
-import java.util.List;
-
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +20,17 @@ import com.eventorfront.comment.dto.response.GetCommentResponse;
 @FeignClient(name = "comment-client", url = "http://localhost:8090/back")
 public interface CommentClient {
 
-	@GetMapping("/posts/{postId}/comments")
-	ResponseEntity<List<GetCommentResponse>> getCommentsByPostId(@PathVariable Long postId);
+	@GetMapping("/posts/{postId}/comments/paging")
+	ResponseEntity<Page<GetCommentResponse>> getCommentsByPostId(
+		@PageableDefault(page = 1, size = 10) Pageable pageable, @PathVariable Long postId);
 
-	@GetMapping("/users/admin/comments")
-	ResponseEntity<List<GetCommentByUserIdResponse>> getComments();
+	@GetMapping("/users/admin/comments/paging")
+	ResponseEntity<Page<GetCommentByUserIdResponse>> getComments(
+		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/users/me/comments")
-	ResponseEntity<List<GetCommentByUserIdResponse>> getCommentsByUserId();
+	@GetMapping("/users/me/comments/paging")
+	ResponseEntity<Page<GetCommentByUserIdResponse>> getCommentsByUserId(
+		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@PostMapping("/posts/{postId}/comments")
 	ResponseEntity<Void> createComment(@PathVariable Long postId, @RequestBody CreateCommentRequest request);

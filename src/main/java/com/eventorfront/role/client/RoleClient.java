@@ -1,10 +1,9 @@
 package com.eventorfront.role.client;
 
-import java.util.List;
-
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +17,8 @@ import com.eventorfront.role.dto.RoleDto;
 @FeignClient(name = "role-client", url = "http://localhost:8090/back/roles")
 public interface RoleClient {
 
-	@GetMapping
-	ResponseEntity<List<RoleDto>> getRoles();
-
 	@GetMapping("/paging")
-	ResponseEntity<Page<RoleDto>> getRoles(Pageable pageable);
+	ResponseEntity<Page<RoleDto>> getRoles(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/{roleId}")
 	ResponseEntity<RoleDto> getRole(@PathVariable Long roleId);

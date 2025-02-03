@@ -1,5 +1,8 @@
 package com.eventorfront.comment.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
 import com.eventorfront.comment.dto.request.UpdateCommentRequest;
+import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
 import com.eventorfront.comment.service.CommentService;
+import com.eventorfront.global.util.PagingModel;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -25,14 +30,18 @@ public class CommentController {
 	private final AuthService authService;
 
 	@GetMapping("/users/admin/comments")
-	public String getComments(Model model) {
-		model.addAttribute("comments", commentService.getComments());
+	public String getComments(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetCommentByUserIdResponse> comments = commentService.getComments(pageable);
+		model.addAttribute("objects", comments);
+		PagingModel.pagingProcessing(pageable, model, comments, "/users/admin/comments", 10);
 		return "comment/admin";
 	}
 
 	@GetMapping("/users/me/comments")
-	public String getCommentsByUserId(Model model) {
-		model.addAttribute("comments", commentService.getCommentsByUserId());
+	public String getCommentsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetCommentByUserIdResponse> comments = commentService.getCommentsByUserId(pageable);
+		model.addAttribute("objects", comments);
+		PagingModel.pagingProcessing(pageable, model, comments, "/users/me/comments", 10);
 		return "comment/me";
 	}
 

@@ -1,7 +1,7 @@
 package com.eventorfront.comment.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
@@ -11,11 +11,11 @@ import com.eventorfront.comment.dto.response.GetCommentResponse;
 
 public interface CommentService {
 
-	List<GetCommentResponse> getCommentsByPostId(Long postId);
+	Page<GetCommentResponse> getCommentsByPostId(Pageable pageable, Long postId);
 
-	List<GetCommentByUserIdResponse> getComments();
+	Page<GetCommentByUserIdResponse> getComments(Pageable pageable);
 
-	List<GetCommentByUserIdResponse> getCommentsByUserId();
+	Page<GetCommentByUserIdResponse> getCommentsByUserId(Pageable pageable);
 
 	void createComment(Long postId, CreateCommentRequest request);
 

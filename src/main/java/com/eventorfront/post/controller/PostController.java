@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.exception.AccessDeniedException;
 import com.eventorfront.global.util.PagingModel;
@@ -96,9 +97,12 @@ public class PostController {
 	}
 
 	@GetMapping("/{postId}")
-	public String getPost(Model model, @PathVariable Long postId) {
+	public String getPost(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model,
+		@PathVariable Long postId) {
+		Page<GetCommentResponse> comments = commentService.getCommentsByPostId(pageable, postId);
 		model.addAttribute("post", postService.getPost(postId));
-		model.addAttribute("comments", commentService.getCommentsByPostId(postId));
+		model.addAttribute("objects", comments);
+		PagingModel.pagingProcessing(pageable, model, comments, "/posts/" + postId, 10);
 		return "post/get";
 	}
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public interface PostClient {
 	ResponseEntity<List<GetPostSimpleResponse>> getPosts();
 
 	@GetMapping("/all/paging")
-	ResponseEntity<Page<GetPostSimpleResponse>> getPosts(Pageable pageable);
+	ResponseEntity<Page<GetPostSimpleResponse>> getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/event/hot")
 	ResponseEntity<List<GetMainPostResponse>> getHotEventPosts();
