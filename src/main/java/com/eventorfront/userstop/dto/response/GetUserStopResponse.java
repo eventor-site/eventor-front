@@ -7,7 +7,7 @@ import lombok.Builder;
 @Builder
 public record GetUserStopResponse(
 	Long userStopId,
-	String identifier,
+	Long userId,
 	String reportTypeName,
 	Long stopDay,
 	LocalDateTime startTime,

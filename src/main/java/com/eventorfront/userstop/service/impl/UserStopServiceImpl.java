@@ -2,6 +2,8 @@ package com.eventorfront.userstop.service.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.userstop.client.UserStopClient;
@@ -23,8 +25,8 @@ public class UserStopServiceImpl implements UserStopService {
 	}
 
 	@Override
-	public List<GetUserStopResponse> getUserStops() {
-		return userStopClient.getUserStops().getBody();
+	public Page<GetUserStopResponse> getUserStops(Pageable pageable) {
+		return userStopClient.getUserStops(pageable).getBody();
 	}
 
 	@Override

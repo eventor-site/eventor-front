@@ -2,6 +2,9 @@ package com.eventorfront.userstop.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.reporttype.service.ReportTypeService;
 import com.eventorfront.userstop.dto.UserStopDto;
 import com.eventorfront.userstop.dto.response.GetUserStopByUserIdResponse;
+import com.eventorfront.userstop.dto.response.GetUserStopResponse;
 import com.eventorfront.userstop.service.UserStopService;
 
 import lombok.RequiredArgsConstructor;
@@ -42,8 +47,10 @@ public class UserStopController {
 	}
 
 	@GetMapping
-	public String getUserStops(Model model) {
-		model.addAttribute("userStops", userStopService.getUserStops());
+	public String getUserStops(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetUserStopResponse> userStops = userStopService.getUserStops(pageable);
+		model.addAttribute("objects", userStops);
+		PagingModel.pagingProcessing(pageable, model, userStops, "/userStops", 10);
 		return "userStop/list";
 	}
 

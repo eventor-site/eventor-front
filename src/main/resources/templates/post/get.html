@@ -127,10 +127,10 @@
 
                 <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
                     <button th:href="@{/posts/{postId}/update (postId=${post.postId()})}"
-                            class="btn-sm btn-warning inline-text">수정
+                            class="btn btn-sm btn-warning inline-text">수정
                     </button>
                     <form th:action="@{/posts/{postId} (postId=${post.postId()})}" th:method="delete">
-                        <button type="submit" class="btn-sm btn-danger inline-text">삭제</button>
+                        <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
                     </form>
                 </div>
             </div>
@@ -198,10 +198,10 @@
                             </div>
 
                             <div th:if="${comment.isAuthorized}" style="display: flex; align-items: center;">
-                                <button class="btn btn-warning inline-text">수정</button>
+                                <button class="btn btn-sm btn-warning inline-text">수정</button>
                                 <form th:action="@{/posts/{postId}/comments/{commentId} (postId=${post.postId}, commentId=${comment.commentId})}"
                                       th:method="delete">
-                                    <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                    <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
                                 </form>
                             </div>
                         </div>
