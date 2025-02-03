@@ -72,9 +72,14 @@ public class PostController {
 		model.addAttribute("isAuthorized",
 			roles.contains("admin") || (roles.contains("member") && List.of("자유", "핫딜", "맛집").contains(categoryName))
 		);
-		model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName));
 		model.addAttribute("data", postService.getPostsByCategoryName(categoryName));
-		return "post/list";
+
+		if (categoryName.equals("공지")) {
+			return "post/noticeList";
+		} else {
+			model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName));
+			return "post/list";
+		}
 	}
 
 	@GetMapping("/me")
