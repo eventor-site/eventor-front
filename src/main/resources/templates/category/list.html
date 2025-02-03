@@ -32,9 +32,9 @@
 
                         <hr style="width: 100%"/>
 
-                        <div th:if="${categories.size() > 0}">
+                        <div th:if="${objects.getTotalElements() > 0}">
 
-                            <div th:each="category : ${categories}"
+                            <div th:each="category : ${objects}"
                                  th:class="'category-container depth-' + ${category.depth}">
                                 <div style="display: flex; align-items: center;">
                                     <div style="margin-right: 10px" th:text="${category.name}">카테고리 이름</div>
@@ -49,9 +49,14 @@
                             </div>
 
                         </div>
-                        <div th:if="${categories.size() == 0}">
+                        <div th:if="${objects.getTotalElements() == 0}">
                             <p>카테고리가 없습니다.</p>
                         </div>
+
+                        <!-- 페이징 처리 시작-->
+                        <div th:insert="~{common/paging.html}"></div>
+                        <!-- 페이징 처리 끝-->
+
                     </section>
                 </section>
 

@@ -2,6 +2,9 @@ package com.eventorfront.category.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.category.dto.request.CreateCategoryRequest;
 import com.eventorfront.category.dto.request.UpdateCategoryRequest;
+import com.eventorfront.category.dto.response.GetCategoryListResponse;
 import com.eventorfront.category.dto.response.GetCategoryNameResponse;
 import com.eventorfront.category.service.CategoryService;
+import com.eventorfront.global.util.PagingModel;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,8 +51,10 @@ public class CategoryController {
 	}
 
 	@GetMapping
-	public String getCategories(Model model) {
-		model.addAttribute("categories", categoryService.getCategories());
+	public String getCategories(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetCategoryListResponse> categories = categoryService.getCategories(pageable);
+		model.addAttribute("objects", categories);
+		PagingModel.pagingProcessing(pageable, model, categories, "/categories", 10);
 		return "category/list";
 	}
 
