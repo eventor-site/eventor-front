@@ -20,11 +20,6 @@ public class IndexController {
 		return "index";
 	}
 
-	@GetMapping("/privacy")
-	public String privacyPage() {
-		return "global/privacy";
-	}
-
 	@GetMapping("/main")
 	public String mainPage(Model model) {
 		model.addAttribute("hotPosts", postService.getHotEventPosts());

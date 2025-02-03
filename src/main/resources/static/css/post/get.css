@@ -73,15 +73,17 @@
     display: block;
 }
 
-.recommend-container {
+.post-recommend-container {
     display: flex; /* flexbox 레이아웃 사용 */
     align-items: center; /* 세로 가운데 정렬 */
     justify-content: center; /* 수평 가운데 정렬 */
     gap: 10px; /* 요소 간 간격 */
 }
 
-.recommend-container p {
-    margin: 0; /* 기본 여백 제거 */
+.comment-recommend-container {
+    display: flex; /* flexbox 레이아웃 사용 */
+    align-items: center; /* 세로 가운데 정렬 */
+    gap: 10px; /* 요소 간 간격 */
 }
 
 .popup {
@@ -107,6 +109,13 @@
 
 .popup a:hover {
     background-color: #f0f0f0;
+}
+
+.post-body {
+    min-height: 400px; /* 기본 최소 높이 설정 */
+    padding: 10px; /* 적절한 여백 추가 */
+    line-height: 1.5; /* 줄 간격 설정 */
+    word-wrap: break-word; /* 긴 단어가 줄 바꿈이 되도록 설정 */
 }
 
 
