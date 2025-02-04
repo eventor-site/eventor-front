@@ -29,7 +29,7 @@ public interface PostService {
 
 	List<GetMainPostResponse> getHotPostsByCategoryName(String categoryName);
 
-	List<GetPostsByCategoryNameResponse> getPostsByCategoryName(String categoryName);
+	Page<GetPostsByCategoryNameResponse> getPostsByCategoryName(Pageable pageable, String categoryName);
 
 	Page<GetPostSimpleResponse> getPostsByUserId(Pageable pageable);
 

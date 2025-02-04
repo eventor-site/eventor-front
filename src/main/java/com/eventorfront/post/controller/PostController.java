@@ -28,6 +28,7 @@ import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
+import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.service.PostService;
 import com.eventorfront.user.service.UserService;
 
@@ -76,13 +77,18 @@ public class PostController {
 	}
 
 	@GetMapping
-	public String getPostsByCategoryName(Model model, @RequestParam String categoryName) {
+	public String getPostsByCategoryName(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model,
+		@RequestParam String categoryName) {
 		List<String> roles = userService.meRoles();
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("isAuthorized",
 			roles.contains("admin") || (roles.contains("member") && List.of("자유", "핫딜", "맛집").contains(categoryName))
 		);
-		model.addAttribute("data", postService.getPostsByCategoryName(categoryName));
+
+		Page<GetPostsByCategoryNameResponse> posts = postService.getPostsByCategoryName(pageable, categoryName);
+		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
+		model.addAttribute("objects", posts);
+		PagingModel.pagingProcessing(pageable, model, posts, "/posts?categoryName=" + encodedCategoryName, 10);
 
 		if (categoryName.equals("공지")) {
 			return "post/noticeList";

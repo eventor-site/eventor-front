@@ -59,8 +59,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<GetPostsByCategoryNameResponse> getPostsByCategoryName(String categoryName) {
-		return postClient.getPostsByCategoryName(categoryName).getData();
+	public Page<GetPostsByCategoryNameResponse> getPostsByCategoryName(Pageable pageable, String categoryName) {
+		return postClient.getPostsByCategoryName(pageable, categoryName).getData();
 	}
 
 	@Override
