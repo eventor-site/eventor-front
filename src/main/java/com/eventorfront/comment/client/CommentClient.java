@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
 import com.eventorfront.comment.dto.request.UpdateCommentRequest;
 import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
+import com.eventorfront.comment.dto.response.GetCommentPageResponse;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 
 @FeignClient(name = "comment-client", url = "http://localhost:8090/back")
@@ -31,6 +32,9 @@ public interface CommentClient {
 	@GetMapping("/users/me/comments/paging")
 	ResponseEntity<Page<GetCommentByUserIdResponse>> getCommentsByUserId(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
+
+	@GetMapping("/posts/{postId}/comments/{commentId}")
+	ResponseEntity<GetCommentPageResponse> getComment(@PathVariable Long postId, @PathVariable Long commentId);
 
 	@PostMapping("/posts/{postId}/comments")
 	ResponseEntity<Void> createComment(@PathVariable Long postId, @RequestBody CreateCommentRequest request);

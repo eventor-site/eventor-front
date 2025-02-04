@@ -45,6 +45,12 @@ public class CommentController {
 		return "comment/me";
 	}
 
+	@GetMapping("/posts/{postId}/comments/{commentId}")
+	public String getComment(@PathVariable Long postId, @PathVariable Long commentId) {
+		Long page = commentService.getComment(postId, commentId).page();
+		return "redirect:/posts/" + postId + "?page=" + page + "&size=10" + "#" + commentId;
+	}
+
 	@PostMapping("/posts/{postId}/comments")
 	public String createComment(@PathVariable Long postId, @ModelAttribute CreateCommentRequest request) {
 		commentService.createComment(postId, request);

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.commentreport.dto.response.GetCommentReportResponse;
 import com.eventorfront.commentreport.service.CommentReportService;
 import com.eventorfront.global.util.PagingModel;
@@ -22,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CommentReportController {
 	private final CommentReportService commentReportService;
+	private final CommentService commentService;
 
 	@GetMapping("/commentReports")
 	public String getCommentReports(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
@@ -41,7 +43,8 @@ public class CommentReportController {
 	public String confirmCommentReport(@PathVariable Long postId, @PathVariable Long commentId,
 		@PathVariable Long commentReportId) {
 		commentReportService.confirmCommentReport(postId, commentReportId, commentReportId);
-		return "redirect:/posts/" + postId + "#" + commentId;
+		Long page = commentService.getComment(postId, commentId).page();
+		return "redirect:/posts/" + postId + "?page=" + page + "&size=10" + "#" + commentId;
 	}
 
 	@DeleteMapping("/commentReports/{commentReportId}")

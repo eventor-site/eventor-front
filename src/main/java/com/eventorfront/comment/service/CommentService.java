@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
 import com.eventorfront.comment.dto.request.UpdateCommentRequest;
 import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
+import com.eventorfront.comment.dto.response.GetCommentPageResponse;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 
 public interface CommentService {
@@ -16,6 +17,8 @@ public interface CommentService {
 	Page<GetCommentByUserIdResponse> getComments(Pageable pageable);
 
 	Page<GetCommentByUserIdResponse> getCommentsByUserId(Pageable pageable);
+
+	GetCommentPageResponse getComment(Long postId, Long commentId);
 
 	void createComment(Long postId, CreateCommentRequest request);
 
