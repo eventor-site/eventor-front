@@ -9,6 +9,7 @@ import com.eventorfront.comment.client.CommentClient;
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
 import com.eventorfront.comment.dto.request.UpdateCommentRequest;
 import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
+import com.eventorfront.comment.dto.response.GetCommentPageResponse;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.comment.service.CommentService;
 
@@ -32,6 +33,11 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public Page<GetCommentByUserIdResponse> getCommentsByUserId(Pageable pageable) {
 		return commentClient.getCommentsByUserId(pageable).getBody();
+	}
+
+	@Override
+	public GetCommentPageResponse getComment(Long postId, Long commentId) {
+		return commentClient.getComment(postId, commentId).getBody();
 	}
 
 	@Override
