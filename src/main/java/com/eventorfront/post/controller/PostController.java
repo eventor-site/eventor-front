@@ -1,5 +1,7 @@
 package com.eventorfront.post.controller;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -138,8 +140,9 @@ public class PostController {
 	}
 
 	@DeleteMapping("/{postId}")
-	public String deletePost(@PathVariable Long postId) {
+	public String deletePost(@PathVariable Long postId, @RequestParam String categoryName) {
 		postService.deletePost(postId);
-		return "redirect:/posts/all";
+		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
+		return "redirect:/posts?categoryName=" + encodedCategoryName;
 	}
 }
