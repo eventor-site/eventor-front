@@ -2,6 +2,7 @@ package com.eventorfront.user.dto.response;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Builder;
 
@@ -16,7 +17,7 @@ public record GetUserResponse(
 	String gender,
 	String statusName,
 	String gradeName,
-	String userRoles,
+	List<String> roles,
 	String oauthType,
 	LocalDateTime connectTime,
 	LocalDateTime createdAt,
