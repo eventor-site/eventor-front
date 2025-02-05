@@ -75,22 +75,40 @@
                 </div>
             </div>
 
-            <div class="event-section">
-                <h3>추천 이벤트</h3>
-                <div class="event-slider">
-                    <div th:if="${recommendedPosts.size() > 0}" th:each="post : ${recommendedPosts}">
-                        <div class="event-card">
-                            <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
-                            <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
-                                <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
-                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
-                            </a>
-                            <div class="event-card-body">
-                                <div class="event-card-title" th:text="${post.title}"></div>
+            <h3>추천 게시물</h3>
+            <div class="recommended-container">
+                <div class="recommended-wrapper">
+                    <!-- 왼쪽: 추천 배너 슬라이드 -->
+                    <div class="recommend-slider">
+                        <div th:each="post : ${recommendedPosts}">
+                            <div class="recommend-event-card">
+                                <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
+                                    <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
+                                    <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
+                                </a>
+                                <div class="recommend-event-card-body">
+                                    <div class="recommend-event-card-title" th:text="${post.title}"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <p th:if="${recommendedPosts.size() == 0}">추천 이벤트가 없습니다.</p>
+
+                    <!-- 오른쪽: 추천 목록 -->
+                    <div class="recommended-list">
+                        <div th:each="post : ${recommendedPosts}" class="recommended-item">
+                            <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="썸네일">
+                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일">
+                            <div>
+                                <a th:href="@{/posts/{postId} (postId=${post.postId()})}" th:text="${post.title}"></a>
+                                <p>작성자: <span th:text="${post.writer}"></span>
+                                    · 추천수: <span th:text="${post.recommendationCount}"></span>
+                                    · 조회수: <span th:text="${post.viewCount}"></span>
+                                    · 작성시간: <span
+                                            th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

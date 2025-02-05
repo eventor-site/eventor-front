@@ -14,6 +14,7 @@ import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
+import com.eventorfront.post.dto.response.GetRecommendPostResponse;
 
 public interface PostService {
 
@@ -25,7 +26,7 @@ public interface PostService {
 
 	List<GetMainPostResponse> getLatestEventPosts();
 
-	List<GetMainPostResponse> getRecommendationEventPosts();
+	List<GetRecommendPostResponse> getRecommendationEventPosts();
 
 	List<GetMainPostResponse> getHotPostsByCategoryName(String categoryName);
 

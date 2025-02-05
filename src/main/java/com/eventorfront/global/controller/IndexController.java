@@ -28,9 +28,4 @@ public class IndexController {
 		model.addAttribute("bookmarks", bookmarkService.getBookmarksByUserId());
 		return "page/main";
 	}
-
-	// @GetMapping("/")
-	// public String indexPage() {
-	// 	return "redirect:/main";
-	// }
 }

@@ -23,6 +23,7 @@ import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
+import com.eventorfront.post.dto.response.GetRecommendPostResponse;
 
 @FeignClient(name = "post-client", url = "http://localhost:8090/back/posts")
 public interface PostClient {
@@ -40,7 +41,7 @@ public interface PostClient {
 	ResponseEntity<List<GetMainPostResponse>> getLatestEventPosts();
 
 	@GetMapping("/event/recommendation")
-	ResponseEntity<List<GetMainPostResponse>> getRecommendationEventPosts();
+	ResponseEntity<List<GetRecommendPostResponse>> getRecommendationEventPosts();
 
 	@GetMapping("/hot")
 	ResponseEntity<List<GetMainPostResponse>> getHotPostsByCategoryName(@RequestParam String categoryName);

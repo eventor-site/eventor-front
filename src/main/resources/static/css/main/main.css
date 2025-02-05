@@ -3,7 +3,6 @@
 }
 
 .event-slider {
-    overflow: visible !important; /* 화살표가 잘리지 않도록 */
     position: relative;
     padding: 0 50px; /* 화살표 공간 확보 */
 }
@@ -33,25 +32,106 @@
     margin-bottom: 10px;
 }
 
-.slick-prev i, .slick-next i {
-    font-size: 50px; /* 아이콘 크기 */
-    color: #858484; /* 기본 색상 */
-    background-color: rgba(255, 255, 255, 0.8); /* 배경색 */
-    border-radius: 50%; /* 둥근 화살표 */
-    top: 50%; /* 슬라이더의 높이를 기준으로 수직 중앙 */
-    transform: translateY(-50%); /* 실제 위치를 중앙으로 보정 */
+/* 커스텀 화살표 스타일 */
+.slick-prev:before, .slick-next:before {
+    font-size: 50px !important; /* 아이콘 크기 */
+    color: black !important;
 }
 
 .slick-prev {
-    left: -40px; /* 왼쪽 화살표 위치 */
+    position: absolute;
+    left: 10px !important; /* 왼쪽 화살표 위치 */
 }
 
 .slick-next {
-    right: -40px; /* 오른쪽 화살표 위치 */
+    position: absolute;
+    right: 40px !important; /* 오른쪽 화살표 위치 */
 }
 
 .slick-prev:hover i, .slick-next:hover i {
     color: rgb(71, 71, 71); /* 호버 시 아이콘 색상 변경 */
 }
 
+.recommended-container {
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
 
+.recommended-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.recommend-slider {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    padding: 0 50px; /* 화살표 공간 확보 */
+}
+
+.recommend-event-card {
+    margin: 40px;
+    border: 1px solid #ddd;
+    height: 700px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column; /* 제목을 이미지 아래로 정렬 */
+    justify-content: center;
+    align-items: center;
+}
+
+.recommend-event-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.recommend-event-card-body {
+    padding: 10px;
+}
+
+.recommend-event-card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.recommended-list {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+}
+
+.recommended-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.recommended-item p {
+    font-size: 14px;
+}
+
+.recommended-item:hover {
+    background: #f0f0f0;
+}
+
+.recommended-item img {
+    width: 100px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.recommended-item a {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
