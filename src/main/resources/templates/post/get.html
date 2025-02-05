@@ -126,9 +126,9 @@
                 <a class="btn-sm btn-secondary" onclick="history.back()">뒤로가기</a>
 
                 <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
-                    <button th:href="@{/posts/{postId}/update (postId=${post.postId()})}"
-                            class="btn btn-sm btn-warning inline-text">수정
-                    </button>
+                    <a th:href="@{/posts/{postId}/update (postId=${post.postId()})}"
+                       class="btn btn-sm btn-warning inline-text">수정
+                    </a>
                     <form th:action="@{/posts/{postId} (postId=${post.postId()}, categoryName=${post.categoryName})}"
                           th:method="delete">
                         <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
@@ -197,7 +197,7 @@
                             </div>
 
                             <div th:if="${comment.isAuthorized}" style="display: flex; align-items: center;">
-                                <button class="btn btn-sm btn-warning inline-text">수정</button>
+                                <button type="button" class="btn btn-sm btn-warning inline-text">수정</button>
                                 <form th:action="@{/posts/{postId}/comments/{commentId} (postId=${post.postId}, commentId=${comment.commentId})}"
                                       th:method="delete">
                                     <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>

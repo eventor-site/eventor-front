@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     let commentFormContainer = document.querySelector('.comment-form-container');
     const postId = commentFormContainer.dataset.postId; // Thymeleaf에서 렌더링된 data-post-id 값을 가져옴
 
-    const roles = await header();
+    const isComment = await hasTokens();
 
     // 댓글 작성 폼 업데이트
-    if (roles.includes("member")) {
+    if (isComment) {
         commentFormContainer.innerHTML = `
             <form class="comment-form" id="commentForm" action="/posts/${postId}/comments" method="post">
                 <div class="form-group">
