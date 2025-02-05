@@ -43,6 +43,9 @@ public interface PostClient {
 	@GetMapping("/event/recommendation")
 	ResponseEntity<List<GetRecommendPostResponse>> getRecommendationEventPosts();
 
+	@GetMapping("/event/trending")
+	ResponseEntity<List<GetRecommendPostResponse>> getTrendingEventPosts();
+
 	@GetMapping("/hot")
 	ResponseEntity<List<GetMainPostResponse>> getHotPostsByCategoryName(@RequestParam String categoryName);
 

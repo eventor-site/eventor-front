@@ -28,6 +28,8 @@ public interface PostService {
 
 	List<GetRecommendPostResponse> getRecommendationEventPosts();
 
+	List<GetRecommendPostResponse> getTrendingEventPosts();
+
 	List<GetMainPostResponse> getHotPostsByCategoryName(String categoryName);
 
 	Page<GetPostsByCategoryNameResponse> getPostsByCategoryName(Pageable pageable, String categoryName);
