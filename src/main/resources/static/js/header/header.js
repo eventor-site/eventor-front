@@ -1,23 +1,18 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    let profileContainer = document.querySelector('.profile-container');
-
-    const roles = await header();
-
-    const adminPageLink = document.getElementById("adminPageLink");
+    const isDisplayed = await hasTokens();
+    const loginButton = document.getElementById("login");
+    const logoutButton = document.getElementById("logout");
     const myPageLink = document.getElementById("myPageLink");
 
-    if (roles.includes("admin")) {
+    if (isDisplayed) {
         // 로그인한 경우
-        profileContainer.innerHTML = '<button class="btn btn-sm btn-outline-primary" id="logout">로그아웃</button>';
-        adminPageLink.style.display = 'inline-block';  // 관리자페이지 링크 표시
-        myPageLink.style.display = 'inline-block';    // 마이페이지 링크 표시
-    } else if (roles.includes("member")) {
-        profileContainer.innerHTML = '<button class="btn btn-sm btn-outline-primary" id="logout">로그아웃</button>';
+        loginButton.style.display = "none";
+        logoutButton.style.display = "inline-block";
         myPageLink.style.display = 'inline-block';    // 마이페이지 링크 표시
     } else {
         // 로그인하지 않은 경우
-        profileContainer.innerHTML = '<button class="btn btn-sm btn-outline-primary" id="login">로그인</button>';
-        adminPageLink.style.display = 'none';         // 관리자페이지 링크 숨김
+        loginButton.style.display = "inline-block";
+        logoutButton.style.display = "none";
         myPageLink.style.display = 'none';            // 마이페이지 링크 숨김
     }
 
@@ -49,9 +44,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
-const header = async () => {
+const hasTokens = async () => {
     try {
-        const response = await fetch('/users/me/Roles', {
+        const response = await fetch('/auth/hasTokens', {
             method: 'GET'
         });
 

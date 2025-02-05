@@ -24,15 +24,12 @@
                 <div class="category-menu" th:insert="~{common/category-menu}"></div>
 
                 <div class="right-menu">
-                    <a id="adminPageLink" th:href="@{/users/admin}" style="display:none;">
-                        <i class="fa-solid fa-user"></i>
-                        <span class="menu-tag">관리자페이지</span>
-                    </a>
                     <a id="myPageLink" th:href="@{/users/me}" style="display:none;">
                         <i class="fa-solid fa-user"></i>
                         <span class="menu-tag">마이페이지</span>
                     </a>
-                    <div class="profile-container"></div>
+                    <button class="btn btn-sm btn-outline-primary" id="login" style="display:none;">로그인</button>
+                    <button class="btn btn-sm btn-outline-primary" id="logout" style="display:none;">로그아웃</button>
                 </div>
             </div>
         </div>

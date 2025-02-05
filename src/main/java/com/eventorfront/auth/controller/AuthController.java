@@ -78,7 +78,7 @@ public class AuthController {
 	/**
 	 * 클라이언트의 쿠키에 저장된 액세스 토큰 및 리프레시 토큰이 존재하는지 확인합니다.
 	 */
-	@GetMapping("/has-tokens")
+	@GetMapping("/hasTokens")
 	public ResponseEntity<Boolean> hasTokensInCookie(HttpServletRequest request) {
 		return ResponseEntity.status(HttpStatus.OK).body(authService.hasTokensInCookie(request));
 	}
