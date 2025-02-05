@@ -18,6 +18,7 @@ import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
+import com.eventorfront.post.dto.response.GetRecommendPostResponse;
 import com.eventorfront.post.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -49,7 +50,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<GetMainPostResponse> getRecommendationEventPosts() {
+	public List<GetRecommendPostResponse> getRecommendationEventPosts() {
 		return postClient.getRecommendationEventPosts().getBody();
 	}
 

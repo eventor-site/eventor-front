@@ -71,7 +71,6 @@ public class UserController {
 		model.addAttribute("user", userService.getUserInfo());
 		return "user/me";
 	}
-	//
 
 	@GetMapping("/me/update")
 	public String updateUserForm(Model model) {
