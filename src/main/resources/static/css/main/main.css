@@ -73,7 +73,7 @@
 .recommend-event-card {
     margin: 40px;
     border: 1px solid #ddd;
-    height: 700px;
+    height: 600px;
     flex: 0 0 100%;
     display: flex;
     flex-direction: column; /* 제목을 이미지 아래로 정렬 */
@@ -98,40 +98,57 @@
     margin-bottom: 10px;
 }
 
+/* 추천 게시글 컨테이너 */
 .recommended-list {
-    width: 50%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding-left: 20px;
+    width: 100%;
 }
 
-.recommended-item {
+/* 개별 추천 아이템 */
+.recommended-card {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.3s, background-color 0.3s;
+    background-color: #fff;
+}
+
+.recommended-card:hover {
+    background-color: #f9f9f9;
+    text-decoration: none; /* 기본 밑줄 제거 */
+}
+
+/* 이미지 스타일 */
+.recommended-card-img {
+    width: 100px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* 정보 영역 */
+.recommended-card-body {
+    flex: 1;
+}
+
+.recommend-list-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.recommend-list-data {
     display: flex;
     align-items: center;
     gap: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: background 0.3s;
+    margin-bottom: 10px;
 }
 
-.recommended-item p {
+.recommend-list-data span {
     font-size: 14px;
-}
-
-.recommended-item:hover {
-    background: #f0f0f0;
-}
-
-.recommended-item img {
-    width: 100px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.recommended-item a {
-    font-weight: bold;
-    text-decoration: none;
     color: black;
 }
