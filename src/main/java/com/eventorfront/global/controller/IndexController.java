@@ -25,6 +25,7 @@ public class IndexController {
 		model.addAttribute("hotPosts", postService.getHotEventPosts());
 		model.addAttribute("latestPosts", postService.getLatestEventPosts());
 		model.addAttribute("recommendedPosts", postService.getRecommendationEventPosts());
+		model.addAttribute("trendingPosts", postService.getTrendingEventPosts());
 		model.addAttribute("bookmarks", bookmarkService.getBookmarksByUserId());
 		return "page/main";
 	}
