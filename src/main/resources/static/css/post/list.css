@@ -126,9 +126,13 @@
 
 .post-card-stats {
     display: flex;
-    justify-content: space-between;
     font-size: 14px;
     color: #777;
+    gap: 10px;
+}
+
+.post-card-date {
+    color: black;
 }
 
 .btn-primary:hover {
