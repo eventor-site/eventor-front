@@ -30,8 +30,8 @@ public class PostServiceImpl implements PostService {
 	private final ImageClient imageClient;
 
 	@Override
-	public List<GetPostSimpleResponse> getPosts() {
-		return postClient.getPosts().getBody();
+	public List<GetPostSimpleResponse> searchPosts(String keyword) {
+		return postClient.searchPosts(keyword).getBody();
 	}
 
 	@Override

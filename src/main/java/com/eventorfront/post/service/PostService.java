@@ -18,7 +18,7 @@ import com.eventorfront.post.dto.response.GetRecommendPostResponse;
 
 public interface PostService {
 
-	List<GetPostSimpleResponse> getPosts();
+	List<GetPostSimpleResponse> searchPosts(String keyword);
 
 	Page<GetPostSimpleResponse> getPosts(Pageable pageable);
 
