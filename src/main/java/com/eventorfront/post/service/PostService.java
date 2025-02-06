@@ -40,7 +40,7 @@ public interface PostService {
 
 	CreatePostResponse createPost(CreatePostRequest request, List<MultipartFile> files);
 
-	void updatePost(Long postId, UpdatePostRequest request);
+	void updatePost(Long postId, UpdatePostRequest request, List<MultipartFile> files, List<Long> deleteImageIds);
 
 	ResponseEntity<String> recommendPost(Long postId);
 

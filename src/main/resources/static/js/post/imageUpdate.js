@@ -1,21 +1,61 @@
 document.addEventListener("DOMContentLoaded", function () {
     const maxTotalSize = 10 * 1024 * 1024; // 10MB 제한
     let currentSize = 0;
+    let deletedSize = 0;
     let newSize = 0;
     let totalSize = 0;
 
+    // 기존 이미지 크기 계산
+    document.querySelectorAll(".image-size").forEach(span => {
+        currentSize += parseInt(span.getAttribute("data-size"));
+    });
+
+    // 기존 용량 표시 반영
+    document.getElementById("totalSize").textContent = (currentSize / (1024 * 1024)).toFixed(2);
+
     function updateSizeDisplay() {
         // 용량 초과 체크
-        if ((currentSize + newSize) > maxTotalSize) {
+        if ((currentSize - deletedSize + newSize) > maxTotalSize) {
             alert("총 업로드 용량(10MB)을 초과했습니다. 기존 이미지를 삭제하거나 파일 크기를 줄여주세요.");
             return false; // 용량 초과 시 false 반환
         } else {
-            totalSize = (currentSize + newSize) / (1024 * 1024);
+            totalSize = (currentSize - deletedSize + newSize) / (1024 * 1024);
             document.getElementById("totalSize").textContent = totalSize.toFixed(2);
 
             return true; // 용량이 허용 범위 내에 있을 경우 true 반환
         }
     }
+
+    // 기존 이미지 삭제 체크박스 이벤트
+    document.querySelectorAll(".deleteImageCheckbox").forEach(checkbox => {
+        checkbox.addEventListener("change", function () {
+            let imageSize = parseInt(this.closest(".image-preview").querySelector(".image-size").getAttribute("data-size"));
+            deletedSize -= this.checked ? imageSize : -imageSize;
+
+            // 용량 계산 후 업데이트
+            if (!updateSizeDisplay()) {
+                this.checked = !this.checked; // 체크박스를 원래 상태로 되돌림
+                deletedSize -= this.checked ? imageSize : -imageSize; // 용량 다시 갱신
+            }
+        });
+    });
+
+    // 기존 이미지 클릭 시 체크박스 상태 변경
+    document.querySelectorAll(".image-preview").forEach(imagePreview => {
+        imagePreview.addEventListener('click', function () {
+            const checkbox = this.querySelector('.deleteImageCheckbox');
+            checkbox.checked = !checkbox.checked;
+
+            let imageSize = parseInt(this.querySelector(".image-size").getAttribute("data-size"));
+            deletedSize -= checkbox.checked ? imageSize : -imageSize;
+
+            // 용량 계산 후 업데이트
+            if (!updateSizeDisplay()) {
+                checkbox.checked = !checkbox.checked; // 체크박스를 원래 상태로 되돌림
+                deletedSize -= checkbox.checked ? imageSize : -imageSize; // 용량 되돌림
+            }
+        });
+    });
 
     // 새 이미지 업로드 시 미리보기 및 체크박스 추가
     document.getElementById("files").addEventListener("change", function () {
@@ -124,4 +164,21 @@ document.getElementById('form').addEventListener('submit', function (e) {
     const dataTransfer = new DataTransfer();
     selectedFiles.forEach(file => dataTransfer.items.add(file));
     input.files = dataTransfer.files;
+
+
+    const deleteImageIds = [];
+    document.querySelectorAll('.deleteImageCheckbox').forEach(checkbox => {
+        if (!checkbox.checked) { // 체크되지 않은 체크박스를 찾음
+            deleteImageIds.push(checkbox.value); // 체크되지 않은 이미지의 ID값을 리스트에 추가
+        }
+    });
+
+    // 삭제할 이미지 아이디들을 폼에 추가
+    if (deleteImageIds.length > 0) {
+        const deleteInput = document.createElement('input');
+        deleteInput.type = 'hidden';
+        deleteInput.name = 'deleteImageIds'; // 같은 name으로 삭제할 이미지 ID 전송
+        deleteInput.value = deleteImageIds.join(','); // ID값들을 콤마로 구분하여 전달
+        this.appendChild(deleteInput);
+    }
 });

@@ -61,12 +61,6 @@ public class PostController {
 		return "post/update";
 	}
 
-	@GetMapping("/{postId}/comments/{commentId}/update")
-	public String updateCommentForm(@PathVariable Long commentId, Model model, @PathVariable Long postId) {
-		model.addAttribute("post", postService.getPost(postId));
-		return "post/update";
-	}
-
 	@GetMapping("/all")
 	public String getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
 		Page<GetPostSimpleResponse> posts = postService.getPosts(pageable);
@@ -122,8 +116,9 @@ public class PostController {
 	}
 
 	@PutMapping("/{postId}")
-	public String updatePost(@PathVariable Long postId, @ModelAttribute UpdatePostRequest request) {
-		postService.updatePost(postId, request);
+	public String updatePost(@PathVariable Long postId, @ModelAttribute UpdatePostRequest request,
+		List<MultipartFile> files, @RequestParam(required = false) List<Long> deleteImageIds) {
+		postService.updatePost(postId, request, files, deleteImageIds);
 		return "redirect:/posts/" + postId;
 	}
 
