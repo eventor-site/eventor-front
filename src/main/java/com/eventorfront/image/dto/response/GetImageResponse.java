@@ -4,7 +4,9 @@ import lombok.Builder;
 
 @Builder
 public record GetImageResponse(
+	Long imageId,
 	String originalName,
-	String url
+	String url,
+	Long size
 ) {
 }

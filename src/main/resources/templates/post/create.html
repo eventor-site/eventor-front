@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/create.css"/>
 </head>
 
 <body>
@@ -57,12 +59,8 @@
                     <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif"</p>
                     <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple>
 
-                    <div id="imagePreviewContainer" style="display: flex; gap: 10px; margin-top: 10px;"></div>
-
-                    <div>
-                        <p>파일 개수: <span id="fileCount">0</span></p>
-                        <p>총 용량: <span id="totalSize">0</span> MB</p>
-                    </div>
+                    <div id="imagePreviewContainer"></div>
+                    <div><p>총 용량: <span id="totalSize">0</span> / 10MB</p></div>
                 </div>
 
 

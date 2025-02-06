@@ -5,10 +5,13 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
-    <title>이벤터 - 게시물 수정</title>
+    <title>이벤터</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/update.css"/>
+
 </head>
 
 <body>
@@ -27,7 +30,8 @@
                     <input type="hidden" id="categoryName" name="categoryName" th:value="${post.categoryName}">
                 </div>
 
-                <div th:if="${post.categoryName} == '이벤트'" class="form-group d-flex align-items-center">
+                <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집'}"
+                     class="form-group d-flex align-items-center">
                     <label for="startTime" style="margin-right: 10px;">이벤트 시작 시간</label>
                     <input type="datetime-local" class="form-control" id="startTime" name="startTime"
                            th:value="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"
@@ -56,6 +60,38 @@
                            th:checked="${post.isNotification}">
                 </div>
 
+                <!-- 이미지 파일 수정 기능 추가 -->
+                <div class="form-group">
+                    <label>기존 이미지</label>
+                    <div id="existingImagesContainer" class="existing-image-preview-container">
+                        <div th:each="image : ${post.images}" class="image-preview">
+                            <!-- 체크박스 기본값으로 체크 상태 유지 (체크 안 된 경우 삭제할 이미지로 전송할 예정) -->
+                            <input type="checkbox" id="deleteImageIds" th:value="${image.imageId}"
+                                   class="deleteImageCheckbox" checked>
+                            <img th:src="${image.url}" alt="이미지">
+                            <span class="image-size" th:data-size="${image.size}"></span>
+
+                            <!-- 파일 이름 표시를 위한 span 추가 -->
+                            <span class="image-name" th:text="${image.originalName}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 이미지 파일 선택 필드 추가 -->
+                <div class="form-group">
+                    <label for="files">이미지</label>
+                    <p>한파일당 최대 10MB 까지 업로드 가능하며, 최대 업로드 용량은 10MB 입니다.</p>
+                    <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif"</p>
+                    <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple>
+
+                    <div class="imagePreviewContainer" id="imagePreviewContainer"></div>
+
+                    <div>
+                        <p>총 용량: <span id="totalSize">0</span> / 10MB</p>
+                    </div>
+                </div>
+
+
                 <button type="submit" class="btn btn-primary">수정</button>
                 <a class="btn btn-secondary" onclick="history.back()">취소</a>
             </form>
@@ -71,6 +107,8 @@
 
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/js/post/editor.js"></script>
+<script src="/js/post/imageUpdate.js"></script>
 </body>
 
 </html>
+

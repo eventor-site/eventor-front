@@ -10,5 +10,6 @@ public record UpdatePostRequest(
 	String content,
 	Boolean isNotification,
 	LocalDateTime startTime,
-	LocalDateTime endTime) {
+	LocalDateTime endTime
+) {
 }

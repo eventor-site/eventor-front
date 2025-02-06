@@ -1,94 +1,108 @@
-document.getElementById('files').addEventListener('change', function () {
-    const previewContainer = document.getElementById('imagePreviewContainer');
-    const fileCountElement = document.getElementById('fileCount');
-    const totalSizeElement = document.getElementById('totalSize');
-
-    previewContainer.innerHTML = ""; // 기존 미리보기 초기화
-    fileCountElement.textContent = ""; // 파일 개수 초기화
-    totalSizeElement.textContent = ""; // 총 용량 초기화
-
-    let files = this.files.length > 0 ? Array.from(this.files) : null; // 파일이 없으면 null 로 설정
-
-    if (files === null) return; // 파일이 없으면 아무것도 하지 않음
-
+document.addEventListener("DOMContentLoaded", function () {
+    const maxTotalSize = 10 * 1024 * 1024; // 10MB 제한
+    let currentSize = 0;
+    let newSize = 0;
     let totalSize = 0;
-    files.forEach((file, index) => {
-        if (file.type.startsWith('image/')) {
-            totalSize += file.size;
 
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const container = document.createElement('div');
-                container.style.position = 'relative';
-                container.style.width = '100px';
-                container.style.height = '100px';
-                container.style.overflow = 'hidden';
-                container.style.border = '1px solid #ddd';
-                container.style.borderRadius = '4px';
-                container.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
-                container.style.cursor = 'pointer';
-                container.style.display = 'flex';
-                container.style.alignItems = 'center';
-                container.style.justifyContent = 'center';
+    function updateSizeDisplay() {
+        // 용량 초과 체크
+        if ((currentSize + newSize) > maxTotalSize) {
+            alert("총 업로드 용량(10MB)을 초과했습니다. 기존 이미지를 삭제하거나 파일 크기를 줄여주세요.");
+            return false; // 용량 초과 시 false 반환
+        } else {
+            totalSize = (currentSize + newSize) / (1024 * 1024);
+            document.getElementById("totalSize").textContent = totalSize.toFixed(2);
 
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.width = '100%';
-                img.style.height = '100%';
-                img.style.objectFit = 'cover'; // 정사각형 크기에 맞춤
-                img.style.display = 'block';
-
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.checked = true; // 기본적으로 선택된 상태
-                checkbox.style.position = 'absolute';
-                checkbox.style.top = '5px';
-                checkbox.style.left = '5px';
-                checkbox.style.zIndex = '10';
-
-                // 파일 이름 출력
-                const fileName = document.createElement('span');
-                fileName.textContent = file.name;
-                fileName.style.position = 'absolute';
-                fileName.style.bottom = '0';
-                fileName.style.left = '0';
-                fileName.style.right = '0';
-                fileName.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                fileName.style.color = '#fff';
-                fileName.style.padding = '2px';
-                fileName.style.fontSize = '12px';
-                fileName.style.textAlign = 'center';
-                fileName.style.visibility = 'hidden'; // 기본적으로 숨김
-
-                // 마우스 오버 시 파일 이름 표시
-                container.addEventListener('mouseenter', function () {
-                    fileName.style.visibility = 'visible';
-                });
-
-                // 마우스 떠날 때 파일 이름 숨김
-                container.addEventListener('mouseleave', function () {
-                    fileName.style.visibility = 'hidden';
-                });
-
-                // 이미지 클릭 시 체크박스 상태 변경
-                container.addEventListener('click', function (event) {
-                    if (event.target !== checkbox) {
-                        checkbox.checked = !checkbox.checked; // 상태 토글
-                    }
-                });
-
-                container.appendChild(img);
-                container.appendChild(checkbox);
-                container.appendChild(fileName);
-                previewContainer.appendChild(container);
-            };
-            reader.readAsDataURL(file);
+            return true; // 용량이 허용 범위 내에 있을 경우 true 반환
         }
-    });
+    }
 
-    // 파일 개수 및 용량 업데이트 (이미지 선택된 경우에만 표시)
-    fileCountElement.textContent = files.length;
-    totalSizeElement.textContent = (totalSize / (1024 * 1024)).toFixed(2); // MB 단위
+    // 새 이미지 업로드 시 미리보기 및 체크박스 추가
+    document.getElementById("files").addEventListener("change", function () {
+        const previewContainer = document.getElementById('imagePreviewContainer');
+
+        let files = this.files.length > 0 ? Array.from(this.files) : null; // 파일이 없으면 null 로 설정
+
+        if (files === null) {
+            // 파일이 없으면 미리보기 및 용량 계산 초기화
+            previewContainer.innerHTML = ""; // 기존 미리보기 초기화
+            newSize = 0; // 새 이미지 크기 초기화
+            updateSizeDisplay(); // 용량 표시 업데이트
+            return; // 파일이 없으면 아무것도 하지 않음
+        }
+
+        // 파일 크기 합산을 먼저 계산
+        files.forEach(file => {
+            if (file.type.startsWith('image/')) {
+                newSize += file.size;
+            }
+        });
+
+        // 용량 초과 체크 (추가 전에 검사)
+        if (!updateSizeDisplay()) {
+            this.value = ""; // 파일 선택 취소
+            newSize = 0;
+            previewContainer.innerHTML = ""; // 기존 미리보기 초기화
+            return;
+        }
+
+        newSize = 0;
+        previewContainer.innerHTML = ""; // 기존 미리보기 초기화
+
+        files.forEach((file, index) => {
+            if (file.type.startsWith('image/')) {
+                newSize += file.size;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const container = document.createElement('div');
+                    container.classList.add('image-preview');  // 기존 스타일 클래스 추가
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+
+                    const checkbox = document.createElement('input');
+                    checkbox.classList.add('newImageCheckbox')
+                    checkbox.type = 'checkbox';
+                    checkbox.checked = true; // 기본적으로 선택된 상태
+
+                    // 파일 이름 출력
+                    const fileName = document.createElement('span');
+                    fileName.textContent = file.name;
+                    fileName.classList.add('image-name'); // 기존 클래스 적용
+
+                    // 체크박스 상태 변경 시 용량 갱신
+                    checkbox.addEventListener("change", function () {
+                        newSize += checkbox.checked ? file.size : -file.size;
+                        if (!updateSizeDisplay()) {
+                            checkbox.checked = !checkbox.checked; // 상태 되돌림
+                            newSize += checkbox.checked ? file.size : -file.size; // 용량 되돌림
+                        }
+                    });
+
+                    // 이미지 클릭 시 체크박스 상태 변경
+                    container.addEventListener('click', function (event) {
+                        if (event.target !== checkbox) {
+                            checkbox.checked = !checkbox.checked; // 상태 토글
+                            newSize += checkbox.checked ? file.size : -file.size; // 용량 업데이트
+                            if (!updateSizeDisplay()) {
+                                checkbox.checked = !checkbox.checked; // 상태 되돌림
+                                newSize += checkbox.checked ? file.size : -file.size; // 용량 되돌림
+                            }
+                        }
+                    });
+
+                    container.appendChild(img);
+                    container.appendChild(checkbox);
+                    container.appendChild(fileName);
+                    previewContainer.appendChild(container);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        updateSizeDisplay();
+    });
 });
 
 // 폼 제출 시 선택된 파일만 업로드

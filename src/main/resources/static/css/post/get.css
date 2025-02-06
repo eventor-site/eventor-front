@@ -29,6 +29,7 @@
 }
 
 .post-header .remaining-time {
+    width: 220px;
     font-weight: 600;
     color: #ff4444;
     background-color: #fff0f0;

@@ -95,8 +95,23 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public void updatePost(Long postId, UpdatePostRequest request) {
+	public void updatePost(Long postId, UpdatePostRequest request, List<MultipartFile> files,
+		List<Long> deleteImageIds) {
 		postClient.updatePost(postId, request);
+
+		// 파일이 비어 있거나 파일 크기가 0인 파일 필터링
+		files = files.stream()
+			.filter(file -> file != null && !file.isEmpty() && file.getSize() > 0)
+			.toList();
+
+		if (deleteImageIds != null) {
+			imageClient.deleteImage(deleteImageIds);
+		}
+
+		if (!files.isEmpty()) {
+
+			imageClient.upload(files, "postimage", postId);
+		}
 	}
 
 	@Override
