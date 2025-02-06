@@ -61,10 +61,16 @@ public class PostController {
 		return "post/update";
 	}
 
+	@GetMapping("/search")
+	public String searchPosts(@RequestParam String keyword, Model model) {
+		List<GetPostSimpleResponse> posts = postService.searchPosts(keyword);
+		model.addAttribute("objects", posts);
+		return "post/search";
+	}
+
 	@GetMapping("/all")
 	public String getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
 		Page<GetPostSimpleResponse> posts = postService.getPosts(pageable);
-		model.addAttribute("categoryName", "전체");
 		model.addAttribute("objects", posts);
 		PagingModel.pagingProcessing(pageable, model, posts, "/posts/all", 10);
 		return "post/all";

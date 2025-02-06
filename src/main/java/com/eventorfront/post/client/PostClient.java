@@ -28,8 +28,8 @@ import com.eventorfront.post.dto.response.GetRecommendPostResponse;
 @FeignClient(name = "post-client", url = "http://localhost:8090/back/posts")
 public interface PostClient {
 
-	@GetMapping("/all")
-	ResponseEntity<List<GetPostSimpleResponse>> getPosts();
+	@GetMapping("/search")
+	ResponseEntity<List<GetPostSimpleResponse>> searchPosts(@RequestParam String keyword);
 
 	@GetMapping("/all/paging")
 	ResponseEntity<Page<GetPostSimpleResponse>> getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable);
