@@ -15,10 +15,11 @@ import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.dto.response.GetRecommendPostResponse;
+import com.eventorfront.search.dto.response.SearchPostsResponse;
 
 public interface PostService {
 
-	List<GetPostSimpleResponse> searchPosts(String keyword);
+	Page<SearchPostsResponse> searchPosts(Pageable pageable, String keyword);
 
 	Page<GetPostSimpleResponse> getPosts(Pageable pageable);
 
