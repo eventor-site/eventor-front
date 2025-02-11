@@ -24,12 +24,14 @@ import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.dto.response.GetRecommendPostResponse;
+import com.eventorfront.search.dto.response.SearchPostsResponse;
 
 @FeignClient(name = "post-client", url = "http://localhost:8090/back/posts")
 public interface PostClient {
 
 	@GetMapping("/search")
-	ResponseEntity<List<GetPostSimpleResponse>> searchPosts(@RequestParam String keyword);
+	ResponseEntity<Page<SearchPostsResponse>> searchPosts(@PageableDefault(page = 1, size = 10) Pageable pageable,
+		@RequestParam String keyword);
 
 	@GetMapping("/all/paging")
 	ResponseEntity<Page<GetPostSimpleResponse>> getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable);

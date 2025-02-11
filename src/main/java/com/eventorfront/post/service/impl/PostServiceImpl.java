@@ -20,6 +20,7 @@ import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.dto.response.GetRecommendPostResponse;
 import com.eventorfront.post.service.PostService;
+import com.eventorfront.search.dto.response.SearchPostsResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,8 +31,8 @@ public class PostServiceImpl implements PostService {
 	private final ImageClient imageClient;
 
 	@Override
-	public List<GetPostSimpleResponse> searchPosts(String keyword) {
-		return postClient.searchPosts(keyword).getBody();
+	public Page<SearchPostsResponse> searchPosts(Pageable pageable, String keyword) {
+		return postClient.searchPosts(pageable, keyword).getBody();
 	}
 
 	@Override
@@ -105,11 +106,10 @@ public class PostServiceImpl implements PostService {
 			.toList();
 
 		if (deleteImageIds != null) {
-			imageClient.deleteImage(deleteImageIds);
+			imageClient.deleteImage(postId, deleteImageIds);
 		}
 
 		if (!files.isEmpty()) {
-
 			imageClient.upload(files, "postimage", postId);
 		}
 	}

@@ -30,6 +30,7 @@ import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.service.PostService;
+import com.eventorfront.search.dto.response.SearchPostsResponse;
 import com.eventorfront.user.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,9 +63,12 @@ public class PostController {
 	}
 
 	@GetMapping("/search")
-	public String searchPosts(@RequestParam String keyword, Model model) {
-		List<GetPostSimpleResponse> posts = postService.searchPosts(keyword);
+	public String searchPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, @RequestParam String keyword,
+		Model model) {
+		Page<SearchPostsResponse> posts = postService.searchPosts(pageable, keyword);
+		String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
 		model.addAttribute("objects", posts);
+		PagingModel.pagingProcessing(pageable, model, posts, "/posts/search?keyword=" + encodedKeyword, 10);
 		return "post/search";
 	}
 

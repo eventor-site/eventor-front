@@ -18,6 +18,6 @@ public interface ImageClient {
 		@RequestParam Long postId);
 
 	@DeleteMapping
-	ResponseEntity<Void> deleteImage(@RequestParam List<Long> deleteImageIds);
+	ResponseEntity<Void> deleteImage(@RequestParam Long postId, @RequestParam List<Long> deleteImageIds);
 
 }
