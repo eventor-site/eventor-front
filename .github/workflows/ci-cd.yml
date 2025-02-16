@@ -40,8 +40,8 @@ jobs:
       # DockerHub Push
       - name: Build and Push Docker image
         run: |
-          docker build -t eventor-front:latest .  # 원하는 이름으로 로컬에서 태깅
-          docker tag eventor-front:latest ${{ secrets.DOCKER_USERNAME }}/eventor-front:latest  # DockerHub용 태그 생성
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/eventor-front .  # 원하는 이름으로 로컬에서 태깅
+          docker tag ${{ secrets.DOCKER_USERNAME }}/eventor-front eventor-front   # DockerHub용 태그 생성
           docker push ${{ secrets.DOCKER_USERNAME }}/eventor-front  
 
   server:
@@ -60,4 +60,3 @@ jobs:
             sudo docker-compose rm -f
             sudo docker rmi dlrudgjs104/eventor-front:latest
             sudo docker-compose up -d
-#
