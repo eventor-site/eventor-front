@@ -55,7 +55,7 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/eventor .
           docker push ${{ secrets.DOCKER_USERNAME }}/eventor  
 
-  deploy-ec2-server:
+  server:
     runs-on: ubuntu-latest
     needs: build
     steps:
