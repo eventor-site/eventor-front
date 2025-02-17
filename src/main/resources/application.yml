@@ -5,6 +5,9 @@ spring:
   application:
     name: eventor-front
 
+  profiles:
+    active: dev
+
   servlet:
     multipart:
       max-file-size: 10MB # 파일 하나의 최대 크기
@@ -15,15 +18,6 @@ spring:
     hidden method:
       filter:
         enabled: true
-
-  # 라이브 리로드 활성화
-  devtools:
-    livereload:
-      enabled: true
-
-  # 캐시 비활성화
-  thymeleaf:
-    cache: false
 
 logging:
   file:
