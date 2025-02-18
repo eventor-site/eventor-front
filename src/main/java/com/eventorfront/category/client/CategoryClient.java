@@ -21,25 +21,25 @@ import com.eventorfront.category.dto.response.GetCategoryListResponse;
 import com.eventorfront.category.dto.response.GetCategoryNameResponse;
 import com.eventorfront.category.dto.response.GetCategoryResponse;
 
-@FeignClient(name = "category-client", url = "http://localhost:8090/back/categories")
+@FeignClient(name = "category-client", url = "${feignClient.url}")
 public interface CategoryClient {
 
-	@GetMapping("/search")
+	@GetMapping("/back/categories/search")
 	ResponseEntity<List<GetCategoryNameResponse>> searchCategories(@RequestParam String keyword);
 
-	@GetMapping("/paging")
+	@GetMapping("/back/categories/paging")
 	ResponseEntity<Page<GetCategoryListResponse>> getCategories(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/{categoryId}")
+	@GetMapping("/back/categories/{categoryId}")
 	ResponseEntity<GetCategoryResponse> getCategory(@PathVariable Long categoryId);
 
-	@PostMapping
+	@PostMapping("/back/categories")
 	ResponseEntity<Void> createCategory(@RequestBody CreateCategoryRequest request);
 
-	@PutMapping("/{categoryId}")
+	@PutMapping("/back/categories/{categoryId}")
 	ResponseEntity<Void> updateCategory(@PathVariable Long categoryId, @RequestBody UpdateCategoryRequest request);
 
-	@DeleteMapping("/{categoryId}")
+	@DeleteMapping("/back/categories/{categoryId}")
 	ResponseEntity<Void> deleteCategory(@PathVariable Long categoryId);
 }

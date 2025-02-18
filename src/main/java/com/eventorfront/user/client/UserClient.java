@@ -21,55 +21,55 @@ import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.dto.response.GetUserByUserId;
 import com.eventorfront.user.dto.response.GetUserResponse;
 
-@FeignClient(name = "user-client", url = "http://localhost:8090/back/users")
+@FeignClient(name = "user-client", url = "${feignClient.url}")
 public interface UserClient {
 
-	@GetMapping("/search")
+	@GetMapping("/back/users/search")
 	ResponseEntity<List<GetUserByIdentifier>> searchUserByIdentifier(@RequestParam String keyword);
 
-	@GetMapping("/search/userId")
+	@GetMapping("/back/users/search/userId")
 	ResponseEntity<List<GetUserByUserId>> searchUserByUserId(@RequestParam Long userId);
 
-	@GetMapping("/me")
+	@GetMapping("/back/users/me")
 	ResponseEntity<GetUserResponse> getUserInfo();
 
-	@PutMapping("/me")
+	@PutMapping("/back/users/me")
 	ResponseEntity<Void> updateUser(UpdateUserRequest request);
 
-	@DeleteMapping("/me")
+	@DeleteMapping("/back/users/me")
 	ResponseEntity<Void> withdrawUser();
 
-	@GetMapping("/me/checkRoles")
+	@GetMapping("/back/users/me/checkRoles")
 	ResponseEntity<Boolean> meCheckRoles(@RequestParam String roleName);
 
-	@GetMapping("/me/Roles")
+	@GetMapping("/back/users/me/Roles")
 	ResponseEntity<List<String>> meRoles();
 
-	@PostMapping("/me/checkNickname")
+	@PostMapping("/back/users/me/checkNickname")
 	ResponseEntity<String> meCheckNickname(@RequestBody CheckNicknameRequest request);
 
-	@PutMapping("/me/password")
+	@PutMapping("/back/users/me/password")
 	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
 
-	@PostMapping("/signup")
+	@PostMapping("/back/users/signup")
 	ResponseEntity<Void> signup(@RequestBody SignUpRequest signupRequest);
 
-	@PostMapping("/signup/checkIdentifier")
+	@PostMapping("/back/users/signup/checkIdentifier")
 	ResponseEntity<String> checkIdentifier(@RequestBody CheckIdentifierRequest request);
 
-	@PostMapping("/signup/checkNickname")
+	@PostMapping("/back/users/signup/checkNickname")
 	ResponseEntity<String> checkNickname(@RequestBody CheckNicknameRequest request);
 
-	@PostMapping("/signup/sendEmail")
+	@PostMapping("/back/users/signup/sendEmail")
 	ResponseEntity<String> sendEmail(@RequestBody SendCodeRequest request);
 
-	@GetMapping("/signup/checkEmail")
+	@GetMapping("/back/users/signup/checkEmail")
 	ResponseEntity<String> checkEmail(@RequestParam("email") String email,
 		@RequestParam("certifyCode") String certifyCode);
 
-	@PostMapping("/recover/identifier")
+	@PostMapping("/back/users/recover/identifier")
 	ResponseEntity<String> recoverIdentifier(@RequestParam String email);
 
-	@PostMapping("/recover/password")
+	@PostMapping("/back/users/recover/password")
 	ResponseEntity<String> recoverPassword(@RequestParam String identifier);
 }

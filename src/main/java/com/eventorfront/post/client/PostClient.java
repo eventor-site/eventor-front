@@ -26,49 +26,49 @@ import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.dto.response.GetRecommendPostResponse;
 import com.eventorfront.search.dto.response.SearchPostsResponse;
 
-@FeignClient(name = "post-client", url = "http://localhost:8090/back/posts")
+@FeignClient(name = "post-client", url = "${feignClient.url}")
 public interface PostClient {
 
-	@GetMapping("/search")
+	@GetMapping("/back/posts/search")
 	ResponseEntity<Page<SearchPostsResponse>> searchPosts(@PageableDefault(page = 1, size = 10) Pageable pageable,
 		@RequestParam String keyword);
 
-	@GetMapping("/all/paging")
+	@GetMapping("/back/posts/all/paging")
 	ResponseEntity<Page<GetPostSimpleResponse>> getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/event/hot")
+	@GetMapping("/back/posts/event/hot")
 	ResponseEntity<List<GetMainPostResponse>> getHotEventPosts();
 
-	@GetMapping("/event/latest")
+	@GetMapping("/back/posts/event/latest")
 	ResponseEntity<List<GetMainPostResponse>> getLatestEventPosts();
 
-	@GetMapping("/event/recommendation")
+	@GetMapping("/back/posts/event/recommendation")
 	ResponseEntity<List<GetRecommendPostResponse>> getRecommendationEventPosts();
 
-	@GetMapping("/event/trending")
+	@GetMapping("/back/posts/event/trending")
 	ResponseEntity<List<GetRecommendPostResponse>> getTrendingEventPosts();
 
-	@GetMapping("/hot")
+	@GetMapping("/back/posts/hot")
 	ResponseEntity<List<GetMainPostResponse>> getHotPostsByCategoryName(@RequestParam String categoryName);
 
-	@GetMapping
+	@GetMapping("/back/posts")
 	ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(
 		@PageableDefault(page = 1, size = 10) Pageable pageable, @RequestParam String categoryName);
 
-	@GetMapping("/me/paging")
+	@GetMapping("/back/posts/me/paging")
 	ResponseEntity<Page<GetPostSimpleResponse>> getPostsByUserId(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/{postId}")
+	@GetMapping("/back/posts/{postId}")
 	ResponseEntity<GetPostResponse> getPost(@PathVariable Long postId);
 
-	@PostMapping
+	@PostMapping("/back/posts")
 	ResponseEntity<CreatePostResponse> createPost(@RequestBody CreatePostRequest request);
 
-	@PutMapping("/{postId}")
+	@PutMapping("/back/posts/{postId}")
 	ResponseEntity<Void> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request);
 
-	@PutMapping("/{postId}/recommend")
+	@PutMapping("/back/posts/{postId}/recommend")
 	ResponseEntity<String> recommendPost(@PathVariable Long postId);
 
 	@PutMapping("/{postId}/disrecommend")

@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.eventorfront.bookmark.dto.response.GetBookmarkResponse;
 
-@FeignClient(name = "bookmark-client", url = "http://localhost:8090/back")
+@FeignClient(name = "bookmark-client", url = "${feignClient.url}")
 public interface BookmarkClient {
 
-	@GetMapping("/users/me/bookmarks")
+	@GetMapping("/back/users/me/bookmarks")
 	ResponseEntity<List<GetBookmarkResponse>> getBookmarksByUserId();
 
-	@GetMapping("/users/me/bookmarks/paging")
+	@GetMapping("/back/users/me/bookmarks/paging")
 	ResponseEntity<Page<GetBookmarkResponse>> getBookmarksByUserId(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@PostMapping("/categories/{categoryName}/bookmarks")
+	@PostMapping("/back/categories/{categoryName}/bookmarks")
 	ResponseEntity<String> createOrDeleteBookmark(@PathVariable String categoryName);
 
-	@DeleteMapping("/bookmarks/{bookmarkId}")
+	@DeleteMapping("/back/bookmarks/{bookmarkId}")
 	ResponseEntity<String> deleteBookmark(@PathVariable Long bookmarkId);
 }

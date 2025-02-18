@@ -19,24 +19,24 @@ import com.eventorfront.userstop.dto.UserStopDto;
 import com.eventorfront.userstop.dto.response.GetUserStopByUserIdResponse;
 import com.eventorfront.userstop.dto.response.GetUserStopResponse;
 
-@FeignClient(name = "userStop-client", url = "http://localhost:8090/back/userStops")
+@FeignClient(name = "userStop-client", url = "${feignClient.url}")
 public interface UserStopClient {
 
-	@GetMapping("/paging")
+	@GetMapping("/back/userStops/paging")
 	ResponseEntity<Page<GetUserStopResponse>> getUserStops(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/users")
+	@GetMapping("/back/userStops/users")
 	ResponseEntity<List<GetUserStopByUserIdResponse>> getUserStopsByUserId(@RequestParam Long userId);
 
-	@GetMapping("/{userStopId}")
+	@GetMapping("/back/userStops/{userStopId}")
 	ResponseEntity<UserStopDto> getUserStop(@PathVariable Long userStopId);
 
-	@PostMapping
+	@PostMapping("/back/userStops")
 	ResponseEntity<Void> createUserStop(@RequestBody UserStopDto request);
 
-	@PutMapping("/{userStopId}")
+	@PutMapping("/back/userStops/{userStopId}")
 	ResponseEntity<Void> updateUserStop(@PathVariable Long userStopId, @RequestBody UserStopDto request);
 
-	@DeleteMapping("/{userStopId}")
+	@DeleteMapping("/back/userStops/{userStopId}")
 	ResponseEntity<Void> deleteUserStop(@PathVariable Long userStopId);
 }

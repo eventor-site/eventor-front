@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.eventorfront.usergrade.dto.GradeDto;
 
-@FeignClient(name = "grade-client", url = "http://localhost:8090/back/grades")
+@FeignClient(name = "grade-client", url = "${feignClient.url}")
 public interface GradeClient {
 
-	@GetMapping("/paging")
+	@GetMapping("/back/grades/paging")
 	ResponseEntity<Page<GradeDto>> getGrades(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/{gradeId}")
+	@GetMapping("/back/grades/{gradeId}")
 	ResponseEntity<GradeDto> getGrade(@PathVariable Long gradeId);
 
-	@PostMapping
+	@PostMapping("/back/grades")
 	ResponseEntity<Void> createGrade(@RequestBody GradeDto request);
 
-	@PutMapping("/{gradeId}")
+	@PutMapping("/back/grades/{gradeId}")
 	ResponseEntity<Void> updateGrade(@PathVariable Long gradeId, @RequestBody GradeDto request);
 
-	@DeleteMapping("/{gradeId}")
+	@DeleteMapping("/back/grades/{gradeId}")
 	ResponseEntity<Void> deleteGrade(@PathVariable Long gradeId);
 }

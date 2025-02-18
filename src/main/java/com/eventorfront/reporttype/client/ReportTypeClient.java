@@ -16,24 +16,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.eventorfront.reporttype.dto.ReportTypeDto;
 
-@FeignClient(name = "reportType-client", url = "http://localhost:8090/back/reportTypes")
+@FeignClient(name = "reportType-client", url = "${feignClient.url}")
 public interface ReportTypeClient {
 
-	@GetMapping
+	@GetMapping("/back/reportTypes")
 	ResponseEntity<List<ReportTypeDto>> getReportTypes();
 
-	@GetMapping("/paging")
+	@GetMapping("/back/reportTypes/paging")
 	ResponseEntity<Page<ReportTypeDto>> getReportTypes(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/{reportTypeId}")
+	@GetMapping("/back/reportTypes/{reportTypeId}")
 	ResponseEntity<ReportTypeDto> getReportType(@PathVariable Long reportTypeId);
 
-	@PostMapping
+	@PostMapping("/back/reportTypes")
 	ResponseEntity<Void> createReportType(@RequestBody ReportTypeDto request);
 
-	@PutMapping("/{reportTypeId}")
+	@PutMapping("/back/reportTypes/{reportTypeId}")
 	ResponseEntity<Void> updateReportType(@PathVariable Long reportTypeId, @RequestBody ReportTypeDto request);
 
-	@DeleteMapping("/{reportTypeId}")
+	@DeleteMapping("/back/reportTypes/{reportTypeId}")
 	ResponseEntity<Void> deleteReportType(@PathVariable Long reportTypeId);
 }

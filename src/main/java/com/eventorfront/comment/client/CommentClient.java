@@ -18,37 +18,37 @@ import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
 import com.eventorfront.comment.dto.response.GetCommentPageResponse;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 
-@FeignClient(name = "comment-client", url = "http://localhost:8090/back")
+@FeignClient(name = "comment-client", url = "${feignClient.url}")
 public interface CommentClient {
 
-	@GetMapping("/posts/{postId}/comments/paging")
+	@GetMapping("/back/posts/{postId}/comments/paging")
 	ResponseEntity<Page<GetCommentResponse>> getCommentsByPostId(
 		@PageableDefault(page = 1, size = 10) Pageable pageable, @PathVariable Long postId);
 
-	@GetMapping("/users/admin/comments/paging")
+	@GetMapping("/back/users/admin/comments/paging")
 	ResponseEntity<Page<GetCommentByUserIdResponse>> getComments(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/users/me/comments/paging")
+	@GetMapping("/back/users/me/comments/paging")
 	ResponseEntity<Page<GetCommentByUserIdResponse>> getCommentsByUserId(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/posts/{postId}/comments/{commentId}")
+	@GetMapping("/back/posts/{postId}/comments/{commentId}")
 	ResponseEntity<GetCommentPageResponse> getComment(@PathVariable Long postId, @PathVariable Long commentId);
 
-	@PostMapping("/posts/{postId}/comments")
+	@PostMapping("/back/posts/{postId}/comments")
 	ResponseEntity<Void> createComment(@PathVariable Long postId, @RequestBody CreateCommentRequest request);
 
-	@PutMapping("/posts/{postId}/comments/{commentId}")
+	@PutMapping("/back/posts/{postId}/comments/{commentId}")
 	ResponseEntity<Void> updateComment(@PathVariable Long postId, @PathVariable Long commentId,
 		@RequestBody UpdateCommentRequest request);
 
-	@PutMapping("/posts/{postId}/comments/{commentId}/recommend")
+	@PutMapping("/back/posts/{postId}/comments/{commentId}/recommend")
 	ResponseEntity<String> recommendComment(@PathVariable Long postId, @PathVariable Long commentId);
 
-	@PutMapping("/posts/{postId}/comments/{commentId}/disrecommend")
+	@PutMapping("/back/posts/{postId}/comments/{commentId}/disrecommend")
 	ResponseEntity<String> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId);
 
-	@DeleteMapping("/posts/{postId}/comments/{commentId}")
+	@DeleteMapping("/back/posts/{postId}/comments/{commentId}")
 	ResponseEntity<Void> deleteComment(@PathVariable Long postId, @PathVariable Long commentId);
 }
