@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             credentials: 'include',
         }).then(response => {
             if (response.ok) {
-                window.location.replace('/main');
+                window.location.assign('/main');
             }
         }).catch(error => {
             console.error('로그아웃 중 오류 발생: ', error);
