@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            credentials: 'include',
         }).then(response => {
             if (response.ok) {
                 window.location.replace('https://www.eventor.store/main');
