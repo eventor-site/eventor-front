@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.eventorfront.status.dto.request.StatusRequest;
 import com.eventorfront.status.dto.response.GetStatusResponse;
 
-@FeignClient(name = "status-client", url = "http://localhost:8090/back/statuses")
+@FeignClient(name = "status-client", url = "${feignClient.url}")
 public interface StatusClient {
 
-	@GetMapping("/paging")
+	@GetMapping("/back/statuses/paging")
 	ResponseEntity<Page<GetStatusResponse>> getStatuses(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/{statusId}")
+	@GetMapping("/back/statuses/{statusId}")
 	ResponseEntity<GetStatusResponse> getStatus(@PathVariable Long statusId);
 
-	@PostMapping
+	@PostMapping("/back/statuses")
 	ResponseEntity<Void> createStatus(@RequestBody StatusRequest request);
 
-	@PutMapping("/{statusId}")
+	@PutMapping("/back/statuses/{statusId}")
 	ResponseEntity<Void> updateStatus(@PathVariable Long statusId, @RequestBody StatusRequest request);
 
-	@DeleteMapping("/{statusId}")
+	@DeleteMapping("/back/statuses/{statusId}")
 	ResponseEntity<Void> deleteStatus(@PathVariable Long statusId);
 }

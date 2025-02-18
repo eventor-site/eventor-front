@@ -17,29 +17,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.statustype.dto.StatusTypeDto;
 
-@FeignClient(name = "statusType-client", url = "http://localhost:8090/back/statusTypes")
+@FeignClient(name = "statusType-client", url = "${feignClient.url}")
 public interface StatusTypeClient {
 
-	@GetMapping("/search")
+	@GetMapping("/back/statusTypes/search")
 	ResponseEntity<List<StatusTypeDto>> searchStatusTypes(@RequestParam String keyword);
 
-	@GetMapping
+	@GetMapping("/back/statusTypes")
 	ResponseEntity<List<StatusTypeDto>> getStatusTypes();
 
-	@GetMapping("/paging")
+	@GetMapping("/back/statusTypes/paging")
 	ResponseEntity<Page<StatusTypeDto>> getStatusTypes(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/{statusTypeId}")
+	@GetMapping("/back/statusTypes/{statusTypeId}")
 	ResponseEntity<StatusTypeDto> getStatusType(@PathVariable Long statusTypeId);
 
-	@PostMapping
+	@PostMapping("/back/statusTypes")
 	ResponseEntity<Void> createStatusType(
 		@RequestBody StatusTypeDto request);
 
-	@PutMapping("/{statusTypeId}")
+	@PutMapping("/back/statusTypes/{statusTypeId}")
 	ResponseEntity<Void> updateStatusType(@PathVariable Long statusTypeId,
 		@RequestBody StatusTypeDto request);
 
-	@DeleteMapping("/{statusTypeId}")
+	@DeleteMapping("/back/statusTypes/{statusTypeId}")
 	ResponseEntity<Void> deleteStatusType(@PathVariable Long statusTypeId);
 }

@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.postreport.dto.response.GetPostReportResponse;
 
-@FeignClient(name = "postReport-client", url = "http://localhost:8090/back")
+@FeignClient(name = "postReport-client", url = "${feignClient.url}")
 public interface PostReportClient {
 
-	@GetMapping("/postReports/paging")
+	@GetMapping("/back/postReports/paging")
 	ResponseEntity<Page<GetPostReportResponse>> getPostReports(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@PostMapping("/posts/{postId}/postReports")
+	@PostMapping("/back/posts/{postId}/postReports")
 	ResponseEntity<String> createPostReport(@PathVariable Long postId, @RequestParam String reportTypeName);
 
-	@GetMapping("/posts/{postId}/postReports/{postReportId}/confirm")
+	@GetMapping("/back/posts/{postId}/postReports/{postReportId}/confirm")
 	ResponseEntity<Void> confirmPostReport(@PathVariable Long postId, @PathVariable Long postReportId);
 
-	@DeleteMapping("/postReports/{postReportId}")
+	@DeleteMapping("/back/postReports/{postReportId}")
 	ResponseEntity<String> deletePostReport(@PathVariable Long postReportId);
 }

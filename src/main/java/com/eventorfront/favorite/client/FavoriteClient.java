@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.eventorfront.favorite.dto.response.GetFavoriteResponse;
 
-@FeignClient(name = "favorite-client", url = "http://localhost:8090/back")
+@FeignClient(name = "favorite-client", url = "${feignClient.url}")
 public interface FavoriteClient {
 
-	@GetMapping("/users/me/favorites/paging")
+	@GetMapping("/back/users/me/favorites/paging")
 	ResponseEntity<Page<GetFavoriteResponse>> getFavoritesByUserId(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@PostMapping("/post/{postId}/favorites")
+	@PostMapping("/back/post/{postId}/favorites")
 	ResponseEntity<String> createOrDeleteFavorite(@PathVariable Long postId);
 
-	@DeleteMapping("/{favoriteId}")
+	@DeleteMapping("/back/{favoriteId}")
 	ResponseEntity<String> deleteFavorite(@PathVariable Long favoriteId);
 }

@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-@FeignClient(name = "image-client", url = "http://localhost:8090/back/images")
+@FeignClient(name = "image-client", url = "${feignClient.url}")
 public interface ImageClient {
 
-	@PostMapping(value = "/upload", consumes = "multipart/form-data")
+	@PostMapping(value = "/back/images/upload", consumes = "multipart/form-data")
 	ResponseEntity<Void> upload(@RequestPart("files") List<MultipartFile> files, @RequestParam String folderName,
 		@RequestParam Long postId);
 
-	@DeleteMapping
+	@DeleteMapping("/back/images")
 	ResponseEntity<Void> deleteImage(@RequestParam Long postId, @RequestParam List<Long> deleteImageIds);
 
 }

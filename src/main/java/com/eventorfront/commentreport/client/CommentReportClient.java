@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.commentreport.dto.response.GetCommentReportResponse;
 
-@FeignClient(name = "commentReport-client", url = "http://localhost:8090/back")
+@FeignClient(name = "commentReport-client", url = "${feignClient.url}")
 public interface CommentReportClient {
 
-	@GetMapping("/commentReports/paging")
+	@GetMapping("/back/commentReports/paging")
 	ResponseEntity<Page<GetCommentReportResponse>> getCommentReports(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@PostMapping("/comments/{commentId}/commentReports")
+	@PostMapping("/back/comments/{commentId}/commentReports")
 	ResponseEntity<String> createCommentReport(@PathVariable Long commentId, @RequestParam String reportTypeName);
 
-	@GetMapping("/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm")
+	@GetMapping("/back/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm")
 	ResponseEntity<Void> confirmCommentReport(@PathVariable Long postId, @PathVariable Long commentId,
 		@PathVariable Long commentReportId);
 
-	@DeleteMapping("/commentReports/{commentReportId}")
+	@DeleteMapping("/back/commentReports/{commentReportId}")
 	ResponseEntity<String> deleteCommentReport(@PathVariable Long commentReportId);
 }

@@ -13,3 +13,6 @@ spring:
 logging:
   file:
     path: ./logs
+
+feignClient:
+  url: http:localhost:8090
