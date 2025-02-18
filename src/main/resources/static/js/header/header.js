@@ -27,9 +27,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
         }).then(response => {
             if (response.ok) {
-                window.location.replace('https://www.eventor.store/main');
+                window.location.reload();  // 페이지 새로 고침
             }
         }).catch(error => {
             console.error('로그아웃 중 오류 발생: ', error);
