@@ -15,4 +15,4 @@ logging:
     path: ./logs
 
 feignClient:
-  url: http:localhost:8090
+  url: localhost:8090

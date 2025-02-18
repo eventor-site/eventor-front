@@ -11,4 +11,4 @@ spring:
     cache: true
 
 feignClient:
-  url: http:eventor-gateway:8090
+  url: eventor-gateway:8090
