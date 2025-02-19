@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             credentials: 'include',
         }).then(response => {
             if (response.ok) {
-                window.location.reload();  // 페이지 새로 고침
+                window.location.href = 'https://www.eventor.store/main';
             }
         }).catch(error => {
             console.error('로그아웃 중 오류 발생: ', error);
