@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.eventorfront.role.dto.RoleDto;
 
-@FeignClient(name = "role-client", url = "http://localhost:8090/back/roles")
+@FeignClient(name = "role-client", url = "${feignClient.url}")
 public interface RoleClient {
 
-	@GetMapping("/paging")
+	@GetMapping("/back/roles/paging")
 	ResponseEntity<Page<RoleDto>> getRoles(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/{roleId}")
+	@GetMapping("/back/roles/{roleId}")
 	ResponseEntity<RoleDto> getRole(@PathVariable Long roleId);
 
-	@PostMapping
+	@PostMapping("/back/roles")
 	ResponseEntity<Void> createRole(@RequestBody RoleDto request);
 
-	@PutMapping("/{roleId}")
+	@PutMapping("/back/roles/{roleId}")
 	ResponseEntity<Void> updateRole(@PathVariable Long roleId, @RequestBody RoleDto request);
 
-	@DeleteMapping("/{roleId}")
+	@DeleteMapping("/back/roles/{roleId}")
 	ResponseEntity<Void> deleteRole(@PathVariable Long roleId);
 }

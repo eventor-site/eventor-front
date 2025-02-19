@@ -71,9 +71,9 @@ public interface PostClient {
 	@PutMapping("/back/posts/{postId}/recommend")
 	ResponseEntity<String> recommendPost(@PathVariable Long postId);
 
-	@PutMapping("/{postId}/disrecommend")
+	@PutMapping("/back/posts/{postId}/disrecommend")
 	ResponseEntity<String> disrecommendPost(@PathVariable Long postId);
 
-	@DeleteMapping("/{postId}")
+	@DeleteMapping("/back/posts/{postId}")
 	ResponseEntity<Void> deletePost(@PathVariable Long postId);
 }
