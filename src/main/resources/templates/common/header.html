@@ -28,8 +28,14 @@
                         <i class="fa-solid fa-user"></i>
                         <span class="menu-tag">마이페이지</span>
                     </a>
-                    <button class="btn btn-sm btn-outline-primary" id="login" style="display:none;">로그인</button>
-                    <button class="btn btn-sm btn-outline-primary" id="logout" style="display:none;">로그아웃</button>
+
+                    <form id="loginForm" action="/auth/login" method="get">
+                        <button class="btn btn-sm btn-outline-primary" id="login" style="display:none;">로그인</button>
+                    </form>
+                    <form id="logoutForm" action="/auth/logout" method="post">
+                        <button class="btn btn-sm btn-outline-primary" id="logout" style="display:none;">로그아웃</button>
+                    </form>
+
                 </div>
             </div>
         </div>

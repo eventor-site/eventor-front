@@ -16,33 +16,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         myPageLink.style.display = 'none';            // 마이페이지 링크 숨김
     }
 
-
-    document.getElementById('logout')?.addEventListener('click', event => {
-        event.preventDefault();
-
-        console.log("로그아웃 버튼 클릭");
-
-        fetch('/auth/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-        }).then(response => {
-            if (response.ok) {
-                window.location.href = window.location.protocol + '//' + window.location.host + '/main';
-
-            }
-        }).catch(error => {
-            console.error('로그아웃 중 오류 발생: ', error);
-        });
-    });
-
-    document.getElementById('login')?.addEventListener('click', event => {
-        event.preventDefault();
-        window.location.href = '/auth/login';
-    });
-
 });
 
 const hasTokens = async () => {
