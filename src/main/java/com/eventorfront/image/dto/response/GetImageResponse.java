@@ -7,6 +7,7 @@ public record GetImageResponse(
 	Long imageId,
 	String originalName,
 	String url,
-	Long size
+	Long size,
+	Boolean isThumbnail
 ) {
 }

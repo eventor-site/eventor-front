@@ -81,8 +81,13 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public CreatePostResponse createPost(CreatePostRequest request, List<MultipartFile> files) {
+	public CreatePostResponse createPost(CreatePostRequest request, MultipartFile thumbnail,
+		List<MultipartFile> files) {
 		CreatePostResponse response = postClient.createPost(request).getBody();
+
+		if (!thumbnail.isEmpty()) {
+			imageClient.uploadThumbnail(thumbnail, "postimage", Objects.requireNonNull(response).postId());
+		}
 
 		// 파일이 비어 있거나 파일 크기가 0인 파일 필터링
 		files = files.stream()
@@ -96,9 +101,13 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public void updatePost(Long postId, UpdatePostRequest request, List<MultipartFile> files,
-		List<Long> deleteImageIds) {
+	public void updatePost(Long postId, UpdatePostRequest request, MultipartFile thumbnail,
+		List<MultipartFile> files, List<Long> deleteImageIds) {
 		postClient.updatePost(postId, request);
+
+		if (!thumbnail.isEmpty()) {
+			imageClient.uploadThumbnail(thumbnail, "postimage", postId);
+		}
 
 		// 파일이 비어 있거나 파일 크기가 0인 파일 필터링
 		files = files.stream()

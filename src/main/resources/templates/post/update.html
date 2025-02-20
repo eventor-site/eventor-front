@@ -60,11 +60,23 @@
                            th:checked="${post.isNotification}">
                 </div>
 
+                <div>
+                    <p>한파일당 최대 10MB 까지 업로드 가능하며, 최대 업로드 용량은 10MB 입니다.</p>
+                    <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif"</p>
+                </div>
+
+                <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}"
+                     class="form-group">
+                    <label for="thumbnail">새로운 썸네일</label>
+                    <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
+                    <div class="imagePreviewContainer" id="thumbnailPreviewContainer"></div>
+                </div>
+
                 <!-- 이미지 파일 수정 기능 추가 -->
-                <div class="form-group">
+                <div class="form-group" th:if="${!post.images.isEmpty()}">
                     <label>기존 이미지</label>
                     <div id="existingImagesContainer" class="existing-image-preview-container">
-                        <div th:each="image : ${post.images}" class="image-preview">
+                        <div th:each="image : ${post.images}" th:if="${!image.isThumbnail}" class="image-preview">
                             <!-- 체크박스 기본값으로 체크 상태 유지 (체크 안 된 경우 삭제할 이미지로 전송할 예정) -->
                             <input type="checkbox" id="deleteImageIds" th:value="${image.imageId}"
                                    class="deleteImageCheckbox" checked>
@@ -79,11 +91,8 @@
 
                 <!-- 이미지 파일 선택 필드 추가 -->
                 <div class="form-group">
-                    <label for="files">이미지</label>
-                    <p>한파일당 최대 10MB 까지 업로드 가능하며, 최대 업로드 용량은 10MB 입니다.</p>
-                    <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif"</p>
+                    <label for="files">새로운 이미지</label>
                     <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple>
-
                     <div class="imagePreviewContainer" id="imagePreviewContainer"></div>
 
                     <div>

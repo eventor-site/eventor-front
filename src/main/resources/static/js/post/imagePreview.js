@@ -1,20 +1,123 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const categoryName = document.getElementById("categoryName").value; // 카테고리 이름 가져오기
     const maxTotalSize = 10 * 1024 * 1024; // 10MB 제한
     let currentSize = 0;
+    let thumbnailSize = 0;
     let newSize = 0;
     let totalSize = 0;
 
     function updateSizeDisplay() {
         // 용량 초과 체크
-        if ((currentSize + newSize) > maxTotalSize) {
+        if ((currentSize + newSize + thumbnailSize) > maxTotalSize) {
             alert("총 업로드 용량(10MB)을 초과했습니다. 기존 이미지를 삭제하거나 파일 크기를 줄여주세요.");
             return false; // 용량 초과 시 false 반환
         } else {
-            totalSize = (currentSize + newSize) / (1024 * 1024);
+            totalSize = (currentSize + newSize + thumbnailSize) / (1024 * 1024);
             document.getElementById("totalSize").textContent = totalSize.toFixed(2);
 
             return true; // 용량이 허용 범위 내에 있을 경우 true 반환
         }
+    }
+
+    if (categoryName !== '자유' || categoryName !== '공지' || categoryName !== '맛집' || categoryName !== '핫딜') {
+        // 썸네일 파일 업로드 처리
+        document.getElementById("thumbnail").addEventListener("change", function () {
+            const previewContainer = document.getElementById("thumbnailPreviewContainer");
+            previewContainer.innerHTML = ""; // 기존 썸네일 초기화
+
+            let file = this.files.length > 0 ? this.files[0] : null; // 파일이 없으면 null 설정
+
+            if (file === null) {
+                // 파일이 없으면 미리보기 및 용량 계산 초기화
+                previewContainer.innerHTML = ""; // 기존 미리보기 초기화
+                thumbnailSize = 0; // 새 이미지 크기 초기화
+                updateSizeDisplay(); // 용량 표시 업데이트
+                return; // 파일이 없으면 아무것도 하지 않음
+            }
+
+            // 파일 크기 합산을 먼저 계산
+            if (file.type.startsWith('image/')) {
+                thumbnailSize += file.size;
+            }
+
+            // 용량 초과 체크 (추가 전에 검사)
+            if (!updateSizeDisplay()) {
+                this.value = ""; // 파일 선택 취소
+                thumbnailSize = 0;
+                previewContainer.innerHTML = ""; // 기존 미리보기 초기화
+                updateSizeDisplay()
+                return;
+            }
+
+            thumbnailSize = 0;
+            previewContainer.innerHTML = ""; // 기존 미리보기 초기화
+
+
+            if (file.type.startsWith('image/')) {
+                thumbnailSize += file.size;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const container = document.createElement('div');
+                    container.classList.add('image-preview');  // 기존 스타일 클래스 추가
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+
+                    const checkbox = document.createElement('input');
+                    checkbox.classList.add('newImageCheckbox')
+                    checkbox.type = 'checkbox';
+                    checkbox.checked = true; // 기본적으로 선택된 상태
+
+                    // 파일 이름 출력
+                    const fileName = document.createElement('span');
+                    fileName.textContent = file.name;
+                    fileName.classList.add('image-name'); // 기존 클래스 적용
+
+                    // 체크박스 상태 변경 시 용량 갱신
+                    checkbox.addEventListener("change", function () {
+                        thumbnailSize += checkbox.checked ? file.size : -file.size;
+                        if (!updateSizeDisplay()) {
+                            checkbox.checked = !checkbox.checked; // 상태 되돌림
+                            thumbnailSize += checkbox.checked ? file.size : -file.size; // 용량 되돌림
+                        }
+                    });
+
+                    // 이미지 클릭 시 체크박스 상태 변경
+                    container.addEventListener('click', function (event) {
+                        if (event.target !== checkbox) {
+                            checkbox.checked = !checkbox.checked; // 상태 토글
+                            thumbnailSize += checkbox.checked ? file.size : -file.size; // 용량 업데이트
+                            if (!updateSizeDisplay()) {
+                                checkbox.checked = !checkbox.checked; // 상태 되돌림
+                                thumbnailSize += checkbox.checked ? file.size : -file.size; // 용량 되돌림
+                            }
+                        }
+                    });
+
+                    container.appendChild(img);
+                    container.appendChild(checkbox);
+                    container.appendChild(fileName);
+                    previewContainer.appendChild(container);
+                };
+                reader.readAsDataURL(file);
+            }
+
+            updateSizeDisplay();
+        });
+
+        // 폼 제출 시 선택된 파일만 업로드
+        document.getElementById('form').addEventListener('submit', function (e) {
+            const input = document.getElementById('thumbnail');
+            const checkbox = document.querySelector('#thumbnailPreviewContainer input[type="checkbox"]');
+
+            // 체크박스가 없거나 체크되지 않은 경우 → 파일 제거
+            if (!checkbox || !checkbox.checked) {
+                input.value = ""; // 파일 선택 해제
+            }
+
+            this.submit(); // 폼 제출
+        });
     }
 
     // 새 이미지 업로드 시 미리보기 및 체크박스 추가
@@ -43,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
             this.value = ""; // 파일 선택 취소
             newSize = 0;
             previewContainer.innerHTML = ""; // 기존 미리보기 초기화
+            updateSizeDisplay()
             return;
         }
 

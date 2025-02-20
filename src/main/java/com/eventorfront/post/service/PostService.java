@@ -39,9 +39,10 @@ public interface PostService {
 
 	GetPostResponse getPost(Long postId);
 
-	CreatePostResponse createPost(CreatePostRequest request, List<MultipartFile> files);
+	CreatePostResponse createPost(CreatePostRequest request, MultipartFile thumbnail, List<MultipartFile> files);
 
-	void updatePost(Long postId, UpdatePostRequest request, List<MultipartFile> files, List<Long> deleteImageIds);
+	void updatePost(Long postId, UpdatePostRequest request, MultipartFile thumbnail,
+		List<MultipartFile> files, List<Long> deleteImageIds);
 
 	ResponseEntity<String> recommendPost(Long postId);
 
