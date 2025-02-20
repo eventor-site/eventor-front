@@ -196,7 +196,8 @@
                                 <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
                             </div>
 
-                            <div th:if="${comment.isAuthorized}" style="display: flex; align-items: center;">
+                            <div th:if="${comment.isAuthorized and comment.content != '[삭제된 댓글입니다.]'}"
+                                 style="display: flex; align-items: center;">
                                 <button type="button" class="btn btn-sm btn-warning inline-text">수정</button>
                                 <form th:action="@{/posts/{postId}/comments/{commentId} (postId=${post.postId}, commentId=${comment.commentId})}"
                                       th:method="delete">
