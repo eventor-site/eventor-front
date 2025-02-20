@@ -85,7 +85,7 @@ public class PostServiceImpl implements PostService {
 		List<MultipartFile> files) {
 		CreatePostResponse response = postClient.createPost(request).getBody();
 
-		if (!thumbnail.isEmpty()) {
+		if (thumbnail != null) {
 			imageClient.uploadThumbnail(thumbnail, "postimage", Objects.requireNonNull(response).postId());
 		}
 
@@ -105,7 +105,7 @@ public class PostServiceImpl implements PostService {
 		List<MultipartFile> files, List<Long> deleteImageIds) {
 		postClient.updatePost(postId, request);
 
-		if (!thumbnail.isEmpty()) {
+		if (thumbnail != null) {
 			imageClient.uploadThumbnail(thumbnail, "postimage", postId);
 		}
 

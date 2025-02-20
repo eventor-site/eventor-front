@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             updateSizeDisplay();
         });
-        
+
     }
 
     // 폼 제출 시 선택된 파일만 업로드

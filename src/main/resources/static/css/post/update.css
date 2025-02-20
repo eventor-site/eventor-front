@@ -4,7 +4,7 @@
     flex-wrap: nowrap;
 }
 
-.image-preview {
+.image-preview, .thumbnail-preview {
     position: relative;
     width: 100px;
     height: 100px;
@@ -16,7 +16,7 @@
     overflow: hidden;
 }
 
-.image-preview img {
+.image-preview img, .thumbnail-preview img {
     width: 100%;
     height: 100%;
     object-fit: cover;
