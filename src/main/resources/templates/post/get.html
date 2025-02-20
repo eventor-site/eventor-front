@@ -79,7 +79,7 @@
 
                 <!-- 이미지 출력 -->
                 <div class="image-gallery">
-                    <div th:each="image : ${post.images}" class="image-container">
+                    <div th:each="image : ${post.images}" th:if="${!image.isThumbnail}" class="image-container">
                         <!-- 이미지 -->
                         <img th:src="${image.url}" alt="이미지"/>
                     </div>
@@ -141,7 +141,8 @@
                  style="display: flex; flex-wrap: wrap; gap: 10px;">
                 <hr style="width: 100%"/>
                 <p>첨부파일</p>
-                <div th:each="image : ${post.images}" class="image-container" style="position: relative;">
+                <div th:each="image : ${post.images}" th:if="${!image.isThumbnail}" class="image-container"
+                     style="position: relative;">
                     <!-- 이미지 파일명 -->
                     <a th:href="${image.url}" th:text="${image.originalName}"></a>
                 </div>

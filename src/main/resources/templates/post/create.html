@@ -40,7 +40,6 @@
                            required>
                 </div>
 
-
                 <div class="form-group">
                     <label for="title">제목</label>
                     <input type="text" class="form-control" id="title" name="title" required>
@@ -52,17 +51,25 @@
                     <input type="hidden" id="content" name="content" th:value="${content}">
                 </div>
 
+                <div>
+                    <p>한파일당 최대 10MB 까지 업로드 가능하며, 최대 업로드 용량은 10MB 입니다.</p>
+                    <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif"</p>
+                </div>
+
+                <div th:if="${categoryName != '자유' and categoryName != '공지' and categoryName != '맛집' and categoryName != '핫딜'}"
+                     class="form-group">
+                    <label for="thumbnail">썸네일</label>
+                    <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
+                    <div class="imagePreviewContainer" id="thumbnailPreviewContainer"></div>
+                </div>
+
                 <!-- 이미지 파일 선택 필드 추가 -->
                 <div class="form-group">
                     <label for="files">이미지</label>
-                    <p>한파일당 최대 10MB 까지 업로드 가능하며, 최대 업로드 용량은 10MB 입니다.</p>
-                    <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif"</p>
                     <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple>
-
-                    <div id="imagePreviewContainer"></div>
+                    <div class="imagePreviewContainer" id="imagePreviewContainer"></div>
                     <div><p>총 용량: <span id="totalSize">0</span> / 10MB</p></div>
                 </div>
-
 
                 <div>
                     <label for="isNotification">알림 받기</label>
@@ -88,6 +95,9 @@
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/js/post/editor.js"></script>
 <script src="/js/post/imagePreview.js"></script>
+<script>
+
+</script>
 </body>
 
 </html>

@@ -125,14 +125,15 @@ public class PostController {
 	}
 
 	@PostMapping
-	public String createPost(@ModelAttribute CreatePostRequest request, List<MultipartFile> files) {
-		return "redirect:/posts/" + postService.createPost(request, files).postId();
+	public String createPost(@ModelAttribute CreatePostRequest request, MultipartFile thumbnail,
+		List<MultipartFile> files) {
+		return "redirect:/posts/" + postService.createPost(request, thumbnail, files).postId();
 	}
 
 	@PutMapping("/{postId}")
 	public String updatePost(@PathVariable Long postId, @ModelAttribute UpdatePostRequest request,
-		List<MultipartFile> files, @RequestParam(required = false) List<Long> deleteImageIds) {
-		postService.updatePost(postId, request, files, deleteImageIds);
+		MultipartFile thumbnail, List<MultipartFile> files, @RequestParam(required = false) List<Long> deleteImageIds) {
+		postService.updatePost(postId, request, thumbnail, files, deleteImageIds);
 		return "redirect:/posts/" + postId;
 	}
 

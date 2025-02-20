@@ -13,6 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 @FeignClient(name = "image-client", url = "${feignClient.url}")
 public interface ImageClient {
 
+	@PostMapping(value = "/back/images/upload/thumbnail", consumes = "multipart/form-data")
+	ResponseEntity<Void> uploadThumbnail(@RequestPart("thumbnail") MultipartFile thumbnail,
+		@RequestParam String folderName,
+		@RequestParam Long postId);
+
 	@PostMapping(value = "/back/images/upload", consumes = "multipart/form-data")
 	ResponseEntity<Void> upload(@RequestPart("files") List<MultipartFile> files, @RequestParam String folderName,
 		@RequestParam Long postId);
