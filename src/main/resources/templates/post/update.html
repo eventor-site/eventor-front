@@ -65,6 +65,21 @@
                     <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif"</p>
                 </div>
 
+                <!-- 이미지 파일 수정 기능 추가 -->
+                <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜' and !post.images.isEmpty()}"
+                     class="form-group">
+                    <label>기존 썸네일</label>
+                    <div id="existingThumbnailContainer" class="existing-image-preview-container">
+                        <div th:each="image : ${post.images}" th:if="${image.isThumbnail}" class="thumbnail-preview">
+                            <img th:src="${image.url}" alt="썸네일">
+                            <span class="image-size" th:data-size="${image.size}"></span>
+
+                            <!-- 파일 이름 표시를 위한 span 추가 -->
+                            <span class="image-name" th:text="${image.originalName}"></span>
+                        </div>
+                    </div>
+                </div>
+
                 <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}"
                      class="form-group">
                     <label for="thumbnail">새로운 썸네일</label>

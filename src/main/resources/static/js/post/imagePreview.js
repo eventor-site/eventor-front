@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const categoryName = document.getElementById("categoryName").value; // 카테고리 이름 가져오기
+
     const maxTotalSize = 10 * 1024 * 1024; // 10MB 제한
     let currentSize = 0;
     let thumbnailSize = 0;
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    if (categoryName !== '자유' || categoryName !== '공지' || categoryName !== '맛집' || categoryName !== '핫딜') {
+    if (categoryName !== '자유' && categoryName !== '공지' && categoryName !== '맛집' && categoryName !== '핫딜') {
         // 썸네일 파일 업로드 처리
         document.getElementById("thumbnail").addEventListener("change", function () {
             const previewContainer = document.getElementById("thumbnailPreviewContainer");
