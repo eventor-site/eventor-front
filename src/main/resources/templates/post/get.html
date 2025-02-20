@@ -26,7 +26,7 @@
             <div class="post-header">
                 <!-- 이벤트 시간 및 남은 시간 -->
                 <div class="event-time"
-                     th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집'}">
+                     th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}">
                     <div class="left">
                         <span class="label">이벤트 시작 시간:</span>
                         <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"></span>
@@ -43,7 +43,7 @@
                 </div>
 
                 <hr style="width: 100%"
-                    th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집'}"/>
+                    th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}"/>
 
                 <!-- 제목 및 작성시간 -->
                 <div class="title-section">

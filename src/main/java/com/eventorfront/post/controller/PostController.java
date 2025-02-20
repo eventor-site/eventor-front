@@ -24,6 +24,7 @@ import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.exception.AccessDeniedException;
+import com.eventorfront.global.util.FormUtils;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
@@ -49,6 +50,9 @@ public class PostController {
 	public String createPostForm(@RequestParam String categoryName, Model model) {
 		if (userService.meCheckRoles("member")) {
 			model.addAttribute("categoryName", categoryName);
+			if (categoryName.equals("핫딜")) {
+				model.addAttribute("content", FormUtils.HOT_DEAL);
+			}
 			return "post/create";
 		} else {
 			throw new AccessDeniedException();

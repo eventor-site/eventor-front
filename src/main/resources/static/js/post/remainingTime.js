@@ -2,7 +2,7 @@ const categoryName = document.getElementById("categoryName").getAttribute("data-
 
 function updateRemainingTime() {
 
-    if (categoryName !== "자유" && categoryName !== "공지" && categoryName !== "맛집") {
+    if (categoryName !== "자유" && categoryName !== "공지" && categoryName !== "맛집" && categoryName !== "핫딜") {
         const endTimeElement = document.getElementById('endTime');
         const remainingTimeElement = document.getElementById('remainingTime');
         const endTime = new Date(endTimeElement.getAttribute('data-end-time'));
@@ -31,7 +31,7 @@ function updateRemainingTime() {
 
 }
 
-if (categoryName !== "자유" && categoryName !== "공지" && categoryName !== "맛집") {
+if (categoryName !== "자유" && categoryName !== "공지" && categoryName !== "맛집" && categoryName !== "핫딜") {
     // 초기 계산 및 1초마다 업데이트
     updateRemainingTime();
     setInterval(updateRemainingTime, 1000);
