@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.reporttype.service.ReportTypeService;
 import com.eventorfront.userstop.dto.UserStopDto;
@@ -34,12 +35,14 @@ public class UserStopController {
 	private final ReportTypeService reportTypeService;
 	private static final String REDIRECT_URL = "redirect:/userStops";
 
+	@AuthorizeRole("admin")
 	@GetMapping("/create")
 	public String createUserStopForm(Model model) {
 		model.addAttribute("reportTypes", reportTypeService.getReportTypes());
 		return "userStop/create";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/update/{userStopId}")
 	public String updateUserStopForm(@PathVariable Long userStopId, Model model) {
 		model.addAttribute("userStop", userStopService.getUserStop(userStopId));

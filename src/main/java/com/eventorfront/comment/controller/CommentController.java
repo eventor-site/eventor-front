@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
 import com.eventorfront.comment.dto.request.UpdateCommentRequest;
@@ -29,6 +30,7 @@ public class CommentController {
 	private final CommentService commentService;
 	private final AuthService authService;
 
+	@AuthorizeRole("admin")
 	@GetMapping("/users/admin/comments")
 	public String getComments(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
 		Page<GetCommentByUserIdResponse> comments = commentService.getComments(pageable);

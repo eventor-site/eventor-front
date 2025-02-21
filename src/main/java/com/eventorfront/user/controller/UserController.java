@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.service.AuthService;
-import com.eventorfront.global.exception.ForbiddenException;
 import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
@@ -57,13 +57,10 @@ public class UserController {
 		return "user/recoverPasswordForm";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/admin")
 	public String adminPage() {
-		if (userService.meCheckRoles("admin")) {
-			return "user/admin";
-		} else {
-			throw new ForbiddenException();
-		}
+		return "user/admin";
 	}
 
 	@GetMapping("/me")

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.usergrade.dto.GradeDto;
 import com.eventorfront.usergrade.service.GradeService;
@@ -26,11 +27,13 @@ public class GradeController {
 	private final GradeService gradeService;
 	private static final String REDIRECT_URL = "redirect:/grades";
 
+	@AuthorizeRole("admin")
 	@GetMapping("/create")
 	public String createGradeForm() {
 		return "grade/create";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/update/{gradeId}")
 	public String updateGradeForm(@PathVariable Long gradeId, Model model) {
 		model.addAttribute("grade", gradeService.getGrade(gradeId));

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.role.dto.RoleDto;
 import com.eventorfront.role.service.RoleService;
@@ -26,11 +27,13 @@ public class RoleController {
 	private final RoleService roleService;
 	private static final String REDIRECT_URL = "redirect:/roles";
 
+	@AuthorizeRole("admin")
 	@GetMapping("/create")
 	public String createRoleForm() {
 		return "role/create";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/{roleId}/update")
 	public String updateRoleForm(@PathVariable Long roleId, Model model) {
 		model.addAttribute("role", roleService.getRole(roleId));
