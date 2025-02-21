@@ -26,7 +26,6 @@ import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.exception.ForbiddenException;
 import com.eventorfront.global.util.FormUtils;
 import com.eventorfront.global.util.PagingModel;
-import com.eventorfront.global.util.PermissionUtils;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
@@ -49,13 +48,13 @@ public class PostController {
 
 	@GetMapping("/create")
 	public String createPostForm(@RequestParam String categoryName, Model model) {
-		List<String> roles = userService.meRoles();
+		// List<String> roles = userService.meRoles();
 
-		// 비회원일 경우 차단, 멤버는 허용된 카테고리만 접근 가능
-		if (roles.isEmpty() || roles.contains("member") && !PermissionUtils.categories.contains(
-			categoryName)) {
-			throw new ForbiddenException();
-		}
+		// // 비회원일 경우 차단, 멤버는 허용된 카테고리만 접근 가능
+		// if (roles.isEmpty() || roles.contains("member") && !PermissionUtils.categories.contains(
+		// 	categoryName)) {
+		// 	throw new ForbiddenException();
+		// }
 
 		model.addAttribute("categoryName", categoryName);
 		if (categoryName.equals("핫딜")) {
