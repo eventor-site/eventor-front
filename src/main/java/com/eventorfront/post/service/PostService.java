@@ -49,4 +49,6 @@ public interface PostService {
 	ResponseEntity<String> disrecommendPost(Long postId);
 
 	void deletePost(Long postId);
+
+	Boolean isAuthorizedToEdit(Long postId);
 }

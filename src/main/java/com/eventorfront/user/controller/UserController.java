@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.service.AuthService;
-import com.eventorfront.global.exception.AccessDeniedException;
+import com.eventorfront.global.exception.ForbiddenException;
 import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
@@ -62,7 +62,7 @@ public class UserController {
 		if (userService.meCheckRoles("admin")) {
 			return "user/admin";
 		} else {
-			throw new AccessDeniedException();
+			throw new ForbiddenException();
 		}
 	}
 

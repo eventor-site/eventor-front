@@ -30,7 +30,7 @@
                            th:text="${status != null ? 'Status Code: ' + status : ''}"></p>
                         <br/>
                         <p style="color: #333333; word-wrap: break-word"
-                           th:text="${timestamp != null ? 'Timestamp: ' + timestamp : ''}"></p>
+                           th:text="'Timestamp: ' + ${#temporals.format(timestamp, 'yyyy-MM-dd HH:mm')}"></p>
                         <br/>
                         <a href="javascript:history.back()">돌아가기</a>
 

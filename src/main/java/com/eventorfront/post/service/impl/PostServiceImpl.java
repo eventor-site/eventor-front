@@ -137,4 +137,9 @@ public class PostServiceImpl implements PostService {
 	public void deletePost(Long postId) {
 		postClient.deletePost(postId);
 	}
+
+	@Override
+	public Boolean isAuthorizedToEdit(Long postId) {
+		return postClient.isAuthorizedToEdit(postId).getBody();
+	}
 }

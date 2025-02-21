@@ -76,4 +76,7 @@ public interface PostClient {
 
 	@DeleteMapping("/back/posts/{postId}")
 	ResponseEntity<Void> deletePost(@PathVariable Long postId);
+
+	@GetMapping("/back/posts/{postId}/isAuthorized")
+	ResponseEntity<Boolean> isAuthorizedToEdit(@PathVariable Long postId);
 }
