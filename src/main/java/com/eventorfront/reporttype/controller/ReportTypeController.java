@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.reporttype.dto.ReportTypeDto;
 import com.eventorfront.reporttype.service.ReportTypeService;
@@ -26,11 +27,13 @@ public class ReportTypeController {
 	private final ReportTypeService reportTypeService;
 	private static final String REDIRECT_URL = "redirect:/reportTypes";
 
+	@AuthorizeRole("admin")
 	@GetMapping("/create")
 	public String createReportTypeForm() {
 		return "reportType/create";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/{reportTypeId}/update")
 	public String updateReportTypeForm(@PathVariable Long reportTypeId, Model model) {
 		model.addAttribute("reportType", reportTypeService.getReportType(reportTypeId));

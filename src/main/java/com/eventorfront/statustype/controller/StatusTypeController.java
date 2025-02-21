@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.statustype.dto.StatusTypeDto;
 import com.eventorfront.statustype.service.StatusTypeService;
@@ -32,11 +33,13 @@ public class StatusTypeController {
 	private final StatusTypeService statusTypeService;
 	private static final String REDIRECT_URL = "redirect:/statusTypes";
 
+	@AuthorizeRole("admin")
 	@GetMapping("/create")
 	public String createStatusTypeForm() {
 		return "statusType/create";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/update/{statusTypeId}")
 	public String updateStatusTypeForm(@PathVariable Long statusTypeId, Model model) {
 		model.addAttribute("statusType", statusTypeService.getStatusType(statusTypeId));

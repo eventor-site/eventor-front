@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.commentreport.dto.response.GetCommentReportResponse;
 import com.eventorfront.commentreport.service.CommentReportService;
@@ -25,6 +26,7 @@ public class CommentReportController {
 	private final CommentReportService commentReportService;
 	private final CommentService commentService;
 
+	@AuthorizeRole("admin")
 	@GetMapping("/commentReports")
 	public String getCommentReports(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
 		Page<GetCommentReportResponse> commentReports = commentReportService.getCommentReports(pageable);

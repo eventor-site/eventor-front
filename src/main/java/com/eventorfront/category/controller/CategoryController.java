@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.category.dto.request.CreateCategoryRequest;
 import com.eventorfront.category.dto.request.UpdateCategoryRequest;
 import com.eventorfront.category.dto.response.GetCategoryListResponse;
@@ -34,22 +35,26 @@ public class CategoryController {
 	private final CategoryService categoryService;
 	private static final String REDIRECT_URL = "redirect:/categories";
 
+	@AuthorizeRole("admin")
 	@GetMapping("/create")
 	public String createCategoryForm() {
 		return "category/create";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/update/{categoryId}")
 	public String updateCategoryForm(@PathVariable Long categoryId, Model model) {
 		model.addAttribute("category", categoryService.getCategory(categoryId));
 		return "category/update";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/search")
 	public ResponseEntity<List<GetCategoryNameResponse>> searchCategories(@RequestParam String keyword) {
 		return ResponseEntity.status(HttpStatus.OK).body(categoryService.searchCategories(keyword));
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping
 	public String getCategories(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
 		Page<GetCategoryListResponse> categories = categoryService.getCategories(pageable);

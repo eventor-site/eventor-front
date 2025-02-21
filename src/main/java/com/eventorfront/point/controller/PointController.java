@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.point.dto.request.PointRequest;
 import com.eventorfront.point.dto.response.GetPointResponse;
@@ -27,11 +28,13 @@ public class PointController {
 	private final PointService pointService;
 	private static final String REDIRECT_URL = "redirect:/points";
 
+	@AuthorizeRole("admin")
 	@GetMapping("/create")
 	public String createPointForm() {
 		return "point/create";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/update/{pointId}")
 	public String updatePointForm(@PathVariable Long pointId, Model model) {
 		model.addAttribute("point", pointService.getPoint(pointId));

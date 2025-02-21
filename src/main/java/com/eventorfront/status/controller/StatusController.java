@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.status.dto.request.StatusRequest;
 import com.eventorfront.status.dto.response.GetStatusResponse;
@@ -29,12 +30,14 @@ public class StatusController {
 	private final StatusTypeService statusTypeService;
 	private static final String REDIRECT_URL = "redirect:/statuses";
 
+	@AuthorizeRole("admin")
 	@GetMapping("/create")
 	public String createStatusForm(Model model) {
 		model.addAttribute("statusTypes", statusTypeService.getStatusTypes());
 		return "status/create";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/update/{statusId}")
 	public String updateStatusForm(@PathVariable Long statusId, Model model) {
 		model.addAttribute("status", statusService.getStatus(statusId));
