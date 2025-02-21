@@ -85,7 +85,7 @@ public class PostServiceImpl implements PostService {
 		List<MultipartFile> files) {
 		CreatePostResponse response = postClient.createPost(request).getBody();
 
-		if (thumbnail != null) {
+		if (thumbnail != null && thumbnail.isEmpty() && thumbnail.getSize() > 0) {
 			imageClient.uploadThumbnail(thumbnail, "postimage", Objects.requireNonNull(response).postId());
 		}
 
