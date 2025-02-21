@@ -85,13 +85,13 @@ public class PostServiceImpl implements PostService {
 		List<MultipartFile> files) {
 		CreatePostResponse response = postClient.createPost(request).getBody();
 
-		if (thumbnail != null && thumbnail.isEmpty() && thumbnail.getSize() > 0) {
+		if (thumbnail != null && thumbnail.getSize() > 0) {
 			imageClient.uploadThumbnail(thumbnail, "postimage", Objects.requireNonNull(response).postId());
 		}
 
 		// 파일이 비어 있거나 파일 크기가 0인 파일 필터링
 		files = files.stream()
-			.filter(file -> file != null && !file.isEmpty() && file.getSize() > 0)
+			.filter(file -> file != null && file.getSize() > 0)
 			.toList();
 
 		if (!files.isEmpty()) {
@@ -105,13 +105,13 @@ public class PostServiceImpl implements PostService {
 		List<MultipartFile> files, List<Long> deleteImageIds) {
 		postClient.updatePost(postId, request);
 
-		if (thumbnail != null) {
+		if (thumbnail != null && thumbnail.getSize() > 0) {
 			imageClient.uploadThumbnail(thumbnail, "postimage", postId);
 		}
 
 		// 파일이 비어 있거나 파일 크기가 0인 파일 필터링
 		files = files.stream()
-			.filter(file -> file != null && !file.isEmpty() && file.getSize() > 0)
+			.filter(file -> file != null && file.getSize() > 0)
 			.toList();
 
 		if (deleteImageIds != null) {
