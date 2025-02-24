@@ -17,7 +17,7 @@ public class IndexController {
 
 	@GetMapping("/")
 	public String indexPage() {
-		return "google63a4a90bf0c72004";
+		return "index";
 	}
 
 	@GetMapping("/main")
