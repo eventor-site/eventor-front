@@ -169,23 +169,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         formData.append("endTime", document.getElementById('endTime')?.value || "");
         formData.append("isTemp", "true")
 
-        try {
-            const response = await fetch('/posts', {
-                method: 'POST',
-                body: formData
-            });
+        const response = await fetch('/posts', {
+            method: 'POST',
+            body: formData
+        });
 
-            if (!response.ok) {
-                throw new Error("임시 게시물 생성 실패");
-            }
-
-            const data = await response.json();
-            return data.postId;
-        } catch (error) {
-            console.error("임시 게시물 생성 실패:", error);
-            alert("임시 게시물을 생성할 수 없습니다.");
-            return null;
+        if (!response.ok) {
+            throw new Error("임시 게시물 생성 실패");
         }
+
+        const data = await response.json();
+        return data.postId;
     }
 
     // 🛠️ **단일 이미지 업로드 함수**
@@ -289,7 +283,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             imageCheckbox.type = 'checkbox';
             imageCheckbox.classList.add('imageCheckbox');
             imageCheckbox.setAttribute('data-image-id', image.imageId);
-            
+
             // 요소들을 미리보기 컨테이너에 추가
             ImageContainer.appendChild(imgElement);
             ImageContainer.appendChild(fileNameElement);
