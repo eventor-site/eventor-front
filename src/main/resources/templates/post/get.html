@@ -79,7 +79,8 @@
 
                 <!-- 이미지 출력 -->
                 <div class="image-gallery">
-                    <div th:each="image : ${post.images}" th:if="${!image.isThumbnail}" class="image-container">
+                    <div th:each="image : ${post.images}" th:if="${!image.isThumbnail and !image.isPasted}"
+                         class="image-container">
                         <!-- 이미지 -->
                         <img th:src="${image.url}" alt="이미지"/>
                     </div>
@@ -126,7 +127,7 @@
                 <a class="btn-sm btn-secondary" onclick="history.back()">뒤로가기</a>
 
                 <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
-                    <a th:href="@{/posts/{postId}/update (postId=${post.postId()})}"
+                    <a th:href="@{/posts/{postId}/updateForm (postId=${post.postId()})}"
                        class="btn btn-sm btn-warning inline-text">수정
                     </a>
                     <form th:action="@{/posts/{postId} (postId=${post.postId()}, categoryName=${post.categoryName})}"
@@ -141,8 +142,8 @@
                  style="display: flex; flex-wrap: wrap; gap: 10px;">
                 <hr style="width: 100%"/>
                 <p>첨부파일</p>
-                <div th:each="image : ${post.images}" th:if="${!image.isThumbnail}" class="image-container"
-                     style="position: relative;">
+                <div th:each="image : ${post.images}" th:if="${!image.isThumbnail and !image.isPasted}"
+                     class="image-container" style="position: relative;">
                     <!-- 이미지 파일명 -->
                     <a th:href="${image.url}" th:text="${image.originalName}"></a>
                 </div>
@@ -207,7 +208,7 @@
                             </div>
                         </div>
 
-                        <p th:utext="${comment.content}"></p>
+                        <p th:value="${comment.content}"></p>
 
                         <div class="sub-comment-form-container"
                              th:data-post-id="${post.postId}"

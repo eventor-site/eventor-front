@@ -33,8 +33,11 @@
             </h5>
 
             <hr style="width: 100%"/>
-            <h3><a th:if="${isAuthorized}" th:href="@{/posts/create(categoryName=${categoryName})}"
-                   class="btn btn-primary">게시글 작성</a></h3>
+
+            <div style="text-align: right;">
+                <a th:if="${isAuthorized}" th:href="@{/posts/createForm (categoryName=${categoryName})}"
+                   class="btn btn-primary">게시글 작성</a>
+            </div>
 
             <div class="event-section">
                 <h3>Top10</h3>

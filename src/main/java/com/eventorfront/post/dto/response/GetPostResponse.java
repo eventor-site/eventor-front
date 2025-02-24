@@ -17,10 +17,11 @@ public record GetPostResponse(
 	Long recommendationCount,
 	Long viewCount,
 	LocalDateTime createdAt,
-	Boolean isNotification,
 	LocalDateTime startTime,
 	LocalDateTime endTime,
+	String statusName,
 	List<GetImageResponse> images,
+	Double totalSize,
 	String gradeName,
 	Boolean isAuthorized,
 	Boolean isFavorite) {

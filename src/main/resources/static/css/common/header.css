@@ -75,7 +75,8 @@
     font-family: 'Headland One', serif;
     font-size: 60px;
     font-weight: bold;
-    color: black;
+    color: black !important;
+    text-decoration: none !important; /* 밑줄 제거 */
 }
 
 .search-input {

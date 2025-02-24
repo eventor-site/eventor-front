@@ -18,17 +18,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.exception.ForbiddenException;
+import com.eventorfront.global.util.CalendarUtils;
 import com.eventorfront.global.util.FormUtils;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.global.util.PermissionUtils;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
+import com.eventorfront.post.dto.response.CreatePostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.service.PostService;
@@ -47,7 +48,7 @@ public class PostController {
 	private final AuthService authService;
 	private final UserService userService;
 
-	@GetMapping("/create")
+	@GetMapping("/createForm")
 	public String createPostForm(@RequestParam String categoryName, Model model) {
 		List<String> roles = userService.meRoles();
 
@@ -60,17 +61,25 @@ public class PostController {
 		model.addAttribute("categoryName", categoryName);
 		if (categoryName.equals("핫딜")) {
 			model.addAttribute("content", FormUtils.HOT_DEAL);
+
+		} else if (!PermissionUtils.categories.contains(categoryName)) {
+			model.addAttribute("startTime", CalendarUtils.getDate());
+			model.addAttribute("endTime", CalendarUtils.getPlusDate(1));
 		}
+
+		// 기존 임시 저장 게시물이 있는지 확인
+		model.addAttribute("tempPost", postService.getTempPost());
 
 		return "post/create";
 
 	}
 
-	@GetMapping("/{postId}/update")
+	@GetMapping("/{postId}/updateForm")
 	public String updatePostForm(@PathVariable Long postId, Model model) {
 		if (!postService.isAuthorizedToEdit(postId)) {
 			throw new ForbiddenException();
 		}
+
 		model.addAttribute("post", postService.getPost(postId));
 		return "post/update";
 	}
@@ -134,16 +143,15 @@ public class PostController {
 	}
 
 	@PostMapping
-	public String createPost(@ModelAttribute CreatePostRequest request, MultipartFile thumbnail,
-		List<MultipartFile> files) {
-		return "redirect:/posts/" + postService.createPost(request, thumbnail, files).postId();
+	public ResponseEntity<CreatePostResponse> createPost(@ModelAttribute CreatePostRequest request,
+		@RequestParam(defaultValue = "false") boolean isTemp) {
+		return postService.createPost(request, isTemp);
 	}
 
 	@PutMapping("/{postId}")
-	public String updatePost(@PathVariable Long postId, @ModelAttribute UpdatePostRequest request,
-		MultipartFile thumbnail, List<MultipartFile> files, @RequestParam(required = false) List<Long> deleteImageIds) {
-		postService.updatePost(postId, request, thumbnail, files, deleteImageIds);
-		return "redirect:/posts/" + postId;
+	public ResponseEntity<Void> updatePost(@PathVariable Long postId, @ModelAttribute UpdatePostRequest request,
+		@RequestParam(defaultValue = "false") boolean isTemp) {
+		return postService.updatePost(postId, request, isTemp);
 	}
 
 	@PutMapping("/{postId}/recommend")
@@ -169,5 +177,10 @@ public class PostController {
 		postService.deletePost(postId);
 		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
 		return "redirect:/posts?categoryName=" + encodedCategoryName;
+	}
+
+	@DeleteMapping("/temp")
+	public ResponseEntity<Void> deleteTempPost() {
+		return postService.deleteTempPost();
 	}
 }

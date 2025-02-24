@@ -10,7 +10,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/create.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/createOrUpdate.css"/>
 </head>
 
 <body>
@@ -25,7 +25,8 @@
             <form action="/posts" method="post" id="form" enctype="multipart/form-data">
 
                 <div>
-                    <label for="categoryName"></label>
+                    <input type="hidden" id="postId" th:value="${tempPost?.postId}">
+                    <input type="hidden" id="statusName" th:value="${tempPost?.statusName}">
                     <input type="hidden" id="categoryName" name="categoryName" th:value="${categoryName}">
                 </div>
 
@@ -33,11 +34,11 @@
                      class="form-group d-flex align-items-center">
                     <label for="startTime" style="margin-right: 10px;">이벤트 시작 시간</label>
                     <input type="datetime-local" class="form-control" id="startTime" name="startTime"
-                           style="width: 200px; margin-right: 20px;" required>
+                           th:value="${startTime}" style="width: 200px; margin-right: 20px;" required>
 
                     <label for="endTime" style="margin-right: 10px;">이벤트 종료 시간</label>
-                    <input type="datetime-local" class="form-control" id="endTime" name="endTime" style="width: 200px;"
-                           required>
+                    <input type="datetime-local" class="form-control" id="endTime" name="endTime"
+                           th:value="${endTime}" style="width: 200px;" required>
                 </div>
 
                 <div class="form-group">
@@ -51,36 +52,40 @@
                     <input type="hidden" id="content" name="content" th:value="${content}">
                 </div>
 
-                <div>
+                <div class="form-group">
                     <p>한파일당 최대 10MB 까지 업로드 가능하며, 최대 업로드 용량은 10MB 입니다.</p>
-                    <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif"</p>
+                    <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif", "webp"</p>
+                </div>
+
+                <div id="image-select-box" class="form-group" style="display: none">
+                    <button type="button" id="selectAllBtn" class="btn btn-sm btn-primary">전체 선택</button>
+                    <button type="button" id="deselectAllBtn" class="btn btn-sm btn-primary">전체 선택 해제</button>
+                    <button type="button" id="deleteImageBtn" class="btn btn-sm btn-danger">이미지 삭제</button>
+                </div>
+
+                <div class="form-group">
+                    <p>총 용량: <span id="totalSize">0</span> / 10MB</p>
                 </div>
 
                 <div th:if="${categoryName != '자유' and categoryName != '공지' and categoryName != '맛집' and categoryName != '핫딜'}"
                      class="form-group">
                     <label for="thumbnail">썸네일</label>
-                    <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
+                    <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*"
+                           style="width: 50%">
                     <div class="imagePreviewContainer" id="thumbnailPreviewContainer"></div>
                 </div>
 
                 <!-- 이미지 파일 선택 필드 추가 -->
                 <div class="form-group">
                     <label for="files">이미지</label>
-                    <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple>
+                    <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple
+                           style="width: 50%">
                     <div class="imagePreviewContainer" id="imagePreviewContainer"></div>
-                    <div><p>총 용량: <span id="totalSize">0</span> / 10MB</p></div>
-                </div>
-
-                <div>
-                    <label for="isNotification">알림 받기</label>
-                    <!-- 기본값 false 를 전달하기 위한 hidden input -->
-                    <input type="hidden" name="isNotification" value="false">
-                    <!-- 체크되었을 때만 true 가 전달 -->
-                    <input type="checkbox" id="isNotification" name="isNotification" value="true">
                 </div>
 
                 <button type="submit" class="btn btn-primary">등록</button>
                 <a class="btn btn-secondary" onclick="history.back()">취소</a>
+
             </form>
         </div>
     </div>
@@ -94,10 +99,12 @@
 
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/js/post/editor.js"></script>
-<script src="/js/post/imagePreview.js"></script>
-<script>
+<script src="/js/post/imageSelect.js"></script>
 
-</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/post/tempPostAlert.js"></script>
+
+
 </body>
 
 </html>

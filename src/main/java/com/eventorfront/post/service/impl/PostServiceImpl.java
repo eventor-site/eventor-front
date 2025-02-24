@@ -1,13 +1,11 @@
 package com.eventorfront.post.service.impl;
 
 import java.util.List;
-import java.util.Objects;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.eventorfront.image.client.ImageClient;
 import com.eventorfront.post.client.PostClient;
@@ -19,6 +17,7 @@ import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.dto.response.GetRecommendPostResponse;
+import com.eventorfront.post.dto.response.GetTempPostResponse;
 import com.eventorfront.post.service.PostService;
 import com.eventorfront.search.dto.response.SearchPostsResponse;
 
@@ -81,46 +80,18 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public CreatePostResponse createPost(CreatePostRequest request, MultipartFile thumbnail,
-		List<MultipartFile> files) {
-		CreatePostResponse response = postClient.createPost(request).getBody();
-
-		if (thumbnail != null && thumbnail.getSize() > 0) {
-			imageClient.uploadThumbnail(thumbnail, "postimage", Objects.requireNonNull(response).postId());
-		}
-
-		// 파일이 비어 있거나 파일 크기가 0인 파일 필터링
-		files = files.stream()
-			.filter(file -> file != null && file.getSize() > 0)
-			.toList();
-
-		if (!files.isEmpty()) {
-			imageClient.upload(files, "postimage", Objects.requireNonNull(response).postId());
-		}
-		return response;
+	public GetTempPostResponse getTempPost() {
+		return postClient.getTempPost().getBody();
 	}
 
 	@Override
-	public void updatePost(Long postId, UpdatePostRequest request, MultipartFile thumbnail,
-		List<MultipartFile> files, List<Long> deleteImageIds) {
-		postClient.updatePost(postId, request);
+	public ResponseEntity<CreatePostResponse> createPost(CreatePostRequest request, boolean isTemp) {
+		return postClient.createPost(request, isTemp);
+	}
 
-		if (thumbnail != null && thumbnail.getSize() > 0) {
-			imageClient.uploadThumbnail(thumbnail, "postimage", postId);
-		}
-
-		// 파일이 비어 있거나 파일 크기가 0인 파일 필터링
-		files = files.stream()
-			.filter(file -> file != null && file.getSize() > 0)
-			.toList();
-
-		if (deleteImageIds != null) {
-			imageClient.deleteImage(postId, deleteImageIds);
-		}
-
-		if (!files.isEmpty()) {
-			imageClient.upload(files, "postimage", postId);
-		}
+	@Override
+	public ResponseEntity<Void> updatePost(Long postId, UpdatePostRequest request, boolean isTemp) {
+		return postClient.updatePost(postId, request, isTemp);
 	}
 
 	@Override
@@ -142,4 +113,10 @@ public class PostServiceImpl implements PostService {
 	public Boolean isAuthorizedToEdit(Long postId) {
 		return postClient.isAuthorizedToEdit(postId).getBody();
 	}
+
+	@Override
+	public ResponseEntity<Void> deleteTempPost() {
+		return postClient.deleteTempPost();
+	}
+
 }
