@@ -6,23 +6,27 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.eventorfront.image.dto.request.DeleteImageRequest;
+import com.eventorfront.image.dto.response.GetImageResponse;
+
 @FeignClient(name = "image-client", url = "${feignClient.url}")
 public interface ImageClient {
 
-	@PostMapping(value = "/back/images/upload/thumbnail", consumes = "multipart/form-data")
-	ResponseEntity<Void> uploadThumbnail(@RequestPart("thumbnail") MultipartFile thumbnail,
-		@RequestParam String folderName,
-		@RequestParam Long postId);
-
 	@PostMapping(value = "/back/images/upload", consumes = "multipart/form-data")
-	ResponseEntity<Void> upload(@RequestPart("files") List<MultipartFile> files, @RequestParam String folderName,
-		@RequestParam Long postId);
+	ResponseEntity<List<GetImageResponse>> upload(@RequestPart("file") MultipartFile file,
+		@RequestParam String folderName, @RequestParam Long postId,
+		@RequestParam boolean isThumbnail,
+		@RequestParam boolean isPasted);
 
 	@DeleteMapping("/back/images")
-	ResponseEntity<Void> deleteImage(@RequestParam Long postId, @RequestParam List<Long> deleteImageIds);
+	ResponseEntity<List<GetImageResponse>> deleteImages(@RequestBody DeleteImageRequest request);
+
+	@DeleteMapping("/back/images/temp")
+	ResponseEntity<Void> deleteTempImage();
 
 }

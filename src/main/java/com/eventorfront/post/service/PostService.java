@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
@@ -15,6 +14,7 @@ import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.dto.response.GetRecommendPostResponse;
+import com.eventorfront.post.dto.response.GetTempPostResponse;
 import com.eventorfront.search.dto.response.SearchPostsResponse;
 
 public interface PostService {
@@ -39,10 +39,11 @@ public interface PostService {
 
 	GetPostResponse getPost(Long postId);
 
-	CreatePostResponse createPost(CreatePostRequest request, MultipartFile thumbnail, List<MultipartFile> files);
+	GetTempPostResponse getTempPost();
 
-	void updatePost(Long postId, UpdatePostRequest request, MultipartFile thumbnail,
-		List<MultipartFile> files, List<Long> deleteImageIds);
+	ResponseEntity<CreatePostResponse> createPost(CreatePostRequest request, boolean isTemp);
+
+	ResponseEntity<Void> updatePost(Long postId, UpdatePostRequest request, boolean isTemp);
 
 	ResponseEntity<String> recommendPost(Long postId);
 
@@ -51,4 +52,6 @@ public interface PostService {
 	void deletePost(Long postId);
 
 	Boolean isAuthorizedToEdit(Long postId);
+
+	ResponseEntity<Void> deleteTempPost();
 }

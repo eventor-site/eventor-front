@@ -119,6 +119,9 @@
     word-wrap: break-word; /* 긴 단어가 줄 바꿈이 되도록 설정 */
 }
 
+.post-body img {
+    max-width: 100%;
+}
 
 .depth-0 {
     margin-left: 0; /* 기본 여백 */

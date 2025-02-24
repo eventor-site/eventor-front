@@ -24,6 +24,7 @@ import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.dto.response.GetRecommendPostResponse;
+import com.eventorfront.post.dto.response.GetTempPostResponse;
 import com.eventorfront.search.dto.response.SearchPostsResponse;
 
 @FeignClient(name = "post-client", url = "${feignClient.url}")
@@ -62,11 +63,16 @@ public interface PostClient {
 	@GetMapping("/back/posts/{postId}")
 	ResponseEntity<GetPostResponse> getPost(@PathVariable Long postId);
 
+	@GetMapping("/back/posts/temp")
+	ResponseEntity<GetTempPostResponse> getTempPost();
+
 	@PostMapping("/back/posts")
-	ResponseEntity<CreatePostResponse> createPost(@RequestBody CreatePostRequest request);
+	ResponseEntity<CreatePostResponse> createPost(@RequestBody CreatePostRequest request,
+		@RequestParam boolean isTemp);
 
 	@PutMapping("/back/posts/{postId}")
-	ResponseEntity<Void> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request);
+	ResponseEntity<Void> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request,
+		@RequestParam boolean isTemp);
 
 	@PutMapping("/back/posts/{postId}/recommend")
 	ResponseEntity<String> recommendPost(@PathVariable Long postId);
@@ -79,4 +85,8 @@ public interface PostClient {
 
 	@GetMapping("/back/posts/{postId}/isAuthorized")
 	ResponseEntity<Boolean> isAuthorizedToEdit(@PathVariable Long postId);
+
+	@DeleteMapping("/back/posts/temp")
+	ResponseEntity<Void> deleteTempPost();
+
 }

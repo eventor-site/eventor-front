@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 public class PagingModel {
 	// 인스턴스화를 방지하기 위한 private 생성자
 	private PagingModel() {
+		throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
 	}
 
 	/**
