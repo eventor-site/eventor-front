@@ -19,14 +19,14 @@ public class ImageServiceImpl implements ImageService {
 	private final ImageClient imageClient;
 
 	@Override
-	public ResponseEntity<List<GetImageResponse>> upload(MultipartFile file, Long postId, boolean isThumbnail,
+	public List<GetImageResponse> upload(MultipartFile file, Long postId, boolean isThumbnail,
 		boolean isPasted) {
-		return imageClient.upload(file, "postimage", postId, isThumbnail, isPasted);
+		return imageClient.upload(file, "postimage", postId, isThumbnail, isPasted).getBody();
 	}
 
 	@Override
-	public ResponseEntity<List<GetImageResponse>> deleteImages(DeleteImageRequest request) {
-		return imageClient.deleteImages(request);
+	public List<GetImageResponse> deleteImages(DeleteImageRequest request) {
+		return imageClient.deleteImages(request).getBody();
 	}
 
 	@Override

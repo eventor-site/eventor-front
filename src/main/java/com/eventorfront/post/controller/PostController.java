@@ -145,7 +145,7 @@ public class PostController {
 
 	@PostMapping
 	@ResponseBody
-	public ResponseEntity<CreatePostResponse> createPost(@ModelAttribute CreatePostRequest request,
+	public CreatePostResponse createPost(@ModelAttribute CreatePostRequest request,
 		@RequestParam(defaultValue = "false") boolean isTemp) {
 		return postService.createPost(request, isTemp);
 	}
