@@ -40,9 +40,9 @@ import com.eventorfront.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin
 @Controller
 @RequiredArgsConstructor
+@CrossOrigin
 @RequestMapping("/posts")
 public class PostController {
 	private final PostService postService;
