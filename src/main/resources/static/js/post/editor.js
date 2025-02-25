@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
 
             const data = await response.json();
+            console.log(data);
             return data.postId;
         } catch (error) {
             console.error("임시 게시물 생성 실패:", error);
