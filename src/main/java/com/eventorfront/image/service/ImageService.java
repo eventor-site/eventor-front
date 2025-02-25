@@ -10,10 +10,10 @@ import com.eventorfront.image.dto.response.GetImageResponse;
 
 public interface ImageService {
 
-	ResponseEntity<List<GetImageResponse>> upload(MultipartFile file, Long postId, boolean isThumbnail,
+	List<GetImageResponse> upload(MultipartFile file, Long postId, boolean isThumbnail,
 		boolean isPasted);
 
-	ResponseEntity<List<GetImageResponse>> deleteImages(DeleteImageRequest request);
+	List<GetImageResponse> deleteImages(DeleteImageRequest request);
 
 	ResponseEntity<Void> deleteTempImage();
 }

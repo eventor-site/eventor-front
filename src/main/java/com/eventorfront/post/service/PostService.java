@@ -41,7 +41,7 @@ public interface PostService {
 
 	GetTempPostResponse getTempPost();
 
-	ResponseEntity<CreatePostResponse> createPost(CreatePostRequest request, boolean isTemp);
+	CreatePostResponse createPost(CreatePostRequest request, boolean isTemp);
 
 	ResponseEntity<Void> updatePost(Long postId, UpdatePostRequest request, boolean isTemp);
 

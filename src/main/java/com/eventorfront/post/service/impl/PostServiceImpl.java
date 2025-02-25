@@ -85,8 +85,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public ResponseEntity<CreatePostResponse> createPost(CreatePostRequest request, boolean isTemp) {
-		return postClient.createPost(request, isTemp);
+	public CreatePostResponse createPost(CreatePostRequest request, boolean isTemp) {
+		return postClient.createPost(request, isTemp).getBody();
 	}
 
 	@Override
