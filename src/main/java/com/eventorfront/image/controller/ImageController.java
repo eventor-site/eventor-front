@@ -18,9 +18,9 @@ import com.eventorfront.image.service.ImageService;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin
 @Controller
 @RequiredArgsConstructor
+@CrossOrigin
 @RequestMapping("/images")
 public class ImageController {
 	private final ImageService imageService;
