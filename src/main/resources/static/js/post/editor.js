@@ -175,10 +175,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 body: formData
             });
 
-            if (!response.ok) {
-                throw new Error("임시 게시물 생성 실패");
-            }
-
             const data = await response.json();
             return data.postId;
         } catch (error) {
