@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const formData = new FormData(form);
         formData.append("isTemp", "true");
 
-        await fetch(`/posts/${postId}`, {
+        await fetch(`https://www.eventor.store/posts/${postId}`, {
             method: 'PUT',
             body: formData
         });
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         formData.append("isTemp", "true")
 
         try {
-            const response = await fetch('/posts', {
+            const response = await fetch('https://www.eventor.store/posts', {
                 method: 'POST',
                 body: formData
             });
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         formData.append("isPasted", isPasted);
 
         try {
-            const response = await fetch('/images/upload', {
+            const response = await fetch('https://www.eventor.store/images/upload', {
                 method: 'POST',
                 body: formData
             });
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // 선택된 이미지 삭제 요청
     async function deleteSelectedImages(imageIds) {
         try {
-            const response = await fetch('/images', { // 서버의 이미지 삭제 엔드포인트
+            const response = await fetch('https://www.eventor.store/images', { // 서버의 이미지 삭제 엔드포인트
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         event.preventDefault();
 
         let formData = new FormData(this);
-        let url = postId ? '/posts/' + postId : '/posts';
+        let url = postId ? 'https://www.eventor.store/posts/' + postId : 'https://www.eventor.store/posts';
         let method = postId ? 'PUT' : 'POST';
         formData.append("isTemp", "false");
 
