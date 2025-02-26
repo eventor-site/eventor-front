@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             body: formData
         });
 
-        const data = response.json();
+        const data = await response.json();
         return data.postId;
     }
 
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             headers: {"X-Ajax-Request": "true"},
             body: formData
         });
-        return response.json(); // 업로드된 이미지 정보 리스트 반환
+        return await response.json(); // 업로드된 이미지 정보 리스트 반환
     }
 
     const deleteImageBtn = document.getElementById('deleteImageBtn');
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             })
         });
 
-        return response.json();
+        return await response.json();
 
     }
 
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
 
         if (!postId) {
-            const data = response.json();
+            const data = await response.json();
             postId = data.postId;
         }
         window.location.href = `/posts/` + postId;
