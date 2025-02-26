@@ -90,9 +90,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // 게시물 업데이트 요청
     async function updatePostWithImage() {
-        // editor의 내용에 이미지를 포함시킴
-        const content = editor.getHTML();
-        document.getElementById('content').value = content;
+        // editor 의 내용에 이미지를 포함시킴
+        document.getElementById('content').value = editor.getHTML();
 
         // 폼 데이터 준비
         const form = document.getElementById('form');
@@ -101,6 +100,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         await fetch(`/posts/${postId}`, {
             method: 'PUT',
+            headers: {"X-Ajax-Request": "true"},
             body: formData
         });
     }
@@ -169,19 +169,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         formData.append("endTime", document.getElementById('endTime')?.value || "");
         formData.append("isTemp", "true")
 
-        try {
-            const response = await fetch('/posts', {
-                method: 'POST',
-                body: formData
-            });
+        const response = await fetch('/posts', {
+            method: 'POST',
+            headers: {"X-Ajax-Request": "true"},
+            body: formData
+        });
 
-            const data = await response.json();
-            return data.postId;
-        } catch (error) {
-            console.error("임시 게시물 생성 실패:", error);
-            alert("임시 게시물을 생성할 수 없습니다.");
-            return null;
-        }
+        const data = response.json();
+        return data.postId;
     }
 
     // 🛠️ **단일 이미지 업로드 함수**
@@ -192,16 +187,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         formData.append("isThumbnail", isThumbnail);
         formData.append("isPasted", isPasted);
 
-        try {
-            const response = await fetch('/images/upload', {
-                method: 'POST',
-                body: formData
-            });
-            return await response.json(); // 업로드된 이미지 정보 리스트 반환
-        } catch (error) {
-            console.error("이미지 업로드 실패:", error);
-            alert("이미지를 업로드할 수 없습니다.");
-        }
+        const response = await fetch('/images/upload', {
+            method: 'POST',
+            headers: {"X-Ajax-Request": "true"},
+            body: formData
+        });
+        return response.json(); // 업로드된 이미지 정보 리스트 반환
     }
 
     const deleteImageBtn = document.getElementById('deleteImageBtn');
@@ -227,23 +218,19 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // 선택된 이미지 삭제 요청
     async function deleteSelectedImages(imageIds) {
-        try {
-            const response = await fetch('/images', { // 서버의 이미지 삭제 엔드포인트
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    postId: postId,
-                    imageIds: imageIds
-                })
-            });
+        const response = await fetch('/images', { // 서버의 이미지 삭제 엔드포인트
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                "X-Ajax-Request": "true"
+            },
+            body: JSON.stringify({
+                postId: postId,
+                imageIds: imageIds
+            })
+        });
 
-            return await response.json();
-        } catch (error) {
-            console.error("이미지 삭제 실패:", error);
-            alert("이미지를 삭제할 수 없습니다.");
-        }
+        return response.json();
 
     }
 
@@ -327,26 +314,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         let method = postId ? 'PUT' : 'POST';
         formData.append("isTemp", "false");
 
-        try {
-            const response = await fetch(url, {
-                method: method,
-                body: formData,
-            });
+        const response = await fetch(url, {
+            method: method,
+            headers: {"X-Ajax-Request": "true"},
+            body: formData,
+        });
 
-            if (response.ok) {
-                if (!postId) {
-                    const data = await response.json();
-                    postId = data.postId;
-                }
-                window.location.href = `/posts/` + postId;
-
-            } else {
-                const error = await response.text();
-                alert('오류 발생: ' + error);
-            }
-        } catch (error) {
-            alert('네트워크 오류: ' + error);
+        if (!postId) {
+            const data = response.json();
+            postId = data.postId;
         }
+        window.location.href = `/posts/` + postId;
     });
 
     function previewImageEvent() {
