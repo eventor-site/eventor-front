@@ -43,6 +43,13 @@ public class FeignClientInterceptor implements RequestInterceptor {
 					}
 				}
 			}
+
+			// X-Ajax-Request 헤더 추가
+			String ajaxHeader = request.getHeader("X-Ajax-Request");
+			if (ajaxHeader != null) {
+				template.header("X-Ajax-Request", ajaxHeader);
+			}
+
 		}
 	}
 }

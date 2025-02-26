@@ -9,19 +9,19 @@ import com.eventorfront.global.exception.payload.ErrorStatus;
 import lombok.Getter;
 
 @Getter
-public class AlreadyExistsException extends GlobalException {
-	public AlreadyExistsException() {
+public class BadRequestException extends GlobalException {
+	public BadRequestException() {
 		super(ErrorStatus.from(
-			"이미 존재합니다.",
-			HttpStatus.CONFLICT,
+			"잘못된 요청입니다.",
+			HttpStatus.BAD_REQUEST,
 			LocalDateTime.now())
 		);
 	}
 
-	public AlreadyExistsException(String message) {
+	public BadRequestException(String message) {
 		super(ErrorStatus.from(
 			message,
-			HttpStatus.CONFLICT,
+			HttpStatus.BAD_REQUEST,
 			LocalDateTime.now())
 		);
 	}

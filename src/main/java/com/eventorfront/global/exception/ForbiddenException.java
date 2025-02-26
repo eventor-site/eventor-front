@@ -9,7 +9,15 @@ import com.eventorfront.global.exception.payload.ErrorStatus;
 public class ForbiddenException extends GlobalException {
 	public ForbiddenException() {
 		super(ErrorStatus.from(
-			String.format("현재 사용자는 접근 권한이 없습니다."),
+			"접근이 금지 되었습니다.",
+			HttpStatus.FORBIDDEN,
+			LocalDateTime.now()
+		));
+	}
+
+	public ForbiddenException(String message) {
+		super(ErrorStatus.from(
+			message,
 			HttpStatus.FORBIDDEN,
 			LocalDateTime.now()
 		));
