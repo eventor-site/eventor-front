@@ -25,7 +25,6 @@ import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.exception.ForbiddenException;
 import com.eventorfront.global.util.CalendarUtils;
-import com.eventorfront.global.util.FormUtils;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.global.util.PermissionUtils;
 import com.eventorfront.post.dto.request.CreatePostRequest;
@@ -60,10 +59,9 @@ public class PostController {
 		}
 
 		model.addAttribute("categoryName", categoryName);
-		if (categoryName.equals("핫딜")) {
-			model.addAttribute("content", FormUtils.HOT_DEAL);
 
-		} else if (!PermissionUtils.categories.contains(categoryName)) {
+		// 이벤트 관련 게시물 기본 날짜 값 설정
+		if (!PermissionUtils.categories.contains(categoryName)) {
 			model.addAttribute("startTime", CalendarUtils.getDate());
 			model.addAttribute("endTime", CalendarUtils.getPlusDate(1));
 		}

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
 
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/createOrUpdate.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/hotDeal.css"/>
 
 </head>
 
@@ -28,8 +29,8 @@
 
                 <div>
                     <input type="hidden" id="postId" th:value="${post.postId}">
-                    <input type="hidden" id="categoryName" th:value="${post.categoryName}">
                     <input type="hidden" id="statusName" th:value="${post.statusName}">
+                    <input type="hidden" id="categoryName" name="categoryName" th:value="${post.categoryName}">
                 </div>
 
                 <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}"
@@ -49,6 +50,47 @@
                 <div class="form-group">
                     <label for="title">제목</label>
                     <input type="text" class="form-control" id="title" name="title" th:value="${post.title}" required>
+                </div>
+
+                <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>링크</th>
+                            <td><input type="text" class="form-control" id="eventLink" name="link"
+                                       th:value="${post.link}" required></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${post.categoryName == '핫딜'}" class="form-group">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>링크</th>
+                            <td><input type="text" class="form-control" id="hotDealLink" name="link"
+                                       th:value="${post.link}" required></td>
+                        </tr>
+                        <tr>
+                            <th>쇼핑몰</th>
+                            <td><input type="text" class="form-control" id="shoppingMall" name="shoppingMall"
+                                       th:value="${post.shoppingMall}" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>상품명</th>
+                            <td><input type="text" class="form-control" id="productName" name="productName"
+                                       th:value="${post.productName}" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>가격</th>
+                            <td><input type="number" class="form-control" id="price" name="price"
+                                       th:value="${post.price}" required></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="form-group">
