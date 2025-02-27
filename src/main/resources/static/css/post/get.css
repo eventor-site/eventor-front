@@ -52,7 +52,6 @@
 
 /* 이미지 갤러리 스타일 */
 .image-gallery {
-    display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
@@ -72,6 +71,25 @@
     max-width: 100%; /* 컨테이너 크기를 초과하지 않음 */
     max-height: 100%; /* 컨테이너 크기를 초과하지 않음 */
     display: block;
+}
+
+/* 특정 카테고리에만 적용되는 스타일 */
+.event-gallery {
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    flex-wrap: wrap; /* 이미지가 여러 줄로 자동 줄바꿈 */
+}
+
+.event-gallery .image-container {
+    position: relative;
+    max-width: 100%; /* 본문을 벗어나지 않도록 제한 */
+    text-align: center; /* 이미지 중앙 정렬 */
+    margin: 10px; /* 이미지들 간격 추가 */
+}
+
+.event-gallery .image-container img {
+    max-width: 100%; /* 이미지 크기 조정 */
+    height: auto; /* 비율 유지 */
 }
 
 .post-recommend-container {

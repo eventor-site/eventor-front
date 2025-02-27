@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
 
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/createOrUpdate.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/hotDeal.css"/>
 </head>
 
 <body>
@@ -44,6 +45,42 @@
                 <div class="form-group">
                     <label for="title">제목</label>
                     <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+
+                <div th:if="${categoryName != '자유' and categoryName != '공지' and categoryName != '맛집' and categoryName != '핫딜'}">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>링크</th>
+                            <td><input type="text" class="form-control" id="eventLink" name="link" required></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${categoryName == '핫딜'}" class="form-group">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>링크</th>
+                            <td><input type="text" class="form-control" id="hotDealLink" name="link" required></td>
+                        </tr>
+                        <tr>
+                            <th>쇼핑몰</th>
+                            <td><input type="text" class="form-control" id="shoppingMall" name="shoppingMall" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>상품명</th>
+                            <td><input type="text" class="form-control" id="productName" name="productName" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>가격</th>
+                            <td><input type="number" class="form-control" id="price" name="price" required></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="form-group">
