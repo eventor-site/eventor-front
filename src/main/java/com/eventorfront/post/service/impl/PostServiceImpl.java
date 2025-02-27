@@ -50,6 +50,11 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public List<GetMainPostResponse> getDeadlineEventPosts() {
+		return postClient.getDeadlineEventPosts().getBody();
+	}
+
+	@Override
 	public List<GetRecommendPostResponse> getRecommendationEventPosts() {
 		return postClient.getRecommendationEventPosts().getBody();
 	}
