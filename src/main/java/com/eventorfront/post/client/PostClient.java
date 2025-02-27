@@ -43,6 +43,9 @@ public interface PostClient {
 	@GetMapping("/back/posts/event/latest")
 	ResponseEntity<List<GetMainPostResponse>> getLatestEventPosts();
 
+	@GetMapping("/back/posts/event/deadline")
+	ResponseEntity<List<GetMainPostResponse>> getDeadlineEventPosts();
+
 	@GetMapping("/back/posts/event/recommendation")
 	ResponseEntity<List<GetRecommendPostResponse>> getRecommendationEventPosts();
 
