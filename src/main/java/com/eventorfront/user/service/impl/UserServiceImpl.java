@@ -2,6 +2,8 @@ package com.eventorfront.user.service.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,11 @@ import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
+import com.eventorfront.user.dto.request.UpdateUserAttributeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.dto.response.GetUserByUserId;
+import com.eventorfront.user.dto.response.GetUserListResponse;
 import com.eventorfront.user.dto.response.GetUserResponse;
 import com.eventorfront.user.service.UserService;
 
@@ -23,6 +27,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	private final UserClient userClient;
+
+	@Override
+	public Page<GetUserListResponse> getUsers(Pageable pageable) {
+		return userClient.getUsers(pageable).getBody();
+	}
 
 	@Override
 	public List<GetUserByIdentifier> searchUserByIdentifier(String keyword) {
@@ -35,8 +44,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public GetUserResponse getUser(Long userId) {
+		return userClient.getUser(userId).getBody();
+	}
+
+	@Override
 	public GetUserResponse getUserInfo() {
 		return userClient.getUserInfo().getBody();
+	}
+
+	@Override
+	public void updateUserByAdmin(Long userId, UpdateUserRequest request) {
+		userClient.updateUserByAdmin(userId, request);
+	}
+
+	@Override
+	public void updateUserAttributeByAdmin(Long userId, UpdateUserAttributeRequest request) {
+		userClient.updateUserAttributeByAdmin(userId, request);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.eventorfront.status.service.impl;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StatusServiceImpl implements StatusService {
 	private final StatusClient statusClient;
+
+	@Override
+	public List<GetStatusResponse> getStatuses(String statusTypeName) {
+		return statusClient.getStatuses(statusTypeName).getBody();
+	}
 
 	@Override
 	public Page<GetStatusResponse> getStatuses(Pageable pageable) {
