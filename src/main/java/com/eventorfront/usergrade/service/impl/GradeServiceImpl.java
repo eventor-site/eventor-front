@@ -1,5 +1,7 @@
 package com.eventorfront.usergrade.service.impl;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class GradeServiceImpl implements GradeService {
 	private final GradeClient gradeClient;
+
+	@Override
+	public List<GradeDto> getGrades() {
+		return gradeClient.getGrades().getBody();
+	}
 
 	@Override
 	public GradeDto getGrade(Long gradeId) {

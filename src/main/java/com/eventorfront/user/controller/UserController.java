@@ -2,6 +2,9 @@ package com.eventorfront.user.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +22,20 @@ import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.global.util.CookieUtil;
+import com.eventorfront.global.util.PagingModel;
+import com.eventorfront.status.service.StatusService;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
+import com.eventorfront.user.dto.request.UpdateUserAttributeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.dto.response.GetUserByUserId;
+import com.eventorfront.user.dto.response.GetUserListResponse;
 import com.eventorfront.user.service.UserService;
+import com.eventorfront.usergrade.service.GradeService;
+import com.eventorfront.userrole.service.UserRoleService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +46,9 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	private final UserService userService;
 	private final AuthService authService;
+	private final StatusService statusService;
+	private final GradeService gradeService;
+	private final UserRoleService userRoleService;
 
 	@GetMapping("/search")
 	public ResponseEntity<List<GetUserByIdentifier>> searchUserByIdentifier(@RequestParam String keyword) {
@@ -47,20 +60,63 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(userService.searchUserByUserId(userId));
 	}
 
-	@GetMapping("/recover/identifier")
-	public String recoverIdentifierPage() {
-		return "user/recoverIdentifierForm";
-	}
-
-	@GetMapping("/recover/password")
-	public String recoverPasswordPage() {
-		return "user/recoverPasswordForm";
+	@AuthorizeRole("admin")
+	@GetMapping
+	public String getUsers(@PageableDefault(page = 1, size = 10) Pageable pageable,
+		Model model) {
+		Page<GetUserListResponse> users = userService.getUsers(pageable);
+		model.addAttribute("objects", users);
+		PagingModel.pagingProcessing(pageable, model, users, "/users", 10);
+		return "user/admin/list";
 	}
 
 	@AuthorizeRole("admin")
 	@GetMapping("/admin")
 	public String adminPage() {
-		return "user/admin";
+		return "user/admin/main";
+	}
+
+	@AuthorizeRole("admin")
+	@GetMapping("/{userId}")
+	public String getUserForm(Model model, @PathVariable Long userId) {
+		model.addAttribute("userId", userId);
+		model.addAttribute("user", userService.getUser(userId));
+		return "user/get";
+	}
+
+	@AuthorizeRole("admin")
+	@GetMapping("/{userId}/updateForm")
+	public String getUserUpdateForm(Model model, @PathVariable Long userId) {
+		model.addAttribute("userId", userId);
+		model.addAttribute("user", userService.getUser(userId));
+		return "user/admin/updateForm";
+	}
+
+	@AuthorizeRole("admin")
+	@GetMapping("/{userId}/attributeForm")
+	public String updateUserAttributeForm(Model model, @PathVariable Long userId) {
+		model.addAttribute("userId", userId);
+		model.addAttribute("user", userService.getUser(userId));
+		model.addAttribute("statuses", statusService.getStatuses("회원"));
+		model.addAttribute("grades", gradeService.getGrades());
+		model.addAttribute("unassignedRoles", userRoleService.getUnassignedUserRoles(userId));
+		model.addAttribute("userRoles", userRoleService.getUserRoles(userId));
+		return "user/admin/updateAttributeForm";
+	}
+
+	@AuthorizeRole("admin")
+	@PutMapping("/{userId}")
+	public String updateUserByAdmin(@PathVariable Long userId, @ModelAttribute UpdateUserRequest request) {
+		userService.updateUserByAdmin(userId, request);
+		return "redirect:/users/" + userId;
+	}
+
+	@AuthorizeRole("admin")
+	@PutMapping("/{userId}/attribute")
+	public String updateUserAttributeByAdmin(@PathVariable Long userId,
+		@ModelAttribute UpdateUserAttributeRequest request) {
+		userService.updateUserAttributeByAdmin(userId, request);
+		return "redirect:/users/" + userId;
 	}
 
 	@GetMapping("/me")
@@ -141,6 +197,16 @@ public class UserController {
 	ResponseEntity<String> checkEmail(@RequestParam("email") String email,
 		@RequestParam("certifyCode") String certifyCode) {
 		return userService.checkEmail(email, certifyCode);
+	}
+
+	@GetMapping("/recover/identifier")
+	public String recoverIdentifierPage() {
+		return "user/recoverIdentifierForm";
+	}
+
+	@GetMapping("/recover/password")
+	public String recoverPasswordPage() {
+		return "user/recoverPasswordForm";
 	}
 
 	@PostMapping("/recover/identifier")

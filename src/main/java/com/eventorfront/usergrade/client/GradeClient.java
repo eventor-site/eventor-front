@@ -1,5 +1,7 @@
 package com.eventorfront.usergrade.client;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,9 @@ import com.eventorfront.usergrade.dto.GradeDto;
 
 @FeignClient(name = "grade-client", url = "${feignClient.url}")
 public interface GradeClient {
+
+	@GetMapping("/back/grades")
+	ResponseEntity<List<GradeDto>> getGrades();
 
 	@GetMapping("/back/grades/paging")
 	ResponseEntity<Page<GradeDto>> getGrades(@PageableDefault(page = 1, size = 10) Pageable pageable);

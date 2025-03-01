@@ -2,6 +2,8 @@ package com.eventorfront.user.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
@@ -9,17 +11,28 @@ import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
+import com.eventorfront.user.dto.request.UpdateUserAttributeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
 import com.eventorfront.user.dto.response.GetUserByIdentifier;
 import com.eventorfront.user.dto.response.GetUserByUserId;
+import com.eventorfront.user.dto.response.GetUserListResponse;
 import com.eventorfront.user.dto.response.GetUserResponse;
 
 public interface UserService {
+
+	Page<GetUserListResponse> getUsers(Pageable pageable);
+
 	List<GetUserByIdentifier> searchUserByIdentifier(String keyword);
 
 	List<GetUserByUserId> searchUserByUserId(Long userId);
 
+	GetUserResponse getUser(Long userId);
+
 	GetUserResponse getUserInfo();
+
+	void updateUserByAdmin(Long userId, UpdateUserRequest request);
+
+	void updateUserAttributeByAdmin(Long userId, UpdateUserAttributeRequest request);
 
 	void updateUser(UpdateUserRequest request);
 
