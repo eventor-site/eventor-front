@@ -27,6 +27,9 @@ public interface CategoryClient {
 	@GetMapping("/back/categories/search")
 	ResponseEntity<List<GetCategoryNameResponse>> searchCategories(@RequestParam String keyword);
 
+	@GetMapping("/back/categories")
+	ResponseEntity<List<String>> getCategories(@RequestParam String categoryName);
+
 	@GetMapping("/back/categories/paging")
 	ResponseEntity<Page<GetCategoryListResponse>> getCategories(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);

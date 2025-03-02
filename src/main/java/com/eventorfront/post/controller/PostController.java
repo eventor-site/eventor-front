@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.category.service.CategoryService;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.exception.ForbiddenException;
@@ -47,6 +49,7 @@ public class PostController {
 	private final CommentService commentService;
 	private final AuthService authService;
 	private final UserService userService;
+	private final CategoryService categoryService;
 
 	@GetMapping("/createForm")
 	public String createPostForm(@RequestParam String categoryName, Model model) {
@@ -71,6 +74,19 @@ public class PostController {
 
 		return "post/create";
 
+	}
+
+	@AuthorizeRole("admin")
+	@GetMapping("/event/createForm")
+	public String createEventPostForm(Model model) {
+		model.addAttribute("categories", categoryService.getCategories("이벤트"));
+		model.addAttribute("startTime", CalendarUtils.getDate());
+		model.addAttribute("endTime", CalendarUtils.getPlusDate(1));
+
+		// 기존 임시 저장 게시물이 있는지 확인
+		model.addAttribute("tempPost", postService.getTempPost());
+
+		return "eventPost/create";
 	}
 
 	@GetMapping("/{postId}/updateForm")
