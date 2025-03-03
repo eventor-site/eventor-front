@@ -1,66 +1,51 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
-    <title>이벤터</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
+    <th:block th:replace="~{common/fragments/config}"></th:block>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/search.css"/>
 </head>
 
 <body>
+<div layout:fragment="content">
+    <div class="body-container">
 
-<div th:insert="~{common/header}"></div>
+        <h5>검색 결과 <span th:text="${objects.getTotalElements()}"></span> 건</h5>
 
-<div class="wrapper">
-    <div class="main-content">
-        <div class="body-container">
+        <hr>
 
-            <h5>검색 결과 <span th:text="${objects.getTotalElements()}"></span> 건</h5>
-
-            <hr style="width: 100%"/>
-
-            <div class="post-list" th:if="${objects.getTotalElements() > 0}">
-                <a th:each="post : ${objects}" th:href="@{/posts/{postId}(postId=${post.postId()})}" class="post-card">
-                    <img class="post-card-img" th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="썸네일">
-                    <img class="post-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
-                    <div class="post-card-body">
-                        <div class="post-card-title" th:text="${post.title}"></div>
-                        <div class="post-card-meta">
-                            <img th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}" alt="프로필">
-                            <span th:text="${post.writer}"></span>
-                        </div>
-                        <div class="post-card-stats">
-                            <span>조회수: <span th:text="${post.viewCount}"></span></span>
-                            <span>추천수: <span th:text="${post.recommendationCount}"></span></span>
-                        </div>
-                        <div class="post-card-date"
-                             th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
+        <div class="post-list" th:if="${objects.getTotalElements() > 0}">
+            <a th:each="post : ${objects}" th:href="@{/posts/{postId}(postId=${post.postId()})}" class="post-card">
+                <img class="post-card-img" th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="썸네일">
+                <img class="post-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
+                <div class="post-card-body">
+                    <div class="post-card-title" th:text="${post.title}"></div>
+                    <div class="post-card-meta">
+                        <img th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}" alt="프로필">
+                        <span th:text="${post.writer}"></span>
                     </div>
-                </a>
-            </div>
-            <div th:if="${objects.getTotalElements() == 0}">
-                <p>게시글이 없습니다.</p>
-            </div>
-
-            <!-- 페이징 처리 시작-->
-            <div th:insert="~{common/paging.html}"></div>
-            <!-- 페이징 처리 끝-->
-
+                    <div class="post-card-stats">
+                        <span>조회수: <span th:text="${post.viewCount}"></span></span>
+                        <span>추천수: <span th:text="${post.recommendationCount}"></span></span>
+                    </div>
+                    <div class="post-card-date"
+                         th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
+                </div>
+            </a>
         </div>
+        <div th:if="${objects.getTotalElements() == 0}">
+            <p>게시글이 없습니다.</p>
+        </div>
+
+        <!-- 페이징 처리 시작-->
+        <div th:insert="~{common/paging.html}"></div>
+        <!-- 페이징 처리 끝-->
+
     </div>
 </div>
 
+<th:block layout:fragment="script">
 
-<footer th:insert="~{common/footer}"></footer>
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</th:block>
 </body>
-
 </html>

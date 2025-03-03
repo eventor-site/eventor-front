@@ -1,287 +1,273 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
-    <title>이벤터</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
+    <th:block th:replace="~{common/fragments/config}"></th:block>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/get.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/hotDeal.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/highlight.css"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
 </head>
 
 <body>
+<div layout:fragment="content">
+    <div class="body-container">
+        <h5>카테고리: <span id="categoryName" th:data-category-name="${post.categoryName}"
+                        th:text="${post.categoryName}"></span></h5>
 
-<header th:insert="~{common/header}"></header>
-
-<div class="wrapper">
-    <div class="main-content">
-        <div class="body-container">
-            <h5>카테고리: <span id="categoryName" th:data-category-name="${post.categoryName}"
-                            th:text="${post.categoryName}"></span></h5>
-
-            <div class="post-header">
-                <!-- 이벤트 시간 및 남은 시간 -->
-                <div class="event-time"
-                     th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}">
-                    <div class="left">
-                        <span class="label">이벤트 시작 시간:</span>
-                        <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"></span>
-                    </div>
-                    <div class="left">
-                        <span class="label">이벤트 종료 시간:</span>
-                        <span id="endTime" th:data-end-time="${post.endTime}"
-                              th:text="${#temporals.format(post.endTime, 'yyyy-MM-dd HH:mm')}"></span>
-                    </div>
-                    <div class="right">
-                        <span class="label">남은 시간:</span>
-                        <span id="remainingTime" class="remaining-time">계산중...</span>
-                    </div>
+        <div class="post-header">
+            <!-- 이벤트 시간 및 남은 시간 -->
+            <div class="event-time"
+                 th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}">
+                <div class="left">
+                    <span class="label">이벤트 시작 시간:</span>
+                    <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"></span>
                 </div>
-
-                <hr style="width: 100%"
-                    th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}"/>
-
-                <!-- 제목 및 작성시간 -->
-                <div class="title-section">
-                    <div class="left">
-                        <p><strong class="label">제목:</strong> <span th:text="${post.title}"></span></p>
-                    </div>
-                    <div class="right">
-                        <p><strong class="label">작성시간:</strong>
-                            <span th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
-                        </p>
-                    </div>
+                <div class="left">
+                    <span class="label">이벤트 종료 시간:</span>
+                    <span id="endTime"
+                          th:data-end-time="${post.endTime != null ? post.endTime : ''}"
+                          th:text="${post.endTime != null ? #temporals.format(post.endTime, 'yyyy-MM-dd HH:mm') : '별도 공지시'}">
+        </span>
                 </div>
-
-                <hr style="width: 100%"/>
-
-                <!-- 작성자 및 조회수, 추천수 -->
-                <div class="author-section">
-                    <div class="left">
-                        <img class="grade" th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
-                             alt="프로필">
-                        <p><strong class="label">작성자:</strong> <span th:text="${post.writer()}"></span></p>
-                    </div>
-                    <div class="right">
-                        <p><strong class="label">조회수:</strong> <span th:text="${post.viewCount}"></span></p>
-                        <p><strong class="label">추천수:</strong> <span th:text="${post.recommendationCount}"></span></p>
-                        <p><strong class="label">댓글수:</strong> <span th:text="${objects.getTotalElements()}"></span></p>
-                    </div>
+                <div class="right">
+                    <span class="label">남은 시간:</span>
+                    <span id="remainingTime" class="remaining-time">계산중...</span>
                 </div>
             </div>
 
-            <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <th>링크</th>
-                        <td><a th:href="${post.link}" th:text="${post.link}" target="_blank"></a></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <hr style="width: 100%"
+                th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}"/>
 
-            <div th:if="${post.categoryName == '핫딜'}">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <th>링크</th>
-                        <td><a th:href="${post.link}" th:text="${post.link}" target="_blank"></a></td>
-                    </tr>
-                    <tr>
-                        <th>쇼핑몰</th>
-                        <td th:text="${post.shoppingMall}"></td>
-                    </tr>
-                    <tr>
-                        <th>상품명</th>
-                        <td th:text="${post.productName}"></td>
-                    </tr>
-                    <tr>
-                        <th>가격</th>
-                        <td th:text="${post.price}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
-            <!-- 게시글 내용 몸통 -->
-            <div class="post-body">
-
-                <!-- 이미지 출력 -->
-                <div class="image-gallery"
-                     th:classappend="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜' ? ' event-gallery' : ''}">
-                    <div th:each="image : ${post.images}" th:if="${!image.isThumbnail and !image.isPasted}"
-                         class="image-container">
-                        <!-- 이미지 -->
-                        <img th:src="${image.url}" alt="이미지"/>
-                    </div>
+            <!-- 제목 및 작성시간 -->
+            <div class="title-section">
+                <div class="left">
+                    <p><strong class="label">제목:</strong> <span th:text="${post.title}"></span></p>
                 </div>
-
-                <p th:utext="${post.content}"></p>
-            </div>
-
-            <div class="post-recommend-container">
-                <button class="btn btn-sm btn-outline-primary"
-                        th:data-url="@{/posts/{postId}/recommend (postId=${post.postId})}"
-                        data-method="PUT"
-                        onclick="setupAlertBox(this)">추천
-                </button>
-
-                <button class="btn btn-sm btn-outline-primary"
-                        th:data-url="@{/posts/{postId}/disrecommend (postId=${post.postId})}"
-                        data-method="PUT"
-                        onclick="setupAlertBox(this)">비추천
-                </button>
-
-                <!-- 좋아요 -->
-                <button class="btn btn-sm btn-outline-primary"
-                        th:data-url="@{/posts/{postId}/favorites (postId=${post.postId})}"
-                        data-method="Post"
-                        onclick="favorite(this)">
-                    <i id="favoriteIcon" class="fa-solid fa-heart"
-                       th:style="${post.isFavorite} ? 'color: red' : 'color: grey'"></i>
-                </button>
-
-                <button class="btn btn-sm btn-outline-primary report-button"
-                        th:data-url="@{/posts/{postId}/postReports (postId=${post.postId})}"
-                        data-method="POST">
-                    🚨
-                </button>
-                <div class="popup report-popup">
-                    <p><strong>[신고유형]</strong></p>
-                    <a data-report-type="폭언" onclick="submitReport(this)">- 폭언</a>
-                    <a data-report-type="정치" onclick="submitReport(this)">- 정치</a>
-                    <a data-report-type="성인물" onclick="submitReport(this)">- 성인물</a>
-                    <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
-                </div>
-
-                <a class="btn-sm btn-secondary" onclick="history.back()">뒤로가기</a>
-
-                <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
-                    <a th:href="@{/posts/{postId}/updateForm (postId=${post.postId()})}"
-                       class="btn btn-sm btn-warning inline-text">수정
-                    </a>
-                    <form th:action="@{/posts/{postId} (postId=${post.postId()}, categoryName=${post.categoryName})}"
-                          th:method="delete">
-                        <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
-                    </form>
+                <div class="right">
+                    <p><strong class="label">작성시간:</strong>
+                        <span th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                    </p>
                 </div>
             </div>
 
-            <!-- 첨부파일 -->
-            <div th:if="${!post.images().isEmpty()}" class="image-gallery"
-                 style="display: flex; flex-wrap: wrap; gap: 10px;">
-                <hr style="width: 100%"/>
-                <p>첨부파일</p>
-                <div th:each="image : ${post.images}" th:if="${!image.isThumbnail and !image.isPasted}"
-                     class="image-container" style="position: relative;">
-                    <!-- 이미지 파일명 -->
-                    <a th:href="${image.url}" th:text="${image.originalName}"></a>
+            <hr>
+
+            <!-- 작성자 및 조회수, 추천수 -->
+            <div class="author-section">
+                <div class="left">
+                    <img class="grade" th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
+                         alt="프로필">
+                    <p><strong class="label">작성자:</strong> <span th:text="${post.writer()}"></span></p>
+                </div>
+                <div class="right">
+                    <p><strong class="label">조회수:</strong> <span th:text="${post.viewCount}"></span></p>
+                    <p><strong class="label">추천수:</strong> <span th:text="${post.recommendationCount}"></span></p>
+                    <p><strong class="label">댓글수:</strong> <span th:text="${objects.getTotalElements()}"></span></p>
                 </div>
             </div>
-
-            <hr style="width: 100%"/>
-
-            <!-- 댓글 섹션 -->
-            <div class="comment-section">
-                <h5>댓글 <span th:text="${objects.getTotalElements()}"></span> 개</h5>
-
-                <hr style="width: 100%"/>
-
-                <!-- 댓글 리스트 -->
-                <div th:each="comment : ${objects}" th:class="'depth-' + ${comment.depth}"
-                     th:id="${comment.commentId}">
-                    <div class="comment-container" th:id="${comment.commentId}">
-                        <div>
-                            <img class="grade"
-                                 th:src="@{/profile/{gradeName}.png (gradeName=${comment.gradeName()})}"
-                                 alt="프로필">
-                            <strong th:text="${comment.writer}"></strong>
-                            <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
-                        </div>
-                        <div class="comment-recommend-container">
-                            <button class="btn btn-sm btn-outline-primary"
-                                    th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
-                                    data-method="PUT"
-                                    onclick="setupAlertBox(this)">추천
-                            </button>
-                            <span th:text="${comment.recommendationCount}"></span>
-
-                            <button class="btn btn-sm btn-outline-primary"
-                                    th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
-                                    data-method="PUT"
-                                    onclick="setupAlertBox(this)">비추천
-                            </button>
-                            <span th:text="${comment.decommendationCount}"></span>
-
-                            <!-- 대댓글 작성 버튼 -->
-                            <button class="btn btn-sm btn-outline-primary">대댓글 작성</button>
-
-                            <button class="btn btn-sm btn-outline-primary report-button"
-                                    th:data-url="@{/comments/{commentId}/commentReports (commentId=${comment.commentId})}"
-                                    data-method="POST">
-                                🚨
-                            </button>
-                            <div class="popup report-popup">
-                                <p><strong>[신고유형]</strong></p>
-                                <a data-report-type="정치" onclick="submitReport(this)">- 정치</a>
-                                <a data-report-type="성인물" onclick="submitReport(this)">- 성인물</a>
-                                <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
-                            </div>
-
-                            <div th:if="${comment.isAuthorized and comment.content != '[삭제된 댓글입니다.]'}"
-                                 style="display: flex; align-items: center;">
-                                <button type="button" class="btn btn-sm btn-warning inline-text">수정</button>
-                                <form th:action="@{/posts/{postId}/comments/{commentId} (postId=${post.postId}, commentId=${comment.commentId})}"
-                                      th:method="delete">
-                                    <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <p th:text="${comment.content}"></p>
-
-                        <div class="sub-comment-form-container"
-                             th:data-post-id="${post.postId}"
-                             th:data-comment-id="${comment.commentId}"></div>
-                    </div>
-
-                    <hr style="width: 100%"/>
-
-                </div>
-
-                <!-- 댓글 작성 폼 -->
-                <div class="comment-form-container" th:data-post-id="${post.postId}"></div>
-            </div>
-
-            <!-- 페이징 처리 시작-->
-            <div th:insert="~{common/paging.html}"></div>
-            <!-- 페이징 처리 끝-->
-
         </div>
+
+        <div th:if="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜'}">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>링크</th>
+                    <td><a th:href="${post.link}" th:text="${post.link}" target="_blank"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:if="${post.categoryName == '핫딜'}">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>링크</th>
+                    <td><a th:href="${post.link}" th:text="${post.link}" target="_blank"></a></td>
+                </tr>
+                <tr>
+                    <th>쇼핑몰</th>
+                    <td th:text="${post.shoppingMall}"></td>
+                </tr>
+                <tr>
+                    <th>상품명</th>
+                    <td th:text="${post.productName}"></td>
+                </tr>
+                <tr>
+                    <th>가격</th>
+                    <td th:text="${post.price}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- 게시글 내용 몸통 -->
+        <div class="post-body">
+
+            <!-- 이미지 출력 -->
+            <div class="image-gallery"
+                 th:classappend="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜' ? ' event-gallery' : ''}">
+                <div th:each="image : ${post.images}" th:if="${!image.isThumbnail and !image.isPasted}"
+                     class="image-container">
+                    <!-- 이미지 -->
+                    <img th:src="${image.url}" alt="이미지"/>
+                </div>
+            </div>
+
+            <p th:utext="${post.content}"></p>
+        </div>
+
+        <div class="post-recommend-container">
+            <button class="btn btn-sm btn-outline-primary"
+                    th:data-url="@{/posts/{postId}/recommend (postId=${post.postId})}"
+                    data-method="PUT"
+                    onclick="setupAlertBox(this)">추천
+            </button>
+
+            <button class="btn btn-sm btn-outline-primary"
+                    th:data-url="@{/posts/{postId}/disrecommend (postId=${post.postId})}"
+                    data-method="PUT"
+                    onclick="setupAlertBox(this)">비추천
+            </button>
+
+            <!-- 좋아요 -->
+            <button class="btn btn-sm btn-outline-primary"
+                    th:data-url="@{/posts/{postId}/favorites (postId=${post.postId})}"
+                    data-method="Post"
+                    onclick="favorite(this)">
+                <i id="favoriteIcon" class="fa-solid fa-heart"
+                   th:style="${post.isFavorite} ? 'color: red' : 'color: grey'"></i>
+            </button>
+
+            <button class="btn btn-sm btn-outline-primary report-button"
+                    th:data-url="@{/posts/{postId}/postReports (postId=${post.postId})}"
+                    data-method="POST">
+                🚨
+            </button>
+            <div class="popup report-popup">
+                <p><strong>[신고유형]</strong></p>
+                <a data-report-type="폭언" onclick="submitReport(this)">- 폭언</a>
+                <a data-report-type="정치" onclick="submitReport(this)">- 정치</a>
+                <a data-report-type="성인물" onclick="submitReport(this)">- 성인물</a>
+                <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
+            </div>
+
+            <a class="btn-sm btn-secondary" onclick="history.back()">뒤로가기</a>
+
+            <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
+                <a th:href="@{/posts/{postId}/updateForm (postId=${post.postId()})}"
+                   class="btn btn-sm btn-warning inline-text">수정
+                </a>
+                <form th:action="@{/posts/{postId} (postId=${post.postId()}, categoryName=${post.categoryName})}"
+                      th:method="delete">
+                    <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 첨부파일 -->
+        <div th:if="${!post.images().isEmpty()}" class="image-gallery"
+             style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <hr>
+            <p>첨부파일</p>
+            <div th:each="image : ${post.images}" th:if="${!image.isThumbnail and !image.isPasted}"
+                 class="image-container" style="position: relative;">
+                <!-- 이미지 파일명 -->
+                <a th:href="${image.url}" th:text="${image.originalName}"></a>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- 댓글 섹션 -->
+        <div class="comment-section">
+            <h5>댓글 <span th:text="${objects.getTotalElements()}"></span> 개</h5>
+
+            <hr>
+
+            <!-- 댓글 리스트 -->
+            <div th:each="comment : ${objects}" th:class="'depth-' + ${comment.depth}"
+                 th:style="'margin-left: ' + ${comment.depth * 20} + 'px'"
+                 th:id="${comment.commentId}">
+                <div class="comment-container" th:id="${comment.commentId}">
+                    <div>
+                        <img class="grade"
+                             th:src="@{/profile/{gradeName}.png (gradeName=${comment.gradeName()})}"
+                             alt="프로필">
+                        <strong th:text="${comment.writer}"></strong>
+                        <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                    </div>
+                    <div class="comment-recommend-container">
+                        <button class="btn btn-sm btn-outline-primary"
+                                th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
+                                data-method="PUT"
+                                onclick="setupAlertBox(this)">추천
+                        </button>
+                        <span th:text="${comment.recommendationCount}"></span>
+
+                        <button class="btn btn-sm btn-outline-primary"
+                                th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
+                                data-method="PUT"
+                                onclick="setupAlertBox(this)">비추천
+                        </button>
+                        <span th:text="${comment.decommendationCount}"></span>
+
+                        <!-- 대댓글 작성 버튼 -->
+                        <button class="btn btn-sm btn-outline-primary">대댓글 작성</button>
+
+                        <button class="btn btn-sm btn-outline-primary report-button"
+                                th:data-url="@{/comments/{commentId}/commentReports (commentId=${comment.commentId})}"
+                                data-method="POST">
+                            🚨
+                        </button>
+                        <div class="popup report-popup">
+                            <p><strong>[신고유형]</strong></p>
+                            <a data-report-type="정치" onclick="submitReport(this)">- 정치</a>
+                            <a data-report-type="성인물" onclick="submitReport(this)">- 성인물</a>
+                            <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
+                        </div>
+
+                        <div th:if="${comment.isAuthorized and comment.content != '[삭제된 댓글입니다.]'}"
+                             style="display: flex; align-items: center;">
+                            <button type="button" class="btn btn-sm btn-warning inline-text">수정</button>
+                            <form th:action="@{/posts/{postId}/comments/{commentId} (postId=${post.postId}, commentId=${comment.commentId})}"
+                                  th:method="delete">
+                                <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <p th:text="${comment.content}"></p>
+
+                    <div class="sub-comment-form-container"
+                         th:data-post-id="${post.postId}"
+                         th:data-comment-id="${comment.commentId}"></div>
+                </div>
+
+                <hr>
+
+            </div>
+
+            <!-- 댓글 작성 폼 -->
+            <div class="comment-form-container" th:data-post-id="${post.postId}"></div>
+        </div>
+
+        <!-- 페이징 처리 시작-->
+        <div th:insert="~{common/paging.html}"></div>
+        <!-- 페이징 처리 끝-->
+
     </div>
 </div>
 
-<footer th:insert="~{common/footer}"></footer>
-
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="/js/post/comment.js"></script>
-<script src="/js/post/sub-comment.js"></script>
-<script src="/js/post/remainingTime.js"></script>
-<script src="/js/post/report.js"></script>
-<script src="/js/common/highlight.js"></script>
-<script src="/js/post/favorite.js"></script>
-
-
+<th:block layout:fragment="script">
+    <script src="/js/post/comment.js"></script>
+    <script src="/js/post/sub-comment.js"></script>
+    <script src="/js/post/remainingTime.js"></script>
+    <script src="/js/post/report.js"></script>
+    <script src="/js/common/highlight.js"></script>
+    <script src="/js/post/favorite.js"></script>
+</th:block>
 </body>
 </html>

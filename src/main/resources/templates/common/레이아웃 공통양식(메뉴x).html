@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
+<head>
+    <th:block th:replace="~{common/fragments/config}"></th:block>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="body-container">
+        <div class="row justify-content-center no-gutters">
+            <div class="col-md-6">
+                <h5>제목을 입력해주세요</h5>
+                <hr>
+                <p>내용을 작성해주세요</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+
+</th:block>
+</body>
+</html>

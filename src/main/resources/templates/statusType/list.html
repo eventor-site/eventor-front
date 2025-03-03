@@ -1,79 +1,68 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
-    <title>이벤터</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <th:block th:replace="~{common/fragments/config}"></th:block>
 </head>
 
 <body>
-
-<header th:insert="~{common/header}"></header>
-
-<div class="wrapper">
-    <div class="main-content">
-        <div class="body-container">
-            <section id="page">
-                <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
-                <section id="page-content">
-                    <section id="page-header">
-                        <h5>상태유형 관리</h5>
-                    </section>
-                    <hr style="width: 100%"/>
-                    <section id="page-body">
-                        <h3>상태유형 리스트</h3>
-                        <h3><a th:href="@{/statusTypes/create}" class="btn btn-primary">상태유형 추가</a></h3>
-                        <div th:if="${objects.getTotalElements() > 0}">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr class="inline-text">
-                                    <th>번호</th>
-                                    <th>상태유형 이름</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="statusType, index : ${objects}">
-                                    <td th:text="${index.index + 1}">1</td>
-                                    <td th:text="${statusType.name()}">상태 유형 이름</td>
-                                    <td style="display: flex; align-items: center;">
+<div layout:fragment="content">
+    <div class="body-container">
+        <section id="page">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>상태유형 관리</h5>
+                </section>
+                <hr>
+                <section id="page-body">
+                    <h3>상태유형 리스트</h3>
+                    <h3><a th:href="@{/statusTypes/create}" class="btn btn-primary">상태유형 추가</a></h3>
+                    <div th:if="${objects.getTotalElements() > 0}">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>상태유형 이름</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="statusType, index : ${objects}">
+                                <td th:text="${(objects.number * objects.size) + index.count}"></td>
+                                <td th:text="${statusType.name()}">상태 유형 이름</td>
+                                <td>
+                                    <div class="action-buttons">
                                         <a th:href="@{/statusTypes/update/{statusTypeId} (statusTypeId=${statusType.statusTypeId()})}"
                                            class="btn btn-sm btn-warning inline-text">편집</a>
                                         <form th:action="@{/statusTypes/{statusTypeId} (statusTypeId=${statusType.statusTypeId()})}"
                                               th:method="delete">
                                             <button type="submit" class="btn btn-sm  btn-danger inline-text">삭제</button>
                                         </form>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div th:if="${objects.getTotalElements() == 0}">
-                            <p>상태 유형이 없습니다.</p>
-                        </div>
+                                    </div>
 
-                        <!-- 페이징 처리 시작-->
-                        <div th:insert="~{common/paging.html}"></div>
-                        <!-- 페이징 처리 끝-->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:if="${objects.getTotalElements() == 0}">
+                        <p>상태 유형이 없습니다.</p>
+                    </div>
 
-                    </section>
+                    <!-- 페이징 처리 시작-->
+                    <div th:insert="~{common/paging.html}"></div>
+                    <!-- 페이징 처리 끝-->
+
                 </section>
-
             </section>
-        </div>
+
+        </section>
     </div>
 </div>
 
-<footer th:insert="~{common/footer}"></footer>
+<th:block layout:fragment="script">
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</th:block>
 </body>
-
 </html>
