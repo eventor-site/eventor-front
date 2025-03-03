@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
+<head>
+    <th:block th:replace="~{common/fragments/config}"></th:block>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="body-container">
+        <section id="page">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>메뉴 제목을 입력해 주세요</h5>
+                </section>
+                <hr>
+                <section id="page-body">
+                    <h3>기능 이름을 입력해 주세요</h3>
+                    <p>내용을 입력해 주세요</p>
+
+                </section>
+            </section>
+
+        </section>
+
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+
+</th:block>
+</body>
+</html>

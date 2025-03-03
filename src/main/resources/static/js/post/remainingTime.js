@@ -6,6 +6,12 @@ function updateRemainingTime() {
         const endTimeElement = document.getElementById('endTime');
         const remainingTimeElement = document.getElementById('remainingTime');
         const endTime = new Date(endTimeElement.getAttribute('data-end-time'));
+        
+        // 종료 시간이 없는 경우 (null)
+        if (!endTimeElement.getAttribute('data-end-time')) {
+            remainingTimeElement.textContent = "별도 공지시까지";
+            return;
+        }
 
         // 현재 시간 가져오기
         const now = new Date();

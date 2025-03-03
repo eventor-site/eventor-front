@@ -1,105 +1,89 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
-    <title>이벤터</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <th:block th:replace="~{common/fragments/config}"></th:block>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/user/me.css"/>
 </head>
 
 <body>
-
-<header th:insert="~{common/header}"></header>
-
-
-<div class="wrapper">
-    <div class="main-content">
-
-        <div class="body-container">
-            <section id="page">
-                <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
-                <section id="page-content">
-                    <section id="page-header">
-                        <h5>회원 관리</h5>
-                    </section>
-
-                    <hr style="width: 100%"/>
-
-                    <div class="container my-page-container">
-                        <!-- User Basic Info -->
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h6>회원 정보</h6>
-                                <a th:href="@{/users/{userId}/updateForm (userId=${userId})}"
-                                   class="btn btn-info inline-text">수정</a>
-
-                            </div>
-                            <div class="card-body">
-                                <!--                                <p><strong>이름:</strong> <span th:text="${user.name}"></span></p>-->
-                                <p><strong>닉네임:</strong> <span th:text="${user.nickname}"></span></p>
-                                <p><strong>이메일:</strong> <span th:text="${user.email}"></span></p>
-                                <!--                                <p><strong>전화번호:</strong> <span th:text="${user.phone}"></span></p>-->
-                                <!--                                <p><strong>생년월일:</strong> <span th:text="${user.birth}"></span></p>-->
-                                <!--                                <p><strong>성별:</strong> <span th:text="${user.gender}"></span></p>-->
-                                <P>※이벤터 주요 공지사항/소식 등이 발송됩니다.</P>
-                                <p><strong>포인트:</strong> <span th:text="${user.point}"></span></p>
-                            </div>
-                        </div>
-
-
-                        <!-- User Status & Grade -->
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h6>회원 특성</h6>
-                                <a th:href="@{/users/{userId}/attributeForm (userId=${userId})}"
-                                   class="btn btn-info inline-text">수정</a>
-                            </div>
-                            <div class="card-body">
-                                <p><strong>회원 상태:</strong> <span th:text="${user.statusName}"></span></p>
-                                <p><strong>회원 등급:</strong> <span th:text="${user.gradeName}"></span></p>
-                                <p><strong>회원 권한:</strong> <span th:text="${user.roles}"></span></p>
-                            </div>
-                        </div>
-
-                        <!-- User Activity Info -->
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h6>활동 정보</h6>
-                            </div>
-                            <div class="card-body">
-                                <p><strong>가입 SNS:</strong> <span th:text="${user.oauthType}"></span></p>
-                                <p><strong>회원 가입일:</strong> <span
-                                        th:text="${#temporals.format(user.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                                </p>
-                                <p><strong>최근 로그인 시간:</strong> <span
-                                        th:text="${#temporals.format(user.lastLoginTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                                </p>
-                                <p><strong>정보 수정 시간:</strong> <span
-                                        th:text="${#temporals.format(user.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; align-items: center;">
-                        <a th:href="@{/users}" class="btn btn-secondary">뒤로가기</a>
-                    </div>
+<div layout:fragment="content">
+    <div class="body-container">
+        <section id="page">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>회원 관리</h5>
                 </section>
+
+                <hr>
+
+                <div class="container my-page-container">
+                    <!-- User Basic Info -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6>회원 정보</h6>
+                            <a th:href="@{/users/{userId}/updateForm (userId=${userId})}"
+                               class="btn btn-info inline-text">수정</a>
+
+                        </div>
+                        <div class="card-body">
+                            <!--                                <p><strong>이름:</strong> <span th:text="${user.name}"></span></p>-->
+                            <p><strong>닉네임:</strong> <span th:text="${user.nickname}"></span></p>
+                            <p><strong>이메일:</strong> <span th:text="${user.email}"></span></p>
+                            <!--                                <p><strong>전화번호:</strong> <span th:text="${user.phone}"></span></p>-->
+                            <!--                                <p><strong>생년월일:</strong> <span th:text="${user.birth}"></span></p>-->
+                            <!--                                <p><strong>성별:</strong> <span th:text="${user.gender}"></span></p>-->
+                            <P>※이벤터 주요 공지사항/소식 등이 발송됩니다.</P>
+                            <p><strong>포인트:</strong> <span th:text="${user.point}"></span></p>
+                        </div>
+                    </div>
+
+
+                    <!-- User Status & Grade -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6>회원 특성</h6>
+                            <a th:href="@{/users/{userId}/attributeForm (userId=${userId})}"
+                               class="btn btn-info inline-text">수정</a>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>회원 상태:</strong> <span th:text="${user.statusName}"></span></p>
+                            <p><strong>회원 등급:</strong> <span th:text="${user.gradeName}"></span></p>
+                            <p><strong>회원 권한:</strong> <span th:text="${user.roles}"></span></p>
+                        </div>
+                    </div>
+
+                    <!-- User Activity Info -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h6>활동 정보</h6>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>가입 SNS:</strong> <span th:text="${user.oauthType}"></span></p>
+                            <p><strong>회원 가입일:</strong> <span
+                                    th:text="${#temporals.format(user.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                            </p>
+                            <p><strong>최근 로그인 시간:</strong> <span
+                                    th:text="${#temporals.format(user.lastLoginTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                            </p>
+                            <p><strong>정보 수정 시간:</strong> <span
+                                    th:text="${#temporals.format(user.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center;">
+                    <a th:href="@{/users}" class="btn btn-secondary">뒤로가기</a>
+                </div>
             </section>
-        </div>
+        </section>
     </div>
 </div>
 
-<footer th:insert="~{common/footer}"></footer>
+<th:block layout:fragment="script">
 
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+</th:block>
 </body>
 </html>

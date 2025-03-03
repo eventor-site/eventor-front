@@ -1,66 +1,51 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
-    <title>이벤터</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <th:block th:replace="~{common/fragments/config}"></th:block>
 </head>
 
 <body>
+<div layout:fragment="content">
+    <div class="body-container">
+        <section id="page">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>등급 관리</h5>
+                </section>
+                <hr>
+                <section id="page-body">
+                    <h3>등급 수정 폼</h3>
+                    <form th:action="@{/grades/{gradeId} (gradeId=${grade.gradeId})}"
+                          th:method="put" th:object="${grade}">
+                        <div class="form-group">
+                            <label for="name">등급 이름</label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="minAmount">최소 포인트</label>
+                            <input type="number" class="form-control" id="minAmount" th:field="*{minAmount}"
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="maxAmount">최대 포인트</label>
+                            <input type="number" class="form-control" id="maxAmount" th:field="*{maxAmount}"
+                                   required>
+                        </div>
 
-<div th:insert="~{common/header}"></div>
-
-<div class="wrapper">
-    <div class="main-content">
-
-        <div class="body-container">
-            <section id="page">
-                <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
-                <section id="page-content">
-                    <section id="page-header">
-                        <h5>등급 관리</h5>
-                    </section>
-                    <hr style="width: 100%"/>
-                    <section id="page-body">
-                        <h3>등급 수정 폼</h3>
-                        <form th:action="@{/grades/{gradeId} (gradeId=${grade.gradeId})}"
-                              th:method="put" th:object="${grade}">
-                            <div class="form-group">
-                                <label for="name">등급 이름</label>
-                                <input type="text" class="form-control" id="name" th:field="*{name}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="minAmount">최소 기준 금액</label>
-                                <input type="number" class="form-control" id="minAmount" th:field="*{minAmount}"
-                                       required>
-                            </div>
-                            <div class="form-group">
-                                <label for="maxAmount">최대 기준 금액</label>
-                                <input type="number" class="form-control" id="maxAmount" th:field="*{maxAmount}"
-                                       required>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">수정</button>
-                            <a class="btn btn-secondary" onclick="history.back()">취소</a>
-                        </form>
-                    </section>
+                        <button type="submit" class="btn btn-primary">수정</button>
+                        <a class="btn btn-secondary" onclick="history.back()">취소</a>
+                    </form>
                 </section>
             </section>
+        </section>
 
-        </div>
     </div>
 </div>
 
-<footer th:insert="~{common/footer}"></footer>
+<th:block layout:fragment="script">
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</th:block>
 </body>
-
 </html>

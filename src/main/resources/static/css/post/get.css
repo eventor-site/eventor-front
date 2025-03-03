@@ -140,27 +140,3 @@
 .post-body img {
     max-width: 100%;
 }
-
-.depth-0 {
-    margin-left: 0; /* 기본 여백 */
-}
-
-.depth-1 {
-    margin-left: 20px; /* 1단계 깊이 */
-}
-
-.depth-2 {
-    margin-left: 40px; /* 2단계 깊이 */
-}
-
-.depth-3 {
-    margin-left: 60px; /* 3단계 깊이 */
-}
-
-.depth-4 {
-    margin-left: 80px; /* 3단계 깊이 */
-}
-
-.depth-5 {
-    margin-left: 100px; /* 3단계 깊이 */
-}

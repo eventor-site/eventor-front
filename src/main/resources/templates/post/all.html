@@ -1,86 +1,72 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/image/logo.png" type="image/x-icon">
-    <title>이벤터</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/frame.css"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <th:block th:replace="~{common/fragments/config}"></th:block>
 </head>
 
 <body>
-
-<header th:insert="~{common/header}"></header>
-
-
-<div class="wrapper">
-    <div class="main-content">
-
-        <div class="body-container">
-            <section id="page">
-                <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
-                <section id="page-content">
-                    <section id="page-header">
-                        <h5>전체 게시글</h5>
-                    </section>
-                    <hr style="width: 100%"/>
-                    <section id="page-body">
-                        <div th:if="${objects.getTotalElements() > 0}">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr class="inline-text">
-                                    <th>제목</th>
-                                    <th>작성자</th>
-                                    <th>조회수</th>
-                                    <th>추천수</th>
-                                    <th>날짜</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="post, index : ${objects}">
-                                    <td>
-                                        <!-- 제목을 클릭하면 해당 게시글로 이동 -->
-                                        <a th:href="@{/posts/{postId} (postId=${post.postId()})}"
-                                           th:text="${post.title}"></a>
-                                    </td>
-                                    <td>
-                                        <img class="grade"
-                                             th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
-                                             alt="프로필">
-                                        <span class="ml-2" th:text="${post.writer}"></span>
-                                    </td>
-                                    <td th:text="${post.viewCount}"></td>
-                                    <td th:text="${post.recommendationCount}"></td>
-                                    <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div th:if="${objects.getTotalElements() == 0}">
-                            <p>게시글이 없습니다.</p>
-                        </div>
-
-                        <!-- 페이징 처리 시작-->
-                        <div th:insert="~{common/paging.html}"></div>
-                        <!-- 페이징 처리 끝-->
-
-                    </section>
+<div layout:fragment="content">
+    <div class="body-container">
+        <section id="page">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>전체 게시글</h5>
                 </section>
+                <hr>
+                <section id="page-body">
+                    <div th:if="${objects.getTotalElements() > 0}">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>조회수</th>
+                                <th>추천수</th>
+                                <th>날짜</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="post, index : ${objects}">
+                                <td th:text="${(objects.totalElements - (objects.number * objects.size + index.count)) + 1}"></td>
+                                <td>
+                                    <!-- 제목을 클릭하면 해당 게시글로 이동 -->
+                                    <a th:href="@{/posts/{postId} (postId=${post.postId()})}"
+                                       th:text="${post.title}"></a>
+                                </td>
+                                <td>
+                                    <img class="grade"
+                                         th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
+                                         alt="프로필">
+                                    <span class="ml-2" th:text="${post.writer}"></span>
+                                </td>
+                                <td th:text="${post.viewCount}"></td>
+                                <td th:text="${post.recommendationCount}"></td>
+                                <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:if="${objects.getTotalElements() == 0}">
+                        <p>게시글이 없습니다.</p>
+                    </div>
 
+                    <!-- 페이징 처리 시작-->
+                    <div th:insert="~{common/paging.html}"></div>
+                    <!-- 페이징 처리 끝-->
+
+                </section>
             </section>
 
-        </div>
+        </section>
+
     </div>
 </div>
 
-<footer th:insert="~{common/footer}"></footer>
+<th:block layout:fragment="script">
 
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+</th:block>
 </body>
 </html>
