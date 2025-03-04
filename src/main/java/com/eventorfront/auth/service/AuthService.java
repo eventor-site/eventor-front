@@ -23,6 +23,6 @@ public interface AuthService {
 	 */
 	boolean hasTokensInCookie(HttpServletRequest request);
 
-	ResponseEntity<String> oauthAuthorization(String registrationId);
+	String oauthAuthorization(String registrationId);
 
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>이벤터</title>
+</head>
+<body>
+<script>
+    if (window.opener) {
+        window.opener.location.href = '/main';  // 부모 창 리다이렉트
+    }
+    window.close();  // 새 창을 닫음
+</script>
+</body>
+</html>

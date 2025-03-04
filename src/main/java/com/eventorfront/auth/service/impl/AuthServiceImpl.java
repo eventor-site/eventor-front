@@ -50,8 +50,8 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public ResponseEntity<String> oauthAuthorization(String registrationId) {
-		return authClient.oauthAuthorization(registrationId);
+	public String oauthAuthorization(String registrationId) {
+		return authClient.oauthAuthorization(registrationId).getBody();
 	}
 
 }
