@@ -13,7 +13,7 @@
     border-radius: 10px;
     overflow: hidden;
     flex: 0 0 auto;
-    width: 200px;
+    width: 95%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin: 0 10px;
@@ -35,9 +35,12 @@
 }
 
 .event-card-title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
 
 .slick-prev i, .slick-next i {
@@ -98,6 +101,9 @@
 
 .post-card-body {
     flex: 1;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
 
 .post-card-title {
@@ -105,6 +111,9 @@
     font-weight: bold;
     margin-bottom: 10px;
     color: #007bff;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
 
 .post-card-meta {

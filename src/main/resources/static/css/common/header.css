@@ -78,6 +78,7 @@
     color: black !important;
     text-decoration: none !important; /* 밑줄 제거 */
     margin-right: 1rem;
+    /*letter-spacing: 3px; !* 글자 간격 조정 *!*/
 }
 
 .search-input {

@@ -1,10 +1,14 @@
 .table {
     border-spacing: 0;
     border-collapse: collapse;
+    table-layout: fixed; /* 열 크기 고정 */
 }
 
 table td, table th {
     vertical-align: middle !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .action-buttons {
