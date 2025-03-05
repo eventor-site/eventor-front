@@ -5,6 +5,7 @@
     <th:block th:replace="~{common/fragments/config}"></th:block>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/get.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/hotDeal.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/comment/list.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/highlight.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
@@ -234,7 +235,7 @@
                         </div>
                     </div>
 
-                    <p th:text="${comment.content}"></p>
+                    <div class="comment" th:text="${comment.content}"></div>
 
                     <div class="sub-comment-form-container"
                          th:data-post-id="${post.postId}"
