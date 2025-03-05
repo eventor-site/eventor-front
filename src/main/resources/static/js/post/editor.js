@@ -165,9 +165,20 @@ document.addEventListener('DOMContentLoaded', async function () {
         formData.append("categoryName", document.getElementById('categoryName').value);
         formData.append("title", document.getElementById('title').value);
         formData.append("content", editor.getHTML());
-        formData.append("startTime", document.getElementById('startTime')?.value || "");
-        formData.append("endTime", document.getElementById('endTime')?.value || "");
         formData.append("isTemp", "true")
+
+        if (categoryName === '핫딜') {
+            formData.append("link", document.getElementById('hotDealLink')?.value || null);
+            formData.append("shoppingMall", document.getElementById('shoppingMall')?.value || null);
+            formData.append("productName", document.getElementById('productName')?.value || null);
+            formData.append("price", document.getElementById('price')?.value || null);
+        }
+
+        if (categoryName !== '자유' && categoryName !== '공지' && categoryName !== '맛집' && categoryName !== '핫딜') {
+            formData.append("startTime", document.getElementById('startTime')?.value || "");
+            formData.append("endTime", document.getElementById('endTime')?.value || "");
+            formData.append("link", document.getElementById('eventLink')?.value || null);
+        }
 
         const response = await fetch('/posts', {
             method: 'POST',
