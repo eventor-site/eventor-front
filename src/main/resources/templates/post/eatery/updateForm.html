@@ -10,7 +10,7 @@
 <body>
 <div layout:fragment="content">
     <div class="body-container">
-        <h5>카테고리: <span th:text="${post.categoryName}">전체</span></h5>
+        <h5>카테고리: <span th:text="${post.categoryName}"></span></h5>
         <hr>
         <form th:action="@{/posts/{postId} (postId=${post.postId})}" th:method="put" id="form"
               enctype="multipart/form-data">
@@ -28,7 +28,8 @@
                     <option value="">카테고리 리스트</option>
                     <option th:each="category : ${categories}"
                             th:text="${category}"
-                            th:value="${category}">
+                            th:value="${category}"
+                            th:selected="${category == post.categoryName}">
                     </option>
                 </select>
             </div>
