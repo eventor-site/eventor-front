@@ -87,19 +87,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 await updatePostWithImage();
             }
         },
-        useDefaultHTMLSanitizer: false,
-        customHTMLSanitizer: (html) => {
-            // 기존의 iframe 필터링 유지
-            html = html.replace(/<iframe.*?src="(.*?)".*?<\/iframe>/gi, (match, src) => {
-                // 허용할 도메인 리스트 (예: Google Maps, YouTube)
-                const allowedDomains = ['https://www.google.com/maps', 'https://www.youtube.com'];
-                if (allowedDomains.some(domain => src.startsWith(domain))) {
-                    return match; // 허용된 도메인의 iframe만 유지
-                }
-                return ''; // 그 외 iframe 태그는 제거
-            });
-            return html;
-        },
         customHTMLRenderer: {
             htmlBlock: {
                 iframe(node) {
