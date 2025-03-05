@@ -42,9 +42,7 @@
             <!-- 제목 및 작성시간 -->
             <div class="title-section">
                 <div class="left">
-                    <div class="post-title">
-                        <p><strong class="label">제목:</strong> <span th:text="${post.title}"></span></p>
-                    </div>
+                    <p><strong class="label">제목:</strong> <span th:text="${post.title}"></span></p>
                 </div>
                 <div class="right">
 
@@ -56,7 +54,7 @@
             <!-- 작성자 및 조회수, 추천수 -->
             <div class="author-section">
                 <div class="left">
-                    <img class="grade" th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
+                    <img class="grade" th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}"
                          alt="프로필">
                     <p><strong class="label">작성자:</strong> <span th:text="${post.writer()}"></span></p>
                 </div>
@@ -196,7 +194,7 @@
                 <div class="comment-container" th:id="${comment.commentId}">
                     <div>
                         <img class="grade"
-                             th:src="@{/profile/{gradeName}.png (gradeName=${comment.gradeName()})}"
+                             th:src="@{/profile/{gradeName}.png (gradeName=${comment.writerGrade})}"
                              alt="프로필">
                         <strong th:text="${comment.writer}"></strong>
                         <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>

@@ -21,7 +21,7 @@
                 <div class="post-card-body">
                     <div class="post-card-title" th:text="${post.title}"></div>
                     <div class="post-card-meta">
-                        <img th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}" alt="프로필">
+                        <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}" alt="프로필">
                         <span th:text="${post.writer}"></span>
                     </div>
                     <div class="post-card-stats">

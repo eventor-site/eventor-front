@@ -12,13 +12,13 @@ public record SearchPostsResponse(
 	String categoryName,
 	String statusName,
 	String writer,
+	String writerGrade,
 	String title,
 	String content,
 	Long recommendationCount,
 	Long viewCount,
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
 	LocalDateTime createdAt,
-	String gradeName,
 	String imageUrl
 ) {
 }

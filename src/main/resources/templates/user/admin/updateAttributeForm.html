@@ -80,14 +80,16 @@
                                 <table class="table table-bordered" style="width: 300px">
                                     <thead>
                                     <tr>
+                                        <th style="width: 20%;">번호</th>
                                         <th>권한</th>
-                                        <th style="width: 50px"></th>
+                                        <th style="width: 25%"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="role : ${userRoles}">
+                                    <tr th:each="role, index : ${userRoles}">
+                                        <td th:text="${index.count}"></td>
                                         <td th:text="${role.name}">권한</td>
-                                        <td style="width: 50px;">
+                                        <td>
                                             <div class="action-buttons">
                                                 <form th:action="@{/users/{userId}/roles/{roleId} (userId=${userId}, roleId=${role.roleId})}"
                                                       th:method="delete">
