@@ -18,7 +18,6 @@
 
             <div>
                 <input type="hidden" id="postId" th:value="${post.postId}">
-                <input type="hidden" id="statusName" th:value="${post.statusName}">
                 <input type="hidden" id="categoryName" name="categoryName" th:value="${post.categoryName}">
             </div>
 
@@ -134,7 +133,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">수정</button>
+            <button type="submit" class="btn btn-primary">등록</button>
             <a class="btn btn-secondary" onclick="history.back()">취소</a>
         </form>
     </div>
@@ -144,6 +143,7 @@
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <script src="/js/post/editor.js"></script>
     <script src="/js/post/imageSelect.js"></script>
+    <script src="/js/eventPost/categorySelect.js"></script>
 </th:block>
 </body>
 </html>

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.category.service.CategoryService;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
@@ -32,6 +31,7 @@ import com.eventorfront.global.util.PermissionUtils;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
+import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
 import com.eventorfront.post.service.PostService;
@@ -61,32 +61,20 @@ public class PostController {
 			throw new ForbiddenException();
 		}
 
-		model.addAttribute("categoryName", categoryName);
+		// 기존 임시 저장 게시물이 있는지 확인
+		model.addAttribute("tempPost", postService.getTempPost());
 
 		// 이벤트 관련 게시물 기본 날짜 값 설정
-		if (!PermissionUtils.categories.contains(categoryName)) {
+		if (roles.contains("admin") && !PermissionUtils.categories.contains(categoryName)) {
+			model.addAttribute("categories", categoryService.getCategories("이벤트"));
 			model.addAttribute("startTime", CalendarUtils.getDate());
 			model.addAttribute("endTime", CalendarUtils.getPlusDate(1));
+			return "post/event/createForm";
+		} else {
+			model.addAttribute("categoryName", categoryName);
+			return "post/create";
 		}
 
-		// 기존 임시 저장 게시물이 있는지 확인
-		model.addAttribute("tempPost", postService.getTempPost());
-
-		return "post/create";
-
-	}
-
-	@AuthorizeRole("admin")
-	@GetMapping("/event/createForm")
-	public String createEventPostForm(Model model) {
-		model.addAttribute("categories", categoryService.getCategories("이벤트"));
-		model.addAttribute("startTime", CalendarUtils.getDate());
-		model.addAttribute("endTime", CalendarUtils.getPlusDate(1));
-
-		// 기존 임시 저장 게시물이 있는지 확인
-		model.addAttribute("tempPost", postService.getTempPost());
-
-		return "eventPost/create";
 	}
 
 	@GetMapping("/{postId}/updateForm")
@@ -95,8 +83,16 @@ public class PostController {
 			throw new ForbiddenException();
 		}
 
-		model.addAttribute("post", postService.getPost(postId));
-		return "post/update";
+		GetPostResponse post = postService.getPost(postId);
+		model.addAttribute("post", post);
+
+		if (!PermissionUtils.categories.contains(post.categoryName())) {
+			model.addAttribute("categories", categoryService.getCategories("이벤트"));
+			return "post/event/updateForm";
+		} else {
+			return "post/update";
+		}
+
 	}
 
 	@GetMapping("/search")
