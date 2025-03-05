@@ -28,7 +28,7 @@
                     <span id="endTime"
                           th:data-end-time="${post.endTime != null ? post.endTime : ''}"
                           th:text="${post.endTime != null ? #temporals.format(post.endTime, 'yyyy-MM-dd HH:mm') : '별도 공지시'}">
-        </span>
+                    </span>
                 </div>
                 <div class="right">
                     <span class="label">남은 시간:</span>
@@ -42,12 +42,12 @@
             <!-- 제목 및 작성시간 -->
             <div class="title-section">
                 <div class="left">
-                    <p><strong class="label">제목:</strong> <span th:text="${post.title}"></span></p>
+                    <div class="post-title">
+                        <p><strong class="label">제목:</strong> <span th:text="${post.title}"></span></p>
+                    </div>
                 </div>
                 <div class="right">
-                    <p><strong class="label">작성시간:</strong>
-                        <span th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
-                    </p>
+
                 </div>
             </div>
 
@@ -64,6 +64,8 @@
                     <p><strong class="label">조회수:</strong> <span th:text="${post.viewCount}"></span></p>
                     <p><strong class="label">추천수:</strong> <span th:text="${post.recommendationCount}"></span></p>
                     <p><strong class="label">댓글수:</strong> <span th:text="${objects.getTotalElements()}"></span></p>
+                    <p><strong class="label">작성시간:</strong><span
+                            th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
                 </div>
             </div>
         </div>
