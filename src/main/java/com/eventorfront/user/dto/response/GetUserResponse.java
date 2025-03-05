@@ -23,6 +23,7 @@ public record GetUserResponse(
 	LocalDateTime connectTime,
 	LocalDateTime createdAt,
 	LocalDateTime updatedTime,
+	LocalDateTime lastNicknameChangeTime,
 	LocalDateTime lastLoginTime
 ) {
 }

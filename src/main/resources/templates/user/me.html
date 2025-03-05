@@ -29,7 +29,7 @@
                             <!--                                <p><strong>전화번호:</strong> <span th:text="${user.phone}"></span></p>-->
                             <!--                                <p><strong>생년월일:</strong> <span th:text="${user.birth}"></span></p>-->
                             <!--                                <p><strong>성별:</strong> <span th:text="${user.gender}"></span></p>-->
-                            <P>※이벤터 주요 공지사항/소식 등이 발송됩니다.</P>
+                            <P>※ 이벤터 주요 공지사항/소식 등이 발송됩니다.</P>
                             <p><strong>포인트:</strong> <span th:text="${user.point}"></span></p>
                         </div>
                     </div>
@@ -63,11 +63,14 @@
                             <p><strong>회원 가입일:</strong> <span
                                     th:text="${#temporals.format(user.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span>
                             </p>
-                            <p><strong>최근 로그인 시간:</strong> <span
-                                    th:text="${#temporals.format(user.lastLoginTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                            </p>
                             <p><strong>정보 수정 시간:</strong> <span
                                     th:text="${#temporals.format(user.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                            </p>
+                            <p><strong>마지막 닉네임 변경 시간:</strong> <span
+                                    th:text="${#temporals.format(user.lastNicknameChangeTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                            </p>
+                            <p><strong>최근 로그인 시간:</strong> <span
+                                    th:text="${#temporals.format(user.lastLoginTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
                             </p>
                         </div>
                     </div>

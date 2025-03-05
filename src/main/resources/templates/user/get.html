@@ -64,11 +64,14 @@
                             <p><strong>회원 가입일:</strong> <span
                                     th:text="${#temporals.format(user.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span>
                             </p>
-                            <p><strong>최근 로그인 시간:</strong> <span
-                                    th:text="${#temporals.format(user.lastLoginTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                            </p>
                             <p><strong>정보 수정 시간:</strong> <span
                                     th:text="${#temporals.format(user.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                            </p>
+                            <p><strong>마지막 닉네임 변경 시간:</strong> <span
+                                    th:text="${#temporals.format(user.lastNicknameChangeTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                            </p>
+                            <p><strong>최근 로그인 시간:</strong> <span
+                                    th:text="${#temporals.format(user.lastLoginTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
                             </p>
                         </div>
                     </div>
