@@ -5,43 +5,31 @@
     <th:block th:replace="~{common/fragments/config}"></th:block>
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/createOrUpdate.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/hotDeal.css"/>
 </head>
 
 <body>
 <div layout:fragment="content">
     <div class="body-container">
-        <form action="/posts" method="post" id="form" enctype="multipart/form-data">
+        <h5>카테고리: <span th:text="${post.categoryName}"></span></h5>
+        <hr>
+        <form th:action="@{/posts/{postId} (postId=${post.postId})}" th:method="put" id="form"
+              enctype="multipart/form-data">
 
             <div>
-                <input type="hidden" id="postId" th:value="${tempPost?.postId}">
+                <input type="hidden" id="postId" th:value="${post.postId}">
+                <input type="hidden" id="categoryName" name="categoryName" th:value="${post.categoryName}">
                 <input type="hidden" id="categoryType" name="categoryType" th:value="${categoryType}">
             </div>
 
             <div class="form-group">
-                <label for="categoryName">카테고리</label>
-
-                <!-- 드롭다운 리스트 (선택 가능) -->
-                <select class="form-control" id="categoryName" name="categoryName" th:value="${categoryName}">
-                    <option value="">카테고리 리스트</option>
-                    <option th:each="category : ${categories}"
-                            th:text="${category}"
-                            th:value="${category}"
-                            th:selected="${category == categoryName}">
-                    </option>
-                </select>
-            </div>
-
-            <hr>
-
-            <div class="form-group">
                 <label for="title">제목</label>
-                <input type="text" class="form-control" id="title" name="title" required>
+                <input type="text" class="form-control" id="title" name="title" th:value="${post.title}" required>
             </div>
 
             <div class="form-group">
-                <label for="content">내용</label>
                 <div id="toastUi"></div>
-                <input type="hidden" id="content" name="content">
+                <input type="hidden" id="content" name="content" th:field="${post.content}">
             </div>
 
             <div class="form-group">
@@ -56,7 +44,7 @@
             </div>
 
             <div class="form-group">
-                <p>총 용량: <span id="totalSize">0</span> / 10MB</p>
+                <p>총 용량: <span id="totalSize" th:text="${post.totalSize}"></span> / 10MB</p>
             </div>
 
             <!-- 이미지 파일 선택 필드 추가 -->
@@ -64,12 +52,19 @@
                 <label for="files">이미지</label>
                 <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple
                        style="width: 50%">
-                <div class="imagePreviewContainer" id="imagePreviewContainer"></div>
+                <div class="imagePreviewContainer" id="imagePreviewContainer">
+                    <div th:each="image : ${post.images}" th:if="${!image.isThumbnail}" class="imageContainer">
+                        <div class="image-preview">
+                            <img th:src="${image.url}" alt="이미지">
+                            <span class="image-name" th:text="${image.originalName}"></span>
+                            <input type="checkbox" class="imageCheckbox" th:data-image-id="${image.imageId}"/>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <button type="submit" class="btn btn-primary">등록</button>
             <a class="btn btn-secondary" onclick="history.back()">취소</a>
-
         </form>
     </div>
 </div>
@@ -78,9 +73,8 @@
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <script src="/js/post/editor.js"></script>
     <script src="/js/post/imageSelect.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/post/tempPostAlert.js"></script>
+    <script src="/js/eventPost/categorySelect.js"></script>
 </th:block>
 </body>
 </html>
+

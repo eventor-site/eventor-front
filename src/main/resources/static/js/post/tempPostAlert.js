@@ -25,8 +25,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             try {
                 await fetch(`/images/temp`, {method: "DELETE"});
                 await fetch(`/posts/temp`, {method: "DELETE"});
-
-
+                
                 window.location.href = `/posts/createForm?categoryName=${categoryName}`;
             } catch (error) {
                 await Swal.fire({

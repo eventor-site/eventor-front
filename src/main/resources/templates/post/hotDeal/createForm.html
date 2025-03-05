@@ -3,6 +3,7 @@
       lang="ko">
 <head>
     <th:block th:replace="~{common/fragments/config}"></th:block>
+
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/createOrUpdate.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/hotDeal.css"/>
@@ -11,42 +12,14 @@
 <body>
 <div layout:fragment="content">
     <div class="body-container">
+        <h5>카테고리: <span th:text="${categoryName}"></span></h5>
+        <hr>
         <form action="/posts" method="post" id="form" enctype="multipart/form-data">
 
             <div>
                 <input type="hidden" id="postId" th:value="${tempPost?.postId}">
+                <input type="hidden" id="categoryName" name="categoryName" th:value="${categoryName}">
                 <input type="hidden" id="categoryType" name="categoryType" th:value="${categoryType}">
-            </div>
-
-            <div class="form-group">
-                <label for="categoryName">카테고리</label>
-
-                <!-- 드롭다운 리스트 (선택 가능) -->
-                <select class="form-control" id="categorySelect">
-                    <option value="">카테고리 리스트</option>
-                    <option th:each="category : ${categories}"
-                            th:text="${category}">
-                    </option>
-                </select>
-
-                <!-- 입력 필드 (검색 가능) -->
-                <input class="form-control" type="text" id="categoryName" name="categoryName" th:value="${categoryName}"
-                       placeholder="카테고리 검색 또는 선택">
-
-                <!-- 자동완성 검색 결과 -->
-                <div id="categoryResults" class="list-group"></div> <!-- 검색 결과 출력 영역 -->
-            </div>
-
-            <hr>
-
-            <div class="form-group d-flex align-items-center">
-                <label for="startTime" style="margin-right: 10px;">이벤트 시작 시간</label>
-                <input type="datetime-local" class="form-control" id="startTime" name="startTime"
-                       th:value="${startTime}" style="width: 200px; margin-right: 20px;" required>
-
-                <label for="endTime" style="margin-right: 10px;">이벤트 종료 시간</label>
-                <input type="datetime-local" class="form-control" id="endTime" name="endTime"
-                       th:value="${endTime}" style="width: 200px;">
             </div>
 
             <div class="form-group">
@@ -54,12 +27,27 @@
                 <input type="text" class="form-control" id="title" name="title" required>
             </div>
 
-            <div>
+
+            <div class="form-group">
                 <table class="table">
                     <tbody>
                     <tr>
                         <th>링크</th>
-                        <td><input type="text" class="form-control" id="eventLink" name="link" required></td>
+                        <td><input type="text" class="form-control" id="hotDealLink" name="link" required></td>
+                    </tr>
+                    <tr>
+                        <th>쇼핑몰</th>
+                        <td><input type="text" class="form-control" id="shoppingMall" name="shoppingMall" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>상품명</th>
+                        <td><input type="text" class="form-control" id="productName" name="productName" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>가격</th>
+                        <td><input type="number" class="form-control" id="price" name="price" required></td>
                     </tr>
                     </tbody>
                 </table>
@@ -68,7 +56,7 @@
             <div class="form-group">
                 <label for="content">내용</label>
                 <div id="toastUi"></div>
-                <input type="hidden" id="content" name="content">
+                <input type="hidden" id="content" name="content" th:value="${content}">
             </div>
 
             <div class="form-group">
@@ -84,13 +72,6 @@
 
             <div class="form-group">
                 <p>총 용량: <span id="totalSize">0</span> / 10MB</p>
-            </div>
-
-            <div class="form-group">
-                <label for="thumbnail">썸네일</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*"
-                       style="width: 50%">
-                <div class="imagePreviewContainer" id="thumbnailPreviewContainer"></div>
             </div>
 
             <!-- 이미지 파일 선택 필드 추가 -->
@@ -115,7 +96,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/post/tempPostAlert.js"></script>
-    <script src="/js/eventPost/categorySelect.js"></script>
 </th:block>
 </body>
 </html>

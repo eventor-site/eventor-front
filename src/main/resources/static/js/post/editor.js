@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const totalSizeElement = document.getElementById('totalSize');
     const categoryName = document.getElementById("categoryName").value; // 카테고리 이름 가져오기
+    const categoryType = document.getElementById("categoryType").value; // 카테고리 유형 가져오기
 
     previewImageEvent();
     InitializeTotalSize(totalSizeElement);  // 초기 totalSize 설정
@@ -110,7 +111,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('content').value = editor.getHTML();
     });
 
-    if (categoryName !== '자유' && categoryName !== '공지' && categoryName !== '맛집' && categoryName !== '핫딜') {
+    if (categoryType === '이벤트') {
         document.getElementById('thumbnail').addEventListener('change', async function (event) {
             let files = event.target.files;
             if (!files.length) return;
@@ -174,7 +175,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             formData.append("price", document.getElementById('price')?.value || null);
         }
 
-        if (categoryName !== '자유' && categoryName !== '공지' && categoryName !== '맛집' && categoryName !== '핫딜') {
+        if (categoryType === '이벤트') {
             formData.append("startTime", document.getElementById('startTime')?.value || "");
             formData.append("endTime", document.getElementById('endTime')?.value || "");
             formData.append("link", document.getElementById('eventLink')?.value || null);
@@ -251,7 +252,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let previewContainer = document.getElementById('imagePreviewContainer');
         previewContainer.innerHTML = '';
 
-        if (categoryName !== '자유' && categoryName !== '공지' && categoryName !== '맛집' && categoryName !== '핫딜') {
+        if (categoryType === '이벤트') {
             previewContainer = document.getElementById('thumbnailPreviewContainer');
             // 기존 미리보기 이미지 초기화
             previewContainer.innerHTML = '';
@@ -350,7 +351,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
         });
 
-        if (categoryName !== '자유' && categoryName !== '공지' && categoryName !== '맛집' && categoryName !== '핫딜') {
+        if (categoryType === '이벤트') {
             previewContainer = document.getElementById('thumbnailPreviewContainer');
 
             // 모든 이미지 컨테이너에 대해 체크박스 상태 변경 처리

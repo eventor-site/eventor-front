@@ -17,6 +17,7 @@
 
             <div>
                 <input type="hidden" id="postId" th:value="${post.postId}">
+                <input type="hidden" id="categoryType" name="categoryType" th:value="${categoryType}">
             </div>
 
             <div class="form-group">
@@ -55,21 +56,6 @@
 
             <div class="form-group">
                 <p>총 용량: <span id="totalSize" th:text="${post.totalSize}"></span> / 10MB</p>
-            </div>
-
-            <div class="form-group">
-                <label for="thumbnail">썸네일</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*"
-                       style="width: 50%">
-                <div class="imagePreviewContainer" id="thumbnailPreviewContainer">
-                    <div th:each="image : ${post.images}" th:if="${image.isThumbnail}" class="imageContainer">
-                        <div class="image-preview">
-                            <img th:src="${image.url}" alt="이미지">
-                            <span class="image-name" th:text="${image.originalName}"></span>
-                            <input type="checkbox" class="imageCheckbox" th:data-image-id="${image.imageId}"/>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- 이미지 파일 선택 필드 추가 -->
