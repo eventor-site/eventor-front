@@ -62,7 +62,7 @@ public class AuthController {
 			response.addCookie(CookieUtil.createCookie("Refresh-Token", refreshToken));
 		}
 
-		return "redirect:/main";
+		return "redirect:/";
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class AuthController {
 		authService.logout();
 		CookieUtil.revokeToken(response, "Access-Token");
 		CookieUtil.revokeToken(response, "Refresh-Token");
-		return "redirect:/main";
+		return "redirect:/";
 	}
 
 	/**
