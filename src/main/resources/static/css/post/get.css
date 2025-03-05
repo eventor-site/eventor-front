@@ -28,11 +28,6 @@
     margin-right: 5px;
 }
 
-.post-title {
-    width: 80%; /* 제목이 차지할 최대 너비 설정 */
-    word-wrap: break-word; /* 긴 단어가 있을 경우 줄바꿈 */
-}
-
 .post-header .remaining-time {
     width: 220px;
     font-weight: 600;

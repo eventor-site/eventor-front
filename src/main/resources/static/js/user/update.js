@@ -65,6 +65,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const nickname = this.value.trim();
         const feedbackElement = document.getElementById('nicknameFeedback');
 
+        // 글자 수 체크 (1~10자 제한)
+        if (nickname.length < 1 || nickname.length > 10) {
+            feedbackElement.textContent = '10자 이하로 입력해주세요.';
+            feedbackElement.className = "mismatch";
+            isNicknameValid = false;
+            updateButtonState();
+            return;
+        }
+
         if (!nickname) {
             feedbackElement.textContent = '닉네임을 입력해주세요.';
             feedbackElement.className = "mismatch";

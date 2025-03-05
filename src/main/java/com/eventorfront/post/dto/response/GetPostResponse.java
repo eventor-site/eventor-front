@@ -12,6 +12,7 @@ public record GetPostResponse(
 	Long postId,
 	String categoryName,
 	String writer,
+	String writerGrade,
 	String title,
 	String link,
 	String shoppingMall,
@@ -26,7 +27,6 @@ public record GetPostResponse(
 	String statusName,
 	List<GetImageResponse> images,
 	Double totalSize,
-	String gradeName,
 	Boolean isAuthorized,
 	Boolean isFavorite) {
 }
