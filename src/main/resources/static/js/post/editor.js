@@ -86,6 +86,43 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // 이미지 URL 이 본문에 반영된 후, 서버로 업데이트 요청
                 await updatePostWithImage();
             }
+        },
+        useDefaultHTMLSanitizer: false,
+        customHTMLSanitizer: (html) => {
+            // 기존의 iframe 필터링 유지
+            html = html.replace(/<iframe.*?src="(.*?)".*?<\/iframe>/gi, (match, src) => {
+                // 허용할 도메인 리스트 (예: Google Maps, YouTube)
+                const allowedDomains = ['https://www.google.com/maps', 'https://www.youtube.com'];
+                if (allowedDomains.some(domain => src.startsWith(domain))) {
+                    return match; // 허용된 도메인의 iframe만 유지
+                }
+                return ''; // 그 외 iframe 태그는 제거
+            });
+            return html;
+        },
+        customHTMLRenderer: {
+            htmlBlock: {
+                iframe(node) {
+                    const iframeSrc = node.attrs.src;
+
+                    // iframe src가 허용된 도메인에 해당하는지 확인
+                    const allowedDomains = ['https://www.google.com/maps', 'https://www.youtube.com'];
+                    if (allowedDomains.some(domain => iframeSrc.startsWith(domain))) {
+                        return [
+                            {
+                                type: 'openTag',
+                                tagName: 'iframe',
+                                outerNewLine: true,
+                                attributes: node.attrs // iframe 태그 속성
+                            },
+                            {type: 'html', content: node.childrenHTML}, // iframe 안의 HTML 콘텐츠
+                            {type: 'closeTag', tagName: 'iframe', outerNewLine: true}
+                        ];
+                    }
+
+                    return ''; // 허용되지 않은 iframe은 렌더링하지 않음
+                }
+            }
         }
     });
 
