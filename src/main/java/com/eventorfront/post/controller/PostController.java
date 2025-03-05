@@ -100,24 +100,19 @@ public class PostController {
 		model.addAttribute("post", post);
 
 		if (categoryName.equals("자유")) {
-			model.addAttribute("categoryName", categoryName);
 			model.addAttribute("categoryType", "자유");
 			return "post/updateForm";
 		} else if (categoryName.equals("핫딜")) {
-			model.addAttribute("categoryName", categoryName);
 			model.addAttribute("categoryType", "핫딜");
 			return "post/hotDeal/updateForm";
 		} else if (PermissionUtils.bestFoodCategories.contains(categoryName)) {
-			model.addAttribute("categoryName", categoryName);
 			model.addAttribute("categoryType", "맛집");
 			model.addAttribute("categories", categoryService.getCategories("맛집"));
 			return "post/eatery/updateForm";
 		} else if (categoryName.equals("공지")) {
-			model.addAttribute("categoryName", categoryName);
 			model.addAttribute("categoryType", "공지");
 			return "post/updateForm";
 		} else {
-			model.addAttribute("categoryName", categoryName);
 			model.addAttribute("categoryType", "이벤트");
 			model.addAttribute("categories", categoryService.getCategories("이벤트"));
 			return "post/event/updateForm";
