@@ -15,12 +15,12 @@ public class IndexController {
 	private final PostService postService;
 	private final BookmarkService bookmarkService;
 
-	@GetMapping("/")
-	public String indexPage() {
-		return "index";
-	}
+	// @GetMapping("/")
+	// public String indexPage() {
+	// 	return "index";
+	// }
 
-	@GetMapping("/main")
+	@GetMapping("/")
 	public String mainPage(Model model) {
 		model.addAttribute("hotPosts", postService.getHotEventPosts());
 		model.addAttribute("latestPosts", postService.getLatestEventPosts());
