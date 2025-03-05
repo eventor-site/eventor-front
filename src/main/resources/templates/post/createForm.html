@@ -20,58 +20,12 @@
                 <input type="hidden" id="postId" th:value="${tempPost?.postId}">
                 <input type="hidden" id="statusName" th:value="${tempPost?.statusName}">
                 <input type="hidden" id="categoryName" name="categoryName" th:value="${categoryName}">
-            </div>
-
-            <div th:if="${categoryName != '자유' and categoryName != '공지' and categoryName != '맛집' and categoryName != '핫딜'}"
-                 class="form-group d-flex align-items-center">
-                <label for="startTime" style="margin-right: 10px;">이벤트 시작 시간</label>
-                <input type="datetime-local" class="form-control" id="startTime" name="startTime"
-                       th:value="${startTime}" style="width: 200px; margin-right: 20px;" required>
-
-                <label for="endTime" style="margin-right: 10px;">이벤트 종료 시간</label>
-                <input type="datetime-local" class="form-control" id="endTime" name="endTime"
-                       th:value="${endTime}" style="width: 200px;">
+                <input type="hidden" id="categoryType" name="categoryType" th:value="${categoryType}">
             </div>
 
             <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" class="form-control" id="title" name="title" required>
-            </div>
-
-            <div th:if="${categoryName != '자유' and categoryName != '공지' and categoryName != '맛집' and categoryName != '핫딜'}">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <th>링크</th>
-                        <td><input type="text" class="form-control" id="eventLink" name="link" required></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div th:if="${categoryName == '핫딜'}" class="form-group">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <th>링크</th>
-                        <td><input type="text" class="form-control" id="hotDealLink" name="link" required></td>
-                    </tr>
-                    <tr>
-                        <th>쇼핑몰</th>
-                        <td><input type="text" class="form-control" id="shoppingMall" name="shoppingMall" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>상품명</th>
-                        <td><input type="text" class="form-control" id="productName" name="productName" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>가격</th>
-                        <td><input type="number" class="form-control" id="price" name="price" required></td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
 
             <div class="form-group">
@@ -93,14 +47,6 @@
 
             <div class="form-group">
                 <p>총 용량: <span id="totalSize">0</span> / 10MB</p>
-            </div>
-
-            <div th:if="${categoryName != '자유' and categoryName != '공지' and categoryName != '맛집' and categoryName != '핫딜'}"
-                 class="form-group">
-                <label for="thumbnail">썸네일</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*"
-                       style="width: 50%">
-                <div class="imagePreviewContainer" id="thumbnailPreviewContainer"></div>
             </div>
 
             <!-- 이미지 파일 선택 필드 추가 -->
