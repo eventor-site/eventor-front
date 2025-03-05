@@ -55,9 +55,8 @@ public class PostController {
 	public String createPostForm(@RequestParam String categoryName, Model model) {
 		List<String> roles = userService.meRoles();
 
-		// 비회원일 경우 차단, 멤버는 허용된 카테고리만 접근 가능
-		if (roles.isEmpty() || !roles.contains("admin") && !PermissionUtils.categories.contains(
-			categoryName)) {
+		// 비회원일 경우 차단
+		if (roles.isEmpty()) {
 			throw new ForbiddenException();
 		}
 
@@ -65,11 +64,15 @@ public class PostController {
 		model.addAttribute("tempPost", postService.getTempPost());
 
 		// 이벤트 관련 게시물 기본 날짜 값 설정
-		if (roles.contains("admin") && !PermissionUtils.categories.contains(categoryName)) {
+		if (roles.contains("admin") && !PermissionUtils.categories.contains(categoryName)
+			&& !PermissionUtils.bestFoodCategories.contains(categoryName)) {
 			model.addAttribute("categories", categoryService.getCategories("이벤트"));
 			model.addAttribute("startTime", CalendarUtils.getDate());
 			model.addAttribute("endTime", CalendarUtils.getPlusDate(1));
 			return "post/event/createForm";
+		} else if (PermissionUtils.bestFoodCategories.contains(categoryName)) {
+			model.addAttribute("categories", categoryService.getCategories("맛집"));
+			return "post/eatery/createForm";
 		} else {
 			model.addAttribute("categoryName", categoryName);
 			return "post/create";
@@ -86,9 +89,13 @@ public class PostController {
 		GetPostResponse post = postService.getPost(postId);
 		model.addAttribute("post", post);
 
-		if (!PermissionUtils.categories.contains(post.categoryName())) {
+		if (!PermissionUtils.categories.contains(post.categoryName()) && !PermissionUtils.bestFoodCategories.contains(
+			post.categoryName())) {
 			model.addAttribute("categories", categoryService.getCategories("이벤트"));
 			return "post/event/updateForm";
+		} else if (PermissionUtils.bestFoodCategories.contains(post.categoryName())) {
+			model.addAttribute("categories", categoryService.getCategories("맛집"));
+			return "post/eatery/updateForm";
 		} else {
 			return "post/update";
 		}

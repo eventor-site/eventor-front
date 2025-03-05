@@ -68,3 +68,77 @@
 .category-item:hover .sub-category {
     display: block;
 }
+
+
+/*---------------------------------------------------------------------------------------*/
+
+/* 카테고리를 가로 정렬 */
+.eatery-category-menu {
+    display: flex;
+    flex-direction: row; /* 가로 배치 */
+    gap: 10px;
+    position: relative;
+}
+
+/* 카테고리 버튼 */
+.eatery-category-item {
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+    white-space: nowrap; /* 글자가 줄바꿈되지 않도록 설정 */
+}
+
+/* 하위 카테고리 그룹 */
+.eatery-category-group {
+    display: flex;
+    flex-direction: row; /* 가로 배치 */
+    gap: 1rem;
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    top: 100%;
+    left: 87%;
+    z-index: 10;
+    visibility: hidden; /* 기본적으로 숨김 */
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* #category-menu-button 또는 .category-group 에 마우스를 올렸을 때 하위 카테고리 표시 */
+#eatery-category-menu-button:hover + .eatery-category-group,
+.eatery-category-group:hover {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* 개별 하위 카테고리 */
+.eatery-sub-category {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid black;
+    width: 150px;
+    z-index: 10;
+}
+
+/* 하위 카테고리 링크 */
+.eatery-sub-category a {
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    color: black;
+}
+
+.eatery-sub-category a:hover {
+    font-weight: bold;
+    background-color: #ddd;
+    color: #5783f1;
+}
+
+/* 상위 카테고리에 마우스를 올렸을 때 하위 카테고리 표시 */
+.eatery-category-item:hover .eatery-sub-category {
+    display: block;
+}
