@@ -18,9 +18,9 @@
                 <div class="category-menu" th:insert="~{common/category-menu}"></div>
 
                 <div class="right-menu">
-                    <a id="myPageLink" th:href="@{/users/me}" style="display:none;">
+                    <a id="myPageLink" th:href="@{/users/me}" style="white-space: nowrap; display:none;">
                         <i class="fa-solid fa-user"></i>
-                        <span class="menu-tag">마이페이지</span>
+                        <span>마이페이지</span>
                     </a>
 
                     <form id="loginForm" action="/auth/login" method="get">
