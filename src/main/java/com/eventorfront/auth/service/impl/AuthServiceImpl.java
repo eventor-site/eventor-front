@@ -1,11 +1,11 @@
 package com.eventorfront.auth.service.impl;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.auth.client.AuthClient;
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
+import com.eventorfront.auth.dto.response.OauthRedirectUrlResponse;
 import com.eventorfront.auth.service.AuthService;
 
 import jakarta.servlet.http.Cookie;
@@ -18,8 +18,8 @@ public class AuthServiceImpl implements AuthService {
 	private final AuthClient authClient;
 
 	@Override
-	public ResponseEntity<LoginResponse> login(LoginRequest request) {
-		return authClient.login(request);
+	public LoginResponse login(LoginRequest request) {
+		return authClient.login(request).getData();
 	}
 
 	@Override
@@ -50,8 +50,8 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public String oauthAuthorization(String registrationId) {
-		return authClient.oauthAuthorization(registrationId).getBody();
+	public OauthRedirectUrlResponse oauthAuthorization(String registrationId) {
+		return authClient.oauthAuthorization(registrationId).getData();
 	}
 
 }
