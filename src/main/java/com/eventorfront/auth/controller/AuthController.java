@@ -4,7 +4,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +41,7 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public String login(@ModelAttribute LoginRequest request, HttpServletResponse response) {
-		LoginResponse loginResponse = authService.login(request).getBody();
+		LoginResponse loginResponse = authService.login(request);
 
 		String accessToken;
 		String refreshToken;
@@ -81,12 +80,12 @@ public class AuthController {
 	 */
 	@GetMapping("/hasTokens")
 	public ResponseEntity<Boolean> hasTokensInCookie(HttpServletRequest request) {
-		return ResponseEntity.status(HttpStatus.OK).body(authService.hasTokensInCookie(request));
+		return ResponseEntity.ok().body(authService.hasTokensInCookie(request));
 	}
 
 	@GetMapping("/oauth2/authorization/{registrationId}")
 	public RedirectView oauthAuthorization(@PathVariable String registrationId) {
-		return new RedirectView(authService.oauthAuthorization(registrationId));
+		return new RedirectView(authService.oauthAuthorization(registrationId).oauthRedirectUrl());
 	}
 
 	@GetMapping("/oauth2/login")
