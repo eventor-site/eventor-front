@@ -32,8 +32,8 @@
                     </div>
                     <div class="form-group">
                         <!-- 로그인 실패 메시지 출력 -->
-                        <div th:if="${message}" class="text-danger">
-                            <small th:text="${message}"></small>
+                        <div th:if="${errorMessage}" class="text-danger">
+                            <small th:text="${errorMessage}"></small>
                         </div>
                     </div>
                     <button type="submit" id="loginButton">로그인

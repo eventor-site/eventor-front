@@ -2,7 +2,6 @@ package com.eventorfront.image.service.impl;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,16 +20,16 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public List<GetImageResponse> upload(MultipartFile file, Long postId, boolean isThumbnail,
 		boolean isPasted) {
-		return imageClient.upload(file, "postimage", postId, isThumbnail, isPasted).getBody();
+		return imageClient.upload(file, "postimage", postId, isThumbnail, isPasted).getData();
 	}
 
 	@Override
 	public List<GetImageResponse> deleteImages(DeleteImageRequest request) {
-		return imageClient.deleteImages(request).getBody();
+		return imageClient.deleteImages(request).getData();
 	}
 
 	@Override
-	public ResponseEntity<Void> deleteTempImage() {
-		return imageClient.deleteTempImage();
+	public void deleteTempImage() {
+		imageClient.deleteTempImage();
 	}
 }

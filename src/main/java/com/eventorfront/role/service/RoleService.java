@@ -11,9 +11,9 @@ public interface RoleService {
 
 	RoleDto getRole(Long roleId);
 
-	void createRole(RoleDto request);
+	String createRole(RoleDto request);
 
-	void updateRole(Long roleId, RoleDto request);
+	String updateRole(Long roleId, RoleDto request);
 
-	void deleteRole(Long roleId);
+	String deleteRole(Long roleId);
 }

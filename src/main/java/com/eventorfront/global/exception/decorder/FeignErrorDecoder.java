@@ -1,6 +1,7 @@
 package com.eventorfront.global.exception.decorder;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ import com.eventorfront.global.exception.ForbiddenException;
 import com.eventorfront.global.exception.NotFoundException;
 import com.eventorfront.global.exception.ServerException;
 import com.eventorfront.global.exception.UnauthorizedException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import feign.FeignException;
@@ -24,14 +26,14 @@ public class FeignErrorDecoder implements ErrorDecoder {
 	public Exception decode(String methodKey, Response response) {
 		try {
 			// Feign 응답 바디를 InputStream 으로 읽어 JSON 변환
-			String errorMessage = new String(response.body().asInputStream().readAllBytes(), StandardCharsets.UTF_8);
+			// String errorMessage = new String(response.body().asInputStream().readAllBytes(), StandardCharsets.UTF_8);
 
-			//  Feign 응답 바디가 JSON 형식인 경우
-			// String responseBody = new String(response.body().asInputStream().readAllBytes(), StandardCharsets.UTF_8);
-			// Map<String, String> errorMap = objectMapper.readValue(responseBody, new TypeReference<>() {
-			// });
-			//
-			// String errorMessage = errorMap.get("message");
+			// Feign 응답 바디가 JSON 형식인 경우
+			String responseBody = new String(response.body().asInputStream().readAllBytes(), StandardCharsets.UTF_8);
+			Map<String, String> errorMap = objectMapper.readValue(responseBody, new TypeReference<>() {
+			});
+
+			String errorMessage = errorMap.get("message");
 
 			return switch (response.status()) {
 				case 400 -> new BadRequestException(errorMessage);

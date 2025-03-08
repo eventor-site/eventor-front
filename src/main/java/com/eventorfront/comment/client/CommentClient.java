@@ -4,7 +4,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,38 +16,39 @@ import com.eventorfront.comment.dto.request.UpdateCommentRequest;
 import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
 import com.eventorfront.comment.dto.response.GetCommentPageResponse;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
+import com.eventorfront.global.dto.ApiResponse;
 
 @FeignClient(name = "comment-client", url = "${feignClient.url}")
 public interface CommentClient {
 
 	@GetMapping("/back/posts/{postId}/comments/paging")
-	ResponseEntity<Page<GetCommentResponse>> getCommentsByPostId(
+	ApiResponse<Page<GetCommentResponse>> getCommentsByPostId(
 		@PageableDefault(page = 1, size = 10) Pageable pageable, @PathVariable Long postId);
 
 	@GetMapping("/back/users/admin/comments/paging")
-	ResponseEntity<Page<GetCommentByUserIdResponse>> getComments(
+	ApiResponse<Page<GetCommentByUserIdResponse>> getComments(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/users/me/comments/paging")
-	ResponseEntity<Page<GetCommentByUserIdResponse>> getCommentsByUserId(
+	ApiResponse<Page<GetCommentByUserIdResponse>> getCommentsByUserId(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/posts/{postId}/comments/{commentId}")
-	ResponseEntity<GetCommentPageResponse> getComment(@PathVariable Long postId, @PathVariable Long commentId);
+	ApiResponse<GetCommentPageResponse> getComment(@PathVariable Long postId, @PathVariable Long commentId);
 
 	@PostMapping("/back/posts/{postId}/comments")
-	ResponseEntity<Void> createComment(@PathVariable Long postId, @RequestBody CreateCommentRequest request);
+	ApiResponse<Void> createComment(@PathVariable Long postId, @RequestBody CreateCommentRequest request);
 
 	@PutMapping("/back/posts/{postId}/comments/{commentId}")
-	ResponseEntity<Void> updateComment(@PathVariable Long postId, @PathVariable Long commentId,
+	ApiResponse<Void> updateComment(@PathVariable Long postId, @PathVariable Long commentId,
 		@RequestBody UpdateCommentRequest request);
 
 	@PutMapping("/back/posts/{postId}/comments/{commentId}/recommend")
-	ResponseEntity<String> recommendComment(@PathVariable Long postId, @PathVariable Long commentId);
+	ApiResponse<Void> recommendComment(@PathVariable Long postId, @PathVariable Long commentId);
 
 	@PutMapping("/back/posts/{postId}/comments/{commentId}/disrecommend")
-	ResponseEntity<String> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId);
+	ApiResponse<Void> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId);
 
 	@DeleteMapping("/back/posts/{postId}/comments/{commentId}")
-	ResponseEntity<Void> deleteComment(@PathVariable Long postId, @PathVariable Long commentId);
+	ApiResponse<Void> deleteComment(@PathVariable Long postId, @PathVariable Long commentId);
 }

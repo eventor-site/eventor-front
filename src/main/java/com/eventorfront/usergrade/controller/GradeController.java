@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
@@ -49,20 +50,21 @@ public class GradeController {
 	}
 
 	@PostMapping
-	public String createGrade(@ModelAttribute GradeDto request) {
-		gradeService.createGrade(request);
+	public String createGrade(@ModelAttribute GradeDto request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", gradeService.createGrade(request));
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{gradeId}")
-	public String updateGrade(@PathVariable Long gradeId, @ModelAttribute GradeDto request) {
-		gradeService.updateGrade(gradeId, request);
+	public String updateGrade(@PathVariable Long gradeId, @ModelAttribute GradeDto request,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", gradeService.updateGrade(gradeId, request));
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{gradeId}")
-	public String deleteGrade(@PathVariable Long gradeId) {
-		gradeService.deleteGrade(gradeId);
+	public String deleteGrade(@PathVariable Long gradeId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", gradeService.deleteGrade(gradeId));
 		return REDIRECT_URL;
 	}
 }

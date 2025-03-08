@@ -15,9 +15,9 @@ public interface ReportTypeService {
 
 	ReportTypeDto getReportType(Long reportTypeId);
 
-	void createReportType(ReportTypeDto request);
+	String createReportType(ReportTypeDto request);
 
-	void updateReportType(Long reportTypeId, ReportTypeDto request);
+	String updateReportType(Long reportTypeId, ReportTypeDto request);
 
-	void deleteReportType(Long reportTypeId);
+	String deleteReportType(Long reportTypeId);
 }

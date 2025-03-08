@@ -15,9 +15,9 @@ public interface GradeService {
 
 	GradeDto getGrade(Long gradeId);
 
-	void createGrade(GradeDto request);
+	String createGrade(GradeDto request);
 
-	void updateGrade(Long gradeId, GradeDto request);
+	String updateGrade(Long gradeId, GradeDto request);
 
-	void deleteGrade(Long gradeId);
+	String deleteGrade(Long gradeId);
 }

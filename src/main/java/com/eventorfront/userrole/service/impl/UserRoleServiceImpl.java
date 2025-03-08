@@ -17,23 +17,22 @@ public class UserRoleServiceImpl implements UserRoleService {
 
 	@Override
 	public List<RoleDto> getUserRoles(Long userId) {
-		return userRoleClient.getUserRoles(userId).getBody();
+		return userRoleClient.getUserRoles(userId).getData();
 	}
 
 	@Override
 	public List<RoleDto> getUnassignedUserRoles(Long userId) {
-		return userRoleClient.getUnassignedUserRoles(userId).getBody();
+		return userRoleClient.getUnassignedUserRoles(userId).getData();
 	}
 
 	@Override
-	public void createUserRole(Long userId, Long roleId) {
-		userRoleClient.createUserRole(userId, roleId);
-
+	public String createUserRole(Long userId, Long roleId) {
+		return userRoleClient.createUserRole(userId, roleId).getMessage();
 	}
 
 	@Override
-	public void deleteUserRole(Long userId, Long roleId) {
-		userRoleClient.deleteUserRole(userId, roleId);
+	public String deleteUserRole(Long userId, Long roleId) {
+		return userRoleClient.deleteUserRole(userId, roleId).getMessage();
 	}
 
 }

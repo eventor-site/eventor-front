@@ -17,9 +17,7 @@ public interface UserStopService {
 
 	UserStopDto getUserStop(Long userStopId);
 
-	void createUserStop(UserStopDto request);
+	String createUserStop(UserStopDto request);
 
-	void updateUserStop(Long userStopId, UserStopDto request);
-
-	void deleteUserStop(Long userStopId);
+	String deleteUserStop(Long userStopId);
 }

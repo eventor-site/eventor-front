@@ -19,31 +19,31 @@ public class GradeServiceImpl implements GradeService {
 
 	@Override
 	public List<GradeDto> getGrades() {
-		return gradeClient.getGrades().getBody();
+		return gradeClient.getGrades().getData();
 	}
 
 	@Override
 	public GradeDto getGrade(Long gradeId) {
-		return gradeClient.getGrade(gradeId).getBody();
+		return gradeClient.getGrade(gradeId).getData();
 	}
 
 	@Override
 	public Page<GradeDto> getGrades(Pageable pageable) {
-		return gradeClient.getGrades(pageable).getBody();
+		return gradeClient.getGrades(pageable).getData();
 	}
 
 	@Override
-	public void createGrade(GradeDto request) {
-		gradeClient.createGrade(request);
+	public String createGrade(GradeDto request) {
+		return gradeClient.createGrade(request).getMessage();
 	}
 
 	@Override
-	public void updateGrade(Long statusTypeId, GradeDto request) {
-		gradeClient.updateGrade(statusTypeId, request);
+	public String updateGrade(Long statusTypeId, GradeDto request) {
+		return gradeClient.updateGrade(statusTypeId, request).getMessage();
 	}
 
 	@Override
-	public void deleteGrade(Long statusTypeId) {
-		gradeClient.deleteGrade(statusTypeId);
+	public String deleteGrade(Long statusTypeId) {
+		return gradeClient.deleteGrade(statusTypeId).getMessage();
 	}
 }

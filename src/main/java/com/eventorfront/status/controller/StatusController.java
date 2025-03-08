@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
@@ -54,20 +55,21 @@ public class StatusController {
 	}
 
 	@PostMapping
-	public String createStatus(@ModelAttribute StatusRequest request) {
-		statusService.createStatus(request);
+	public String createStatus(@ModelAttribute StatusRequest request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", statusService.createStatus(request));
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{statusId}")
-	public String updateStatus(@PathVariable Long statusId, @ModelAttribute StatusRequest request) {
-		statusService.updateStatus(statusId, request);
+	public String updateStatus(@PathVariable Long statusId, @ModelAttribute StatusRequest request,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", statusService.updateStatus(statusId, request));
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{statusId}")
-	public String deleteStatus(@PathVariable Long statusId) {
-		statusService.deleteStatus(statusId);
+	public String deleteStatus(@PathVariable Long statusId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", statusService.deleteStatus(statusId));
 		return REDIRECT_URL;
 	}
 }

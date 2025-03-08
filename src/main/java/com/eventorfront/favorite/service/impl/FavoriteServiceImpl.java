@@ -2,7 +2,6 @@ package com.eventorfront.favorite.service.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.favorite.client.FavoriteClient;
@@ -18,16 +17,16 @@ public class FavoriteServiceImpl implements FavoriteService {
 
 	@Override
 	public Page<GetFavoriteResponse> getFavoritesByUserId(Pageable pageable) {
-		return favoriteClient.getFavoritesByUserId(pageable).getBody();
+		return favoriteClient.getFavoritesByUserId(pageable).getData();
 	}
 
 	@Override
-	public ResponseEntity<String> createOrDeleteFavorite(Long postId) {
-		return favoriteClient.createOrDeleteFavorite(postId);
+	public String createOrDeleteFavorite(Long postId) {
+		return favoriteClient.createOrDeleteFavorite(postId).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> deleteFavorite(Long favoriteId) {
-		return favoriteClient.deleteFavorite(favoriteId);
+	public String deleteFavorite(Long favoriteId) {
+		return favoriteClient.deleteFavorite(favoriteId).getMessage();
 	}
 }

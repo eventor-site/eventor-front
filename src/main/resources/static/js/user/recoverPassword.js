@@ -7,7 +7,8 @@ const recoverPassword = async () => {
     );
 
     const message = await response.text();
-    
-    alert(message); // 알림 메시지 출력
-    window.location.href = '/auth/login'; // 리다이렉트
+
+    // alert(message); // 알림 메시지 출력
+    alertMessage(message)
+    // window.location.href = '/auth/login'; // 리다이렉트
 }

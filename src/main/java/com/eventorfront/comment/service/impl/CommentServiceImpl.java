@@ -2,7 +2,6 @@ package com.eventorfront.comment.service.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.comment.client.CommentClient;
@@ -22,46 +21,46 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Page<GetCommentResponse> getCommentsByPostId(Pageable pageable, Long postId) {
-		return commentClient.getCommentsByPostId(pageable, postId).getBody();
+		return commentClient.getCommentsByPostId(pageable, postId).getData();
 	}
 
 	@Override
 	public Page<GetCommentByUserIdResponse> getComments(Pageable pageable) {
-		return commentClient.getComments(pageable).getBody();
+		return commentClient.getComments(pageable).getData();
 	}
 
 	@Override
 	public Page<GetCommentByUserIdResponse> getCommentsByUserId(Pageable pageable) {
-		return commentClient.getCommentsByUserId(pageable).getBody();
+		return commentClient.getCommentsByUserId(pageable).getData();
 	}
 
 	@Override
 	public GetCommentPageResponse getComment(Long postId, Long commentId) {
-		return commentClient.getComment(postId, commentId).getBody();
+		return commentClient.getComment(postId, commentId).getData();
 	}
 
 	@Override
-	public void createComment(Long postId, CreateCommentRequest request) {
-		commentClient.createComment(postId, request);
+	public String createComment(Long postId, CreateCommentRequest request) {
+		return commentClient.createComment(postId, request).getMessage();
 	}
 
 	@Override
-	public void updateComment(Long postId, Long commentId, UpdateCommentRequest request) {
-		commentClient.updateComment(postId, commentId, request);
+	public String updateComment(Long postId, Long commentId, UpdateCommentRequest request) {
+		return commentClient.updateComment(postId, commentId, request).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> recommendComment(Long postId, Long commentId) {
-		return commentClient.recommendComment(postId, commentId);
+	public String recommendComment(Long postId, Long commentId) {
+		return commentClient.recommendComment(postId, commentId).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> disrecommendComment(Long postId, Long commentId) {
-		return commentClient.disrecommendComment(postId, commentId);
+	public String disrecommendComment(Long postId, Long commentId) {
+		return commentClient.disrecommendComment(postId, commentId).getMessage();
 	}
 
 	@Override
-	public void deleteComment(Long postId, Long commentId) {
-		commentClient.deleteComment(postId, commentId);
+	public String deleteComment(Long postId, Long commentId) {
+		return commentClient.deleteComment(postId, commentId).getMessage();
 	}
 }

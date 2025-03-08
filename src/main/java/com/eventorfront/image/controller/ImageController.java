@@ -36,7 +36,8 @@ public class ImageController {
 
 	@DeleteMapping("/temp")
 	public ResponseEntity<Void> deleteTempImage() {
-		return imageService.deleteTempImage();
+		imageService.deleteTempImage();
+		return ResponseEntity.ok().build();
 	}
 
 }

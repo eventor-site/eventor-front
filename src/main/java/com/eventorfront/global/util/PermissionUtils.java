@@ -1,6 +1,7 @@
 package com.eventorfront.global.util;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import lombok.Getter;
 
@@ -13,6 +14,9 @@ public class PermissionUtils {
 		"광주", "대구", "대전", "부산", "울산", "인천",
 		"강원도", "경기도", "경남", "경북", "전남", "전북", "충남", "충북"
 	);
+
+	public static final List<String> memberCategories = Stream.concat(categories.stream(), bestFoodCategories.stream())
+		.toList();
 
 	private PermissionUtils() {
 		throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");

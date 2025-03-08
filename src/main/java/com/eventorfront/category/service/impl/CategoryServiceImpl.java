@@ -23,36 +23,36 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public List<GetCategoryNameResponse> searchCategories(String keyword) {
-		return categoryClient.searchCategories(keyword).getBody();
+		return categoryClient.searchCategories(keyword).getData();
 	}
 
 	@Override
 	public List<String> getCategories(String categoryName) {
-		return categoryClient.getCategories(categoryName).getBody();
+		return categoryClient.getCategories(categoryName).getData();
 	}
 
 	@Override
 	public Page<GetCategoryListResponse> getCategories(Pageable pageable) {
-		return categoryClient.getCategories(pageable).getBody();
+		return categoryClient.getCategories(pageable).getData();
 	}
 
 	@Override
 	public GetCategoryResponse getCategory(Long categoryId) {
-		return categoryClient.getCategory(categoryId).getBody();
+		return categoryClient.getCategory(categoryId).getData();
 	}
 
 	@Override
-	public void createCategory(CreateCategoryRequest request) {
-		categoryClient.createCategory(request);
+	public String createCategory(CreateCategoryRequest request) {
+		return categoryClient.createCategory(request).getMessage();
 	}
 
 	@Override
-	public void updateCategory(Long statusTypeId, UpdateCategoryRequest request) {
-		categoryClient.updateCategory(statusTypeId, request);
+	public String updateCategory(Long statusTypeId, UpdateCategoryRequest request) {
+		return categoryClient.updateCategory(statusTypeId, request).getMessage();
 	}
 
 	@Override
-	public void deleteCategory(Long statusTypeId) {
-		categoryClient.deleteCategory(statusTypeId);
+	public String deleteCategory(Long statusTypeId) {
+		return categoryClient.deleteCategory(statusTypeId).getMessage();
 	}
 }

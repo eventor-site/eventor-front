@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.dto.request.SignUpRequest;
@@ -137,14 +138,14 @@ public class UserController {
 	}
 
 	@PutMapping("/me")
-	public String updateUser(@ModelAttribute UpdateUserRequest request) {
-		userService.updateUser(request);
+	public String updateUser(@ModelAttribute UpdateUserRequest request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", userService.updateUser(request));
 		return "redirect:/users/me";
 	}
 
 	@DeleteMapping("/me")
-	public String withdrawUser(HttpServletResponse response) {
-		userService.withdrawUser();
+	public String withdrawUser(HttpServletResponse response, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", userService.withdrawUser());
 		authService.logout();
 		CookieUtil.revokeToken(response, "Access-Token");
 		CookieUtil.revokeToken(response, "Refresh-Token");
@@ -153,12 +154,12 @@ public class UserController {
 
 	@PostMapping("/me/checkNickname")
 	ResponseEntity<String> meCheckNickname(@ModelAttribute CheckNicknameRequest request) {
-		return userService.meCheckNickname(request);
+		return ResponseEntity.ok(userService.meCheckNickname(request));
 	}
 
 	@PutMapping("/me/password")
-	public String modifyPassword(@ModelAttribute ModifyPasswordRequest request) {
-		userService.modifyPassword(request);
+	public String modifyPassword(@ModelAttribute ModifyPasswordRequest request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", userService.modifyPassword(request));
 		return "redirect:/users/me";
 	}
 
@@ -173,30 +174,30 @@ public class UserController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute SignUpRequest request) {
-		userService.signup(request);
+	public String signup(@ModelAttribute SignUpRequest request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", userService.signup(request));
 		return "redirect:/auth/login";
 	}
 
 	@PostMapping("/signup/checkIdentifier")
 	public ResponseEntity<String> checkIdentifier(@ModelAttribute CheckIdentifierRequest request) {
-		return userService.checkIdentifier(request);
+		return ResponseEntity.ok(userService.checkIdentifier(request));
 	}
 
 	@PostMapping("/signup/checkNickname")
 	public ResponseEntity<String> checkNickname(@ModelAttribute CheckNicknameRequest request) {
-		return userService.checkNickname(request);
+		return ResponseEntity.ok(userService.checkNickname(request));
 	}
 
 	@PostMapping("/signup/sendEmail")
 	ResponseEntity<String> sendEmail(@ModelAttribute SendCodeRequest request) {
-		return userService.sendEmail(request);
+		return ResponseEntity.ok(userService.sendEmail(request));
 	}
 
 	@GetMapping("/signup/checkEmail")
 	ResponseEntity<String> checkEmail(@RequestParam("email") String email,
 		@RequestParam("certifyCode") String certifyCode) {
-		return userService.checkEmail(email, certifyCode);
+		return ResponseEntity.ok(userService.checkEmail(email, certifyCode));
 	}
 
 	@GetMapping("/recover/identifier")
@@ -211,12 +212,12 @@ public class UserController {
 
 	@PostMapping("/recover/identifier")
 	ResponseEntity<String> recoverIdentifier(@RequestParam String email) {
-		return userService.recoverIdentifier(email);
+		return ResponseEntity.ok(userService.recoverIdentifier(email));
 	}
 
 	@PostMapping("/recover/password")
 	ResponseEntity<String> recoverPassword(@RequestParam String identifier) {
-		return userService.recoverPassword(identifier);
+		return ResponseEntity.ok(userService.recoverPassword(identifier));
 	}
 
 }

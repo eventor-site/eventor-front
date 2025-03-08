@@ -6,7 +6,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,65 +30,65 @@ import com.eventorfront.search.dto.response.SearchPostsResponse;
 public interface PostClient {
 
 	@GetMapping("/back/posts/search")
-	ResponseEntity<Page<SearchPostsResponse>> searchPosts(@PageableDefault(page = 1, size = 10) Pageable pageable,
+	ApiResponse<Page<SearchPostsResponse>> searchPosts(@PageableDefault(page = 1, size = 10) Pageable pageable,
 		@RequestParam String keyword);
 
 	@GetMapping("/back/posts/all/paging")
-	ResponseEntity<Page<GetPostSimpleResponse>> getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable);
+	ApiResponse<Page<GetPostSimpleResponse>> getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/posts/event/hot")
-	ResponseEntity<List<GetMainPostResponse>> getHotEventPosts();
+	ApiResponse<List<GetMainPostResponse>> getHotEventPosts();
 
 	@GetMapping("/back/posts/event/latest")
-	ResponseEntity<List<GetMainPostResponse>> getLatestEventPosts();
+	ApiResponse<List<GetMainPostResponse>> getLatestEventPosts();
 
 	@GetMapping("/back/posts/event/deadline")
-	ResponseEntity<List<GetMainPostResponse>> getDeadlineEventPosts();
+	ApiResponse<List<GetMainPostResponse>> getDeadlineEventPosts();
 
 	@GetMapping("/back/posts/event/recommendation")
-	ResponseEntity<List<GetRecommendPostResponse>> getRecommendationEventPosts();
+	ApiResponse<List<GetRecommendPostResponse>> getRecommendationEventPosts();
 
 	@GetMapping("/back/posts/event/trending")
-	ResponseEntity<List<GetRecommendPostResponse>> getTrendingEventPosts();
+	ApiResponse<List<GetRecommendPostResponse>> getTrendingEventPosts();
 
 	@GetMapping("/back/posts/hot")
-	ResponseEntity<List<GetMainPostResponse>> getHotPostsByCategoryName(@RequestParam String categoryName);
+	ApiResponse<List<GetMainPostResponse>> getHotPostsByCategoryName(@RequestParam String categoryName);
 
 	@GetMapping("/back/posts")
 	ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(
 		@PageableDefault(page = 1, size = 10) Pageable pageable, @RequestParam String categoryName);
 
 	@GetMapping("/back/posts/me/paging")
-	ResponseEntity<Page<GetPostSimpleResponse>> getPostsByUserId(
+	ApiResponse<Page<GetPostSimpleResponse>> getPostsByUserId(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/posts/{postId}")
-	ResponseEntity<GetPostResponse> getPost(@PathVariable Long postId);
+	ApiResponse<GetPostResponse> getPost(@PathVariable Long postId);
 
 	@GetMapping("/back/posts/temp")
-	ResponseEntity<GetTempPostResponse> getTempPost();
+	ApiResponse<GetTempPostResponse> getTempPost();
 
 	@PostMapping("/back/posts")
-	ResponseEntity<CreatePostResponse> createPost(@RequestBody CreatePostRequest request,
+	ApiResponse<CreatePostResponse> createPost(@RequestBody CreatePostRequest request,
 		@RequestParam boolean isTemp);
 
 	@PutMapping("/back/posts/{postId}")
-	ResponseEntity<Void> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request,
+	ApiResponse<Void> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request,
 		@RequestParam boolean isTemp);
 
 	@PutMapping("/back/posts/{postId}/recommend")
-	ResponseEntity<String> recommendPost(@PathVariable Long postId);
+	ApiResponse<Void> recommendPost(@PathVariable Long postId);
 
 	@PutMapping("/back/posts/{postId}/disrecommend")
-	ResponseEntity<String> disrecommendPost(@PathVariable Long postId);
+	ApiResponse<Void> disrecommendPost(@PathVariable Long postId);
 
 	@DeleteMapping("/back/posts/{postId}")
-	ResponseEntity<Void> deletePost(@PathVariable Long postId);
+	ApiResponse<Void> deletePost(@PathVariable Long postId);
 
 	@GetMapping("/back/posts/{postId}/isAuthorized")
-	ResponseEntity<Boolean> isAuthorizedToEdit(@PathVariable Long postId);
+	ApiResponse<Boolean> isAuthorizedToEdit(@PathVariable Long postId);
 
 	@DeleteMapping("/back/posts/temp")
-	ResponseEntity<Void> deleteTempPost();
+	ApiResponse<Void> deleteTempPost();
 
 }

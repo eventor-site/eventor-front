@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.bookmark.client.BookmarkClient;
@@ -20,21 +19,21 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 	@Override
 	public List<GetBookmarkResponse> getBookmarksByUserId() {
-		return favoriteClient.getBookmarksByUserId().getBody();
+		return favoriteClient.getBookmarksByUserId().getData();
 	}
 
 	@Override
 	public Page<GetBookmarkResponse> getBookmarksByUserId(Pageable pageable) {
-		return favoriteClient.getBookmarksByUserId(pageable).getBody();
+		return favoriteClient.getBookmarksByUserId(pageable).getData();
 	}
 
 	@Override
-	public ResponseEntity<String> createOrDeleteBookmark(String categoryName) {
-		return favoriteClient.createOrDeleteBookmark(categoryName);
+	public String createOrDeleteBookmark(String categoryName) {
+		return favoriteClient.createOrDeleteBookmark(categoryName).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> deleteBookmark(Long favoriteId) {
-		return favoriteClient.deleteBookmark(favoriteId);
+	public String deleteBookmark(Long favoriteId) {
+		return favoriteClient.deleteBookmark(favoriteId).getMessage();
 	}
 }

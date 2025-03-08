@@ -17,26 +17,26 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public Page<RoleDto> getRoles(Pageable pageable) {
-		return roleClient.getRoles(pageable).getBody();
+		return roleClient.getRoles(pageable).getData();
 	}
 
 	@Override
 	public RoleDto getRole(Long roleId) {
-		return roleClient.getRole(roleId).getBody();
+		return roleClient.getRole(roleId).getData();
 	}
 
 	@Override
-	public void createRole(RoleDto request) {
-		roleClient.createRole(request);
+	public String createRole(RoleDto request) {
+		return roleClient.createRole(request).getMessage();
 	}
 
 	@Override
-	public void updateRole(Long roleId, RoleDto request) {
-		roleClient.updateRole(roleId, request);
+	public String updateRole(Long roleId, RoleDto request) {
+		return roleClient.updateRole(roleId, request).getMessage();
 	}
 
 	@Override
-	public void deleteRole(Long roleId) {
-		roleClient.deleteRole(roleId);
+	public String deleteRole(Long roleId) {
+		return roleClient.deleteRole(roleId).getMessage();
 	}
 }

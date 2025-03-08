@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
@@ -49,20 +50,21 @@ public class ReportTypeController {
 	}
 
 	@PostMapping
-	public String createReportType(@ModelAttribute ReportTypeDto request) {
-		reportTypeService.createReportType(request);
+	public String createReportType(@ModelAttribute ReportTypeDto request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", reportTypeService.createReportType(request));
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{reportTypeId}")
-	public String updateReportType(@PathVariable Long reportTypeId, @ModelAttribute ReportTypeDto request) {
-		reportTypeService.updateReportType(reportTypeId, request);
+	public String updateReportType(@PathVariable Long reportTypeId, @ModelAttribute ReportTypeDto request,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", reportTypeService.updateReportType(reportTypeId, request));
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{reportTypeId}")
-	public String deleteReportType(@PathVariable Long reportTypeId) {
-		reportTypeService.deleteReportType(reportTypeId);
+	public String deleteReportType(@PathVariable Long reportTypeId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", reportTypeService.deleteReportType(reportTypeId));
 		return REDIRECT_URL;
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.favorite.dto.response.GetFavoriteResponse;
 import com.eventorfront.favorite.service.FavoriteService;
@@ -32,12 +33,12 @@ public class FavoriteController {
 
 	@PostMapping("/posts/{postId}/favorites")
 	public ResponseEntity<String> createOrDeleteFavorite(@PathVariable Long postId) {
-		return favoriteService.createOrDeleteFavorite(postId);
+		return ResponseEntity.ok(favoriteService.createOrDeleteFavorite(postId));
 	}
 
 	@DeleteMapping("/favorites/{favoriteId}")
-	public String deleteFavorite(@PathVariable Long favoriteId) {
-		favoriteService.deleteFavorite(favoriteId);
+	public String deleteFavorite(@PathVariable Long favoriteId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", favoriteService.deleteFavorite(favoriteId));
 		return "redirect:/users/me/favorites";
 	}
 }

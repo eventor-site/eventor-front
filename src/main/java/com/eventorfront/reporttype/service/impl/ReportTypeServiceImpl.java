@@ -19,31 +19,31 @@ public class ReportTypeServiceImpl implements ReportTypeService {
 
 	@Override
 	public ReportTypeDto getReportType(Long reportTypeId) {
-		return reportTypeClient.getReportType(reportTypeId).getBody();
+		return reportTypeClient.getReportType(reportTypeId).getData();
 	}
 
 	@Override
 	public List<ReportTypeDto> getReportTypes() {
-		return reportTypeClient.getReportTypes().getBody();
+		return reportTypeClient.getReportTypes().getData();
 	}
 
 	@Override
 	public Page<ReportTypeDto> getReportTypes(Pageable pageable) {
-		return reportTypeClient.getReportTypes(pageable).getBody();
+		return reportTypeClient.getReportTypes(pageable).getData();
 	}
 
 	@Override
-	public void createReportType(ReportTypeDto request) {
-		reportTypeClient.createReportType(request);
+	public String createReportType(ReportTypeDto request) {
+		return reportTypeClient.createReportType(request).getMessage();
 	}
 
 	@Override
-	public void updateReportType(Long reportTypeId, ReportTypeDto request) {
-		reportTypeClient.updateReportType(reportTypeId, request);
+	public String updateReportType(Long reportTypeId, ReportTypeDto request) {
+		return reportTypeClient.updateReportType(reportTypeId, request).getMessage();
 	}
 
 	@Override
-	public void deleteReportType(Long reportTypeId) {
-		reportTypeClient.deleteReportType(reportTypeId);
+	public String deleteReportType(Long reportTypeId) {
+		return reportTypeClient.deleteReportType(reportTypeId).getMessage();
 	}
 }

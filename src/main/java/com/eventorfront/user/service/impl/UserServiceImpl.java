@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
@@ -30,27 +29,27 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Page<GetUserListResponse> getUsers(Pageable pageable) {
-		return userClient.getUsers(pageable).getBody();
+		return userClient.getUsers(pageable).getData();
 	}
 
 	@Override
 	public List<GetUserByIdentifier> searchUserByIdentifier(String keyword) {
-		return userClient.searchUserByIdentifier(keyword).getBody();
+		return userClient.searchUserByIdentifier(keyword).getData();
 	}
 
 	@Override
 	public List<GetUserByUserId> searchUserByUserId(Long userId) {
-		return userClient.searchUserByUserId(userId).getBody();
+		return userClient.searchUserByUserId(userId).getData();
 	}
 
 	@Override
 	public GetUserResponse getUser(Long userId) {
-		return userClient.getUser(userId).getBody();
+		return userClient.getUser(userId).getData();
 	}
 
 	@Override
 	public GetUserResponse getUserInfo() {
-		return userClient.getUserInfo().getBody();
+		return userClient.getUserInfo().getData();
 	}
 
 	@Override
@@ -64,67 +63,67 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(UpdateUserRequest request) {
-		userClient.updateUser(request);
+	public String updateUser(UpdateUserRequest request) {
+		return userClient.updateUser(request).getMessage();
 	}
 
 	@Override
-	public void withdrawUser() {
-		userClient.withdrawUser();
+	public String withdrawUser() {
+		return userClient.withdrawUser().getMessage();
 	}
 
 	@Override
 	public boolean meCheckRoles(String roleName) {
-		return Boolean.TRUE.equals(userClient.meCheckRoles(roleName).getBody());
+		return Boolean.TRUE.equals(userClient.meCheckRoles(roleName).getData());
 	}
 
 	@Override
 	public List<String> meRoles() {
-		return userClient.meRoles().getBody();
+		return userClient.meRoles().getData();
 	}
 
 	@Override
-	public ResponseEntity<String> meCheckNickname(CheckNicknameRequest request) {
-		return userClient.meCheckNickname(request);
+	public String meCheckNickname(CheckNicknameRequest request) {
+		return userClient.meCheckNickname(request).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> modifyPassword(ModifyPasswordRequest request) {
-		return userClient.modifyPassword(request);
+	public String modifyPassword(ModifyPasswordRequest request) {
+		return userClient.modifyPassword(request).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<Void> signup(SignUpRequest signupRequest) {
-		return userClient.signup(signupRequest);
+	public String signup(SignUpRequest signupRequest) {
+		return userClient.signup(signupRequest).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request) {
-		return userClient.checkIdentifier(request);
+	public String checkIdentifier(CheckIdentifierRequest request) {
+		return userClient.checkIdentifier(request).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> checkNickname(CheckNicknameRequest request) {
-		return userClient.checkNickname(request);
+	public String checkNickname(CheckNicknameRequest request) {
+		return userClient.checkNickname(request).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> sendEmail(SendCodeRequest request) {
-		return userClient.sendEmail(request);
+	public String sendEmail(SendCodeRequest request) {
+		return userClient.sendEmail(request).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> checkEmail(String email, String certifyCode) {
-		return userClient.checkEmail(email, certifyCode);
+	public String checkEmail(String email, String certifyCode) {
+		return userClient.checkEmail(email, certifyCode).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> recoverIdentifier(String email) {
-		return userClient.recoverIdentifier(email);
+	public String recoverIdentifier(String email) {
+		return userClient.recoverIdentifier(email).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> recoverPassword(String identifier) {
-		return userClient.recoverPassword(identifier);
+	public String recoverPassword(String identifier) {
+		return userClient.recoverPassword(identifier).getMessage();
 	}
 }

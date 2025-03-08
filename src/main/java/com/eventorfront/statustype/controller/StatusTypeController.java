@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
@@ -60,21 +61,21 @@ public class StatusTypeController {
 	}
 
 	@PostMapping
-	public String createStatusType(@ModelAttribute StatusTypeDto request) {
-		statusTypeService.createStatusType(request);
+	public String createStatusType(@ModelAttribute StatusTypeDto request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", statusTypeService.createStatusType(request));
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{statusTypeId}")
 	public String updateStatusType(@PathVariable Long statusTypeId,
-		@Valid @ModelAttribute StatusTypeDto request) {
-		statusTypeService.updateStatusType(statusTypeId, request);
+		@Valid @ModelAttribute StatusTypeDto request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", statusTypeService.updateStatusType(statusTypeId, request));
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{statusTypeId}")
-	public String deleteStatusType(@PathVariable Long statusTypeId) {
-		statusTypeService.deleteStatusType(statusTypeId);
+	public String deleteStatusType(@PathVariable Long statusTypeId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", statusTypeService.deleteStatusType(statusTypeId));
 		return REDIRECT_URL;
 	}
 }
