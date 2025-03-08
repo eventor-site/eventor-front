@@ -84,7 +84,7 @@ public class AuthController {
 
 	@GetMapping("/oauth2/authorization/{registrationId}")
 	public String oauthAuthorization(@PathVariable String registrationId) {
-		return authService.oauthAuthorization(registrationId).getData();
+		return "redirect:" + authService.oauthAuthorization(registrationId).getData();
 	}
 
 	@GetMapping("/oauth2/login")
