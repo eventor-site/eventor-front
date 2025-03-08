@@ -4,12 +4,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.eventorfront.favorite.dto.response.GetFavoriteResponse;
+import com.eventorfront.global.dto.ApiResponse;
 
 public interface FavoriteService {
 
-	Page<GetFavoriteResponse> getFavoritesByUserId(Pageable pageable);
+	ApiResponse<Page<GetFavoriteResponse>> getFavoritesByUserId(Pageable pageable);
 
-	String createOrDeleteFavorite(Long postId);
+	ApiResponse<Void> createOrDeleteFavorite(Long postId);
 
-	String deleteFavorite(Long favoriteId);
+	ApiResponse<Void> deleteFavorite(Long favoriteId);
 }

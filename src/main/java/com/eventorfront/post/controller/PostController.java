@@ -54,7 +54,7 @@ public class PostController {
 
 	@GetMapping("/createForm")
 	public String createPostForm(@RequestParam String categoryName, Model model) {
-		List<String> roles = userService.meRoles();
+		List<String> roles = userService.meRoles().getData();
 
 		// 비회원일 경우 차단
 		if (roles.isEmpty()) {
@@ -63,7 +63,7 @@ public class PostController {
 		model.addAttribute("categoryName", categoryName);
 
 		// 기존 임시 저장 게시물이 있는지 확인
-		model.addAttribute("tempPost", postService.getTempPost());
+		model.addAttribute("tempPost", postService.getTempPost().getData());
 
 		if (categoryName.equals("자유")) {
 			model.addAttribute("categoryType", "자유");
@@ -92,11 +92,11 @@ public class PostController {
 
 	@GetMapping("/{postId}/updateForm")
 	public String updatePostForm(@PathVariable Long postId, Model model) {
-		if (!postService.isAuthorizedToEdit(postId)) {
+		if (!postService.isAuthorizedToEdit(postId).getData()) {
 			throw new ForbiddenException();
 		}
 
-		GetPostResponse post = postService.getPost(postId);
+		GetPostResponse post = postService.getPost(postId).getData();
 		String categoryName = post.categoryName();
 		model.addAttribute("post", post);
 
@@ -124,7 +124,7 @@ public class PostController {
 	@GetMapping("/search")
 	public String searchPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, @RequestParam String keyword,
 		Model model) {
-		Page<SearchPostsResponse> posts = postService.searchPosts(pageable, keyword);
+		Page<SearchPostsResponse> posts = postService.searchPosts(pageable, keyword).getData();
 		String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
 		model.addAttribute("objects", posts);
 		PagingModel.pagingProcessing(pageable, model, posts, "/posts/search?keyword=" + encodedKeyword, 10);
@@ -133,7 +133,7 @@ public class PostController {
 
 	@GetMapping("/all")
 	public String getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetPostSimpleResponse> posts = postService.getPosts(pageable);
+		Page<GetPostSimpleResponse> posts = postService.getPosts(pageable).getData();
 		model.addAttribute("objects", posts);
 		PagingModel.pagingProcessing(pageable, model, posts, "/posts/all", 10);
 		return "post/all";
@@ -142,14 +142,15 @@ public class PostController {
 	@GetMapping
 	public String getPostsByCategoryName(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model,
 		@RequestParam String categoryName) {
-		List<String> roles = userService.meRoles();
+		List<String> roles = userService.meRoles().getData();
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("isAuthorized",
 			roles.contains("admin") || (roles.contains("member") && PermissionUtils.memberCategories.contains(
 				categoryName))
 		);
 
-		Page<GetPostsByCategoryNameResponse> posts = postService.getPostsByCategoryName(pageable, categoryName);
+		Page<GetPostsByCategoryNameResponse> posts = postService.getPostsByCategoryName(pageable, categoryName)
+			.getData();
 		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
 		model.addAttribute("objects", posts);
 		PagingModel.pagingProcessing(pageable, model, posts, "/posts?categoryName=" + encodedCategoryName, 10);
@@ -157,14 +158,14 @@ public class PostController {
 		if (categoryName.equals("공지")) {
 			return "post/noticeList";
 		} else {
-			model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName));
+			model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName).getData());
 			return "post/list";
 		}
 	}
 
 	@GetMapping("/me")
 	public String getPostsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetPostSimpleResponse> posts = postService.getPostsByUserId(pageable);
+		Page<GetPostSimpleResponse> posts = postService.getPostsByUserId(pageable).getData();
 		model.addAttribute("objects", posts);
 		PagingModel.pagingProcessing(pageable, model, posts, "/posts/me", 10);
 		return "post/me";
@@ -173,8 +174,8 @@ public class PostController {
 	@GetMapping("/{postId}")
 	public String getPost(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model,
 		@PathVariable Long postId) {
-		Page<GetCommentResponse> comments = commentService.getCommentsByPostId(pageable, postId);
-		model.addAttribute("post", postService.getPost(postId));
+		Page<GetCommentResponse> comments = commentService.getCommentsByPostId(pageable, postId).getData();
+		model.addAttribute("post", postService.getPost(postId).getData());
 		model.addAttribute("objects", comments);
 		PagingModel.pagingProcessing(pageable, model, comments, "/posts/" + postId, 10);
 		return "post/get";
@@ -197,7 +198,7 @@ public class PostController {
 	@PutMapping("/{postId}/recommend")
 	public ResponseEntity<String> recommendPost(@PathVariable Long postId, HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return ResponseEntity.ok(postService.recommendPost(postId));
+			return ResponseEntity.ok(postService.recommendPost(postId).getMessage());
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
@@ -206,7 +207,7 @@ public class PostController {
 	@PutMapping("/{postId}/disrecommend")
 	public ResponseEntity<String> disrecommendPost(@PathVariable Long postId, HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return ResponseEntity.ok(postService.disrecommendPost(postId));
+			return ResponseEntity.ok(postService.disrecommendPost(postId).getMessage());
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}

@@ -37,13 +37,13 @@ public class RoleController {
 	@AuthorizeRole("admin")
 	@GetMapping("/{roleId}/update")
 	public String updateRoleForm(@PathVariable Long roleId, Model model) {
-		model.addAttribute("role", roleService.getRole(roleId));
+		model.addAttribute("role", roleService.getRole(roleId).getData());
 		return "role/update";
 	}
 
 	@GetMapping
 	public String getRoles(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<RoleDto> roles = roleService.getRoles(pageable);
+		Page<RoleDto> roles = roleService.getRoles(pageable).getData();
 		model.addAttribute("objects", roles);
 		PagingModel.pagingProcessing(pageable, model, roles, "/roles", 10);
 		return "role/list";
@@ -51,20 +51,20 @@ public class RoleController {
 
 	@PostMapping
 	public String createRole(@ModelAttribute RoleDto request, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", roleService.createRole(request));
+		redirectAttributes.addFlashAttribute("message", roleService.createRole(request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{roleId}")
 	public String updateRole(@PathVariable Long roleId, @ModelAttribute RoleDto request,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", roleService.updateRole(roleId, request));
+		redirectAttributes.addFlashAttribute("message", roleService.updateRole(roleId, request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{roleId}")
 	public String deleteRole(@PathVariable Long roleId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", roleService.deleteRole(roleId));
+		redirectAttributes.addFlashAttribute("message", roleService.deleteRole(roleId).getMessage());
 		return REDIRECT_URL;
 	}
 }

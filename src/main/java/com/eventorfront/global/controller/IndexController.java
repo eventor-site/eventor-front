@@ -22,12 +22,12 @@ public class IndexController {
 
 	@GetMapping("/")
 	public String mainPage(Model model) {
-		model.addAttribute("hotPosts", postService.getHotEventPosts());
-		model.addAttribute("latestPosts", postService.getLatestEventPosts());
-		model.addAttribute("deadlinePosts", postService.getDeadlineEventPosts());
-		model.addAttribute("recommendedPosts", postService.getRecommendationEventPosts());
-		model.addAttribute("trendingPosts", postService.getTrendingEventPosts());
-		model.addAttribute("bookmarks", bookmarkService.getBookmarksByUserId());
+		model.addAttribute("hotPosts", postService.getHotEventPosts().getData());
+		model.addAttribute("latestPosts", postService.getLatestEventPosts().getData());
+		model.addAttribute("deadlinePosts", postService.getDeadlineEventPosts().getData());
+		model.addAttribute("recommendedPosts", postService.getRecommendationEventPosts().getData());
+		model.addAttribute("trendingPosts", postService.getTrendingEventPosts().getData());
+		model.addAttribute("bookmarks", bookmarkService.getBookmarksByUserId().getData());
 		return "page/main";
 	}
 }

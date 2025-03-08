@@ -10,20 +10,21 @@ import com.eventorfront.category.dto.request.UpdateCategoryRequest;
 import com.eventorfront.category.dto.response.GetCategoryListResponse;
 import com.eventorfront.category.dto.response.GetCategoryNameResponse;
 import com.eventorfront.category.dto.response.GetCategoryResponse;
+import com.eventorfront.global.dto.ApiResponse;
 
 public interface CategoryService {
 
-	List<GetCategoryNameResponse> searchCategories(String keyword);
+	ApiResponse<List<GetCategoryNameResponse>> searchCategories(String keyword);
 
-	List<String> getCategories(String categoryName);
+	ApiResponse<List<String>> getCategories(String categoryName);
 
-	Page<GetCategoryListResponse> getCategories(Pageable pageable);
+	ApiResponse<Page<GetCategoryListResponse>> getCategories(Pageable pageable);
 
-	GetCategoryResponse getCategory(Long categoryId);
+	ApiResponse<GetCategoryResponse> getCategory(Long categoryId);
 
-	String createCategory(CreateCategoryRequest request);
+	ApiResponse<Void> createCategory(CreateCategoryRequest request);
 
-	String updateCategory(Long categoryId, UpdateCategoryRequest request);
+	ApiResponse<Void> updateCategory(Long categoryId, UpdateCategoryRequest request);
 
-	String deleteCategory(Long categoryId);
+	ApiResponse<Void> deleteCategory(Long categoryId);
 }

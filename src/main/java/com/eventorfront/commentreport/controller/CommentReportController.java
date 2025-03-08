@@ -30,7 +30,7 @@ public class CommentReportController {
 	@AuthorizeRole("admin")
 	@GetMapping("/commentReports")
 	public String getCommentReports(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetCommentReportResponse> commentReports = commentReportService.getCommentReports(pageable);
+		Page<GetCommentReportResponse> commentReports = commentReportService.getCommentReports(pageable).getData();
 		model.addAttribute("objects", commentReports);
 		PagingModel.pagingProcessing(pageable, model, commentReports, "/commentReports", 10);
 		return "commentReport/list";
@@ -39,21 +39,22 @@ public class CommentReportController {
 	@PostMapping("/comments/{commentId}/commentReports")
 	public ResponseEntity<String> createCommentReport(@PathVariable Long commentId,
 		@RequestParam String reportTypeName) {
-		return ResponseEntity.ok(commentReportService.createCommentReport(commentId, reportTypeName));
+		return ResponseEntity.ok(commentReportService.createCommentReport(commentId, reportTypeName).getMessage());
 	}
 
 	@GetMapping("/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm")
 	public String confirmCommentReport(@PathVariable Long postId, @PathVariable Long commentId,
 		@PathVariable Long commentReportId, RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("message",
-			commentReportService.confirmCommentReport(postId, commentReportId, commentReportId));
-		Long page = commentService.getComment(postId, commentId).page();
+			commentReportService.confirmCommentReport(postId, commentReportId, commentReportId).getMessage());
+		Long page = commentService.getComment(postId, commentId).getData().page();
 		return "redirect:/posts/" + postId + "?page=" + page + "&size=10" + "#" + commentId;
 	}
 
 	@DeleteMapping("/commentReports/{commentReportId}")
 	public String deleteCommentReport(@PathVariable Long commentReportId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", commentReportService.deleteCommentReport(commentReportId));
+		redirectAttributes.addFlashAttribute("message",
+			commentReportService.deleteCommentReport(commentReportId).getMessage());
 		return "redirect:/commentReports";
 	}
 }

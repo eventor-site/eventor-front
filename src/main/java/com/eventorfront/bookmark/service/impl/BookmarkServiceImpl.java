@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.eventorfront.bookmark.client.BookmarkClient;
 import com.eventorfront.bookmark.dto.response.GetBookmarkResponse;
 import com.eventorfront.bookmark.service.BookmarkService;
+import com.eventorfront.global.dto.ApiResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,22 +19,22 @@ public class BookmarkServiceImpl implements BookmarkService {
 	private final BookmarkClient favoriteClient;
 
 	@Override
-	public List<GetBookmarkResponse> getBookmarksByUserId() {
-		return favoriteClient.getBookmarksByUserId().getData();
+	public ApiResponse<List<GetBookmarkResponse>> getBookmarksByUserId() {
+		return favoriteClient.getBookmarksByUserId().getBody();
 	}
 
 	@Override
-	public Page<GetBookmarkResponse> getBookmarksByUserId(Pageable pageable) {
-		return favoriteClient.getBookmarksByUserId(pageable).getData();
+	public ApiResponse<Page<GetBookmarkResponse>> getBookmarksByUserId(Pageable pageable) {
+		return favoriteClient.getBookmarksByUserId(pageable).getBody();
 	}
 
 	@Override
-	public String createOrDeleteBookmark(String categoryName) {
-		return favoriteClient.createOrDeleteBookmark(categoryName).getMessage();
+	public ApiResponse<Void> createOrDeleteBookmark(String categoryName) {
+		return favoriteClient.createOrDeleteBookmark(categoryName).getBody();
 	}
 
 	@Override
-	public String deleteBookmark(Long favoriteId) {
-		return favoriteClient.deleteBookmark(favoriteId).getMessage();
+	public ApiResponse<Void> deleteBookmark(Long favoriteId) {
+		return favoriteClient.deleteBookmark(favoriteId).getBody();
 	}
 }

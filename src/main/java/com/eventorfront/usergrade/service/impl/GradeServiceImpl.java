@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.usergrade.client.GradeClient;
 import com.eventorfront.usergrade.dto.GradeDto;
 import com.eventorfront.usergrade.service.GradeService;
@@ -18,32 +19,32 @@ public class GradeServiceImpl implements GradeService {
 	private final GradeClient gradeClient;
 
 	@Override
-	public List<GradeDto> getGrades() {
-		return gradeClient.getGrades().getData();
+	public ApiResponse<List<GradeDto>> getGrades() {
+		return gradeClient.getGrades().getBody();
 	}
 
 	@Override
-	public GradeDto getGrade(Long gradeId) {
-		return gradeClient.getGrade(gradeId).getData();
+	public ApiResponse<GradeDto> getGrade(Long gradeId) {
+		return gradeClient.getGrade(gradeId).getBody();
 	}
 
 	@Override
-	public Page<GradeDto> getGrades(Pageable pageable) {
-		return gradeClient.getGrades(pageable).getData();
+	public ApiResponse<Page<GradeDto>> getGrades(Pageable pageable) {
+		return gradeClient.getGrades(pageable).getBody();
 	}
 
 	@Override
-	public String createGrade(GradeDto request) {
-		return gradeClient.createGrade(request).getMessage();
+	public ApiResponse<Void> createGrade(GradeDto request) {
+		return gradeClient.createGrade(request).getBody();
 	}
 
 	@Override
-	public String updateGrade(Long statusTypeId, GradeDto request) {
-		return gradeClient.updateGrade(statusTypeId, request).getMessage();
+	public ApiResponse<Void> updateGrade(Long statusTypeId, GradeDto request) {
+		return gradeClient.updateGrade(statusTypeId, request).getBody();
 	}
 
 	@Override
-	public String deleteGrade(Long statusTypeId) {
-		return gradeClient.deleteGrade(statusTypeId).getMessage();
+	public ApiResponse<Void> deleteGrade(Long statusTypeId) {
+		return gradeClient.deleteGrade(statusTypeId).getBody();
 	}
 }

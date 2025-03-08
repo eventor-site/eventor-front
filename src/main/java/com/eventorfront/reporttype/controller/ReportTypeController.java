@@ -37,13 +37,13 @@ public class ReportTypeController {
 	@AuthorizeRole("admin")
 	@GetMapping("/{reportTypeId}/update")
 	public String updateReportTypeForm(@PathVariable Long reportTypeId, Model model) {
-		model.addAttribute("reportType", reportTypeService.getReportType(reportTypeId));
+		model.addAttribute("reportType", reportTypeService.getReportType(reportTypeId).getData());
 		return "reportType/update";
 	}
 
 	@GetMapping
 	public String getReportTypes(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<ReportTypeDto> reportTypes = reportTypeService.getReportTypes(pageable);
+		Page<ReportTypeDto> reportTypes = reportTypeService.getReportTypes(pageable).getData();
 		model.addAttribute("objects", reportTypes);
 		PagingModel.pagingProcessing(pageable, model, reportTypes, "/reportTypes", 10);
 		return "reportType/list";
@@ -51,20 +51,21 @@ public class ReportTypeController {
 
 	@PostMapping
 	public String createReportType(@ModelAttribute ReportTypeDto request, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", reportTypeService.createReportType(request));
+		redirectAttributes.addFlashAttribute("message", reportTypeService.createReportType(request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{reportTypeId}")
 	public String updateReportType(@PathVariable Long reportTypeId, @ModelAttribute ReportTypeDto request,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", reportTypeService.updateReportType(reportTypeId, request));
+		redirectAttributes.addFlashAttribute("message",
+			reportTypeService.updateReportType(reportTypeId, request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{reportTypeId}")
 	public String deleteReportType(@PathVariable Long reportTypeId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", reportTypeService.deleteReportType(reportTypeId));
+		redirectAttributes.addFlashAttribute("message", reportTypeService.deleteReportType(reportTypeId).getMessage());
 		return REDIRECT_URL;
 	}
 }

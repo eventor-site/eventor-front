@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.role.client.RoleClient;
 import com.eventorfront.role.dto.RoleDto;
 import com.eventorfront.role.service.RoleService;
@@ -16,27 +17,27 @@ public class RoleServiceImpl implements RoleService {
 	private final RoleClient roleClient;
 
 	@Override
-	public Page<RoleDto> getRoles(Pageable pageable) {
-		return roleClient.getRoles(pageable).getData();
+	public ApiResponse<Page<RoleDto>> getRoles(Pageable pageable) {
+		return roleClient.getRoles(pageable).getBody();
 	}
 
 	@Override
-	public RoleDto getRole(Long roleId) {
-		return roleClient.getRole(roleId).getData();
+	public ApiResponse<RoleDto> getRole(Long roleId) {
+		return roleClient.getRole(roleId).getBody();
 	}
 
 	@Override
-	public String createRole(RoleDto request) {
-		return roleClient.createRole(request).getMessage();
+	public ApiResponse<Void> createRole(RoleDto request) {
+		return roleClient.createRole(request).getBody();
 	}
 
 	@Override
-	public String updateRole(Long roleId, RoleDto request) {
-		return roleClient.updateRole(roleId, request).getMessage();
+	public ApiResponse<Void> updateRole(Long roleId, RoleDto request) {
+		return roleClient.updateRole(roleId, request).getBody();
 	}
 
 	@Override
-	public String deleteRole(Long roleId) {
-		return roleClient.deleteRole(roleId).getMessage();
+	public ApiResponse<Void> deleteRole(Long roleId) {
+		return roleClient.deleteRole(roleId).getBody();
 	}
 }

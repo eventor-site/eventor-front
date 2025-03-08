@@ -25,7 +25,7 @@ public class FavoriteController {
 
 	@GetMapping("/users/me/favorites")
 	public String getFavoritesByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetFavoriteResponse> favorites = favoriteService.getFavoritesByUserId(pageable);
+		Page<GetFavoriteResponse> favorites = favoriteService.getFavoritesByUserId(pageable).getData();
 		model.addAttribute("objects", favorites);
 		PagingModel.pagingProcessing(pageable, model, favorites, "/users/me/favorites", 10);
 		return "favorite/list";
@@ -33,12 +33,12 @@ public class FavoriteController {
 
 	@PostMapping("/posts/{postId}/favorites")
 	public ResponseEntity<String> createOrDeleteFavorite(@PathVariable Long postId) {
-		return ResponseEntity.ok(favoriteService.createOrDeleteFavorite(postId));
+		return ResponseEntity.ok(favoriteService.createOrDeleteFavorite(postId).getMessage());
 	}
 
 	@DeleteMapping("/favorites/{favoriteId}")
 	public String deleteFavorite(@PathVariable Long favoriteId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", favoriteService.deleteFavorite(favoriteId));
+		redirectAttributes.addFlashAttribute("message", favoriteService.deleteFavorite(favoriteId).getMessage());
 		return "redirect:/users/me/favorites";
 	}
 }

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import com.eventorfront.auth.client.AuthClient;
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
-import com.eventorfront.auth.dto.response.OauthRedirectUrlResponse;
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.global.dto.ApiResponse;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,8 +18,8 @@ public class AuthServiceImpl implements AuthService {
 	private final AuthClient authClient;
 
 	@Override
-	public LoginResponse login(LoginRequest request) {
-		return authClient.login(request).getData();
+	public ApiResponse<LoginResponse> login(LoginRequest request) {
+		return authClient.login(request).getBody();
 	}
 
 	@Override
@@ -38,10 +38,10 @@ public class AuthServiceImpl implements AuthService {
 		boolean hasRefreshToken = false;
 
 		for (Cookie cookie : cookies) {
-			if ("Access-Token".equals(cookie.getName())) {
+			if ("access-token".equals(cookie.getName())) {
 				hasAccessToken = true;
 			}
-			if ("Refresh-Token".equals(cookie.getName())) {
+			if ("refresh-token".equals(cookie.getName())) {
 				hasRefreshToken = true;
 			}
 		}
@@ -50,8 +50,8 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public OauthRedirectUrlResponse oauthAuthorization(String registrationId) {
-		return authClient.oauthAuthorization(registrationId).getData();
+	public ApiResponse<String> oauthAuthorization(String registrationId) {
+		return authClient.oauthAuthorization(registrationId).getBody();
 	}
 
 }

@@ -11,6 +11,7 @@ import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
 import com.eventorfront.comment.dto.response.GetCommentPageResponse;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.comment.service.CommentService;
+import com.eventorfront.global.dto.ApiResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,47 +21,47 @@ public class CommentServiceImpl implements CommentService {
 	private final CommentClient commentClient;
 
 	@Override
-	public Page<GetCommentResponse> getCommentsByPostId(Pageable pageable, Long postId) {
-		return commentClient.getCommentsByPostId(pageable, postId).getData();
+	public ApiResponse<Page<GetCommentResponse>> getCommentsByPostId(Pageable pageable, Long postId) {
+		return commentClient.getCommentsByPostId(pageable, postId).getBody();
 	}
 
 	@Override
-	public Page<GetCommentByUserIdResponse> getComments(Pageable pageable) {
-		return commentClient.getComments(pageable).getData();
+	public ApiResponse<Page<GetCommentByUserIdResponse>> getComments(Pageable pageable) {
+		return commentClient.getComments(pageable).getBody();
 	}
 
 	@Override
-	public Page<GetCommentByUserIdResponse> getCommentsByUserId(Pageable pageable) {
-		return commentClient.getCommentsByUserId(pageable).getData();
+	public ApiResponse<Page<GetCommentByUserIdResponse>> getCommentsByUserId(Pageable pageable) {
+		return commentClient.getCommentsByUserId(pageable).getBody();
 	}
 
 	@Override
-	public GetCommentPageResponse getComment(Long postId, Long commentId) {
-		return commentClient.getComment(postId, commentId).getData();
+	public ApiResponse<GetCommentPageResponse> getComment(Long postId, Long commentId) {
+		return commentClient.getComment(postId, commentId).getBody();
 	}
 
 	@Override
-	public String createComment(Long postId, CreateCommentRequest request) {
-		return commentClient.createComment(postId, request).getMessage();
+	public ApiResponse<Void> createComment(Long postId, CreateCommentRequest request) {
+		return commentClient.createComment(postId, request).getBody();
 	}
 
 	@Override
-	public String updateComment(Long postId, Long commentId, UpdateCommentRequest request) {
-		return commentClient.updateComment(postId, commentId, request).getMessage();
+	public ApiResponse<Void> updateComment(Long postId, Long commentId, UpdateCommentRequest request) {
+		return commentClient.updateComment(postId, commentId, request).getBody();
 	}
 
 	@Override
-	public String recommendComment(Long postId, Long commentId) {
-		return commentClient.recommendComment(postId, commentId).getMessage();
+	public ApiResponse<Void> recommendComment(Long postId, Long commentId) {
+		return commentClient.recommendComment(postId, commentId).getBody();
 	}
 
 	@Override
-	public String disrecommendComment(Long postId, Long commentId) {
-		return commentClient.disrecommendComment(postId, commentId).getMessage();
+	public ApiResponse<Void> disrecommendComment(Long postId, Long commentId) {
+		return commentClient.disrecommendComment(postId, commentId).getBody();
 	}
 
 	@Override
-	public String deleteComment(Long postId, Long commentId) {
-		return commentClient.deleteComment(postId, commentId).getMessage();
+	public ApiResponse<Void> deleteComment(Long postId, Long commentId) {
+		return commentClient.deleteComment(postId, commentId).getBody();
 	}
 }

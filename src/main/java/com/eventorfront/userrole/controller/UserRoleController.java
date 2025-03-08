@@ -21,14 +21,14 @@ public class UserRoleController {
 	@PostMapping("/{userId}/roles")
 	public String createUserRole(@PathVariable Long userId, @RequestParam Long roleId,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", userRoleService.createUserRole(userId, roleId));
+		redirectAttributes.addFlashAttribute("message", userRoleService.createUserRole(userId, roleId).getMessage());
 		return "redirect:/users/" + userId + "/attributeForm";
 	}
 
 	@DeleteMapping("/{userId}/roles/{roleId}")
 	public String deleteUserRole(@PathVariable Long userId, @PathVariable Long roleId,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", userRoleService.deleteUserRole(userId, roleId));
+		redirectAttributes.addFlashAttribute("message", userRoleService.deleteUserRole(userId, roleId).getMessage());
 		return "redirect:/users/" + userId + "/attributeForm";
 	}
 }

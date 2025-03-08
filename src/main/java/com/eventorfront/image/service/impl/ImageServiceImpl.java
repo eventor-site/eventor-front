@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.image.client.ImageClient;
 import com.eventorfront.image.dto.request.DeleteImageRequest;
 import com.eventorfront.image.dto.response.GetImageResponse;
@@ -18,14 +19,14 @@ public class ImageServiceImpl implements ImageService {
 	private final ImageClient imageClient;
 
 	@Override
-	public List<GetImageResponse> upload(MultipartFile file, Long postId, boolean isThumbnail,
+	public ApiResponse<List<GetImageResponse>> upload(MultipartFile file, Long postId, boolean isThumbnail,
 		boolean isPasted) {
-		return imageClient.upload(file, "postimage", postId, isThumbnail, isPasted).getData();
+		return imageClient.upload(file, "postimage", postId, isThumbnail, isPasted).getBody();
 	}
 
 	@Override
-	public List<GetImageResponse> deleteImages(DeleteImageRequest request) {
-		return imageClient.deleteImages(request).getData();
+	public ApiResponse<List<GetImageResponse>> deleteImages(DeleteImageRequest request) {
+		return imageClient.deleteImages(request).getBody();
 	}
 
 	@Override

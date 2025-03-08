@@ -41,7 +41,7 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public String login(@ModelAttribute LoginRequest request, HttpServletResponse response) {
-		LoginResponse loginResponse = authService.login(request);
+		LoginResponse loginResponse = authService.login(request).getData();
 
 		String accessToken;
 		String refreshToken;
@@ -54,11 +54,11 @@ public class AuthController {
 		refreshToken = loginResponse.refreshToken();
 
 		if (accessToken != null) {
-			response.addCookie(CookieUtil.createCookie("Access-Token", accessToken));
+			response.addCookie(CookieUtil.createCookie("access-token", accessToken));
 		}
 
 		if (refreshToken != null) {
-			response.addCookie(CookieUtil.createCookie("Refresh-Token", refreshToken));
+			response.addCookie(CookieUtil.createCookie("refresh-token", refreshToken));
 		}
 
 		return "redirect:/";
@@ -70,8 +70,8 @@ public class AuthController {
 	@PostMapping("/logout")
 	public String logout(HttpServletResponse response) {
 		authService.logout();
-		CookieUtil.revokeToken(response, "Access-Token");
-		CookieUtil.revokeToken(response, "Refresh-Token");
+		CookieUtil.revokeToken(response, "access-token");
+		CookieUtil.revokeToken(response, "refresh-token");
 		return "redirect:/";
 	}
 
@@ -85,7 +85,7 @@ public class AuthController {
 
 	@GetMapping("/oauth2/authorization/{registrationId}")
 	public RedirectView oauthAuthorization(@PathVariable String registrationId) {
-		return new RedirectView(authService.oauthAuthorization(registrationId).oauthRedirectUrl());
+		return new RedirectView(authService.oauthAuthorization(registrationId).getData());
 	}
 
 	@GetMapping("/oauth2/login")
@@ -93,11 +93,11 @@ public class AuthController {
 		HttpServletResponse response) {
 
 		if (accessToken != null) {
-			response.addCookie(CookieUtil.createCookie("Access-Token", accessToken));
+			response.addCookie(CookieUtil.createCookie("access-token", accessToken));
 		}
 
 		if (refreshToken != null) {
-			response.addCookie(CookieUtil.createCookie("Refresh-Token", refreshToken));
+			response.addCookie(CookieUtil.createCookie("refresh-token", refreshToken));
 		}
 
 		return "auth/oauth";

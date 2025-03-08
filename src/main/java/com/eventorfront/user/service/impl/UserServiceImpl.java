@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.user.client.UserClient;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
@@ -28,102 +29,102 @@ public class UserServiceImpl implements UserService {
 	private final UserClient userClient;
 
 	@Override
-	public Page<GetUserListResponse> getUsers(Pageable pageable) {
-		return userClient.getUsers(pageable).getData();
+	public ApiResponse<Page<GetUserListResponse>> getUsers(Pageable pageable) {
+		return userClient.getUsers(pageable).getBody();
 	}
 
 	@Override
-	public List<GetUserByIdentifier> searchUserByIdentifier(String keyword) {
-		return userClient.searchUserByIdentifier(keyword).getData();
+	public ApiResponse<List<GetUserByIdentifier>> searchUserByIdentifier(String keyword) {
+		return userClient.searchUserByIdentifier(keyword).getBody();
 	}
 
 	@Override
-	public List<GetUserByUserId> searchUserByUserId(Long userId) {
-		return userClient.searchUserByUserId(userId).getData();
+	public ApiResponse<List<GetUserByUserId>> searchUserByUserId(Long userId) {
+		return userClient.searchUserByUserId(userId).getBody();
 	}
 
 	@Override
-	public GetUserResponse getUser(Long userId) {
-		return userClient.getUser(userId).getData();
+	public ApiResponse<GetUserResponse> getUser(Long userId) {
+		return userClient.getUser(userId).getBody();
 	}
 
 	@Override
-	public GetUserResponse getUserInfo() {
-		return userClient.getUserInfo().getData();
+	public ApiResponse<GetUserResponse> getUserInfo() {
+		return userClient.getUserInfo().getBody();
 	}
 
 	@Override
-	public void updateUserByAdmin(Long userId, UpdateUserRequest request) {
-		userClient.updateUserByAdmin(userId, request);
+	public ApiResponse<Void> updateUserByAdmin(Long userId, UpdateUserRequest request) {
+		return userClient.updateUserByAdmin(userId, request).getBody();
 	}
 
 	@Override
-	public void updateUserAttributeByAdmin(Long userId, UpdateUserAttributeRequest request) {
-		userClient.updateUserAttributeByAdmin(userId, request);
+	public ApiResponse<Void> updateUserAttributeByAdmin(Long userId, UpdateUserAttributeRequest request) {
+		return userClient.updateUserAttributeByAdmin(userId, request).getBody();
 	}
 
 	@Override
-	public String updateUser(UpdateUserRequest request) {
-		return userClient.updateUser(request).getMessage();
+	public ApiResponse<Void> updateUser(UpdateUserRequest request) {
+		return userClient.updateUser(request).getBody();
 	}
 
 	@Override
-	public String withdrawUser() {
-		return userClient.withdrawUser().getMessage();
+	public ApiResponse<Void> withdrawUser() {
+		return userClient.withdrawUser().getBody();
 	}
 
 	@Override
-	public boolean meCheckRoles(String roleName) {
-		return Boolean.TRUE.equals(userClient.meCheckRoles(roleName).getData());
+	public ApiResponse<Boolean> meCheckRoles(String roleName) {
+		return userClient.meCheckRoles(roleName).getBody();
 	}
 
 	@Override
-	public List<String> meRoles() {
-		return userClient.meRoles().getData();
+	public ApiResponse<List<String>> meRoles() {
+		return userClient.meRoles().getBody();
 	}
 
 	@Override
-	public String meCheckNickname(CheckNicknameRequest request) {
-		return userClient.meCheckNickname(request).getMessage();
+	public ApiResponse<Void> meCheckNickname(CheckNicknameRequest request) {
+		return userClient.meCheckNickname(request).getBody();
 	}
 
 	@Override
-	public String modifyPassword(ModifyPasswordRequest request) {
-		return userClient.modifyPassword(request).getMessage();
+	public ApiResponse<Void> modifyPassword(ModifyPasswordRequest request) {
+		return userClient.modifyPassword(request).getBody();
 	}
 
 	@Override
-	public String signup(SignUpRequest signupRequest) {
-		return userClient.signup(signupRequest).getMessage();
+	public ApiResponse<Void> signup(SignUpRequest signupRequest) {
+		return userClient.signup(signupRequest).getBody();
 	}
 
 	@Override
-	public String checkIdentifier(CheckIdentifierRequest request) {
-		return userClient.checkIdentifier(request).getMessage();
+	public ApiResponse<Void> checkIdentifier(CheckIdentifierRequest request) {
+		return userClient.checkIdentifier(request).getBody();
 	}
 
 	@Override
-	public String checkNickname(CheckNicknameRequest request) {
-		return userClient.checkNickname(request).getMessage();
+	public ApiResponse<Void> checkNickname(CheckNicknameRequest request) {
+		return userClient.checkNickname(request).getBody();
 	}
 
 	@Override
-	public String sendEmail(SendCodeRequest request) {
-		return userClient.sendEmail(request).getMessage();
+	public ApiResponse<Void> sendEmail(SendCodeRequest request) {
+		return userClient.sendEmail(request).getBody();
 	}
 
 	@Override
-	public String checkEmail(String email, String certifyCode) {
-		return userClient.checkEmail(email, certifyCode).getMessage();
+	public ApiResponse<Void> checkEmail(String email, String certifyCode) {
+		return userClient.checkEmail(email, certifyCode).getBody();
 	}
 
 	@Override
-	public String recoverIdentifier(String email) {
-		return userClient.recoverIdentifier(email).getMessage();
+	public ApiResponse<Void> recoverIdentifier(String email) {
+		return userClient.recoverIdentifier(email).getBody();
 	}
 
 	@Override
-	public String recoverPassword(String identifier) {
-		return userClient.recoverPassword(identifier).getMessage();
+	public ApiResponse<Void> recoverPassword(String identifier) {
+		return userClient.recoverPassword(identifier).getBody();
 	}
 }

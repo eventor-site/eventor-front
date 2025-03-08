@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.statustype.client.StatusTypeClient;
 import com.eventorfront.statustype.dto.StatusTypeDto;
 import com.eventorfront.statustype.service.StatusTypeService;
@@ -18,37 +19,37 @@ public class StatusTypeServiceImpl implements StatusTypeService {
 	private final StatusTypeClient statusTypeClient;
 
 	@Override
-	public List<StatusTypeDto> searchStatusTypes(String keyword) {
-		return statusTypeClient.searchStatusTypes(keyword).getData();
+	public ApiResponse<List<StatusTypeDto>> searchStatusTypes(String keyword) {
+		return statusTypeClient.searchStatusTypes(keyword).getBody();
 	}
 
 	@Override
-	public StatusTypeDto getStatusType(Long statusTypeId) {
-		return statusTypeClient.getStatusType(statusTypeId).getData();
+	public ApiResponse<StatusTypeDto> getStatusType(Long statusTypeId) {
+		return statusTypeClient.getStatusType(statusTypeId).getBody();
 	}
 
 	@Override
-	public List<StatusTypeDto> getStatusTypes() {
-		return statusTypeClient.getStatusTypes().getData();
+	public ApiResponse<List<StatusTypeDto>> getStatusTypes() {
+		return statusTypeClient.getStatusTypes().getBody();
 	}
 
 	@Override
-	public Page<StatusTypeDto> getStatusTypes(Pageable pageable) {
-		return statusTypeClient.getStatusTypes(pageable).getData();
+	public ApiResponse<Page<StatusTypeDto>> getStatusTypes(Pageable pageable) {
+		return statusTypeClient.getStatusTypes(pageable).getBody();
 	}
 
 	@Override
-	public String createStatusType(StatusTypeDto request) {
-		return statusTypeClient.createStatusType(request).getMessage();
+	public ApiResponse<Void> createStatusType(StatusTypeDto request) {
+		return statusTypeClient.createStatusType(request).getBody();
 	}
 
 	@Override
-	public String updateStatusType(Long statusTypeId, StatusTypeDto request) {
-		return statusTypeClient.updateStatusType(statusTypeId, request).getMessage();
+	public ApiResponse<Void> updateStatusType(Long statusTypeId, StatusTypeDto request) {
+		return statusTypeClient.updateStatusType(statusTypeId, request).getBody();
 	}
 
 	@Override
-	public String deleteStatusType(Long statusTypeId) {
-		return statusTypeClient.deleteStatusType(statusTypeId).getMessage();
+	public ApiResponse<Void> deleteStatusType(Long statusTypeId) {
+		return statusTypeClient.deleteStatusType(statusTypeId).getBody();
 	}
 }

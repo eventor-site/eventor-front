@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.point.client.PointClient;
 import com.eventorfront.point.dto.request.PointRequest;
 import com.eventorfront.point.dto.response.GetPointResponse;
@@ -17,27 +18,27 @@ public class PointServiceImpl implements PointService {
 	private final PointClient pointClient;
 
 	@Override
-	public Page<GetPointResponse> getPoints(Pageable pageable) {
-		return pointClient.getPoints(pageable).getData();
+	public ApiResponse<Page<GetPointResponse>> getPoints(Pageable pageable) {
+		return pointClient.getPoints(pageable).getBody();
 	}
 
 	@Override
-	public GetPointResponse getPoint(Long pointId) {
-		return pointClient.getPoint(pointId).getData();
+	public ApiResponse<GetPointResponse> getPoint(Long pointId) {
+		return pointClient.getPoint(pointId).getBody();
 	}
 
 	@Override
-	public String createPoint(PointRequest request) {
-		return pointClient.createPoint(request).getMessage();
+	public ApiResponse<Void> createPoint(PointRequest request) {
+		return pointClient.createPoint(request).getBody();
 	}
 
 	@Override
-	public String updatePoint(Long pointTypeId, PointRequest request) {
-		return pointClient.updatePoint(pointTypeId, request).getMessage();
+	public ApiResponse<Void> updatePoint(Long pointTypeId, PointRequest request) {
+		return pointClient.updatePoint(pointTypeId, request).getBody();
 	}
 
 	@Override
-	public String deletePoint(Long pointTypeId) {
-		return pointClient.deletePoint(pointTypeId).getMessage();
+	public ApiResponse<Void> deletePoint(Long pointTypeId) {
+		return pointClient.deletePoint(pointTypeId).getBody();
 	}
 }

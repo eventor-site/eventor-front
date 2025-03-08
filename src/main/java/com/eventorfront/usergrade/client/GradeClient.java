@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,20 +21,20 @@ import com.eventorfront.usergrade.dto.GradeDto;
 public interface GradeClient {
 
 	@GetMapping("/back/grades")
-	ApiResponse<List<GradeDto>> getGrades();
+	ResponseEntity<ApiResponse<List<GradeDto>>> getGrades();
 
 	@GetMapping("/back/grades/paging")
-	ApiResponse<Page<GradeDto>> getGrades(@PageableDefault(page = 1, size = 10) Pageable pageable);
+	ResponseEntity<ApiResponse<Page<GradeDto>>> getGrades(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/grades/{gradeId}")
-	ApiResponse<GradeDto> getGrade(@PathVariable Long gradeId);
+	ResponseEntity<ApiResponse<GradeDto>> getGrade(@PathVariable Long gradeId);
 
 	@PostMapping("/back/grades")
-	ApiResponse<Void> createGrade(@RequestBody GradeDto request);
+	ResponseEntity<ApiResponse<Void>> createGrade(@RequestBody GradeDto request);
 
 	@PutMapping("/back/grades/{gradeId}")
-	ApiResponse<Void> updateGrade(@PathVariable Long gradeId, @RequestBody GradeDto request);
+	ResponseEntity<ApiResponse<Void>> updateGrade(@PathVariable Long gradeId, @RequestBody GradeDto request);
 
 	@DeleteMapping("/back/grades/{gradeId}")
-	ApiResponse<Void> deleteGrade(@PathVariable Long gradeId);
+	ResponseEntity<ApiResponse<Void>> deleteGrade(@PathVariable Long gradeId);
 }

@@ -5,21 +5,22 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.statustype.dto.StatusTypeDto;
 
 public interface StatusTypeService {
 
-	List<StatusTypeDto> searchStatusTypes(String keyword);
+	ApiResponse<List<StatusTypeDto>> searchStatusTypes(String keyword);
 
-	List<StatusTypeDto> getStatusTypes();
+	ApiResponse<List<StatusTypeDto>> getStatusTypes();
 
-	Page<StatusTypeDto> getStatusTypes(Pageable pageable);
+	ApiResponse<Page<StatusTypeDto>> getStatusTypes(Pageable pageable);
 
-	StatusTypeDto getStatusType(Long statusTypeId);
+	ApiResponse<StatusTypeDto> getStatusType(Long statusTypeId);
 
-	String createStatusType(StatusTypeDto request);
+	ApiResponse<Void> createStatusType(StatusTypeDto request);
 
-	String updateStatusType(Long statusTypeId, StatusTypeDto request);
+	ApiResponse<Void> updateStatusType(Long statusTypeId, StatusTypeDto request);
 
-	String deleteStatusType(Long statusTypeId);
+	ApiResponse<Void> deleteStatusType(Long statusTypeId);
 }

@@ -5,20 +5,21 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.status.dto.request.StatusRequest;
 import com.eventorfront.status.dto.response.GetStatusResponse;
 
 public interface StatusService {
 
-	List<GetStatusResponse> getStatuses(String statusTypeName);
+	ApiResponse<List<GetStatusResponse>> getStatuses(String statusTypeName);
 
-	Page<GetStatusResponse> getStatuses(Pageable pageable);
+	ApiResponse<Page<GetStatusResponse>> getStatuses(Pageable pageable);
 
-	GetStatusResponse getStatus(Long statusId);
+	ApiResponse<GetStatusResponse> getStatus(Long statusId);
 
-	String createStatus(StatusRequest request);
+	ApiResponse<Void> createStatus(StatusRequest request);
 
-	String updateStatus(Long statusId, StatusRequest request);
+	ApiResponse<Void> updateStatus(Long statusId, StatusRequest request);
 
-	String deleteStatus(Long statusId);
+	ApiResponse<Void> deleteStatus(Long statusId);
 }

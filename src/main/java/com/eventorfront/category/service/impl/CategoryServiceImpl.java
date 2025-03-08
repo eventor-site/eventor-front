@@ -13,6 +13,7 @@ import com.eventorfront.category.dto.response.GetCategoryListResponse;
 import com.eventorfront.category.dto.response.GetCategoryNameResponse;
 import com.eventorfront.category.dto.response.GetCategoryResponse;
 import com.eventorfront.category.service.CategoryService;
+import com.eventorfront.global.dto.ApiResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,37 +23,37 @@ public class CategoryServiceImpl implements CategoryService {
 	private final CategoryClient categoryClient;
 
 	@Override
-	public List<GetCategoryNameResponse> searchCategories(String keyword) {
-		return categoryClient.searchCategories(keyword).getData();
+	public ApiResponse<List<GetCategoryNameResponse>> searchCategories(String keyword) {
+		return categoryClient.searchCategories(keyword).getBody();
 	}
 
 	@Override
-	public List<String> getCategories(String categoryName) {
-		return categoryClient.getCategories(categoryName).getData();
+	public ApiResponse<List<String>> getCategories(String categoryName) {
+		return categoryClient.getCategories(categoryName).getBody();
 	}
 
 	@Override
-	public Page<GetCategoryListResponse> getCategories(Pageable pageable) {
-		return categoryClient.getCategories(pageable).getData();
+	public ApiResponse<Page<GetCategoryListResponse>> getCategories(Pageable pageable) {
+		return categoryClient.getCategories(pageable).getBody();
 	}
 
 	@Override
-	public GetCategoryResponse getCategory(Long categoryId) {
-		return categoryClient.getCategory(categoryId).getData();
+	public ApiResponse<GetCategoryResponse> getCategory(Long categoryId) {
+		return categoryClient.getCategory(categoryId).getBody();
 	}
 
 	@Override
-	public String createCategory(CreateCategoryRequest request) {
-		return categoryClient.createCategory(request).getMessage();
+	public ApiResponse<Void> createCategory(CreateCategoryRequest request) {
+		return categoryClient.createCategory(request).getBody();
 	}
 
 	@Override
-	public String updateCategory(Long statusTypeId, UpdateCategoryRequest request) {
-		return categoryClient.updateCategory(statusTypeId, request).getMessage();
+	public ApiResponse<Void> updateCategory(Long statusTypeId, UpdateCategoryRequest request) {
+		return categoryClient.updateCategory(statusTypeId, request).getBody();
 	}
 
 	@Override
-	public String deleteCategory(Long statusTypeId) {
-		return categoryClient.deleteCategory(statusTypeId).getMessage();
+	public ApiResponse<Void> deleteCategory(Long statusTypeId) {
+		return categoryClient.deleteCategory(statusTypeId).getBody();
 	}
 }

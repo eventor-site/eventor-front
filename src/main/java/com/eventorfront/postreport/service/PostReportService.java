@@ -3,15 +3,16 @@ package com.eventorfront.postreport.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.postreport.dto.response.GetPostReportResponse;
 
 public interface PostReportService {
 
-	Page<GetPostReportResponse> getPostReports(Pageable pageable);
+	ApiResponse<Page<GetPostReportResponse>> getPostReports(Pageable pageable);
 
-	String createPostReport(Long postId, String reportTypeName);
+	ApiResponse<Void> createPostReport(Long postId, String reportTypeName);
 
-	String confirmPostReport(Long postId, Long postReportId);
+	ApiResponse<Void> confirmPostReport(Long postId, Long postReportId);
 
-	String deletePostReport(Long postReportId);
+	ApiResponse<Void> deletePostReport(Long postReportId);
 }

@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,20 +23,21 @@ import com.eventorfront.status.dto.response.GetStatusResponse;
 public interface StatusClient {
 
 	@GetMapping("/back/statuses")
-	ApiResponse<List<GetStatusResponse>> getStatuses(@RequestParam String statusTypeName);
+	ResponseEntity<ApiResponse<List<GetStatusResponse>>> getStatuses(@RequestParam String statusTypeName);
 
 	@GetMapping("/back/statuses/paging")
-	ApiResponse<Page<GetStatusResponse>> getStatuses(@PageableDefault(page = 1, size = 10) Pageable pageable);
+	ResponseEntity<ApiResponse<Page<GetStatusResponse>>> getStatuses(
+		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/statuses/{statusId}")
-	ApiResponse<GetStatusResponse> getStatus(@PathVariable Long statusId);
+	ResponseEntity<ApiResponse<GetStatusResponse>> getStatus(@PathVariable Long statusId);
 
 	@PostMapping("/back/statuses")
-	ApiResponse<Void> createStatus(@RequestBody StatusRequest request);
+	ResponseEntity<ApiResponse<Void>> createStatus(@RequestBody StatusRequest request);
 
 	@PutMapping("/back/statuses/{statusId}")
-	ApiResponse<Void> updateStatus(@PathVariable Long statusId, @RequestBody StatusRequest request);
+	ResponseEntity<ApiResponse<Void>> updateStatus(@PathVariable Long statusId, @RequestBody StatusRequest request);
 
 	@DeleteMapping("/back/statuses/{statusId}")
-	ApiResponse<Void> deleteStatus(@PathVariable Long statusId);
+	ResponseEntity<ApiResponse<Void>> deleteStatus(@PathVariable Long statusId);
 }
