@@ -22,7 +22,7 @@ public class RoleAuthorizationAspect {
 	@Before("@annotation(authorizeRole)")
 	public void checkUserRole(AuthorizeRole authorizeRole) {
 
-		List<String> roles = userService.meRoles();
+		List<String> roles = userService.meRoles().getData();
 
 		// @AuthorizeRole 에 정의된 역할 목록
 		List<String> requiredRoles = Arrays.asList(authorizeRole.value());

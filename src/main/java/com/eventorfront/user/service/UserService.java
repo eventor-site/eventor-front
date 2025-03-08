@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
@@ -19,44 +20,44 @@ import com.eventorfront.user.dto.response.GetUserResponse;
 
 public interface UserService {
 
-	Page<GetUserListResponse> getUsers(Pageable pageable);
+	ApiResponse<Page<GetUserListResponse>> getUsers(Pageable pageable);
 
-	List<GetUserByIdentifier> searchUserByIdentifier(String keyword);
+	ApiResponse<List<GetUserByIdentifier>> searchUserByIdentifier(String keyword);
 
-	List<GetUserByUserId> searchUserByUserId(Long userId);
+	ApiResponse<List<GetUserByUserId>> searchUserByUserId(Long userId);
 
-	GetUserResponse getUser(Long userId);
+	ApiResponse<GetUserResponse> getUser(Long userId);
 
-	GetUserResponse getUserInfo();
+	ApiResponse<GetUserResponse> getUserInfo();
 
-	void updateUserByAdmin(Long userId, UpdateUserRequest request);
+	ApiResponse<Void> updateUserByAdmin(Long userId, UpdateUserRequest request);
 
-	void updateUserAttributeByAdmin(Long userId, UpdateUserAttributeRequest request);
+	ApiResponse<Void> updateUserAttributeByAdmin(Long userId, UpdateUserAttributeRequest request);
 
-	String updateUser(UpdateUserRequest request);
+	ApiResponse<Void> updateUser(UpdateUserRequest request);
 
-	String withdrawUser();
+	ApiResponse<Void> withdrawUser();
 
-	boolean meCheckRoles(String roleName);
+	ApiResponse<Boolean> meCheckRoles(String roleName);
 
-	List<String> meRoles();
+	ApiResponse<List<String>> meRoles();
 
-	String meCheckNickname(CheckNicknameRequest request);
+	ApiResponse<Void> meCheckNickname(CheckNicknameRequest request);
 
-	String modifyPassword(ModifyPasswordRequest request);
+	ApiResponse<Void> modifyPassword(ModifyPasswordRequest request);
 
-	String signup(SignUpRequest signupRequest);
+	ApiResponse<Void> signup(SignUpRequest signupRequest);
 
-	String checkIdentifier(CheckIdentifierRequest request);
+	ApiResponse<Void> checkIdentifier(CheckIdentifierRequest request);
 
-	String checkNickname(CheckNicknameRequest request);
+	ApiResponse<Void> checkNickname(CheckNicknameRequest request);
 
-	String sendEmail(SendCodeRequest request);
+	ApiResponse<Void> sendEmail(SendCodeRequest request);
 
-	String checkEmail(String email, String certifyCode);
+	ApiResponse<Void> checkEmail(String email, String certifyCode);
 
-	String recoverIdentifier(String email);
+	ApiResponse<Void> recoverIdentifier(String email);
 
-	String recoverPassword(String identifier);
+	ApiResponse<Void> recoverPassword(String identifier);
 
 }

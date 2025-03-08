@@ -30,68 +30,69 @@ public class PostServiceImpl implements PostService {
 	private final ImageClient imageClient;
 
 	@Override
-	public Page<SearchPostsResponse> searchPosts(Pageable pageable, String keyword) {
-		return postClient.searchPosts(pageable, keyword).getData();
+	public ApiResponse<Page<SearchPostsResponse>> searchPosts(Pageable pageable, String keyword) {
+		return postClient.searchPosts(pageable, keyword).getBody();
 	}
 
 	@Override
-	public Page<GetPostSimpleResponse> getPosts(Pageable pageable) {
-		return postClient.getPosts(pageable).getData();
+	public ApiResponse<Page<GetPostSimpleResponse>> getPosts(Pageable pageable) {
+		return postClient.getPosts(pageable).getBody();
 	}
 
 	@Override
-	public List<GetMainPostResponse> getHotEventPosts() {
-		return postClient.getHotEventPosts().getData();
+	public ApiResponse<List<GetMainPostResponse>> getHotEventPosts() {
+		return postClient.getHotEventPosts().getBody();
 	}
 
 	@Override
-	public List<GetMainPostResponse> getLatestEventPosts() {
-		return postClient.getLatestEventPosts().getData();
+	public ApiResponse<List<GetMainPostResponse>> getLatestEventPosts() {
+		return postClient.getLatestEventPosts().getBody();
 	}
 
 	@Override
-	public List<GetMainPostResponse> getDeadlineEventPosts() {
-		return postClient.getDeadlineEventPosts().getData();
+	public ApiResponse<List<GetMainPostResponse>> getDeadlineEventPosts() {
+		return postClient.getDeadlineEventPosts().getBody();
 	}
 
 	@Override
-	public List<GetRecommendPostResponse> getRecommendationEventPosts() {
-		return postClient.getRecommendationEventPosts().getData();
+	public ApiResponse<List<GetRecommendPostResponse>> getRecommendationEventPosts() {
+		return postClient.getRecommendationEventPosts().getBody();
 	}
 
 	@Override
-	public List<GetRecommendPostResponse> getTrendingEventPosts() {
-		return postClient.getTrendingEventPosts().getData();
+	public ApiResponse<List<GetRecommendPostResponse>> getTrendingEventPosts() {
+		return postClient.getTrendingEventPosts().getBody();
 	}
 
 	@Override
-	public List<GetMainPostResponse> getHotPostsByCategoryName(String categoryName) {
-		return postClient.getHotPostsByCategoryName(categoryName).getData();
+	public ApiResponse<List<GetMainPostResponse>> getHotPostsByCategoryName(String categoryName) {
+		return postClient.getHotPostsByCategoryName(categoryName).getBody();
 	}
 
 	@Override
-	public Page<GetPostsByCategoryNameResponse> getPostsByCategoryName(Pageable pageable, String categoryName) {
-		return postClient.getPostsByCategoryName(pageable, categoryName).getData();
+	public ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable,
+		String categoryName) {
+		return postClient.getPostsByCategoryName(pageable, categoryName).getBody();
 	}
 
 	@Override
-	public Page<GetPostSimpleResponse> getPostsByUserId(Pageable pageable) {
-		return postClient.getPostsByUserId(pageable).getData();
+	public ApiResponse<Page<GetPostSimpleResponse>> getPostsByUserId(Pageable pageable) {
+		return postClient.getPostsByUserId(pageable).getBody();
 	}
 
 	@Override
-	public GetPostResponse getPost(Long postId) {
-		return postClient.getPost(postId).getData();
+	public ApiResponse<GetPostResponse> getPost(Long postId) {
+		return postClient.getPost(postId).getBody();
 	}
 
 	@Override
-	public GetTempPostResponse getTempPost() {
-		return postClient.getTempPost().getData();
+	public ApiResponse<GetTempPostResponse> getTempPost() {
+		return postClient.getTempPost().getBody();
 	}
 
 	@Override
 	public ApiResponse<CreatePostResponse> createPost(CreatePostRequest request, boolean isTemp) {
-		return postClient.createPost(request, isTemp);
+		return postClient.createPost(request, isTemp).getBody();
 	}
 
 	@Override
@@ -100,13 +101,13 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public String recommendPost(Long postId) {
-		return postClient.recommendPost(postId).getMessage();
+	public ApiResponse<Void> recommendPost(Long postId) {
+		return postClient.recommendPost(postId).getBody();
 	}
 
 	@Override
-	public String disrecommendPost(Long postId) {
-		return postClient.disrecommendPost(postId).getMessage();
+	public ApiResponse<Void> disrecommendPost(Long postId) {
+		return postClient.disrecommendPost(postId).getBody();
 	}
 
 	@Override
@@ -115,8 +116,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Boolean isAuthorizedToEdit(Long postId) {
-		return postClient.isAuthorizedToEdit(postId).getData();
+	public ApiResponse<Boolean> isAuthorizedToEdit(Long postId) {
+		return postClient.isAuthorizedToEdit(postId).getBody();
 	}
 
 	@Override

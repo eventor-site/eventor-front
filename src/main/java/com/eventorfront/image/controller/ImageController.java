@@ -26,12 +26,12 @@ public class ImageController {
 	@PostMapping("/upload")
 	public List<GetImageResponse> uploadImage(@RequestParam("file") MultipartFile file,
 		@RequestParam Long postId, @RequestParam boolean isThumbnail, @RequestParam boolean isPasted) {
-		return imageService.upload(file, postId, isThumbnail, isPasted); // 이미지를 저장하고 URL 반환하는 로직
+		return imageService.upload(file, postId, isThumbnail, isPasted).getData();
 	}
 
 	@DeleteMapping
 	public List<GetImageResponse> deleteImages(@RequestBody DeleteImageRequest request) {
-		return imageService.deleteImages(request);
+		return imageService.deleteImages(request).getData();
 	}
 
 	@DeleteMapping("/temp")

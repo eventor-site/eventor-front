@@ -5,19 +5,20 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.reporttype.dto.ReportTypeDto;
 
 public interface ReportTypeService {
 
-	List<ReportTypeDto> getReportTypes();
+	ApiResponse<List<ReportTypeDto>> getReportTypes();
 
-	Page<ReportTypeDto> getReportTypes(Pageable pageable);
+	ApiResponse<Page<ReportTypeDto>> getReportTypes(Pageable pageable);
 
-	ReportTypeDto getReportType(Long reportTypeId);
+	ApiResponse<ReportTypeDto> getReportType(Long reportTypeId);
 
-	String createReportType(ReportTypeDto request);
+	ApiResponse<Void> createReportType(ReportTypeDto request);
 
-	String updateReportType(Long reportTypeId, ReportTypeDto request);
+	ApiResponse<Void> updateReportType(Long reportTypeId, ReportTypeDto request);
 
-	String deleteReportType(Long reportTypeId);
+	ApiResponse<Void> deleteReportType(Long reportTypeId);
 }

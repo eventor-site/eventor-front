@@ -19,41 +19,41 @@ import com.eventorfront.search.dto.response.SearchPostsResponse;
 
 public interface PostService {
 
-	Page<SearchPostsResponse> searchPosts(Pageable pageable, String keyword);
+	ApiResponse<Page<SearchPostsResponse>> searchPosts(Pageable pageable, String keyword);
 
-	Page<GetPostSimpleResponse> getPosts(Pageable pageable);
+	ApiResponse<Page<GetPostSimpleResponse>> getPosts(Pageable pageable);
 
-	List<GetMainPostResponse> getHotEventPosts();
+	ApiResponse<List<GetMainPostResponse>> getHotEventPosts();
 
-	List<GetMainPostResponse> getLatestEventPosts();
+	ApiResponse<List<GetMainPostResponse>> getLatestEventPosts();
 
-	List<GetMainPostResponse> getDeadlineEventPosts();
+	ApiResponse<List<GetMainPostResponse>> getDeadlineEventPosts();
 
-	List<GetRecommendPostResponse> getRecommendationEventPosts();
+	ApiResponse<List<GetRecommendPostResponse>> getRecommendationEventPosts();
 
-	List<GetRecommendPostResponse> getTrendingEventPosts();
+	ApiResponse<List<GetRecommendPostResponse>> getTrendingEventPosts();
 
-	List<GetMainPostResponse> getHotPostsByCategoryName(String categoryName);
+	ApiResponse<List<GetMainPostResponse>> getHotPostsByCategoryName(String categoryName);
 
-	Page<GetPostsByCategoryNameResponse> getPostsByCategoryName(Pageable pageable, String categoryName);
+	ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable, String categoryName);
 
-	Page<GetPostSimpleResponse> getPostsByUserId(Pageable pageable);
+	ApiResponse<Page<GetPostSimpleResponse>> getPostsByUserId(Pageable pageable);
 
-	GetPostResponse getPost(Long postId);
+	ApiResponse<GetPostResponse> getPost(Long postId);
 
-	GetTempPostResponse getTempPost();
+	ApiResponse<GetTempPostResponse> getTempPost();
 
 	ApiResponse<CreatePostResponse> createPost(CreatePostRequest request, boolean isTemp);
 
 	void updatePost(Long postId, UpdatePostRequest request, boolean isTemp);
 
-	String recommendPost(Long postId);
+	ApiResponse<Void> recommendPost(Long postId);
 
-	String disrecommendPost(Long postId);
+	ApiResponse<Void> disrecommendPost(Long postId);
 
 	void deletePost(Long postId);
 
-	Boolean isAuthorizedToEdit(Long postId);
+	ApiResponse<Boolean> isAuthorizedToEdit(Long postId);
 
 	void deleteTempPost();
 }

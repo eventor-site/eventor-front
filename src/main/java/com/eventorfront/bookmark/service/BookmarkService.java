@@ -6,14 +6,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.eventorfront.bookmark.dto.response.GetBookmarkResponse;
+import com.eventorfront.global.dto.ApiResponse;
 
 public interface BookmarkService {
 
-	List<GetBookmarkResponse> getBookmarksByUserId();
+	ApiResponse<List<GetBookmarkResponse>> getBookmarksByUserId();
 
-	Page<GetBookmarkResponse> getBookmarksByUserId(Pageable pageable);
+	ApiResponse<Page<GetBookmarkResponse>> getBookmarksByUserId(Pageable pageable);
 
-	String createOrDeleteBookmark(String categoryName);
+	ApiResponse<Void> createOrDeleteBookmark(String categoryName);
 
-	String deleteBookmark(Long bookmarkId);
+	ApiResponse<Void> deleteBookmark(Long bookmarkId);
 }

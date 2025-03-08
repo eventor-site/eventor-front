@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Feign 클라이언트의 요청을 가로채고 수정하는 인터셉터입니다.
- * 이 클래스는 현재 요청의 쿠키에서 `Access-Token` 및 `Refresh-Token` 값을 추출하여
+ * 이 클래스는 현재 요청의 쿠키에서 `access-token` 및 `refresh-token` 값을 추출하여
  * Feign 클라이언트의 요청 헤더에 추가합니다.
  */
 @Slf4j
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FeignClientInterceptor implements RequestInterceptor {
 
 	/**
-	 * 요청 템플릿에 현재 요청의 쿠키에서 추출한 `Access-Token` 및 `Refresh-Token` 값을
+	 * 요청 템플릿에 현재 요청의 쿠키에서 추출한 `access-token` 및 `refresh-token` 값을
 	 * 헤더로 추가합니다.
 	 */
 	@Override
@@ -31,15 +31,15 @@ public class FeignClientInterceptor implements RequestInterceptor {
 			HttpServletRequest request = attributes.getRequest();
 			Cookie[] cookies = request.getCookies();
 
-			if (request.getAttribute("Access-Token") != null) {
-				template.header("Access-Token", request.getAttribute("Access-Token").toString());
-				template.header("Refresh-Token", request.getAttribute("Access-Token").toString());
+			if (request.getAttribute("access-token") != null) {
+				template.header("access-token", request.getAttribute("access-token").toString());
+				template.header("refresh-token", request.getAttribute("access-token").toString());
 			} else if (cookies != null) {
 				for (Cookie cookie : cookies) {
-					if ("Access-Token".equals(cookie.getName())) {
-						template.header("Access-Token", cookie.getValue());
-					} else if ("Refresh-Token".equals(cookie.getName())) {
-						template.header("Refresh-Token", cookie.getValue());
+					if ("access-token".equals(cookie.getName())) {
+						template.header("access-token", cookie.getValue());
+					} else if ("refresh-token".equals(cookie.getName())) {
+						template.header("refresh-token", cookie.getValue());
 					}
 				}
 			}

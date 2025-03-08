@@ -2,7 +2,7 @@ package com.eventorfront.auth.service;
 
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
-import com.eventorfront.auth.dto.response.OauthRedirectUrlResponse;
+import com.eventorfront.global.dto.ApiResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
  * 인증과 관련된 비즈니스 로직을 처리하는 서비스 인터페이스입니다.
  */
 public interface AuthService {
-	LoginResponse login(LoginRequest loginRequest);
+	ApiResponse<LoginResponse> login(LoginRequest loginRequest);
 
 	/**
 	 * 사용자의 로그아웃 요청을 처리합니다.
@@ -22,6 +22,6 @@ public interface AuthService {
 	 */
 	boolean hasTokensInCookie(HttpServletRequest request);
 
-	OauthRedirectUrlResponse oauthAuthorization(String registrationId);
+	ApiResponse<String> oauthAuthorization(String registrationId);
 
 }

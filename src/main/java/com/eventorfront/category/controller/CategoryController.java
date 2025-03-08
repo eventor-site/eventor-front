@@ -45,20 +45,20 @@ public class CategoryController {
 	@AuthorizeRole("admin")
 	@GetMapping("/update/{categoryId}")
 	public String updateCategoryForm(@PathVariable Long categoryId, Model model) {
-		model.addAttribute("category", categoryService.getCategory(categoryId));
+		model.addAttribute("category", categoryService.getCategory(categoryId).getData());
 		return "category/update";
 	}
 
 	@AuthorizeRole("admin")
 	@GetMapping("/search")
 	public ResponseEntity<List<GetCategoryNameResponse>> searchCategories(@RequestParam String keyword) {
-		return ResponseEntity.status(HttpStatus.OK).body(categoryService.searchCategories(keyword));
+		return ResponseEntity.status(HttpStatus.OK).body(categoryService.searchCategories(keyword).getData());
 	}
 
 	@AuthorizeRole("admin")
 	@GetMapping
 	public String getCategories(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetCategoryListResponse> categories = categoryService.getCategories(pageable);
+		Page<GetCategoryListResponse> categories = categoryService.getCategories(pageable).getData();
 		model.addAttribute("objects", categories);
 		PagingModel.pagingProcessing(pageable, model, categories, "/categories", 10);
 		return "category/list";
@@ -66,20 +66,21 @@ public class CategoryController {
 
 	@PostMapping
 	public String createCategory(@ModelAttribute CreateCategoryRequest request, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", categoryService.createCategory(request));
+		redirectAttributes.addFlashAttribute("message", categoryService.createCategory(request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{categoryId}")
 	public String updateCategory(@PathVariable Long categoryId, @ModelAttribute UpdateCategoryRequest request,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", categoryService.updateCategory(categoryId, request));
+		redirectAttributes.addFlashAttribute("message",
+			categoryService.updateCategory(categoryId, request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{categoryId}")
 	public String deleteCategory(@PathVariable Long categoryId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", categoryService.deleteCategory(categoryId));
+		redirectAttributes.addFlashAttribute("message", categoryService.deleteCategory(categoryId).getMessage());
 		return REDIRECT_URL;
 	}
 }

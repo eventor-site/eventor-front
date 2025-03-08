@@ -38,20 +38,20 @@ public class UserStopController {
 	@AuthorizeRole("admin")
 	@GetMapping("/create")
 	public String createUserStopForm(Model model) {
-		model.addAttribute("reportTypes", reportTypeService.getReportTypes());
+		model.addAttribute("reportTypes", reportTypeService.getReportTypes().getData());
 		return "userStop/create";
 	}
 
 	@AuthorizeRole("admin")
 	@GetMapping("/update/{userStopId}")
 	public String updateUserStopForm(@PathVariable Long userStopId, Model model) {
-		model.addAttribute("userStop", userStopService.getUserStop(userStopId));
+		model.addAttribute("userStop", userStopService.getUserStop(userStopId).getData());
 		return "userStop/update";
 	}
 
 	@GetMapping
 	public String getUserStops(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetUserStopResponse> userStops = userStopService.getUserStops(pageable);
+		Page<GetUserStopResponse> userStops = userStopService.getUserStops(pageable).getData();
 		model.addAttribute("objects", userStops);
 		PagingModel.pagingProcessing(pageable, model, userStops, "/userStops", 10);
 		return "userStop/list";
@@ -60,18 +60,18 @@ public class UserStopController {
 	@GetMapping("/users")
 	@ResponseBody
 	public List<GetUserStopByUserIdResponse> getUserStopsByUserId(@RequestParam Long userId) {
-		return userStopService.getUserStopsByUserId(userId);
+		return userStopService.getUserStopsByUserId(userId).getData();
 	}
 
 	@PostMapping
 	public String createUserStop(@ModelAttribute UserStopDto request, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", userStopService.createUserStop(request));
+		redirectAttributes.addFlashAttribute("message", userStopService.createUserStop(request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{userStopId}")
 	public String deleteUserStop(@PathVariable Long userStopId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", userStopService.deleteUserStop(userStopId));
+		redirectAttributes.addFlashAttribute("message", userStopService.deleteUserStop(userStopId).getMessage());
 		return REDIRECT_URL;
 	}
 }

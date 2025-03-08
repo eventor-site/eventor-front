@@ -3,6 +3,7 @@ package com.eventorfront.image.client;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +19,15 @@ import com.eventorfront.image.dto.response.GetImageResponse;
 public interface ImageClient {
 
 	@PostMapping(value = "/back/images/upload", consumes = "multipart/form-data")
-	ApiResponse<List<GetImageResponse>> upload(@RequestPart("file") MultipartFile file,
+	ResponseEntity<ApiResponse<List<GetImageResponse>>> upload(@RequestPart("file") MultipartFile file,
 		@RequestParam String folderName, @RequestParam Long postId,
 		@RequestParam boolean isThumbnail,
 		@RequestParam boolean isPasted);
 
 	@DeleteMapping("/back/images")
-	ApiResponse<List<GetImageResponse>> deleteImages(@RequestBody DeleteImageRequest request);
+	ResponseEntity<ApiResponse<List<GetImageResponse>>> deleteImages(@RequestBody DeleteImageRequest request);
 
 	@DeleteMapping("/back/images/temp")
-	ApiResponse<Void> deleteTempImage();
+	ResponseEntity<ApiResponse<Void>> deleteTempImage();
 
 }

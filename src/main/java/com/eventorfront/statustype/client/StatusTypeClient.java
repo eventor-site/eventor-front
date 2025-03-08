@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,25 +22,26 @@ import com.eventorfront.statustype.dto.StatusTypeDto;
 public interface StatusTypeClient {
 
 	@GetMapping("/back/statusTypes/search")
-	ApiResponse<List<StatusTypeDto>> searchStatusTypes(@RequestParam String keyword);
+	ResponseEntity<ApiResponse<List<StatusTypeDto>>> searchStatusTypes(@RequestParam String keyword);
 
 	@GetMapping("/back/statusTypes")
-	ApiResponse<List<StatusTypeDto>> getStatusTypes();
+	ResponseEntity<ApiResponse<List<StatusTypeDto>>> getStatusTypes();
 
 	@GetMapping("/back/statusTypes/paging")
-	ApiResponse<Page<StatusTypeDto>> getStatusTypes(@PageableDefault(page = 1, size = 10) Pageable pageable);
+	ResponseEntity<ApiResponse<Page<StatusTypeDto>>> getStatusTypes(
+		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/statusTypes/{statusTypeId}")
-	ApiResponse<StatusTypeDto> getStatusType(@PathVariable Long statusTypeId);
+	ResponseEntity<ApiResponse<StatusTypeDto>> getStatusType(@PathVariable Long statusTypeId);
 
 	@PostMapping("/back/statusTypes")
-	ApiResponse<Void> createStatusType(
+	ResponseEntity<ApiResponse<Void>> createStatusType(
 		@RequestBody StatusTypeDto request);
 
 	@PutMapping("/back/statusTypes/{statusTypeId}")
-	ApiResponse<Void> updateStatusType(@PathVariable Long statusTypeId,
+	ResponseEntity<ApiResponse<Void>> updateStatusType(@PathVariable Long statusTypeId,
 		@RequestBody StatusTypeDto request);
 
 	@DeleteMapping("/back/statusTypes/{statusTypeId}")
-	ApiResponse<Void> deleteStatusType(@PathVariable Long statusTypeId);
+	ResponseEntity<ApiResponse<Void>> deleteStatusType(@PathVariable Long statusTypeId);
 }

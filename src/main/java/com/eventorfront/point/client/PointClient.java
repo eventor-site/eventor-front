@@ -4,6 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,17 +20,18 @@ import com.eventorfront.point.dto.response.GetPointResponse;
 public interface PointClient {
 
 	@GetMapping("/back/points/paging")
-	ApiResponse<Page<GetPointResponse>> getPoints(@PageableDefault(page = 1, size = 10) Pageable pageable);
+	ResponseEntity<ApiResponse<Page<GetPointResponse>>> getPoints(
+		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/points/{pointId}")
-	ApiResponse<GetPointResponse> getPoint(@PathVariable Long pointId);
+	ResponseEntity<ApiResponse<GetPointResponse>> getPoint(@PathVariable Long pointId);
 
 	@PostMapping("/back/points")
-	ApiResponse<Void> createPoint(@RequestBody PointRequest request);
+	ResponseEntity<ApiResponse<Void>> createPoint(@RequestBody PointRequest request);
 
 	@PutMapping("/back/points/{pointId}")
-	ApiResponse<Void> updatePoint(@PathVariable Long pointId, @RequestBody PointRequest request);
+	ResponseEntity<ApiResponse<Void>> updatePoint(@PathVariable Long pointId, @RequestBody PointRequest request);
 
 	@DeleteMapping("/back/points/{pointId}")
-	ApiResponse<Void> deletePoint(@PathVariable Long pointId);
+	ResponseEntity<ApiResponse<Void>> deletePoint(@PathVariable Long pointId);
 }

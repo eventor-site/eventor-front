@@ -34,7 +34,7 @@ public class CommentController {
 	@AuthorizeRole("admin")
 	@GetMapping("/users/admin/comments")
 	public String getComments(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetCommentByUserIdResponse> comments = commentService.getComments(pageable);
+		Page<GetCommentByUserIdResponse> comments = commentService.getComments(pageable).getData();
 		model.addAttribute("objects", comments);
 		PagingModel.pagingProcessing(pageable, model, comments, "/users/admin/comments", 10);
 		return "comment/admin";
@@ -42,7 +42,7 @@ public class CommentController {
 
 	@GetMapping("/users/me/comments")
 	public String getCommentsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetCommentByUserIdResponse> comments = commentService.getCommentsByUserId(pageable);
+		Page<GetCommentByUserIdResponse> comments = commentService.getCommentsByUserId(pageable).getData();
 		model.addAttribute("objects", comments);
 		PagingModel.pagingProcessing(pageable, model, comments, "/users/me/comments", 10);
 		return "comment/me";
@@ -50,21 +50,22 @@ public class CommentController {
 
 	@GetMapping("/posts/{postId}/comments/{commentId}")
 	public String getComment(@PathVariable Long postId, @PathVariable Long commentId) {
-		Long page = commentService.getComment(postId, commentId).page();
+		Long page = commentService.getComment(postId, commentId).getData().page();
 		return "redirect:/posts/" + postId + "?page=" + page + "&size=10" + "#" + commentId;
 	}
 
 	@PostMapping("/posts/{postId}/comments")
 	public String createComment(@PathVariable Long postId, @ModelAttribute CreateCommentRequest request,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", commentService.createComment(postId, request));
+		redirectAttributes.addFlashAttribute("message", commentService.createComment(postId, request).getMessage());
 		return "redirect:/posts/" + postId;
 	}
 
 	@PutMapping("/posts/{postId}/comments/{commentId}")
 	public String updateComment(@PathVariable Long postId, @PathVariable Long commentId,
 		@ModelAttribute UpdateCommentRequest request, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", commentService.updateComment(postId, commentId, request));
+		redirectAttributes.addFlashAttribute("message",
+			commentService.updateComment(postId, commentId, request).getMessage());
 		return "redirect:/posts/" + postId;
 	}
 
@@ -72,7 +73,7 @@ public class CommentController {
 	public ResponseEntity<String> recommendComment(@PathVariable Long postId, @PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return ResponseEntity.ok(commentService.recommendComment(postId, commentId));
+			return ResponseEntity.ok(commentService.recommendComment(postId, commentId).getMessage());
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
@@ -82,7 +83,7 @@ public class CommentController {
 	public ResponseEntity<String> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return ResponseEntity.ok(commentService.disrecommendComment(postId, commentId));
+			return ResponseEntity.ok(commentService.disrecommendComment(postId, commentId).getMessage());
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
@@ -91,7 +92,7 @@ public class CommentController {
 	@DeleteMapping("/posts/{postId}/comments/{commentId}")
 	public String deleteComment(@PathVariable Long postId, @PathVariable Long commentId,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", commentService.deleteComment(postId, commentId));
+		redirectAttributes.addFlashAttribute("message", commentService.deleteComment(postId, commentId).getMessage());
 		return "redirect:/posts/" + postId;
 	}
 }

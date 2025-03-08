@@ -25,7 +25,7 @@ public class BookmarkController {
 
 	@GetMapping("/users/me/bookmarks")
 	public String getBookmarksByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetBookmarkResponse> bookmarks = bookmarkService.getBookmarksByUserId(pageable);
+		Page<GetBookmarkResponse> bookmarks = bookmarkService.getBookmarksByUserId(pageable).getData();
 		model.addAttribute("objects", bookmarks);
 		PagingModel.pagingProcessing(pageable, model, bookmarks, "/users/me/bookmarks", 10);
 		return "bookmark/list";
@@ -33,13 +33,12 @@ public class BookmarkController {
 
 	@PostMapping("/categories/{categoryName}/bookmarks")
 	public ResponseEntity<String> createOrDeleteBookmark(@PathVariable String categoryName) {
-		return ResponseEntity.ok(bookmarkService.createOrDeleteBookmark(categoryName));
+		return ResponseEntity.ok(bookmarkService.createOrDeleteBookmark(categoryName).getMessage());
 	}
 
 	@DeleteMapping("/bookmarks/{bookmarkId}")
 	public String deleteBookmark(@PathVariable Long bookmarkId, RedirectAttributes redirectAttributes) {
-
-		redirectAttributes.addFlashAttribute("message", bookmarkService.deleteBookmark(bookmarkId));
+		redirectAttributes.addFlashAttribute("message", bookmarkService.deleteBookmark(bookmarkId).getMessage());
 		return "redirect:/users/me/bookmarks";
 	}
 }

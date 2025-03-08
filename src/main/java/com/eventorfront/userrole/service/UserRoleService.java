@@ -2,15 +2,16 @@ package com.eventorfront.userrole.service;
 
 import java.util.List;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.role.dto.RoleDto;
 
 public interface UserRoleService {
 
-	List<RoleDto> getUserRoles(Long userId);
+	ApiResponse<List<RoleDto>> getUserRoles(Long userId);
 
-	List<RoleDto> getUnassignedUserRoles(Long userId);
+	ApiResponse<List<RoleDto>> getUnassignedUserRoles(Long userId);
 
-	String createUserRole(Long userId, Long roleId);
+	ApiResponse<Void> createUserRole(Long userId, Long roleId);
 
-	String deleteUserRole(Long userId, Long roleId);
+	ApiResponse<Void> deleteUserRole(Long userId, Long roleId);
 }

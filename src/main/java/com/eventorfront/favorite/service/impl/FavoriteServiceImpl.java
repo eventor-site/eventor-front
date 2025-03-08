@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.eventorfront.favorite.client.FavoriteClient;
 import com.eventorfront.favorite.dto.response.GetFavoriteResponse;
 import com.eventorfront.favorite.service.FavoriteService;
+import com.eventorfront.global.dto.ApiResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,17 +17,17 @@ public class FavoriteServiceImpl implements FavoriteService {
 	private final FavoriteClient favoriteClient;
 
 	@Override
-	public Page<GetFavoriteResponse> getFavoritesByUserId(Pageable pageable) {
-		return favoriteClient.getFavoritesByUserId(pageable).getData();
+	public ApiResponse<Page<GetFavoriteResponse>> getFavoritesByUserId(Pageable pageable) {
+		return favoriteClient.getFavoritesByUserId(pageable).getBody();
 	}
 
 	@Override
-	public String createOrDeleteFavorite(Long postId) {
-		return favoriteClient.createOrDeleteFavorite(postId).getMessage();
+	public ApiResponse<Void> createOrDeleteFavorite(Long postId) {
+		return favoriteClient.createOrDeleteFavorite(postId).getBody();
 	}
 
 	@Override
-	public String deleteFavorite(Long favoriteId) {
-		return favoriteClient.deleteFavorite(favoriteId).getMessage();
+	public ApiResponse<Void> deleteFavorite(Long favoriteId) {
+		return favoriteClient.deleteFavorite(favoriteId).getBody();
 	}
 }

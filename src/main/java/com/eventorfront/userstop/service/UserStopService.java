@@ -5,19 +5,20 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.userstop.dto.UserStopDto;
 import com.eventorfront.userstop.dto.response.GetUserStopByUserIdResponse;
 import com.eventorfront.userstop.dto.response.GetUserStopResponse;
 
 public interface UserStopService {
 
-	Page<GetUserStopResponse> getUserStops(Pageable pageable);
+	ApiResponse<Page<GetUserStopResponse>> getUserStops(Pageable pageable);
 
-	List<GetUserStopByUserIdResponse> getUserStopsByUserId(Long userId);
+	ApiResponse<List<GetUserStopByUserIdResponse>> getUserStopsByUserId(Long userId);
 
-	UserStopDto getUserStop(Long userStopId);
+	ApiResponse<UserStopDto> getUserStop(Long userStopId);
 
-	String createUserStop(UserStopDto request);
+	ApiResponse<Void> createUserStop(UserStopDto request);
 
-	String deleteUserStop(Long userStopId);
+	ApiResponse<Void> deleteUserStop(Long userStopId);
 }

@@ -37,13 +37,13 @@ public class GradeController {
 	@AuthorizeRole("admin")
 	@GetMapping("/update/{gradeId}")
 	public String updateGradeForm(@PathVariable Long gradeId, Model model) {
-		model.addAttribute("grade", gradeService.getGrade(gradeId));
+		model.addAttribute("grade", gradeService.getGrade(gradeId).getData());
 		return "grade/update";
 	}
 
 	@GetMapping
 	public String getGrades(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GradeDto> grades = gradeService.getGrades(pageable);
+		Page<GradeDto> grades = gradeService.getGrades(pageable).getData();
 		model.addAttribute("objects", grades);
 		PagingModel.pagingProcessing(pageable, model, grades, "/grades", 10);
 		return "grade/list";
@@ -51,20 +51,20 @@ public class GradeController {
 
 	@PostMapping
 	public String createGrade(@ModelAttribute GradeDto request, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", gradeService.createGrade(request));
+		redirectAttributes.addFlashAttribute("message", gradeService.createGrade(request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{gradeId}")
 	public String updateGrade(@PathVariable Long gradeId, @ModelAttribute GradeDto request,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", gradeService.updateGrade(gradeId, request));
+		redirectAttributes.addFlashAttribute("message", gradeService.updateGrade(gradeId, request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{gradeId}")
 	public String deleteGrade(@PathVariable Long gradeId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", gradeService.deleteGrade(gradeId));
+		redirectAttributes.addFlashAttribute("message", gradeService.deleteGrade(gradeId).getMessage());
 		return REDIRECT_URL;
 	}
 }

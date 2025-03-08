@@ -3,18 +3,19 @@ package com.eventorfront.point.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.point.dto.request.PointRequest;
 import com.eventorfront.point.dto.response.GetPointResponse;
 
 public interface PointService {
 
-	Page<GetPointResponse> getPoints(Pageable pageable);
+	ApiResponse<Page<GetPointResponse>> getPoints(Pageable pageable);
 
-	GetPointResponse getPoint(Long pointId);
+	ApiResponse<GetPointResponse> getPoint(Long pointId);
 
-	String createPoint(PointRequest request);
+	ApiResponse<Void> createPoint(PointRequest request);
 
-	String updatePoint(Long pointId, PointRequest request);
+	ApiResponse<Void> updatePoint(Long pointId, PointRequest request);
 
-	String deletePoint(Long pointId);
+	ApiResponse<Void> deletePoint(Long pointId);
 }

@@ -38,13 +38,13 @@ public class PointController {
 	@AuthorizeRole("admin")
 	@GetMapping("/update/{pointId}")
 	public String updatePointForm(@PathVariable Long pointId, Model model) {
-		model.addAttribute("point", pointService.getPoint(pointId));
+		model.addAttribute("point", pointService.getPoint(pointId).getData());
 		return "point/update";
 	}
 
 	@GetMapping
 	public String getPoints(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetPointResponse> points = pointService.getPoints(pageable);
+		Page<GetPointResponse> points = pointService.getPoints(pageable).getData();
 		model.addAttribute("objects", points);
 		PagingModel.pagingProcessing(pageable, model, points, "/points", 10);
 		return "point/list";
@@ -52,20 +52,20 @@ public class PointController {
 
 	@PostMapping
 	public String createPoint(@ModelAttribute PointRequest request, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", pointService.createPoint(request));
+		redirectAttributes.addFlashAttribute("message", pointService.createPoint(request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{pointId}")
 	public String updatePoint(@PathVariable Long pointId, @ModelAttribute PointRequest request,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", pointService.updatePoint(pointId, request));
+		redirectAttributes.addFlashAttribute("message", pointService.updatePoint(pointId, request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{pointId}")
 	public String deletePoint(@PathVariable Long pointId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", pointService.deletePoint(pointId));
+		redirectAttributes.addFlashAttribute("message", pointService.deletePoint(pointId).getMessage());
 		return REDIRECT_URL;
 	}
 }

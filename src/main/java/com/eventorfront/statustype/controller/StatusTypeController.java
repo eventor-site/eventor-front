@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,18 +42,18 @@ public class StatusTypeController {
 	@AuthorizeRole("admin")
 	@GetMapping("/update/{statusTypeId}")
 	public String updateStatusTypeForm(@PathVariable Long statusTypeId, Model model) {
-		model.addAttribute("statusType", statusTypeService.getStatusType(statusTypeId));
+		model.addAttribute("statusType", statusTypeService.getStatusType(statusTypeId).getData());
 		return "statusType/update";
 	}
 
 	@GetMapping("/search")
 	public ResponseEntity<List<StatusTypeDto>> searchStatusTypes(@RequestParam String keyword) {
-		return ResponseEntity.status(HttpStatus.OK).body(statusTypeService.searchStatusTypes(keyword));
+		return ResponseEntity.ok(statusTypeService.searchStatusTypes(keyword).getData());
 	}
 
 	@GetMapping
 	public String getStatusTypes(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<StatusTypeDto> statusTypes = statusTypeService.getStatusTypes(pageable);
+		Page<StatusTypeDto> statusTypes = statusTypeService.getStatusTypes(pageable).getData();
 		model.addAttribute("objects", statusTypes);
 		PagingModel.pagingProcessing(pageable, model, statusTypes, "/statusTypes", 10);
 		return "statusType/list";
@@ -62,20 +61,21 @@ public class StatusTypeController {
 
 	@PostMapping
 	public String createStatusType(@ModelAttribute StatusTypeDto request, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", statusTypeService.createStatusType(request));
+		redirectAttributes.addFlashAttribute("message", statusTypeService.createStatusType(request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{statusTypeId}")
 	public String updateStatusType(@PathVariable Long statusTypeId,
 		@Valid @ModelAttribute StatusTypeDto request, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", statusTypeService.updateStatusType(statusTypeId, request));
+		redirectAttributes.addFlashAttribute("message",
+			statusTypeService.updateStatusType(statusTypeId, request).getMessage());
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{statusTypeId}")
 	public String deleteStatusType(@PathVariable Long statusTypeId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", statusTypeService.deleteStatusType(statusTypeId));
+		redirectAttributes.addFlashAttribute("message", statusTypeService.deleteStatusType(statusTypeId).getMessage());
 		return REDIRECT_URL;
 	}
 }

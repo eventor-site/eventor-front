@@ -3,17 +3,18 @@ package com.eventorfront.role.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.role.dto.RoleDto;
 
 public interface RoleService {
 
-	Page<RoleDto> getRoles(Pageable pageable);
+	ApiResponse<Page<RoleDto>> getRoles(Pageable pageable);
 
-	RoleDto getRole(Long roleId);
+	ApiResponse<RoleDto> getRole(Long roleId);
 
-	String createRole(RoleDto request);
+	ApiResponse<Void> createRole(RoleDto request);
 
-	String updateRole(Long roleId, RoleDto request);
+	ApiResponse<Void> updateRole(Long roleId, RoleDto request);
 
-	String deleteRole(Long roleId);
+	ApiResponse<Void> deleteRole(Long roleId);
 }
