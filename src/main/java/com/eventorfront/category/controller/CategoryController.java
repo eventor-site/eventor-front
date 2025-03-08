@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.category.dto.request.CreateCategoryRequest;
@@ -64,20 +65,21 @@ public class CategoryController {
 	}
 
 	@PostMapping
-	public String createCategory(@ModelAttribute CreateCategoryRequest request) {
-		categoryService.createCategory(request);
+	public String createCategory(@ModelAttribute CreateCategoryRequest request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", categoryService.createCategory(request));
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{categoryId}")
-	public String updateCategory(@PathVariable Long categoryId, @ModelAttribute UpdateCategoryRequest request) {
-		categoryService.updateCategory(categoryId, request);
+	public String updateCategory(@PathVariable Long categoryId, @ModelAttribute UpdateCategoryRequest request,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", categoryService.updateCategory(categoryId, request));
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{categoryId}")
-	public String deleteCategory(@PathVariable Long categoryId) {
-		categoryService.deleteCategory(categoryId);
+	public String deleteCategory(@PathVariable Long categoryId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", categoryService.deleteCategory(categoryId));
 		return REDIRECT_URL;
 	}
 }

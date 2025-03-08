@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
@@ -64,20 +64,14 @@ public class UserStopController {
 	}
 
 	@PostMapping
-	public String createUserStop(@ModelAttribute UserStopDto request) {
-		userStopService.createUserStop(request);
-		return REDIRECT_URL;
-	}
-
-	@PutMapping("/{userStopId}")
-	public String updateUserStop(@PathVariable Long userStopId, @ModelAttribute UserStopDto request) {
-		userStopService.updateUserStop(userStopId, request);
+	public String createUserStop(@ModelAttribute UserStopDto request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", userStopService.createUserStop(request));
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{userStopId}")
-	public String deleteUserStop(@PathVariable Long userStopId) {
-		userStopService.deleteUserStop(userStopId);
+	public String deleteUserStop(@PathVariable Long userStopId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", userStopService.deleteUserStop(userStopId));
 		return REDIRECT_URL;
 	}
 }

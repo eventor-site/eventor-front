@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
@@ -34,30 +33,30 @@ public interface UserService {
 
 	void updateUserAttributeByAdmin(Long userId, UpdateUserAttributeRequest request);
 
-	void updateUser(UpdateUserRequest request);
+	String updateUser(UpdateUserRequest request);
 
-	void withdrawUser();
+	String withdrawUser();
 
 	boolean meCheckRoles(String roleName);
 
 	List<String> meRoles();
 
-	ResponseEntity<String> meCheckNickname(CheckNicknameRequest request);
+	String meCheckNickname(CheckNicknameRequest request);
 
-	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
+	String modifyPassword(ModifyPasswordRequest request);
 
-	ResponseEntity<Void> signup(SignUpRequest signupRequest);
+	String signup(SignUpRequest signupRequest);
 
-	ResponseEntity<String> checkIdentifier(CheckIdentifierRequest request);
+	String checkIdentifier(CheckIdentifierRequest request);
 
-	ResponseEntity<String> checkNickname(CheckNicknameRequest request);
+	String checkNickname(CheckNicknameRequest request);
 
-	ResponseEntity<String> sendEmail(SendCodeRequest request);
+	String sendEmail(SendCodeRequest request);
 
-	ResponseEntity<String> checkEmail(String email, String certifyCode);
+	String checkEmail(String email, String certifyCode);
 
-	ResponseEntity<String> recoverIdentifier(String email);
+	String recoverIdentifier(String email);
 
-	ResponseEntity<String> recoverPassword(String identifier);
+	String recoverPassword(String identifier);
 
 }

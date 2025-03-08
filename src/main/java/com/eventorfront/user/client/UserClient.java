@@ -6,7 +6,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
@@ -31,63 +31,63 @@ import com.eventorfront.user.dto.response.GetUserResponse;
 public interface UserClient {
 
 	@GetMapping("/back/users")
-	ResponseEntity<Page<GetUserListResponse>> getUsers(@PageableDefault(page = 1, size = 10) Pageable pageable);
+	ApiResponse<Page<GetUserListResponse>> getUsers(@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/users/search")
-	ResponseEntity<List<GetUserByIdentifier>> searchUserByIdentifier(@RequestParam String keyword);
+	ApiResponse<List<GetUserByIdentifier>> searchUserByIdentifier(@RequestParam String keyword);
 
 	@GetMapping("/back/users/search/userId")
-	ResponseEntity<List<GetUserByUserId>> searchUserByUserId(@RequestParam Long userId);
+	ApiResponse<List<GetUserByUserId>> searchUserByUserId(@RequestParam Long userId);
 
 	@GetMapping("/back/users/{userId}")
-	ResponseEntity<GetUserResponse> getUser(@PathVariable Long userId);
+	ApiResponse<GetUserResponse> getUser(@PathVariable Long userId);
 
 	@PutMapping("/back/users/{userId}")
-	ResponseEntity<Void> updateUserByAdmin(@PathVariable Long userId, UpdateUserRequest request);
+	ApiResponse<Void> updateUserByAdmin(@PathVariable Long userId, UpdateUserRequest request);
 
 	@PutMapping("/back/users/{userId}/attribute")
-	ResponseEntity<Void> updateUserAttributeByAdmin(@PathVariable Long userId, UpdateUserAttributeRequest request);
+	ApiResponse<Void> updateUserAttributeByAdmin(@PathVariable Long userId, UpdateUserAttributeRequest request);
 
 	@GetMapping("/back/users/me")
-	ResponseEntity<GetUserResponse> getUserInfo();
+	ApiResponse<GetUserResponse> getUserInfo();
 
 	@PutMapping("/back/users/me")
-	ResponseEntity<Void> updateUser(UpdateUserRequest request);
+	ApiResponse<Void> updateUser(UpdateUserRequest request);
 
 	@DeleteMapping("/back/users/me")
-	ResponseEntity<Void> withdrawUser();
+	ApiResponse<Void> withdrawUser();
 
 	@GetMapping("/back/users/me/checkRoles")
-	ResponseEntity<Boolean> meCheckRoles(@RequestParam String roleName);
+	ApiResponse<Boolean> meCheckRoles(@RequestParam String roleName);
 
 	@GetMapping("/back/users/me/Roles")
-	ResponseEntity<List<String>> meRoles();
+	ApiResponse<List<String>> meRoles();
 
 	@PostMapping("/back/users/me/checkNickname")
-	ResponseEntity<String> meCheckNickname(@RequestBody CheckNicknameRequest request);
+	ApiResponse<Void> meCheckNickname(@RequestBody CheckNicknameRequest request);
 
 	@PutMapping("/back/users/me/password")
-	ResponseEntity<String> modifyPassword(ModifyPasswordRequest request);
+	ApiResponse<Void> modifyPassword(ModifyPasswordRequest request);
 
 	@PostMapping("/back/users/signup")
-	ResponseEntity<Void> signup(@RequestBody SignUpRequest signupRequest);
+	ApiResponse<Void> signup(@RequestBody SignUpRequest signupRequest);
 
 	@PostMapping("/back/users/signup/checkIdentifier")
-	ResponseEntity<String> checkIdentifier(@RequestBody CheckIdentifierRequest request);
+	ApiResponse<Void> checkIdentifier(@RequestBody CheckIdentifierRequest request);
 
 	@PostMapping("/back/users/signup/checkNickname")
-	ResponseEntity<String> checkNickname(@RequestBody CheckNicknameRequest request);
+	ApiResponse<Void> checkNickname(@RequestBody CheckNicknameRequest request);
 
 	@PostMapping("/back/users/signup/sendEmail")
-	ResponseEntity<String> sendEmail(@RequestBody SendCodeRequest request);
+	ApiResponse<Void> sendEmail(@RequestBody SendCodeRequest request);
 
 	@GetMapping("/back/users/signup/checkEmail")
-	ResponseEntity<String> checkEmail(@RequestParam("email") String email,
+	ApiResponse<Void> checkEmail(@RequestParam("email") String email,
 		@RequestParam("certifyCode") String certifyCode);
 
 	@PostMapping("/back/users/recover/identifier")
-	ResponseEntity<String> recoverIdentifier(@RequestParam String email);
+	ApiResponse<Void> recoverIdentifier(@RequestParam String email);
 
 	@PostMapping("/back/users/recover/password")
-	ResponseEntity<String> recoverPassword(@RequestParam String identifier);
+	ApiResponse<String> recoverPassword(@RequestParam String identifier);
 }

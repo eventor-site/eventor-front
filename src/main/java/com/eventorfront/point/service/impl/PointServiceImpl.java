@@ -18,26 +18,26 @@ public class PointServiceImpl implements PointService {
 
 	@Override
 	public Page<GetPointResponse> getPoints(Pageable pageable) {
-		return pointClient.getPoints(pageable).getBody();
+		return pointClient.getPoints(pageable).getData();
 	}
 
 	@Override
 	public GetPointResponse getPoint(Long pointId) {
-		return pointClient.getPoint(pointId).getBody();
+		return pointClient.getPoint(pointId).getData();
 	}
 
 	@Override
-	public void createPoint(PointRequest request) {
-		pointClient.createPoint(request);
+	public String createPoint(PointRequest request) {
+		return pointClient.createPoint(request).getMessage();
 	}
 
 	@Override
-	public void updatePoint(Long pointTypeId, PointRequest request) {
-		pointClient.updatePoint(pointTypeId, request);
+	public String updatePoint(Long pointTypeId, PointRequest request) {
+		return pointClient.updatePoint(pointTypeId, request).getMessage();
 	}
 
 	@Override
-	public void deletePoint(Long pointTypeId) {
-		pointClient.deletePoint(pointTypeId);
+	public String deletePoint(Long pointTypeId) {
+		return pointClient.deletePoint(pointTypeId).getMessage();
 	}
 }

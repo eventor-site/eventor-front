@@ -12,9 +12,9 @@ public interface PointService {
 
 	GetPointResponse getPoint(Long pointId);
 
-	void createPoint(PointRequest request);
+	String createPoint(PointRequest request);
 
-	void updatePoint(Long pointId, PointRequest request);
+	String updatePoint(Long pointId, PointRequest request);
 
-	void deletePoint(Long pointId);
+	String deletePoint(Long pointId);
 }

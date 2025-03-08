@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증에 실패 했습니다. 다시 로그인해 주세요");
 		} else {
 			// 🔹 일반 요청이면 로그인 페이지로 리다이렉트
-			redirectAttributes.addFlashAttribute("message", "인증에 실패 했습니다. 다시 로그인해 주세요");
+			redirectAttributes.addFlashAttribute("errorMessage", "인증에 실패 했습니다. 다시 로그인해 주세요");
 			return "redirect:/auth/login";
 		}
 	}
@@ -37,13 +37,13 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(FeignException.class)
 	public Object handleFeignException(HttpServletRequest request, Model model, FeignException e) {
 		String ajaxHeader = request.getHeader("X-Ajax-Request");
-		String message = e.getMessage(); // FeignException 메시지
+		String errorMessage = e.getMessage(); // FeignException 메시지
 		HttpStatus status = HttpStatus.valueOf(e.status()); // FeignException 에서 상태 코드 추출
 
 		if (ajaxHeader != null) {
-			return ResponseEntity.status(status).body(message);
+			return ResponseEntity.status(status).body(errorMessage);
 		} else {
-			model.addAttribute("message", message);
+			model.addAttribute("errorMessage", errorMessage);
 			model.addAttribute("status", status.value());
 			model.addAttribute("timestamp", LocalDateTime.now());
 
@@ -57,14 +57,14 @@ public class GlobalExceptionHandler {
 		String ajaxHeader = request.getHeader("X-Ajax-Request");
 
 		ErrorStatus errorStatus = e.getErrorStatus();
-		String message = errorStatus.getMessage();
+		String errorMessage = errorStatus.getMessage();
 		HttpStatus status = errorStatus.getStatus();
 		LocalDateTime timestamp = errorStatus.getTimestamp();
 
 		if (ajaxHeader != null) {
-			return ResponseEntity.status(status).body(message);
+			return ResponseEntity.status(status).body(errorMessage);
 		} else {
-			model.addAttribute("message", message);
+			model.addAttribute("errorMessage", errorMessage);
 			model.addAttribute("status", status);
 			model.addAttribute("timestamp", timestamp);
 

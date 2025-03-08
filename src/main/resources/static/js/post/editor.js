@@ -211,8 +211,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             body: formData
         });
 
-        const data = await response.json();
-        return data.postId;
+        const responseBody = await response.json();
+        return responseBody.data.postId;
     }
 
     // 🛠️ **단일 이미지 업로드 함수**
@@ -269,7 +269,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         return await response.json();
 
     }
-
 
     // 🖼️ **업로드된 이미지 미리보기 추가 및 체크박스 클릭 시 상태 변경**
     function updatePreview(images) {
@@ -353,14 +352,16 @@ document.addEventListener('DOMContentLoaded', async function () {
         const response = await fetch(url, {
             method: method,
             headers: {"X-Ajax-Request": "true"},
-            body: formData,
-        });
+            body: formData
+        })
 
         if (!postId) {
-            const data = await response.json();
-            postId = data.postId;
+            const json = await response.json();
+            setupAlertMessage(json.message)
+            postId = json.data.postId;
         }
         window.location.href = `/posts/` + postId;
+        
     });
 
     function previewImageEvent() {

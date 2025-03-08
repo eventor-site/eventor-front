@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.image.client.ImageClient;
 import com.eventorfront.post.client.PostClient;
 import com.eventorfront.post.dto.request.CreatePostRequest;
@@ -31,42 +31,42 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Page<SearchPostsResponse> searchPosts(Pageable pageable, String keyword) {
-		return postClient.searchPosts(pageable, keyword).getBody();
+		return postClient.searchPosts(pageable, keyword).getData();
 	}
 
 	@Override
 	public Page<GetPostSimpleResponse> getPosts(Pageable pageable) {
-		return postClient.getPosts(pageable).getBody();
+		return postClient.getPosts(pageable).getData();
 	}
 
 	@Override
 	public List<GetMainPostResponse> getHotEventPosts() {
-		return postClient.getHotEventPosts().getBody();
+		return postClient.getHotEventPosts().getData();
 	}
 
 	@Override
 	public List<GetMainPostResponse> getLatestEventPosts() {
-		return postClient.getLatestEventPosts().getBody();
+		return postClient.getLatestEventPosts().getData();
 	}
 
 	@Override
 	public List<GetMainPostResponse> getDeadlineEventPosts() {
-		return postClient.getDeadlineEventPosts().getBody();
+		return postClient.getDeadlineEventPosts().getData();
 	}
 
 	@Override
 	public List<GetRecommendPostResponse> getRecommendationEventPosts() {
-		return postClient.getRecommendationEventPosts().getBody();
+		return postClient.getRecommendationEventPosts().getData();
 	}
 
 	@Override
 	public List<GetRecommendPostResponse> getTrendingEventPosts() {
-		return postClient.getTrendingEventPosts().getBody();
+		return postClient.getTrendingEventPosts().getData();
 	}
 
 	@Override
 	public List<GetMainPostResponse> getHotPostsByCategoryName(String categoryName) {
-		return postClient.getHotPostsByCategoryName(categoryName).getBody();
+		return postClient.getHotPostsByCategoryName(categoryName).getData();
 	}
 
 	@Override
@@ -76,37 +76,37 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Page<GetPostSimpleResponse> getPostsByUserId(Pageable pageable) {
-		return postClient.getPostsByUserId(pageable).getBody();
+		return postClient.getPostsByUserId(pageable).getData();
 	}
 
 	@Override
 	public GetPostResponse getPost(Long postId) {
-		return postClient.getPost(postId).getBody();
+		return postClient.getPost(postId).getData();
 	}
 
 	@Override
 	public GetTempPostResponse getTempPost() {
-		return postClient.getTempPost().getBody();
+		return postClient.getTempPost().getData();
 	}
 
 	@Override
-	public CreatePostResponse createPost(CreatePostRequest request, boolean isTemp) {
-		return postClient.createPost(request, isTemp).getBody();
+	public ApiResponse<CreatePostResponse> createPost(CreatePostRequest request, boolean isTemp) {
+		return postClient.createPost(request, isTemp);
 	}
 
 	@Override
-	public ResponseEntity<Void> updatePost(Long postId, UpdatePostRequest request, boolean isTemp) {
-		return postClient.updatePost(postId, request, isTemp);
+	public void updatePost(Long postId, UpdatePostRequest request, boolean isTemp) {
+		postClient.updatePost(postId, request, isTemp);
 	}
 
 	@Override
-	public ResponseEntity<String> recommendPost(Long postId) {
-		return postClient.recommendPost(postId);
+	public String recommendPost(Long postId) {
+		return postClient.recommendPost(postId).getMessage();
 	}
 
 	@Override
-	public ResponseEntity<String> disrecommendPost(Long postId) {
-		return postClient.disrecommendPost(postId);
+	public String disrecommendPost(Long postId) {
+		return postClient.disrecommendPost(postId).getMessage();
 	}
 
 	@Override
@@ -116,12 +116,12 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Boolean isAuthorizedToEdit(Long postId) {
-		return postClient.isAuthorizedToEdit(postId).getBody();
+		return postClient.isAuthorizedToEdit(postId).getData();
 	}
 
 	@Override
-	public ResponseEntity<Void> deleteTempPost() {
-		return postClient.deleteTempPost();
+	public void deleteTempPost() {
+		postClient.deleteTempPost();
 	}
 
 }

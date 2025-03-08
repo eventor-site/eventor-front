@@ -9,7 +9,7 @@
         <!-- 이전 페이지로 이동 -->
         <li class="page-item" th:classappend="${objects.first} ? 'disabled'">
             <a class="page-link"
-               th:href="${objects.first} ? '#' : ${baseUrl} + '?page=' + ${objects.number} + '&size=' + ${objects.size}"
+               th:href="${objects.first} ? '#' : ${baseUrl} + '&page=' + ${objects.number} + '&size=' + ${objects.size}"
                aria-label="Previous">
                 <span aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
             </a>
@@ -22,7 +22,7 @@
         <!-- 다음 페이지로 이동 -->
         <li class="page-item" th:classappend="${objects.last} ? 'disabled'">
             <a class="page-link"
-               th:href="${objects.last} ? '#' : ${baseUrl} + '?page=' + (${objects.number} + 2)+'&size='+${objects.size}"
+               th:href="${objects.last} ? '#' : ${baseUrl} + '&page=' + (${objects.number} + 2)+'&size='+${objects.size}"
                aria-label="Next">
                 <span aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
             </a>

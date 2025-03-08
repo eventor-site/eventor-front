@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.postreport.dto.response.GetPostReportResponse;
@@ -33,18 +34,19 @@ public class PostReportController {
 
 	@PostMapping("/posts/{postId}/postReports")
 	public ResponseEntity<String> createPostReport(@PathVariable Long postId, @RequestParam String reportTypeName) {
-		return postReportService.createPostReport(postId, reportTypeName);
+		return ResponseEntity.ok(postReportService.createPostReport(postId, reportTypeName));
 	}
 
 	@GetMapping("/posts/{postId}/postReports/{postReportId}/confirm")
-	public String confirmPostReport(@PathVariable Long postId, @PathVariable Long postReportId) {
-		postReportService.confirmPostReport(postId, postReportId);
+	public String confirmPostReport(@PathVariable Long postId, @PathVariable Long postReportId,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", postReportService.confirmPostReport(postId, postReportId));
 		return "redirect:/posts/" + postId;
 	}
 
 	@DeleteMapping("/postReports/{postReportId}")
-	public String deletePostReport(@PathVariable Long postReportId) {
-		postReportService.deletePostReport(postReportId);
+	public String deletePostReport(@PathVariable Long postReportId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", postReportService.deletePostReport(postReportId));
 		return "redirect:/postReports";
 	}
 }

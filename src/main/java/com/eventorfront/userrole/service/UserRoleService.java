@@ -10,7 +10,7 @@ public interface UserRoleService {
 
 	List<RoleDto> getUnassignedUserRoles(Long userId);
 
-	void createUserRole(Long userId, Long roleId);
+	String createUserRole(Long userId, Long roleId);
 
-	void deleteUserRole(Long userId, Long roleId);
+	String deleteUserRole(Long userId, Long roleId);
 }

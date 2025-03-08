@@ -17,9 +17,9 @@ public interface StatusTypeService {
 
 	StatusTypeDto getStatusType(Long statusTypeId);
 
-	void createStatusType(StatusTypeDto request);
+	String createStatusType(StatusTypeDto request);
 
-	void updateStatusType(Long statusTypeId, StatusTypeDto request);
+	String updateStatusType(Long statusTypeId, StatusTypeDto request);
 
-	void deleteStatusType(Long statusTypeId);
+	String deleteStatusType(Long statusTypeId);
 }

@@ -24,6 +24,7 @@ import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.category.service.CategoryService;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
 import com.eventorfront.comment.service.CommentService;
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.global.exception.ForbiddenException;
 import com.eventorfront.global.util.CalendarUtils;
 import com.eventorfront.global.util.PagingModel;
@@ -144,7 +145,8 @@ public class PostController {
 		List<String> roles = userService.meRoles();
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("isAuthorized",
-			roles.contains("admin") || (roles.contains("member") && List.of("자유", "핫딜", "맛집").contains(categoryName))
+			roles.contains("admin") || (roles.contains("member") && PermissionUtils.memberCategories.contains(
+				categoryName))
 		);
 
 		Page<GetPostsByCategoryNameResponse> posts = postService.getPostsByCategoryName(pageable, categoryName);
@@ -180,7 +182,7 @@ public class PostController {
 
 	@PostMapping
 	@ResponseBody
-	public CreatePostResponse createPost(@ModelAttribute CreatePostRequest request,
+	public ApiResponse<CreatePostResponse> createPost(@ModelAttribute CreatePostRequest request,
 		@RequestParam(defaultValue = "false") boolean isTemp) {
 		return postService.createPost(request, isTemp);
 	}
@@ -188,13 +190,14 @@ public class PostController {
 	@PutMapping("/{postId}")
 	public ResponseEntity<Void> updatePost(@PathVariable Long postId, @ModelAttribute UpdatePostRequest request,
 		@RequestParam(defaultValue = "false") boolean isTemp) {
-		return postService.updatePost(postId, request, isTemp);
+		postService.updatePost(postId, request, isTemp);
+		return ResponseEntity.ok().build();
 	}
 
 	@PutMapping("/{postId}/recommend")
 	public ResponseEntity<String> recommendPost(@PathVariable Long postId, HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return postService.recommendPost(postId);
+			return ResponseEntity.ok(postService.recommendPost(postId));
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
@@ -203,7 +206,7 @@ public class PostController {
 	@PutMapping("/{postId}/disrecommend")
 	public ResponseEntity<String> disrecommendPost(@PathVariable Long postId, HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return postService.disrecommendPost(postId);
+			return ResponseEntity.ok(postService.disrecommendPost(postId));
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
@@ -218,6 +221,7 @@ public class PostController {
 
 	@DeleteMapping("/temp")
 	public ResponseEntity<Void> deleteTempPost() {
-		return postService.deleteTempPost();
+		postService.deleteTempPost();
+		return ResponseEntity.ok().build();
 	}
 }

@@ -20,31 +20,31 @@ public class StatusServiceImpl implements StatusService {
 
 	@Override
 	public List<GetStatusResponse> getStatuses(String statusTypeName) {
-		return statusClient.getStatuses(statusTypeName).getBody();
+		return statusClient.getStatuses(statusTypeName).getData();
 	}
 
 	@Override
 	public Page<GetStatusResponse> getStatuses(Pageable pageable) {
-		return statusClient.getStatuses(pageable).getBody();
+		return statusClient.getStatuses(pageable).getData();
 	}
 
 	@Override
 	public GetStatusResponse getStatus(Long statusId) {
-		return statusClient.getStatus(statusId).getBody();
+		return statusClient.getStatus(statusId).getData();
 	}
 
 	@Override
-	public void createStatus(StatusRequest request) {
-		statusClient.createStatus(request);
+	public String createStatus(StatusRequest request) {
+		return statusClient.createStatus(request).getMessage();
 	}
 
 	@Override
-	public void updateStatus(Long statusTypeId, StatusRequest request) {
-		statusClient.updateStatus(statusTypeId, request);
+	public String updateStatus(Long statusTypeId, StatusRequest request) {
+		return statusClient.updateStatus(statusTypeId, request).getMessage();
 	}
 
 	@Override
-	public void deleteStatus(Long statusTypeId) {
-		statusClient.deleteStatus(statusTypeId);
+	public String deleteStatus(Long statusTypeId) {
+		return statusClient.deleteStatus(statusTypeId).getMessage();
 	}
 }

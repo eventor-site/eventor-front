@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.PagingModel;
@@ -50,20 +51,21 @@ public class PointController {
 	}
 
 	@PostMapping
-	public String createPoint(@ModelAttribute PointRequest request) {
-		pointService.createPoint(request);
+	public String createPoint(@ModelAttribute PointRequest request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", pointService.createPoint(request));
 		return REDIRECT_URL;
 	}
 
 	@PutMapping("/{pointId}")
-	public String updatePoint(@PathVariable Long pointId, @ModelAttribute PointRequest request) {
-		pointService.updatePoint(pointId, request);
+	public String updatePoint(@PathVariable Long pointId, @ModelAttribute PointRequest request,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", pointService.updatePoint(pointId, request));
 		return REDIRECT_URL;
 	}
 
 	@DeleteMapping("/{pointId}")
-	public String deletePoint(@PathVariable Long pointId) {
-		pointService.deletePoint(pointId);
+	public String deletePoint(@PathVariable Long pointId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", pointService.deletePoint(pointId));
 		return REDIRECT_URL;
 	}
 }

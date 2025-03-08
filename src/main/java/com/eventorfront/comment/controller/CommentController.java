@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.service.AuthService;
@@ -54,15 +55,16 @@ public class CommentController {
 	}
 
 	@PostMapping("/posts/{postId}/comments")
-	public String createComment(@PathVariable Long postId, @ModelAttribute CreateCommentRequest request) {
-		commentService.createComment(postId, request);
+	public String createComment(@PathVariable Long postId, @ModelAttribute CreateCommentRequest request,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", commentService.createComment(postId, request));
 		return "redirect:/posts/" + postId;
 	}
 
 	@PutMapping("/posts/{postId}/comments/{commentId}")
 	public String updateComment(@PathVariable Long postId, @PathVariable Long commentId,
-		@ModelAttribute UpdateCommentRequest request) {
-		commentService.updateComment(postId, commentId, request);
+		@ModelAttribute UpdateCommentRequest request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", commentService.updateComment(postId, commentId, request));
 		return "redirect:/posts/" + postId;
 	}
 
@@ -70,7 +72,7 @@ public class CommentController {
 	public ResponseEntity<String> recommendComment(@PathVariable Long postId, @PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return commentService.recommendComment(postId, commentId);
+			return ResponseEntity.ok(commentService.recommendComment(postId, commentId));
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
@@ -80,15 +82,16 @@ public class CommentController {
 	public ResponseEntity<String> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return commentService.disrecommendComment(postId, commentId);
+			return ResponseEntity.ok(commentService.disrecommendComment(postId, commentId));
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
 	}
 
 	@DeleteMapping("/posts/{postId}/comments/{commentId}")
-	public String deleteComment(@PathVariable Long postId, @PathVariable Long commentId) {
-		commentService.deleteComment(postId, commentId);
+	public String deleteComment(@PathVariable Long postId, @PathVariable Long commentId,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", commentService.deleteComment(postId, commentId));
 		return "redirect:/posts/" + postId;
 	}
 }

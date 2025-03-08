@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.bookmark.dto.response.GetBookmarkResponse;
 import com.eventorfront.bookmark.service.BookmarkService;
@@ -32,12 +33,13 @@ public class BookmarkController {
 
 	@PostMapping("/categories/{categoryName}/bookmarks")
 	public ResponseEntity<String> createOrDeleteBookmark(@PathVariable String categoryName) {
-		return bookmarkService.createOrDeleteBookmark(categoryName);
+		return ResponseEntity.ok(bookmarkService.createOrDeleteBookmark(categoryName));
 	}
 
 	@DeleteMapping("/bookmarks/{bookmarkId}")
-	public String deleteBookmark(@PathVariable Long bookmarkId) {
-		bookmarkService.deleteBookmark(bookmarkId);
+	public String deleteBookmark(@PathVariable Long bookmarkId, RedirectAttributes redirectAttributes) {
+
+		redirectAttributes.addFlashAttribute("message", bookmarkService.deleteBookmark(bookmarkId));
 		return "redirect:/users/me/bookmarks";
 	}
 }

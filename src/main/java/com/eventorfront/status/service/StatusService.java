@@ -16,9 +16,9 @@ public interface StatusService {
 
 	GetStatusResponse getStatus(Long statusId);
 
-	void createStatus(StatusRequest request);
+	String createStatus(StatusRequest request);
 
-	void updateStatus(Long statusId, StatusRequest request);
+	String updateStatus(Long statusId, StatusRequest request);
 
-	void deleteStatus(Long statusId);
+	String deleteStatus(Long statusId);
 }

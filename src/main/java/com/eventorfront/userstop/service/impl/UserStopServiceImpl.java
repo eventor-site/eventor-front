@@ -21,31 +21,26 @@ public class UserStopServiceImpl implements UserStopService {
 
 	@Override
 	public UserStopDto getUserStop(Long userStopId) {
-		return userStopClient.getUserStop(userStopId).getBody();
+		return userStopClient.getUserStop(userStopId).getData();
 	}
 
 	@Override
 	public Page<GetUserStopResponse> getUserStops(Pageable pageable) {
-		return userStopClient.getUserStops(pageable).getBody();
+		return userStopClient.getUserStops(pageable).getData();
 	}
 
 	@Override
 	public List<GetUserStopByUserIdResponse> getUserStopsByUserId(Long userId) {
-		return userStopClient.getUserStopsByUserId(userId).getBody();
+		return userStopClient.getUserStopsByUserId(userId).getData();
 	}
 
 	@Override
-	public void createUserStop(UserStopDto request) {
-		userStopClient.createUserStop(request);
+	public String createUserStop(UserStopDto request) {
+		return userStopClient.createUserStop(request).getMessage();
 	}
 
 	@Override
-	public void updateUserStop(Long statusTypeId, UserStopDto request) {
-		userStopClient.updateUserStop(statusTypeId, request);
-	}
-
-	@Override
-	public void deleteUserStop(Long statusTypeId) {
-		userStopClient.deleteUserStop(statusTypeId);
+	public String deleteUserStop(Long statusTypeId) {
+		return userStopClient.deleteUserStop(statusTypeId).getMessage();
 	}
 }

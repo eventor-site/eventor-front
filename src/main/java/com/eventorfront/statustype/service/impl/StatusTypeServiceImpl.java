@@ -19,36 +19,36 @@ public class StatusTypeServiceImpl implements StatusTypeService {
 
 	@Override
 	public List<StatusTypeDto> searchStatusTypes(String keyword) {
-		return statusTypeClient.searchStatusTypes(keyword).getBody();
+		return statusTypeClient.searchStatusTypes(keyword).getData();
 	}
 
 	@Override
 	public StatusTypeDto getStatusType(Long statusTypeId) {
-		return statusTypeClient.getStatusType(statusTypeId).getBody();
+		return statusTypeClient.getStatusType(statusTypeId).getData();
 	}
 
 	@Override
 	public List<StatusTypeDto> getStatusTypes() {
-		return statusTypeClient.getStatusTypes().getBody();
+		return statusTypeClient.getStatusTypes().getData();
 	}
 
 	@Override
 	public Page<StatusTypeDto> getStatusTypes(Pageable pageable) {
-		return statusTypeClient.getStatusTypes(pageable).getBody();
+		return statusTypeClient.getStatusTypes(pageable).getData();
 	}
 
 	@Override
-	public void createStatusType(StatusTypeDto request) {
-		statusTypeClient.createStatusType(request);
+	public String createStatusType(StatusTypeDto request) {
+		return statusTypeClient.createStatusType(request).getMessage();
 	}
 
 	@Override
-	public void updateStatusType(Long statusTypeId, StatusTypeDto request) {
-		statusTypeClient.updateStatusType(statusTypeId, request);
+	public String updateStatusType(Long statusTypeId, StatusTypeDto request) {
+		return statusTypeClient.updateStatusType(statusTypeId, request).getMessage();
 	}
 
 	@Override
-	public void deleteStatusType(Long statusTypeId) {
-		statusTypeClient.deleteStatusType(statusTypeId);
+	public String deleteStatusType(Long statusTypeId) {
+		return statusTypeClient.deleteStatusType(statusTypeId).getMessage();
 	}
 }

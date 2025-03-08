@@ -2,7 +2,6 @@ package com.eventorfront.comment.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 
 import com.eventorfront.comment.dto.request.CreateCommentRequest;
 import com.eventorfront.comment.dto.request.UpdateCommentRequest;
@@ -20,13 +19,13 @@ public interface CommentService {
 
 	GetCommentPageResponse getComment(Long postId, Long commentId);
 
-	void createComment(Long postId, CreateCommentRequest request);
+	String createComment(Long postId, CreateCommentRequest request);
 
-	void updateComment(Long postId, Long commentId, UpdateCommentRequest request);
+	String updateComment(Long postId, Long commentId, UpdateCommentRequest request);
 
-	ResponseEntity<String> recommendComment(Long postId, Long commentId);
+	String recommendComment(Long postId, Long commentId);
 
-	ResponseEntity<String> disrecommendComment(Long postId, Long commentId);
+	String disrecommendComment(Long postId, Long commentId);
 
-	void deleteComment(Long postId, Long commentId);
+	String deleteComment(Long postId, Long commentId);
 }
