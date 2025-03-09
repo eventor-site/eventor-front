@@ -1,5 +1,8 @@
 package com.eventorfront.global.util;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -16,7 +19,7 @@ public class CookieUtil {
 	 * 주어진 키와 값을 사용하여 쿠키를 생성합니다.
 	 */
 	public static Cookie createCookie(String key, String value) {
-		Cookie cookie = new Cookie(key, value);
+		Cookie cookie = new Cookie(key, URLEncoder.encode(value, StandardCharsets.UTF_8));
 		cookie.setPath("/");
 		cookie.setHttpOnly(true);
 		return cookie;
