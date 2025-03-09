@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
@@ -83,8 +84,8 @@ public class AuthController {
 	}
 
 	@GetMapping("/oauth2/authorization/{registrationId}")
-	public String oauthAuthorization(@PathVariable String registrationId) {
-		return "redirect:" + authService.oauthAuthorization(registrationId).getData();
+	public RedirectView oauthAuthorization(@PathVariable String registrationId) {
+		return new RedirectView(authService.oauthAuthorization(registrationId).getData());
 	}
 
 	@GetMapping("/oauth2/login")
