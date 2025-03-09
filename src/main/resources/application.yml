@@ -19,6 +19,9 @@ spring:
       filter:
         enabled: true
 
+  jpa:
+    open-in-view: false
+
 logging:
   file:
     path: ./logs
