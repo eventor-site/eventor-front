@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.category.service.CategoryService;
@@ -182,10 +181,9 @@ public class PostController {
 	}
 
 	@PostMapping
-	@ResponseBody
-	public ApiResponse<CreatePostResponse> createPost(@ModelAttribute CreatePostRequest request,
+	public ResponseEntity<ApiResponse<CreatePostResponse>> createPost(@ModelAttribute CreatePostRequest request,
 		@RequestParam(defaultValue = "false") boolean isTemp) {
-		return postService.createPost(request, isTemp);
+		return ResponseEntity.ok(postService.createPost(request, isTemp));
 	}
 
 	@PutMapping("/{postId}")
