@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         hooks: {
             addImageBlobHook: async (blob, callback) => {
                 if (!postId) {
-                    postId = await createTempPost();
+                    await createTempPost();
                 }
 
                 if (await getTotalSize() + blob.size > MAX_SIZE) {
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (!files.length) return;
 
             if (!postId) {
-                postId = await createTempPost();
+                await createTempPost();
             }
 
             // 파일 크기 체크 및 용량 계산
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (!files.length) return;
 
         if (!postId) {
-            postId = await createTempPost();
+            await createTempPost();
         }
 
         // 파일 크기 체크 및 용량 계산
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     // 🛠️ **임시 게시물 생성 함수**
-    async function createTempPost() {
+    window.createTempPost = async function createTempPost() {
         const formData = new FormData();
         formData.append("categoryName", document.getElementById('categoryName').value);
         formData.append("title", document.getElementById('title').value);
@@ -205,14 +205,22 @@ document.addEventListener('DOMContentLoaded', async function () {
             formData.append("link", document.getElementById('eventLink')?.value || null);
         }
 
-        const response = await fetch('/posts', {
-            method: 'POST',
+        let url = postId ? '/posts/' + postId : '/posts';
+        let method = postId ? 'PUT' : 'POST';
+
+        const response = await fetch(url, {
+            method: method,
             headers: {"X-Ajax-Request": "true"},
             body: formData
-        });
+        })
 
-        const responseBody = await response.json();
-        return responseBody.data.postId;
+        const json = await response.json();
+
+        if (!postId) {
+            postId = json.data.postId;
+        }
+
+        alertMessage(json.message)
     }
 
     // 🛠️ **단일 이미지 업로드 함수**
@@ -355,13 +363,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             body: formData
         })
 
+        const json = await response.json();
+
         if (!postId) {
-            const json = await response.json();
-            setupAlertMessage(json.message)
             postId = json.data.postId;
         }
+
+        setupAlertMessage(json.message)
         window.location.href = `/posts/` + postId;
-        
+
     });
 
     function previewImageEvent() {
