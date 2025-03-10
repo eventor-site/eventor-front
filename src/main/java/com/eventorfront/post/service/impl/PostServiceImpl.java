@@ -96,8 +96,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public void updatePost(Long postId, UpdatePostRequest request, boolean isTemp) {
-		postClient.updatePost(postId, request, isTemp);
+	public ApiResponse<Void> updatePost(Long postId, UpdatePostRequest request, boolean isTemp) {
+		return postClient.updatePost(postId, request, isTemp).getBody();
 	}
 
 	@Override
