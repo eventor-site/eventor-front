@@ -51,7 +51,7 @@ public interface PostService {
 
 	ApiResponse<Void> disrecommendPost(Long postId);
 
-	void deletePost(Long postId);
+	ApiResponse<Void> deletePost(Long postId);
 
 	ApiResponse<Boolean> isAuthorizedToEdit(Long postId);
 

@@ -111,8 +111,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public void deletePost(Long postId) {
-		postClient.deletePost(postId);
+	public ApiResponse<Void> deletePost(Long postId) {
+		return postClient.deletePost(postId).getBody();
 	}
 
 	@Override

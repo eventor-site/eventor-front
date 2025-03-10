@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.category.service.CategoryService;
@@ -212,8 +213,9 @@ public class PostController {
 	}
 
 	@DeleteMapping("/{postId}")
-	public String deletePost(@PathVariable Long postId, @RequestParam String categoryName) {
-		postService.deletePost(postId);
+	public String deletePost(@PathVariable Long postId, @RequestParam String categoryName,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", postService.deletePost(postId).getMessage());
 		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
 		return "redirect:/posts?categoryName=" + encodedCategoryName;
 	}
