@@ -72,7 +72,7 @@ public class PostController {
 			return "post/hotDeal/createForm";
 		} else if (PermissionUtils.bestFoodCategories.contains(categoryName)) {
 			model.addAttribute("categoryType", "맛집");
-			model.addAttribute("categories", categoryService.getCategories("맛집"));
+			model.addAttribute("categories", categoryService.getCategories("맛집").getData());
 			return "post/eatery/createForm";
 		} else if (!roles.contains("admin")) {
 			throw new ForbiddenException();
@@ -83,7 +83,7 @@ public class PostController {
 			model.addAttribute("startTime", CalendarUtils.getDate());
 			model.addAttribute("endTime", CalendarUtils.getPlusDate(1));
 			model.addAttribute("categoryType", "이벤트");
-			model.addAttribute("categories", categoryService.getCategories("이벤트"));
+			model.addAttribute("categories", categoryService.getCategories("이벤트").getData());
 			return "post/event/createForm";
 		}
 
@@ -107,14 +107,14 @@ public class PostController {
 			return "post/hotDeal/updateForm";
 		} else if (PermissionUtils.bestFoodCategories.contains(categoryName)) {
 			model.addAttribute("categoryType", "맛집");
-			model.addAttribute("categories", categoryService.getCategories("맛집"));
+			model.addAttribute("categories", categoryService.getCategories("맛집").getData());
 			return "post/eatery/updateForm";
 		} else if (categoryName.equals("공지")) {
 			model.addAttribute("categoryType", "공지");
 			return "post/updateForm";
 		} else {
 			model.addAttribute("categoryType", "이벤트");
-			model.addAttribute("categories", categoryService.getCategories("이벤트"));
+			model.addAttribute("categories", categoryService.getCategories("이벤트").getData());
 			return "post/event/updateForm";
 		}
 
@@ -187,10 +187,10 @@ public class PostController {
 	}
 
 	@PutMapping("/{postId}")
-	public ResponseEntity<Void> updatePost(@PathVariable Long postId, @ModelAttribute UpdatePostRequest request,
+	public ResponseEntity<ApiResponse<Void>> updatePost(@PathVariable Long postId,
+		@ModelAttribute UpdatePostRequest request,
 		@RequestParam(defaultValue = "false") boolean isTemp) {
-		postService.updatePost(postId, request, isTemp);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(postService.updatePost(postId, request, isTemp));
 	}
 
 	@PutMapping("/{postId}/recommend")
