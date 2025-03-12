@@ -5,13 +5,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  server:
     runs-on: ubuntu-22.04
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       # DockerHub 로그인
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -19,19 +15,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
-      # DockerHub Push
-      - name: Build & Push Docker Images (Blue & Green)
-        run: |
-          cd eventor-front
-          docker-compose -f compose.blue-build.yml build
-          docker-compose -f compose.green-build.yml build
-          docker-compose -f compose.blue-build.yml push
-          docker-compose -f compose.green-build.yml push
-
-  server:
-    runs-on: ubuntu-22.04
-    needs: build
-    steps:
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
@@ -40,9 +23,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd eventor-front
+            docker-compose -f compose.blue-build.yml build
+            docker-compose -f compose.green-build.yml build
+            docker-compose -f compose.blue-build.yml push
+            docker-compose -f compose.green-build.yml push
             chmod +x deploy.sh
             source deploy.sh
-#            sudo docker-compose stop eventor-front
-#            sudo docker-compose rm -f
-#            sudo docker rmi dlrudgjs104/eventor-front:latest
-#            sudo docker-compose up -d
