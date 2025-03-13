@@ -7,4 +7,5 @@ WORKDIR /app
 COPY target/eventor-front-0.0.1-SNAPSHOT.jar eventor-front.jar
 
 # 애플리케이션 실행
-ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "eventor-front.jar", "--server.port=${PROD_SERVER_PORT}"]
+ENTRYPOINT ["sh", "-c", "java -Dspring.profiles.active=prod -jar eventor-front.jar --server.port=${PROD_SERVER_PORT:-8081}"]
+
