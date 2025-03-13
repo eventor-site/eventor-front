@@ -25,7 +25,7 @@ public class IndexController {
 
 	@GetMapping("/")
 	public String mainPage(Model model) {
-		log.info("Main Page 실행");
+		log.info("Main Page 실행 ");
 		model.addAttribute("hotPosts", postService.getHotEventPosts().getData());
 		model.addAttribute("latestPosts", postService.getLatestEventPosts().getData());
 		model.addAttribute("deadlinePosts", postService.getDeadlineEventPosts().getData());
