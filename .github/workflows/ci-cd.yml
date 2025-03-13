@@ -65,8 +65,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd eventor-front
-            docker-compose -f compose.blue-deploy.yml pull
-            docker-compose -f compose.green-deploy.yml pull
+            docker-compose -f docker-compose.blue.yml pull
+            docker-compose -f docker-compose.green.yml pull
             source deploy.sh
 #            sudo docker-compose stop eventor-front
 #            sudo docker-compose rm -f
