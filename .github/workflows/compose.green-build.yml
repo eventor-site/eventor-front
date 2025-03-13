@@ -3,7 +3,7 @@ services:
     image: dlrudgjs104/eventor-front:green-1
     container_name: "eventor-front-green-1"
     build:
-      context: .
+      context: ../../
       dockerfile: Dockerfile
     environment:
       - PROD_SERVER_PORT=8003
@@ -12,7 +12,7 @@ services:
     image: dlrudgjs104/eventor-front:green-2
     container_name: "eventor-front-green-2"
     build:
-      context: .
+      context: ../../
       dockerfile: Dockerfile
     environment:
       - PROD_SERVER_PORT=8004
