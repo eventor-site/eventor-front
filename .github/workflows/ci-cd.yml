@@ -40,6 +40,11 @@ jobs:
       # DockerHub Push
       - name: Build and Push Docker image
         run: |
+          cd .github/workflows
+          docker-compose -f compose.blue-build.yml build
+          docker-compose -f compose.green-build.yml build
+          docker-compose -f compose.blue-build.yml push
+          docker-compose -f compose.green-build.yml push
           docker build -t ${{ secrets.DOCKER_USERNAME }}/eventor-front .  # 원하는 이름으로 로컬에서 태깅
           docker push ${{ secrets.DOCKER_USERNAME }}/eventor-front 
 
