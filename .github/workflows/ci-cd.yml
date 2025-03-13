@@ -45,7 +45,7 @@ jobs:
       # DockerHub Push
       - name: Build and Push Docker image
         run: |
-          cd .github/workflows
+          cd .github/docker
           docker-compose -f compose.blue-build.yml build
           docker-compose -f compose.green-build.yml build
           docker-compose -f compose.blue-build.yml push
