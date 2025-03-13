@@ -46,10 +46,16 @@ jobs:
       - name: Build and Push Docker image
         run: |
           cd .github/docker
-          docker-compose -f compose.blue-build.yml build
-          docker-compose -f compose.green-build.yml build
-          docker-compose -f compose.blue-build.yml push
-          docker-compose -f compose.green-build.yml push
+          
+          if [ "$(curl -s http://www.eventor.store/checks/version)" == "blue" ]; then
+            echo "Blue version is running, building Green";
+            docker-compose -f compose.green-build.yml build
+            docker-compose -f compose.green-build.yml push
+          else
+            echo "Green version is running, building Blue";
+            docker-compose -f compose.blue-build.yml build
+            docker-compose -f compose.blue-build.yml push
+          fi
   #          docker build -t ${{ secrets.DOCKER_USERNAME }}/eventor-front .  # 원하는 이름으로 로컬에서 태깅
   #          docker push ${{ secrets.DOCKER_USERNAME }}/eventor-front
 
