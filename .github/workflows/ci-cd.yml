@@ -45,8 +45,7 @@ jobs:
       # DockerHub Push
       - name: Build and Push Docker image
         run: |
-          cd .github/docker
-          
+          cd .github/docker        
           if [ "$(curl -s http://www.eventor.store/checks/version)" == "blue" ]; then
             echo "Blue version is running, building Green";
             docker-compose -f compose.green-build.yml build
@@ -70,10 +69,10 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd eventor-front
-            docker-compose -f docker-compose.blue.yml pull
-            docker-compose -f docker-compose.green.yml pull
-            source deploy.sh
+                    cd eventor-front
+            #            docker-compose -f docker-compose.blue.yml pull
+            #            docker-compose -f docker-compose.green.yml pull
+                    source deploy.sh
 #            sudo docker-compose stop eventor-front
 #            sudo docker-compose rm -f
 #            sudo docker rmi dlrudgjs104/eventor-front:latest
