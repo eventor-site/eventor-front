@@ -65,8 +65,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd eventor-front
-            sudo docker-compose stop eventor-front
-            sudo docker-compose rm -f
-            sudo docker rmi dlrudgjs104/eventor-front:latest
-            sudo docker-compose up -d
             source deploy.sh
+#            sudo docker-compose stop eventor-front
+#            sudo docker-compose rm -f
+#            sudo docker rmi dlrudgjs104/eventor-front:latest
+#            sudo docker-compose up -d
