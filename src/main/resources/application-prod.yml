@@ -1,5 +1,5 @@
 server:
-  port: ${PROD_SERVER_PORT}
+  port: 0
 
 spring:
   # 재시작 및 라이브 리로드 비활성화
