@@ -1,27 +1,27 @@
-package com.eventorfront.global.controller;
+package com.eventorfront.monitor.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eventorfront.global.client.HealthClient;
+import com.eventorfront.monitor.service.MonitorService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 public class HealthController {
-	private final HealthClient healthClient;
+	private final MonitorService monitorService;
 
 	@Value("${server.port}")
 	private int port;
 
-	@GetMapping("/checks/health")
+	@GetMapping("/monitors/health")
 	public Boolean checkHealth() {
 		return true;
 	}
 
-	@GetMapping("/checks/version")
+	@GetMapping("/monitors/version")
 	public String checkVersion() {
 		if (port == 8001 || port == 8002) {
 			return "blue";
@@ -30,14 +30,14 @@ public class HealthController {
 		}
 	}
 
-	@GetMapping("/back/checks/health")
+	@GetMapping("/back/monitors/health")
 	public Boolean checkBackHealth() {
-		return healthClient.backCheckHealth().getBody().getData();
+		return monitorService.backCheckHealth().getData();
 	}
 
-	@GetMapping("/back/checks/version")
+	@GetMapping("/back/monitors/version")
 	public String checkBackVersion() {
-		return healthClient.backCheckVersion().getBody().getData();
+		return monitorService.backCheckVersion().getData();
 	}
 
 }
