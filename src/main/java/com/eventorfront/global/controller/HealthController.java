@@ -32,12 +32,12 @@ public class HealthController {
 
 	@GetMapping("/back/checks/health")
 	public Boolean checkBackHealth() {
-		return healthClient.backCheckHealth();
+		return healthClient.backCheckHealth().getBody().getData();
 	}
 
 	@GetMapping("/back/checks/version")
 	public String checkBackVersion() {
-		return healthClient.backCheckVersion();
+		return healthClient.backCheckVersion().getBody().getData();
 	}
 
 }
