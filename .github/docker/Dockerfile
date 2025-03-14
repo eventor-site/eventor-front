@@ -3,10 +3,6 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-ARG PROD_SERVER_PORT=${PROD_SERVER_PORT}
-
-ENV PROD_SERVER_PORT=${PROD_SERVER_PORT}
-
 # JAR 파일 복사
 COPY target/eventor-front-0.0.1-SNAPSHOT.jar eventor-front.jar
 
