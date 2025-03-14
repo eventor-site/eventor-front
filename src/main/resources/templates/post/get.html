@@ -104,7 +104,7 @@
 
             <!-- 이미지 출력 -->
             <div class="image-gallery"
-                 th:classappend="${post.categoryName != '자유' and post.categoryName != '공지' and post.categoryName != '맛집' and post.categoryName != '핫딜' ? ' event-gallery' : ''}">
+                 th:classappend="${isEvent ? 'event-gallery' : ''}">
                 <div th:each="image : ${post.images}" th:if="${!image.isThumbnail and !image.isPasted}"
                      class="image-container">
                     <!-- 이미지 -->
