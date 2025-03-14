@@ -175,8 +175,10 @@ public class PostController {
 	public String getPost(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model,
 		@PathVariable Long postId) {
 		Page<GetCommentResponse> comments = commentService.getCommentsByPostId(pageable, postId).getData();
-		model.addAttribute("post", postService.getPost(postId).getData());
+		GetPostResponse post = postService.getPost(postId).getData();
+		model.addAttribute("post", post);
 		model.addAttribute("objects", comments);
+		model.addAttribute("isEvent", !PermissionUtils.notEventCategories.contains(post.categoryName()));
 		PagingModel.pagingProcessing(pageable, model, comments, "/posts/" + postId, 10);
 		return "post/get";
 	}

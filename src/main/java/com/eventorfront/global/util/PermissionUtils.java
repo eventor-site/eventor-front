@@ -18,6 +18,9 @@ public class PermissionUtils {
 	public static final List<String> memberCategories = Stream.concat(categories.stream(), bestFoodCategories.stream())
 		.toList();
 
+	public static final List<String> notEventCategories = Stream.concat(memberCategories.stream(), Stream.of("공지"))
+		.toList();
+
 	private PermissionUtils() {
 		throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
 	}
