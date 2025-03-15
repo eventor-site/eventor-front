@@ -5,7 +5,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -140,7 +142,11 @@ public class PostController {
 	}
 
 	@GetMapping
-	public String getPostsByCategoryName(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model,
+	public String getPostsByCategoryName(
+		@PageableDefault(page = 1, size = 10, sort = {
+			"createdAt"}, direction = Sort.Direction.DESC) Pageable defaultPageable, Model model,
+		@RequestParam(defaultValue = "createdAt") String sortBy,
+		@RequestParam(defaultValue = "DESC") String direction,
 		@RequestParam String categoryName) {
 		List<String> roles = userService.meRoles().getData();
 		model.addAttribute("categoryName", categoryName);
@@ -149,11 +155,18 @@ public class PostController {
 				categoryName))
 		);
 
+		Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
+		Sort sort = Sort.by(sortDirection, sortBy);
+		Pageable pageable = PageRequest.of(defaultPageable.getPageNumber(), defaultPageable.getPageSize(), sort);
+
 		Page<GetPostsByCategoryNameResponse> posts = postService.getPostsByCategoryName(pageable, categoryName)
 			.getData();
 		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
 		model.addAttribute("objects", posts);
-		PagingModel.pagingProcessing(pageable, model, posts, "/posts?categoryName=" + encodedCategoryName, 10);
+		model.addAttribute("sortBy", sortBy);
+		model.addAttribute("direction", direction);
+		PagingModel.pagingProcessing(pageable, model, posts,
+			"/posts?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy, 10);
 
 		if (categoryName.equals("공지")) {
 			return "post/noticeList";
