@@ -123,6 +123,19 @@
     margin-bottom: 10px;
 }
 
+.post-card-meta2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left, .right {
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .post-card-meta img {
     width: 24px;
     height: 24px;
@@ -136,7 +149,7 @@
 .post-card-stats {
     display: flex;
     font-size: 14px;
-    color: #777;
+    color: black;
     gap: 10px;
 }
 
@@ -183,4 +196,13 @@
     color: gray; /* 마감 스타일 */
     border: 2px solid gray;
     background-color: rgba(169, 169, 169, 0.1); /* 자연스러운 배경색 (회색의 투명도) */
+}
+
+.remaining-day {
+    color: #ff4444;
+    background-color: #fff0f0;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 2px solid #ffcccc;
 }

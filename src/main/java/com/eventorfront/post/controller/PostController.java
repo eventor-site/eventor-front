@@ -158,11 +158,14 @@ public class PostController {
 		if (categoryName.equals("공지")) {
 			return "post/noticeList";
 		} else {
+			model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName).getData());
+
 			if (CategoryUtils.eventCategories.contains(categoryName)) {
 				model.addAttribute("isEvent", true);
+				return "post/event/list";
+			} else {
+				return "post/list";
 			}
-			model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName).getData());
-			return "post/list";
 		}
 	}
 
