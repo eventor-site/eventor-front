@@ -27,8 +27,8 @@ import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.global.exception.ForbiddenException;
 import com.eventorfront.global.util.CalendarUtils;
+import com.eventorfront.global.util.CategoryUtils;
 import com.eventorfront.global.util.PagingModel;
-import com.eventorfront.global.util.PermissionUtils;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
@@ -71,7 +71,7 @@ public class PostController {
 		} else if (categoryName.equals("핫딜")) {
 			model.addAttribute("categoryType", "핫딜");
 			return "post/hotDeal/createForm";
-		} else if (PermissionUtils.bestFoodCategories.contains(categoryName)) {
+		} else if (CategoryUtils.bestFoodCategories.contains(categoryName)) {
 			model.addAttribute("categoryType", "맛집");
 			model.addAttribute("categories", categoryService.getCategories("맛집").getData());
 			return "post/eatery/createForm";
@@ -106,7 +106,7 @@ public class PostController {
 		} else if (categoryName.equals("핫딜")) {
 			model.addAttribute("categoryType", "핫딜");
 			return "post/hotDeal/updateForm";
-		} else if (PermissionUtils.bestFoodCategories.contains(categoryName)) {
+		} else if (CategoryUtils.bestFoodCategories.contains(categoryName)) {
 			model.addAttribute("categoryType", "맛집");
 			model.addAttribute("categories", categoryService.getCategories("맛집").getData());
 			return "post/eatery/updateForm";
@@ -145,7 +145,7 @@ public class PostController {
 		List<String> roles = userService.meRoles().getData();
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("isAuthorized",
-			roles.contains("admin") || (roles.contains("member") && PermissionUtils.memberCategories.contains(
+			roles.contains("admin") || (roles.contains("member") && CategoryUtils.memberCategories.contains(
 				categoryName))
 		);
 
@@ -158,6 +158,9 @@ public class PostController {
 		if (categoryName.equals("공지")) {
 			return "post/noticeList";
 		} else {
+			if (CategoryUtils.eventCategories.contains(categoryName)) {
+				model.addAttribute("isEvent", true);
+			}
 			model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName).getData());
 			return "post/list";
 		}
@@ -178,7 +181,7 @@ public class PostController {
 		GetPostResponse post = postService.getPost(postId).getData();
 		model.addAttribute("post", post);
 		model.addAttribute("objects", comments);
-		model.addAttribute("isEvent", !PermissionUtils.notEventCategories.contains(post.categoryName()));
+		model.addAttribute("isEvent", CategoryUtils.eventCategories.contains(post.categoryName()));
 		PagingModel.pagingProcessing(pageable, model, comments, "/posts/" + postId, 10);
 		return "post/get";
 	}
