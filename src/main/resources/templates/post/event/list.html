@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
+<head>
+    <th:block th:replace="~{common/fragments/config}"></th:block>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/list.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="body-container">
+
+        <h5>카테고리: <span th:text="${categoryName}"></span>
+            <button class="btn btn-sm btn-outline-primary"
+                    th:data-url="@{/categories/{categoryName}/bookmarks (categoryName=${categoryName})}"
+                    data-method="post"
+                    onclick="setupAlertBox(this)">⭐
+            </button>
+        </h5>
+
+        <hr>
+
+        <div style="text-align: right;">
+            <a th:if="${isAuthorized}" th:href="@{/posts/createForm (categoryName=${categoryName})}"
+               class="btn btn-primary">게시글 작성</a>
+        </div>
+
+        <div class="event-section">
+            <h3>Top10</h3>
+            <div class="event-slider">
+                <div th:if="${hotPosts.size() > 0}" th:each="post : ${hotPosts}">
+                    <div class="event-card">
+                        <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
+                            <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
+                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
+                        </a>
+                        <div class="event-card-body">
+                            <div class="event-card-title" th:text="${post.title}"></div>
+                        </div>
+                    </div>
+                </div>
+                <p th:if="${hotPosts.size() == 0}">Top10 리스트가 없습니다.</p>
+            </div>
+        </div>
+
+        <!-- 게시글 목록 -->
+        <div class="post-list" th:if="${objects.getTotalElements() > 0}">
+            <a th:each="post : ${objects}" th:href="@{/posts/{postId}(postId=${post.postId()})}" class="post-card">
+                <img class="post-card-img" th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="썸네일">
+                <img class="post-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
+                <div class="post-card-body">
+                    <div class="post-card-title-status">
+                        <div class="post-card-title" th:text="${post.title}"></div>
+                        <div class="post-card-status" th:if="${isEvent}" th:text="${post.eventStatusName}"
+                             th:classappend="${post.eventStatusName == '예정' ? 'status-scheduled' : (post.eventStatusName == '진행중' ? 'status-ongoing' : (post.eventStatusName == '마감' ? 'status-closed' : ''))}"></div>
+                        <div class="remaining-day" th:if="${post.eventStatusName == '예정'}">
+                            <span th:text="'D-' + ${post.remainingDay}"></span>
+                        </div>
+                    </div>
+                    <div class="post-card-meta">
+                        <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}" alt="프로필">
+                        <span th:text="${post.writer}"></span>
+                    </div>
+                    <div class="post-card-meta2">
+                        <div class="left">
+                            <span>시작: <span
+                                    th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"></span></span>
+                        </div>
+                        <div class="right">
+                            <div class="post-card-stats">
+                                <span>조회수: <span th:text="${post.viewCount}"></span></span>
+                                <span>추천수: <span th:text="${post.recommendationCount}"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-card-meta2">
+                        <div class="left">
+                            <span>종료: <span
+                                    th:text="${#temporals.format(post.endTime, 'yyyy-MM-dd HH:mm')}"></span></span>
+                        </div>
+                        <div class="right">
+                            <div class="post-card-stats">
+                                <span class="post-card-date">작성시간: <span
+                                        th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div th:if="${objects.getTotalElements() == 0}">
+            <p>게시글이 없습니다.</p>
+        </div>
+
+        <!-- 페이징 처리 시작-->
+        <div th:insert="~{common/paging.html}"></div>
+        <!-- 페이징 처리 끝-->
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="/js/post/list.js"></script>
+</th:block>
+</body>
+</html>
