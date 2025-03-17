@@ -8,20 +8,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/comment/list.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/highlight.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        /* 첨부파일 텍스트의 hover 효과 */
-        .attachment-text {
-            cursor: pointer;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        /* 마우스를 올리면 색상이 변경되도록 */
-        .attachment-text:hover {
-            color: #007bff; /* 원하는 hover 색상으로 변경 */
-        }
-
-    </style>
 </head>
 
 <body>
@@ -182,9 +168,7 @@
              style="display: flex; flex-wrap: wrap; gap: 10px;">
             <hr>
             <!-- 첨부파일 개수 출력 및 클릭 시 링크 토글 -->
-            <div class="attachment-text" onclick="toggleImageLinks()" style="cursor: pointer;">
-                첨부파일 <span th:text="${#lists.size(post.images)}"></span> 개
-            </div>
+            <div class="attachment-text" onclick="toggleImageLinks()">첨부파일</div>
 
             <!-- 이미지 링크 영역 (기본적으로 숨김 처리) -->
             <div id="image-links" style="display: none; flex-wrap: wrap; gap: 10px;">
@@ -284,20 +268,7 @@
     <script src="/js/post/report.js"></script>
     <script src="/js/common/highlight.js"></script>
     <script src="/js/post/favorite.js"></script>
-    <script>
-        function toggleImageLinks() {
-            var imageLinksDiv = document.getElementById('image-links');
-            var currentDisplay = imageLinksDiv.style.display;
-
-            // 이미지 링크 영역의 표시/숨김 상태를 토글
-            if (currentDisplay === 'none' || currentDisplay === '') {
-                imageLinksDiv.style.display = 'flex';  // 링크를 보여줌
-            } else {
-                imageLinksDiv.style.display = 'none';  // 링크를 숨김
-            }
-        }
-
-    </script>
+    <script src="/js/post/toggleImageLinks.js"></script>
 </th:block>
 </body>
 </html>

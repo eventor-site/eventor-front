@@ -148,3 +148,15 @@
 .post-body img {
     max-width: 100%;
 }
+
+/* 첨부파일 텍스트의 hover 효과 */
+.attachment-text {
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* 마우스를 올리면 색상이 변경되도록 */
+.attachment-text:hover {
+    color: #007bff; /* 원하는 hover 색상으로 변경 */
+}
