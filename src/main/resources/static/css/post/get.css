@@ -160,3 +160,10 @@
 .attachment-text:hover {
     color: #007bff; /* 원하는 hover 색상으로 변경 */
 }
+
+.comment-button-img {
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}

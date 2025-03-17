@@ -1,5 +1,6 @@
 package com.eventorfront.post.client;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
@@ -19,6 +20,7 @@ import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
+import com.eventorfront.post.dto.response.GetEventPostCountByAdminResponse;
 import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
@@ -95,4 +97,7 @@ public interface PostClient {
 	@DeleteMapping("/back/posts/temp")
 	ResponseEntity<ApiResponse<Void>> deleteTempPost();
 
+	@GetMapping("/back/posts/statistic/users/admin")
+	ResponseEntity<ApiResponse<List<GetEventPostCountByAdminResponse>>> getEventPostCountByAdmin(
+		@RequestParam LocalDateTime startTime, @RequestParam LocalDateTime endTime);
 }

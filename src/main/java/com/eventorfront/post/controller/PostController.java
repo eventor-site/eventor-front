@@ -2,6 +2,7 @@ package com.eventorfront.post.controller;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -245,5 +246,22 @@ public class PostController {
 	public ResponseEntity<Void> deleteTempPost() {
 		postService.deleteTempPost();
 		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/statistic/users/admin")
+	public String getEventPostCountByAdmin(@RequestParam(required = false) LocalDateTime startTime,
+		@RequestParam(required = false) LocalDateTime endTime,
+		Model model) {
+
+		if (startTime == null || endTime == null) {
+			model.addAttribute("startTime", CalendarUtils.getDate());
+			model.addAttribute("endTime", CalendarUtils.getPlusDate(1));
+		} else {
+			model.addAttribute("startTime", startTime);
+			model.addAttribute("endTime", endTime);
+			model.addAttribute("eventPostStats", postService.getEventPostCountByAdmin(startTime, endTime).getData());
+		}
+
+		return "user/admin/statistic";
 	}
 }
