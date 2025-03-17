@@ -26,6 +26,7 @@ public record GetPostResponse(
 	LocalDateTime endTime,
 	String statusName,
 	List<GetImageResponse> images,
+	Long attachmentImageCount,
 	Double totalSize,
 	Boolean isAuthorized,
 	Boolean isFavorite) {

@@ -164,15 +164,17 @@
         </div>
 
         <!-- 첨부파일 -->
-        <div th:if="${!post.images().isEmpty()}" class="image-gallery"
+        <div th:if="${post.attachmentImageCount > 0}" class="image-gallery"
              style="display: flex; flex-wrap: wrap; gap: 10px;">
             <hr>
             <!-- 첨부파일 개수 출력 및 클릭 시 링크 토글 -->
-            <div class="attachment-text" onclick="toggleImageLinks()">첨부파일</div>
+            <div class="attachment-text" onclick="toggleImageLinks()" style="cursor: pointer;">
+                첨부파일 <span th:text="${post.attachmentImageCount}"></span> 개
+            </div>
 
             <!-- 이미지 링크 영역 (기본적으로 숨김 처리) -->
             <div id="image-links" style="display: none; flex-wrap: wrap; gap: 10px;">
-                <div th:each="image : ${post.images}" th:if="${!image.isThumbnail and !image.isPasted}">
+                <div th:each="image : ${post.images}" th:if="${!image.isThumbnail}">
                     <a th:href="${image.url}" th:text="${image.originalName}"></a>
                 </div>
             </div>
