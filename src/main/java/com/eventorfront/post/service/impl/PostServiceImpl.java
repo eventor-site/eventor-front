@@ -1,5 +1,6 @@
 package com.eventorfront.post.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import com.eventorfront.post.client.PostClient;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
+import com.eventorfront.post.dto.response.GetEventPostCountByAdminResponse;
 import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
@@ -123,6 +125,12 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public void deleteTempPost() {
 		postClient.deleteTempPost();
+	}
+
+	@Override
+	public ApiResponse<List<GetEventPostCountByAdminResponse>> getEventPostCountByAdmin(
+		LocalDateTime startTime, LocalDateTime endTime) {
+		return postClient.getEventPostCountByAdmin(startTime, endTime).getBody();
 	}
 
 }
