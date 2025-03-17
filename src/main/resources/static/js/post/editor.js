@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                     await createTempPost();
                 }
 
-                if (await getTotalSize() + blob.size > MAX_SIZE) {
-                    alert("업로드 용량이 10MB를 초과할 수 없습니다.");
-                    return;
-                }
+                // if (await getTotalSize() + blob.size > MAX_SIZE) {
+                //     alert("업로드 용량이 10MB를 초과할 수 없습니다.");
+                //     return;
+                // }
 
                 const file = new File([blob], `pasted-image.png`, {type: blob.type});
                 const uploadedImages = await uploadImage(file, postId, false, true);
@@ -144,13 +144,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                 await createTempPost();
             }
 
-            // 파일 크기 체크 및 용량 계산
-            for (const file of files) {
-                if (await getTotalSize() + file.size > MAX_SIZE) {
-                    alert("업로드 용량이 10MB를 초과할 수 없습니다.");
-                    return;
-                }
-            }
+            // // 파일 크기 체크 및 용량 계산
+            // for (const file of files) {
+            //     if (await getTotalSize() + file.size > MAX_SIZE) {
+            //         alert("업로드 용량이 10MB를 초과할 수 없습니다.");
+            //         return;
+            //     }
+            // }
 
             for (const file of files) {
                 const uploadedImages = await uploadImage(file, postId, true, false);
@@ -169,13 +169,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             await createTempPost();
         }
 
-        // 파일 크기 체크 및 용량 계산
-        for (const file of files) {
-            if (await getTotalSize() + file.size > MAX_SIZE) {
-                alert("업로드 용량이 10MB를 초과할 수 없습니다.");
-                return;
-            }
-        }
+        // // 파일 크기 체크 및 용량 계산
+        // for (const file of files) {
+        //     if (await getTotalSize() + file.size > MAX_SIZE) {
+        //         alert("업로드 용량이 10MB를 초과할 수 없습니다.");
+        //         return;
+        //     }
+        // }
 
         for (const file of files) {
             const uploadedImages = await uploadImage(file, postId, false, false);

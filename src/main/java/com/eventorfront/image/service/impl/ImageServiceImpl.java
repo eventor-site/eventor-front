@@ -1,5 +1,9 @@
 package com.eventorfront.image.service.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -9,7 +13,11 @@ import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.image.client.ImageClient;
 import com.eventorfront.image.dto.request.DeleteImageRequest;
 import com.eventorfront.image.dto.response.GetImageResponse;
+import com.eventorfront.image.exception.ImageConvertException;
+import com.eventorfront.image.service.CustomMultipartFile;
 import com.eventorfront.image.service.ImageService;
+import com.sksamuel.scrimage.ImmutableImage;
+import com.sksamuel.scrimage.webp.WebpWriter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +29,8 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public ApiResponse<List<GetImageResponse>> upload(MultipartFile file, Long postId, boolean isThumbnail,
 		boolean isPasted) {
-		return imageClient.upload(file, "postimage", postId, isThumbnail, isPasted).getBody();
+		return imageClient.upload(convertToWebp(file), "postimage", postId, isThumbnail, isPasted)
+			.getBody();
 	}
 
 	@Override
@@ -33,4 +42,39 @@ public class ImageServiceImpl implements ImageService {
 	public void deleteTempImage() {
 		imageClient.deleteTempImage();
 	}
+
+	public MultipartFile convertToWebp(MultipartFile file) {
+		try {
+
+			if (file == null || file.isEmpty() || file.getOriginalFilename() == null) {
+				throw new ImageConvertException();
+			}
+
+			String originalFilename = file.getOriginalFilename();
+
+			if (originalFilename.endsWith(".webp")) {
+				return file;
+			}
+
+			File tempFile = new File(file.getOriginalFilename());
+			ImmutableImage image = ImmutableImage.loader().fromStream(file.getInputStream());
+
+			// WebP로 변환 (손실 압축)
+			image.output(WebpWriter.DEFAULT, tempFile);
+
+			// 변환된 데이터를 메모리에 저장 후 임시 파일 삭제
+			ByteArrayInputStream webpData = new ByteArrayInputStream(Files.readAllBytes(tempFile.toPath()));
+			tempFile.delete(); // 변환 후 즉시 삭제
+
+			return new CustomMultipartFile(
+				webpData,
+				originalFilename.substring(0, originalFilename.lastIndexOf('.')) + ".webp",
+				"image/webp"
+			);
+
+		} catch (IOException e) {
+			throw new ImageConvertException();
+		}
+	}
+
 }

@@ -16,4 +16,5 @@ public interface ImageService {
 	ApiResponse<List<GetImageResponse>> deleteImages(DeleteImageRequest request);
 
 	void deleteTempImage();
+
 }
