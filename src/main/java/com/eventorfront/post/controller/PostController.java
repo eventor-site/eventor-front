@@ -126,12 +126,39 @@ public class PostController {
 	}
 
 	@GetMapping("/search")
-	public String searchPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, @RequestParam String keyword,
+	public String searchPosts(@PageableDefault(page = 1, size = 10, sort = {
+			"createdAt"}, direction = Sort.Direction.DESC) Pageable defaultPageable,
+		@RequestParam(defaultValue = "createdAt") String sortBy,
+		@RequestParam(defaultValue = "DESC") String direction,
+		@RequestParam(required = false) String categoryName, @RequestParam(defaultValue = "") String keyword,
 		Model model) {
-		Page<SearchPostsResponse> posts = postService.searchPosts(pageable, keyword).getData();
+		List<String> roles = userService.meRoles().getData();
+		model.addAttribute("categoryName", categoryName);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("isAuthorized",
+			roles.contains("admin") || (roles.contains("member") && CategoryUtils.memberCategories.contains(
+				categoryName))
+		);
+
+		Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
+		Sort sort = Sort.by(sortDirection, sortBy);
+		Pageable pageable = PageRequest.of(defaultPageable.getPageNumber(), defaultPageable.getPageSize(), sort);
+
+		model.addAttribute("sortBy", sortBy);
+		model.addAttribute("direction", direction);
+
+		Page<SearchPostsResponse> posts = postService.searchPosts(pageable, categoryName, keyword).getData();
+
+		if (categoryName == null) {
+			categoryName = ""; // 비어있으면 빈 문자열로 설정
+		}
+
+		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
 		String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
 		model.addAttribute("objects", posts);
-		PagingModel.pagingProcessing(pageable, model, posts, "/posts/search?keyword=" + encodedKeyword, 10);
+		PagingModel.pagingProcessing(pageable, model, posts,
+			"/posts/search?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy
+				+ "&keyword=" + encodedKeyword, 10);
 		return "post/search";
 	}
 
