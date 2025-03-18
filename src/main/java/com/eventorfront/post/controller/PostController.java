@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.service.AuthService;
 import com.eventorfront.category.service.CategoryService;
 import com.eventorfront.comment.dto.response.GetCommentResponse;
@@ -162,6 +163,7 @@ public class PostController {
 		return "post/search";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/all")
 	public String getPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
 		Page<GetPostSimpleResponse> posts = postService.getPosts(pageable).getData();
@@ -170,6 +172,7 @@ public class PostController {
 		return "post/all";
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/monitor")
 	public String monitorPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
 		Page<GetPostSimpleResponse> posts = postService.monitorPosts(pageable).getData();
@@ -184,7 +187,8 @@ public class PostController {
 			"createdAt"}, direction = Sort.Direction.DESC) Pageable defaultPageable, Model model,
 		@RequestParam(defaultValue = "createdAt") String sortBy,
 		@RequestParam(defaultValue = "DESC") String direction,
-		@RequestParam String categoryName) {
+		@RequestParam String categoryName,
+		@RequestParam(required = false) String eventStatusName) {
 		List<String> roles = userService.meRoles().getData();
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("isAuthorized",
@@ -196,29 +200,37 @@ public class PostController {
 		Sort sort = Sort.by(sortDirection, sortBy);
 		Pageable pageable = PageRequest.of(defaultPageable.getPageNumber(), defaultPageable.getPageSize(), sort);
 
-		Page<GetPostsByCategoryNameResponse> posts = postService.getPostsByCategoryName(pageable, categoryName)
+		Page<GetPostsByCategoryNameResponse> posts = postService.getPostsByCategoryName(pageable, categoryName,
+				eventStatusName)
 			.getData();
 		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
 		model.addAttribute("objects", posts);
 		model.addAttribute("sortBy", sortBy);
 		model.addAttribute("direction", direction);
-		PagingModel.pagingProcessing(pageable, model, posts,
-			"/posts?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy, 10);
 
 		if (categoryName.equals("공지")) {
+			PagingModel.pagingProcessing(pageable, model, posts,
+				"/posts?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy, 10);
 			return "post/noticeList";
 		} else {
 			model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName).getData());
 
 			if (CategoryUtils.eventCategories.contains(categoryName)) {
 				model.addAttribute("isEvent", true);
+				model.addAttribute("eventStatusName", eventStatusName);
+				PagingModel.pagingProcessing(pageable, model, posts,
+					"/posts?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy
+						+ "&eventStatusName=" + eventStatusName, 10);
 				return "post/event/list";
 			} else {
+				PagingModel.pagingProcessing(pageable, model, posts,
+					"/posts?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy, 10);
 				return "post/list";
 			}
 		}
 	}
 
+	@AuthorizeRole("member")
 	@GetMapping("/me")
 	public String getPostsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
 		Page<GetPostSimpleResponse> posts = postService.getPostsByUserId(pageable).getData();
@@ -284,6 +296,7 @@ public class PostController {
 		return ResponseEntity.ok().build();
 	}
 
+	@AuthorizeRole("admin")
 	@GetMapping("/statistic/users/admin")
 	public String getEventPostCountByAdmin(
 		@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,

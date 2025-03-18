@@ -78,8 +78,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable,
-		String categoryName) {
-		return postClient.getPostsByCategoryName(pageable, categoryName).getBody();
+		String categoryName, String eventStatusName) {
+		return postClient.getPostsByCategoryName(pageable, categoryName, eventStatusName).getBody();
 	}
 
 	@Override

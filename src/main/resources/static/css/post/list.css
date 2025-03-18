@@ -206,3 +206,27 @@
     border-radius: 5px;
     border: 2px solid #ffcccc;
 }
+
+.event-status-filter {
+    display: flex;
+    gap: 15px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.event-status-filter a {
+    text-decoration: none;
+    color: #555;
+    padding-bottom: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.event-status-filter a:hover {
+    color: #000;
+}
+
+.event-status-filter a.active {
+    font-weight: bold;
+    color: #007bff; /* 강조 색상 */
+    border-bottom: 3px solid #007bff;
+}
