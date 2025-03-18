@@ -116,17 +116,18 @@
         </div>
 
         <div class="post-recommend-container">
-            <button class="btn btn-sm btn-outline-primary"
-                    th:data-url="@{/posts/{postId}/recommend (postId=${post.postId})}"
-                    data-method="PUT"
-                    onclick="setupAlertBox(this)">추천
-            </button>
+            <img class="btn btn-sm btn-outline-primary recommend-button-img"
+                 th:data-url="@{/posts/{postId}/recommend (postId=${post.postId})}"
+                 data-method="PUT"
+                 onclick="setupAlertBox(this)"
+                 src="/image/comment/recommend.png" alt="비추천">
 
-            <button class="btn btn-sm btn-outline-primary"
-                    th:data-url="@{/posts/{postId}/disrecommend (postId=${post.postId})}"
-                    data-method="PUT"
-                    onclick="setupAlertBox(this)">비추천
-            </button>
+            <img class="btn btn-sm btn-outline-primary recommend-button-img"
+                 th:data-url="@{/posts/{postId}/disrecommend (postId=${post.postId})}"
+                 data-method="PUT"
+                 onclick="setupAlertBox(this)"
+                 src="/image/comment/disrecommend.png" alt="비추천">
+
 
             <!-- 좋아요 -->
             <button class="btn btn-sm btn-outline-primary"
@@ -202,20 +203,20 @@
                         <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
                     </div>
                     <div class="comment-recommend-container">
-                        <img class="btn btn-sm btn-outline-primary comment-button-img"
+                        <img class="btn btn-sm btn-outline-primary recommend-button-img"
                              th:data-url="@{/posts/{postId}/comments/{commentId}/recommend (postId=${post.postId}, commentId=${comment.commentId})}"
                              data-method="PUT"
                              onclick="setupAlertBox(this)"
                              src="/image/comment/recommend.png" alt="추천">
-                        </img>
+
                         <span th:text="${comment.recommendationCount}"></span>
 
-                        <img class="btn btn-sm btn-outline-primary comment-button-img"
+                        <img class="btn btn-sm btn-outline-primary recommend-button-img"
                              th:data-url="@{/posts/{postId}/comments/{commentId}/disrecommend (postId=${post.postId}, commentId=${comment.commentId})}"
                              data-method="PUT"
                              onclick="setupAlertBox(this)"
                              src="/image/comment/disrecommend.png" alt="비추천">
-                        </img>
+
                         <span th:text="${comment.decommendationCount}"></span>
 
                         <!-- 대댓글 작성 버튼 -->
