@@ -39,7 +39,8 @@ public interface PostService {
 
 	ApiResponse<List<GetMainPostResponse>> getHotPostsByCategoryName(String categoryName);
 
-	ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable, String categoryName);
+	ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable, String categoryName,
+		String eventStatusName);
 
 	ApiResponse<Page<GetPostSimpleResponse>> getPostsByUserId(Pageable pageable);
 

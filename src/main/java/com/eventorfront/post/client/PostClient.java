@@ -67,7 +67,8 @@ public interface PostClient {
 	@GetMapping("/back/posts")
 	ResponseEntity<ApiResponse<Page<GetPostsByCategoryNameResponse>>> getPostsByCategoryName(
 		@PageableDefault(page = 1, size = 10, sort = "createdAt,desc") Pageable pageable,
-		@RequestParam String categoryName);
+		@RequestParam String categoryName,
+		@RequestParam(required = false) String eventStatusName);
 
 	@GetMapping("/back/posts/me/paging")
 	ResponseEntity<ApiResponse<Page<GetPostSimpleResponse>>> getPostsByUserId(
