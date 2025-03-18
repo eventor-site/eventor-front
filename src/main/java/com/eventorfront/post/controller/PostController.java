@@ -170,6 +170,14 @@ public class PostController {
 		return "post/all";
 	}
 
+	@GetMapping("/monitor")
+	public String monitorPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetPostSimpleResponse> posts = postService.monitorPosts(pageable).getData();
+		model.addAttribute("objects", posts);
+		PagingModel.pagingProcessing(pageable, model, posts, "/posts/monitor", 10);
+		return "post/all";
+	}
+
 	@GetMapping
 	public String getPostsByCategoryName(
 		@PageableDefault(page = 1, size = 10, sort = {

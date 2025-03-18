@@ -42,6 +42,11 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public ApiResponse<Page<GetPostSimpleResponse>> monitorPosts(Pageable pageable) {
+		return postClient.monitorPosts(pageable).getBody();
+	}
+
+	@Override
 	public ApiResponse<List<GetMainPostResponse>> getHotEventPosts() {
 		return postClient.getHotEventPosts().getBody();
 	}
