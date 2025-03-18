@@ -16,15 +16,17 @@
     <div class="main-page-container">
 
         <div class="event-section">
-            <span>즐겨찾기: </span>
-            <div th:each="bookmark : ${bookmarks}" style="display: inline;">
-                <a th:href="@{/posts(categoryName=${bookmark.categoryName()})}"
-                   class="btn btn-sm btn-outline-primary"
-                   style="width: 120px;">
-                    <span th:text="${bookmark.categoryName()}"></span>
-                </a>
+            <div th:if="${isLogin}">
+                <span>즐겨찾기: </span>
+                <div th:each="bookmark : ${bookmarks}" style="display: inline;">
+                    <a th:href="@{/posts(categoryName=${bookmark.categoryName})}"
+                       class="btn btn-sm btn-outline-primary"
+                       style="width: 120px;">
+                        <span th:text="${bookmark.categoryName}"></span>
+                    </a>
+                </div>
             </div>
-
+            
             <hr style="width: 100%; color: black; height: 1px; background-color:black;"/>
 
             <h3>핫 이벤트</h3>
@@ -32,7 +34,7 @@
                 <div th:if="${hotPosts.size() > 0}" th:each="post : ${hotPosts}">
                     <div class="event-card">
                         <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
-                        <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
+                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
                             <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
                             <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
                         </a>
@@ -52,7 +54,7 @@
                 <div th:if="${latestPosts.size() > 0}" th:each="post : ${latestPosts}">
                     <div class="event-card">
                         <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
-                        <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
+                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
                             <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
                             <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
                         </a>
@@ -72,7 +74,7 @@
                 <div th:if="${deadlinePosts.size() > 0}" th:each="post : ${deadlinePosts}">
                     <div class="event-card">
                         <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
-                        <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
+                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
                             <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
                             <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
                         </a>
@@ -93,7 +95,7 @@
                 <div class="recommend-slider">
                     <div th:each="post : ${recommendedPosts}">
                         <div class="recommend-event-card">
-                            <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
+                            <a th:href="@{/posts/{postId} (postId=${post.postId})}">
                                 <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
                                 <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
                             </a>
@@ -106,7 +108,7 @@
 
                 <!-- 오른쪽: 추천 목록 -->
                 <div class="recommended-list">
-                    <a th:each="post : ${recommendedPosts}" th:href="@{/posts/{postId} (postId=${post.postId()})}"
+                    <a th:each="post : ${recommendedPosts}" th:href="@{/posts/{postId} (postId=${post.postId})}"
                        class="recommended-card">
                         <!-- 썸네일 이미지 -->
                         <img class="recommended-card-img" th:if="${post.imageUrl}" th:src="${post.imageUrl}"
@@ -139,7 +141,7 @@
                 <div class="recommend-slider">
                     <div th:each="post : ${trendingPosts}">
                         <div class="recommend-event-card">
-                            <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
+                            <a th:href="@{/posts/{postId} (postId=${post.postId})}">
                                 <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
                                 <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
                             </a>
@@ -152,7 +154,7 @@
 
                 <!-- 오른쪽: 추천 목록 -->
                 <div class="recommended-list">
-                    <a th:each="post : ${trendingPosts}" th:href="@{/posts/{postId} (postId=${post.postId()})}"
+                    <a th:each="post : ${trendingPosts}" th:href="@{/posts/{postId} (postId=${post.postId})}"
                        class="recommended-card">
                         <!-- 썸네일 이미지 -->
                         <img class="recommended-card-img" th:if="${post.imageUrl}" th:src="${post.imageUrl}"
