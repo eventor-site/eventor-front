@@ -106,14 +106,21 @@
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
 
-.post-card-title {
+.post-card-title-container {
     font-size: 18px;
     font-weight: bold;
     margin: 5px 0 5px 0;
-    color: #007bff;
     white-space: nowrap; /* 줄 바꿈 방지 */
     overflow: hidden; /* 넘치는 텍스트 숨김 */
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
+}
+
+.post-card-category {
+    color: black;
+}
+
+.post-card-title {
+    color: #007bff;
 }
 
 .post-card-meta {
@@ -121,12 +128,6 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
-}
-
-.post-card-meta2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .left, .right {

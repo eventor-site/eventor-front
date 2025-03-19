@@ -36,7 +36,9 @@ public interface PostClient {
 	@GetMapping("/back/posts/search")
 	ResponseEntity<ApiResponse<Page<SearchPostsResponse>>> searchPosts(
 		@PageableDefault(page = 1, size = 10, sort = "createdAt,desc") Pageable pageable,
-		@RequestParam(required = false) String categoryName, @RequestParam(defaultValue = "") String keyword);
+		@RequestParam(defaultValue = "") String keyword,
+		@RequestParam(required = false) String categoryName,
+		@RequestParam(required = false) String eventStatusName);
 
 	@GetMapping("/back/posts/all/paging")
 	ResponseEntity<ApiResponse<Page<GetPostSimpleResponse>>> getPosts(

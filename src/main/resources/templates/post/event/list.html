@@ -100,9 +100,12 @@
                 <img class="post-card-img" th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="썸네일">
                 <img class="post-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
                 <div class="post-card-body">
-                    <div class="post-card-title-status">
-                        <div class="post-card-title" th:text="${post.title}"></div>
-                        <div class="post-card-status" th:if="${isEvent}" th:text="${post.eventStatusName}"
+                    <div class="d-flex">
+                        <div class="post-card-title-container">
+                            <span class="post-card-category">[<span th:text="${categoryName}"></span>] </span>
+                            <span class="post-card-title" th:text="${post.title}"></span>
+                        </div>
+                        <div class="post-card-status" th:text="${post.eventStatusName}"
                              th:classappend="${post.eventStatusName == '예정' ? 'status-scheduled' : (post.eventStatusName == '진행중' ? 'status-ongoing' : (post.eventStatusName == '마감' ? 'status-closed' : ''))}"></div>
                         <div class="remaining-day" th:if="${post.eventStatusName == '예정'}">
                             <span th:text="'D-' + ${post.remainingDay}"></span>
@@ -112,7 +115,7 @@
                         <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}" alt="프로필">
                         <span th:text="${post.writer}"></span>
                     </div>
-                    <div class="post-card-meta2">
+                    <div class="d-flex justify-content-between align-items-center">
                         <div class="left">
                             <span>시작: <span
                                     th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"></span></span>
@@ -124,7 +127,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="post-card-meta2">
+                    <div class="d-flex justify-content-between align-items-center">
                         <div class="left">
                             <span>종료: <span
                                     th:text="${#temporals.format(post.endTime, 'yyyy-MM-dd HH:mm')}"></span></span>
