@@ -163,7 +163,7 @@ public class PostController {
 		if (isEvent) {
 			model.addAttribute("eventStatusName", eventStatusName);
 			PagingModel.pagingProcessing(pageable, model, posts,
-				"/posts?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy
+				"/posts/search?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy
 					+ "&keyword=" + encodedKeyword + "&eventStatusName=" + eventStatusName, 10);
 		} else {
 			PagingModel.pagingProcessing(pageable, model, posts,
