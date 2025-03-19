@@ -77,7 +77,7 @@
 
         <div class="event-status-filter" th:if="${isEvent}">
             <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='전체')}"
-               th:classappend="${eventStatusName == '전체' or eventStatusName == null} ? 'active'">전체</a>
+               th:classappend="${eventStatusName == '전체'} ? 'active'">전체</a>
             <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='예정')}"
                th:classappend="${eventStatusName == '예정'} ? 'active'">예정</a>
             <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='진행중')}"
