@@ -19,6 +19,17 @@ public record SearchPostsResponse(
 	Long viewCount,
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
 	LocalDateTime createdAt,
+
+	String productName,
+	String shoppingMall,
+
+	String eventStatusName,
+	Integer remainingDay,
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+	LocalDateTime startTime,
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+	LocalDateTime endTime,
+
 	String imageUrl
 ) {
 }

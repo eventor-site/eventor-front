@@ -37,18 +37,8 @@
         <hr>
 
         <div class="d-flex justify-content-between align-items-center">
-            <form th:action="@{/posts/search}"
-                  method="get">
-                <input type="hidden" name="keyword" th:value="${keyword}">
-
-                <div th:if="${categoryName != null}">
-                    <input type="hidden" name="categoryName" th:value="${categoryName}">
-                </div>
-                <div th:if="${eventStatusName != null}">
-                    <input type="hidden" name="eventStatusName" th:value="${eventStatusName}">
-                </div>
-
-
+            <form th:action="@{/posts/search (categoryName=${categoryName}, keyword=${keyword})}" method="get">
+                <input type="hidden" name="categoryName" th:value="${categoryName}">
                 <!-- 정렬 방식 선택 -->
                 <label for="direction">정렬 방식:</label>
                 <select id="direction" name="direction">
@@ -62,9 +52,11 @@
                     <option value="viewCount" th:selected="${sortBy == 'viewCount'}">조회수</option>
                     <option value="recommendationCount" th:selected="${sortBy == 'recommendationCount'}">추천수</option>
                     <option value="createdAt" th:selected="${sortBy == 'createdAt'}">작성시간</option>
-                    <option th:if="${isEvent}" value="startTime" th:selected="${sortBy == 'startTime'}">시작시간</option>
-                    <option th:if="${isEvent}" value="endTime" th:selected="${sortBy == 'endTime'}">종료시간</option>
+                    <option value="startTime" th:selected="${sortBy == 'startTime'}">시작시간</option>
+                    <option value="endTime" th:selected="${sortBy == 'endTime'}">종료시간</option>
                 </select>
+
+                <input type="hidden" name="keyword" th:value="${keyword}">
 
                 <button type="submit" class="btn btn-sm btn-warning">정렬하기</button>
             </form>
@@ -75,45 +67,25 @@
 
         <h5>검색 결과 <span th:text="${objects.getTotalElements()}"></span> 건</h5>
 
-        <div class="event-status-filter" th:if="${isEvent}">
-            <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='전체')}"
+        <div class="event-status-filter">
+            <a th:href="@{/posts/search (categoryName=${categoryName}, eventStatusName='전체')}"
                th:classappend="${eventStatusName == '전체' or eventStatusName == null} ? 'active'">전체</a>
-            <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='예정')}"
+            <a th:href="@{/posts/search (categoryName=${categoryName}, eventStatusName='예정')}"
                th:classappend="${eventStatusName == '예정'} ? 'active'">예정</a>
-            <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='진행중')}"
+            <a th:href="@{/posts/search (categoryName=${categoryName}, eventStatusName='진행중')}"
                th:classappend="${eventStatusName == '진행중'} ? 'active'">진행중</a>
-            <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='마감')}"
+            <a th:href="@{/posts/search (categoryName=${categoryName}, eventStatusName='마감')}"
                th:classappend="${eventStatusName == '마감'} ? 'active'">마감</a>
         </div>
 
+        <!-- 게시글 목록 -->
         <div class="post-list" th:if="${objects.getTotalElements() > 0}">
             <a th:each="post : ${objects}" th:href="@{/posts/{postId}(postId=${post.postId()})}" class="post-card">
                 <img class="post-card-img" th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="썸네일">
                 <img class="post-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
-
-                <div class="post-card-body" th:if="${post.startTime == null}">
-                    <div class="post-card-title-container">
-                        <span class="post-card-category">[<span th:text="${post.categoryName}"></span>] </span>
-                        <span class="post-card-title" th:text="${post.title}"></span>
-                    </div>
-                    <div class="post-card-meta">
-                        <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}" alt="프로필">
-                        <span th:text="${post.writer}"></span>
-                    </div>
-                    <div class="post-card-stats">
-                        <span>조회수: <span th:text="${post.viewCount}"></span></span>
-                        <span>추천수: <span th:text="${post.recommendationCount}"></span></span>
-                    </div>
-                    <div class="post-card-date"
-                         th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
-                </div>
-
-                <div class="post-card-body" th:if="${post.startTime != null}">
-                    <div class="d-flex">
-                        <div class="post-card-title-container">
-                            <span class="post-card-category">[<span th:text="${post.categoryName}"></span>] </span>
-                            <span class="post-card-title" th:text="${post.title}"></span>
-                        </div>
+                <div class="post-card-body">
+                    <div class="post-card-title-status">
+                        <div class="post-card-title" th:text=" '[' + ${post.categoryName} + '] ' + ${post.title}"></div>
                         <div class="post-card-status" th:text="${post.eventStatusName}"
                              th:classappend="${post.eventStatusName == '예정' ? 'status-scheduled' : (post.eventStatusName == '진행중' ? 'status-ongoing' : (post.eventStatusName == '마감' ? 'status-closed' : ''))}"></div>
                         <div class="remaining-day" th:if="${post.eventStatusName == '예정'}">

@@ -32,8 +32,9 @@ public class PostServiceImpl implements PostService {
 	private final ImageClient imageClient;
 
 	@Override
-	public ApiResponse<Page<SearchPostsResponse>> searchPosts(Pageable pageable, String categoryName, String keyword) {
-		return postClient.searchPosts(pageable, categoryName, keyword).getBody();
+	public ApiResponse<Page<SearchPostsResponse>> searchPosts(Pageable pageable, String keyword, String categoryName,
+		String eventStatusName) {
+		return postClient.searchPosts(pageable, keyword, categoryName, eventStatusName).getBody();
 	}
 
 	@Override
