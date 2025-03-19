@@ -133,8 +133,13 @@ public class PostController {
 		@RequestParam(defaultValue = "DESC") String direction,
 		@RequestParam(defaultValue = "") String keyword,
 		@RequestParam(required = false) String categoryName,
-		@RequestParam(required = false) String eventStatusName, Model model) {
+		@RequestParam(defaultValue = "전체") String eventStatusName, Model model) {
 		List<String> roles = userService.meRoles().getData();
+
+		if (categoryName != null && categoryName.isEmpty()) {
+			categoryName = null;
+		}
+
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("isAuthorized",
@@ -198,7 +203,7 @@ public class PostController {
 		@RequestParam(defaultValue = "createdAt") String sortBy,
 		@RequestParam(defaultValue = "DESC") String direction,
 		@RequestParam String categoryName,
-		@RequestParam(required = false) String eventStatusName) {
+		@RequestParam(defaultValue = "전체") String eventStatusName) {
 		List<String> roles = userService.meRoles().getData();
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("isAuthorized",
