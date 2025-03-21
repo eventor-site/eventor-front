@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.user.client.UserClient;
+import com.eventorfront.user.dto.request.CertifyEmailRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
@@ -109,18 +110,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ApiResponse<Void> sendEmail(SendCodeRequest request) {
+	public ApiResponse<Boolean> sendEmail(SendCodeRequest request) {
 		return userClient.sendEmail(request).getBody();
 	}
 
 	@Override
-	public ApiResponse<Void> checkEmail(String email, String certifyCode) {
-		return userClient.checkEmail(email, certifyCode).getBody();
+	public ApiResponse<Boolean> certifyEmail(CertifyEmailRequest request) {
+		return userClient.certifyEmail(request).getBody();
 	}
 
 	@Override
-	public ApiResponse<Void> recoverIdentifier(String email) {
-		return userClient.recoverIdentifier(email).getBody();
+	public ApiResponse<Void> recoverIdentifier(String identifier) {
+		return userClient.recoverIdentifier(identifier).getBody();
 	}
 
 	@Override

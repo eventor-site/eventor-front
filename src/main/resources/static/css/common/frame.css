@@ -10,6 +10,7 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     font-size: 16px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 .wrapper {
@@ -49,6 +50,7 @@ hr {
 
 a {
     cursor: pointer;
+    text-decoration: none;
 }
 
 a:hover {

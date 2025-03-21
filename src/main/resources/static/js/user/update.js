@@ -1,5 +1,4 @@
 let isNicknameValid = true; // 닉네임 유효성 확인
-let isEmailCertified = true; // 이메일 인증 상태 추적
 let isEditingEmail = false; // 이메일 수정 상태 추적
 
 // 수정 버튼 활성화 여부를 확인하는 함수
@@ -16,8 +15,7 @@ function updateButtonState() {
 // 이메일 변경 버튼 동작
 const toggleEmailEdit = () => {
     const emailInput = document.getElementById('email');
-    const changeButton = document.getElementById('changeButton');
-    const codeInput = document.getElementById('certify-code');
+    const codeInput = document.getElementById('certifyCode');
     const updateButton = document.getElementById('updateButton');
 
     isEmailCertified = false; // 이메일 인증 초기화
@@ -27,37 +25,40 @@ const toggleEmailEdit = () => {
         // '변경' 버튼 클릭 시 수정 가능 상태로 변경
         emailInput.removeAttribute('readonly'); // 이메일 입력 가능
         emailInput.focus(); // 입력칸 포커스
-        changeButton.textContent = '인증번호'; // 버튼 이름 변경
+        certifyButton.textContent = '인증번호'; // 버튼 이름 변경
         codeInput.setAttribute('required', 'true'); // 인증번호 필수 입력 설정
         isEditingEmail = true; // 상태 업데이트
 
     } else {
         // '인증번호' 상태 → 인증 요청 실행
         sendEmail(); // 이메일 인증번호 요청
+        showInputSignUpCode();
     }
 };
 
-// 이메일 인증번호 확인 함수
-const certifySignUpCode = async () => {
-    const emailInput = document.getElementById('email');
-    const email = emailInput.value;
-    const codeInput = document.getElementById('certify-code');
-    const code = codeInput.value;
+document.addEventListener("DOMContentLoaded", function () {
+    const emailInput = document.getElementById("email");
+    const certifyCodeInput = document.getElementById("certifyCode");
+    const certifyButton = document.getElementById("certifyCodeButton");
 
-    const response = await fetch(`/users/signup/checkEmail?email=${encodeURI(email)}&certifyCode=${code}`);
-    const message = await response.text();
+    certifyButton.addEventListener("click", async () => {
+        await certifyEmailCodeUpdate(emailInput, certifyCodeInput, "이메일 수정");
+    });
+});
 
-    if (message === '인증되었습니다.') {
-        alert(message);
+
+const certifyEmailCodeUpdate = async (emailInput, certifyCodeInput, type) => {
+    const isSuccess = await certifyEmailCode(emailInput, certifyCodeInput, type);
+    
+    if (isSuccess) {
         emailInput.setAttribute('readonly', 'true'); // 이메일 수정 불가
-        codeInput.setAttribute('readonly', 'true'); // 인증번호 수정 불가
-        codeInput.removeAttribute('required'); // 인증번호 필수 해제
+        certifyCodeInput.setAttribute('readonly', 'true'); // 인증번호 수정 불가
+        certifyCodeInput.removeAttribute('required'); // 인증번호 필수 해제
         isEmailCertified = true; // 이메일 인증 완료
-    } else {
-        alert(message);
     }
+
     updateButtonState(); // 수정 버튼 상태 갱신
-};
+}
 
 // 닉네임 유효성 검사
 document.addEventListener('DOMContentLoaded', function () {
@@ -115,26 +116,4 @@ document.addEventListener('DOMContentLoaded', function () {
 // 이메일 인증번호 입력칸을 표시하는 함수 (필요 시 호출)
 function showInputSignUpCode() {
     document.getElementById('verify-code-row').style.display = 'block';
-}
-
-const sendEmail = async () => {
-    const email = document.getElementById('email').value
-
-    const formData = new FormData();
-    formData.append('email', email);
-
-    const response = await fetch('/users/signup/sendEmail', {
-        method: 'POST',
-        body: formData,
-    })
-
-    const message = await response.text();
-
-    if (message === email + '로 인증 번호를 전송했습니다.') {
-        alert(message);
-        showInputSignUpCode();
-    } else {
-        alert(message);
-        document.getElementById('email').value = '';
-    }
 }

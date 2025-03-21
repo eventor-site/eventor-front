@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.global.dto.ApiResponse;
+import com.eventorfront.user.dto.request.CertifyEmailRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
@@ -52,11 +53,11 @@ public interface UserService {
 
 	ApiResponse<Void> checkNickname(CheckNicknameRequest request);
 
-	ApiResponse<Void> sendEmail(SendCodeRequest request);
+	ApiResponse<Boolean> sendEmail(SendCodeRequest request);
 
-	ApiResponse<Void> checkEmail(String email, String certifyCode);
+	ApiResponse<Boolean> certifyEmail(CertifyEmailRequest request);
 
-	ApiResponse<Void> recoverIdentifier(String email);
+	ApiResponse<Void> recoverIdentifier(String identifier);
 
 	ApiResponse<Void> recoverPassword(String identifier);
 

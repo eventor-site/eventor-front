@@ -40,23 +40,25 @@
                                 <P>※ 닉네임은 10자 이내여야 합니다.</P>
                                 <P>※ 닉네임은 한 달 주기로 한 번만 변경할 수 있습니다.</P>
 
-                                <div class="form-group">
+                                <div class="form-group mb-2">
                                     <label for="email">이메일</label>
-                                    <div class="email-input-container">
-                                        <input id="email" type="email" name="email" th:value="${user.email}"
-                                               readonly>
-                                        <button id="changeButton" type="button"
-                                                class="btn btn-sm btn-outline-primary"
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input class="form-control" id="email" type="email" name="email"
+                                               th:value="${user.email}" readonly>
+                                        <button class="btn btn-outline-primary" id="certifyButton" type="button"
                                                 onclick="toggleEmailEdit()">변경
                                         </button>
                                     </div>
                                 </div>
 
-                                <div class="form-group" id="verify-code-row" style="display: none">
-                                    <div class="email-input-container">
-                                        <input id="certify-code" type="text" placeholder="인증번호를 입력해주세요">
-                                        <button type="button" class="btn btn-sm btn-outline-primary"
-                                                onclick="certifySignUpCode()">인증번호 확인
+                                <div class="mb-2" id="verify-code-row" style="display: none">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <input id="type" type="hidden" name="type" value="이메일 수정">
+                                        <input class="form-control" id="certifyCode" type="text"
+                                               placeholder="인증번호를 입력해주세요" required>
+                                        <button type="button" id="certifyCodeButton"
+                                                class="btn btn-outline-primary">
+                                            인증번호 확인
                                         </button>
                                     </div>
                                 </div>
@@ -96,6 +98,7 @@
 
 <th:block layout:fragment="script">
     <script src="/js/user/update.js"></script>
+    <script src="/js/user/certifyEmail.js"></script>
 </th:block>
 </body>
 </html>

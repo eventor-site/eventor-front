@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.global.dto.ApiResponse;
+import com.eventorfront.user.dto.request.CertifyEmailRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
@@ -82,14 +83,13 @@ public interface UserClient {
 	ResponseEntity<ApiResponse<Void>> checkNickname(@RequestBody CheckNicknameRequest request);
 
 	@PostMapping("/back/users/signup/sendEmail")
-	ResponseEntity<ApiResponse<Void>> sendEmail(@RequestBody SendCodeRequest request);
+	ResponseEntity<ApiResponse<Boolean>> sendEmail(@RequestBody SendCodeRequest request);
 
-	@GetMapping("/back/users/signup/checkEmail")
-	ResponseEntity<ApiResponse<Void>> checkEmail(@RequestParam("email") String email,
-		@RequestParam("certifyCode") String certifyCode);
+	@PostMapping("/back/users/signup/certifyEmail")
+	ResponseEntity<ApiResponse<Boolean>> certifyEmail(@RequestBody CertifyEmailRequest request);
 
 	@PostMapping("/back/users/recover/identifier")
-	ResponseEntity<ApiResponse<Void>> recoverIdentifier(@RequestParam String email);
+	ResponseEntity<ApiResponse<Void>> recoverIdentifier(@RequestParam String identifier);
 
 	@PostMapping("/back/users/recover/password")
 	ResponseEntity<ApiResponse<Void>> recoverPassword(@RequestParam String identifier);

@@ -1,16 +1,17 @@
 // 각 조건의 상태를 추적하는 변수
 let isEmailCertified = false;
 // 인증 버튼과 관련된 요소 선택
-const certifyButton = document.getElementById('certify-button');
+const certifyButton = document.getElementById('certifyButton');
 
 // 타이머 변수
 let certifyTimer = null; // 인증 버튼 타이머
 
 const sendEmail = async () => {
-    const identifier = document.getElementById('identifier').value
+    const email = document.getElementById('email').value
+    const type = document.getElementById('type').value
     let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일 정규식
 
-    if (!emailRegex.test(identifier)) {
+    if (!emailRegex.test(email)) {
         alert("유효한 이메일 형식이 아닙니다.");
         return;
     }
@@ -19,14 +20,16 @@ const sendEmail = async () => {
     disableCertifyButton(60);
 
     const formData = new FormData();
-    formData.append('email', identifier);
+    formData.append('email', email);
+    formData.append('type', type);
 
     const response = await fetch('/users/signup/sendEmail', {
         method: 'POST',
         body: formData,
     })
 
-    const message = await response.text();
+    const json = await response.json();
+    const message = json.message;
     alert(message);
 
 }
@@ -50,23 +53,23 @@ function disableCertifyButton(seconds) {
     }, 1000);
 }
 
-const certifySignUpCode = async () => {
-    const emailInput = document.getElementById('identifier');
+const certifyEmailCode = async (emailInput, certifyCodeInput, type) => {
     const email = emailInput.value;
-    const codeInput = document.getElementById('certify-code');
-    const code = codeInput.value;
+    const certifyCode = certifyCodeInput.value;
 
-    const response = await fetch(`/users/signup/checkEmail?email=${encodeURI(email)}&certifyCode=${code}`);
-    const message = await response.text();
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('type', type);
+    formData.append('certifyCode', certifyCode);
 
-    if (message === '인증되었습니다.') {
-        alert(message);
-        emailInput.setAttribute('readonly', 'true');
-        codeInput.setAttribute('readonly', 'true');
-        isEmailCertified = true;
-    } else {
-        alert(message);
-        isEmailCertified = false;
-    }
-    updateSignupButtonState();
+    const response = await fetch('/users/signup/certifyEmail', {
+        method: 'POST',
+        body: formData,
+    })
+
+    const json = await response.json();
+    const message = json.message;
+    alert(message)
+
+    return json.data;
 }

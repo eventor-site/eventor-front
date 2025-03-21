@@ -10,27 +10,27 @@
     <div class="body-container">
         <div class="row justify-content-center no-gutters">
             <div class="col-md-6">
-                <h5>아이디 찾기</h5>
+                <h5 class="text-center fw-bold">아이디 찾기</h5>
                 <hr>
-                <p>가입하신 이메일을 입력하시면, 해당 이메일로 아이디를 찾을 수 있습니다.</p>
+                <p>아이디를 입력하시면, 가입 여부를 확인할 수 있습니다.</p>
 
                 <!-- 아이디 찾기 폼 -->
-                <form action="/users/recover/identifier" method="GET">
-                    <div class="form-group">
-                        <label for="email">이메일 주소</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="이메일을 입력해주세요"
-                               required>
+                <form class="mb-2" action="/users/recover/identifier" method="get">
+                    <div class="d-flex align-items-center gap-2">
+                        <input class="form-control" type="email" id="identifier" name="identifier"
+                               th:value="${identifier}" placeholder="아이디를 입력해주세요" required>
+                        <button type="submit" class="btn btn-primary btn-block">아이디 찾기</button>
                     </div>
-                    <button type="button" class="btn btn-primary btn-block" onclick="recoverIdentifier()">아이디 찾기
-                    </button>
                 </form>
+
+                <div class="fw-bold text-primary" th:text="${recoverMessage}"></div>
             </div>
         </div>
     </div>
 </div>
 
 <th:block layout:fragment="script">
-    <script src="/js/user/recoverIdentifier.js"></script>
+
 </th:block>
 </body>
 </html>
