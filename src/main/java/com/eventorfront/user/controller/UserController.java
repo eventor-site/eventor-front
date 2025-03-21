@@ -21,9 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.status.service.StatusService;
+import com.eventorfront.user.dto.request.CertifyEmailRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
@@ -133,9 +135,9 @@ public class UserController {
 		return "user/update";
 	}
 
-	@GetMapping("/me/modifyPasswordForm")
-	public String modifyPasswordForm() {
-		return "user/modifyPasswordForm";
+	@GetMapping("/me/updatePasswordForm")
+	public String updatePasswordForm() {
+		return "user/updatePasswordForm";
 	}
 
 	@PutMapping("/me")
@@ -191,34 +193,35 @@ public class UserController {
 	}
 
 	@PostMapping("/signup/sendEmail")
-	ResponseEntity<String> sendEmail(@ModelAttribute SendCodeRequest request) {
-		return ResponseEntity.ok(userService.sendEmail(request).getMessage());
+	ResponseEntity<ApiResponse<Boolean>> sendEmail(@ModelAttribute SendCodeRequest request) {
+		return ResponseEntity.ok(userService.sendEmail(request));
 	}
 
-	@GetMapping("/signup/checkEmail")
-	ResponseEntity<String> checkEmail(@RequestParam("email") String email,
-		@RequestParam("certifyCode") String certifyCode) {
-		return ResponseEntity.ok(userService.checkEmail(email, certifyCode).getMessage());
+	@PostMapping("/signup/certifyEmail")
+	ResponseEntity<ApiResponse<Boolean>> certifyEmail(@ModelAttribute CertifyEmailRequest request) {
+		return ResponseEntity.ok(userService.certifyEmail(request));
 	}
 
 	@GetMapping("/recover/identifier")
-	public String recoverIdentifierPage() {
+	public String recoverIdentifierPage(@RequestParam(required = false) String identifier, Model model) {
+		if (identifier != null) {
+			model.addAttribute("identifier", identifier);
+			model.addAttribute("recoverMessage", userService.recoverIdentifier(identifier).getMessage());
+		}
 		return "user/recoverIdentifierForm";
 	}
 
 	@GetMapping("/recover/password")
-	public String recoverPasswordPage() {
+	public String recoverPasswordPage(@ModelAttribute CertifyEmailRequest request, Model model) {
+		if (request.email() != null) {
+			model.addAttribute("recoverMessage", userService.recoverPassword(request.email()).getMessage());
+		}
 		return "user/recoverPasswordForm";
 	}
 
-	@PostMapping("/recover/identifier")
-	ResponseEntity<String> recoverIdentifier(@RequestParam String email) {
-		return ResponseEntity.ok(userService.recoverIdentifier(email).getMessage());
-	}
-
-	@PostMapping("/recover/password")
-	ResponseEntity<String> recoverPassword(@RequestParam String identifier) {
-		return ResponseEntity.ok(userService.recoverPassword(identifier).getMessage());
-	}
+	// @PostMapping("/recover/password")
+	// ResponseEntity<String> recoverPassword(@RequestParam String identifier) {
+	// 	return ResponseEntity.ok(userService.recoverPassword(identifier).getMessage());
+	// }
 
 }

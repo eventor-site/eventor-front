@@ -1,14 +1,32 @@
-const recoverPassword = async () => {
-    const identifier = document.getElementById('identifier').value
+document.addEventListener("DOMContentLoaded", function () {
+    const emailInput = document.getElementById("email");
+    const certifyCodeInput = document.getElementById("certifyCode");
+    const certifyButton = document.getElementById("certifyCodeButton");
 
-    const response = await fetch(
-        `/users/recover/password?identifier=${encodeURI(identifier)}`,
-        {method: 'POST'}
-    );
+    certifyButton.addEventListener("click", async () => {
+        await certifyEmailCodeRecoverPassword(emailInput, certifyCodeInput, "비밀번호 찾기");
+    });
+});
 
-    const message = await response.text();
+function updateSignupButtonState() {
+    const recoverPasswordButton = document.getElementById('recoverPasswordButton');
 
-    // alert(message); // 알림 메시지 출력
-    alertMessage(message)
-    // window.location.href = '/auth/login'; // 리다이렉트
+    if (isEmailCertified) {
+        recoverPasswordButton.removeAttribute('disabled');
+    } else {
+        recoverPasswordButton.setAttribute('disabled', 'true');
+    }
+}
+
+const certifyEmailCodeRecoverPassword = async (emailInput, certifyCodeInput, type) => {
+    const isSuccess = await certifyEmailCode(emailInput, certifyCodeInput, type);
+
+    if (isSuccess) {
+        emailInput.setAttribute('readonly', 'true');
+        certifyCodeInput.setAttribute('readonly', 'true');
+        isEmailCertified = true;
+    } else {
+        isEmailCertified = false;
+    }
+    updateSignupButtonState();
 }

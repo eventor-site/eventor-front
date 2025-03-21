@@ -6,6 +6,7 @@
 
 html, body {
     height: 100%;
+    font-size: 16px;
 }
 
 body {
@@ -92,20 +93,20 @@ body {
 .upper-form button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     border: 2px solid #000000;
     border-radius: 4px;
 }
 
 .upper-form button {
-    background-color: yellow;
+    background-color: gold;
     font-weight: bold;
     border: none;
     cursor: pointer;
 }
 
 .upper-form button:hover {
-    background-color: gold;
+    background-color: goldenrod;
 }
 
 /* OAuth 버튼 컨테이너 스타일 */
@@ -135,7 +136,6 @@ body {
 .footer-links a {
     margin: 0 10px;
     text-decoration: none;
-    font-size: 14px;
     color: blue;
 }
 
