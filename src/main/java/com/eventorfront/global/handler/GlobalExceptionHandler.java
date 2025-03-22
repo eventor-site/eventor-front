@@ -1,5 +1,7 @@
 package com.eventorfront.global.handler;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
@@ -31,7 +33,7 @@ public class GlobalExceptionHandler {
 		} else {//"인증에 실패 했습니다. 다시 로그인해 주세요"
 			// 🔹 일반 요청이면 로그인 페이지로 리다이렉트
 			session.setAttribute("errorMessage", e.getMessage());
-			return "redirect:/auth/login";
+			return "redirect:/auth/login?errorMessage=" + URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8);
 		}
 	}
 
