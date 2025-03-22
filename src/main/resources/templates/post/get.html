@@ -13,9 +13,27 @@
 <body>
 <div layout:fragment="content">
     <div class="body-container">
-        <h5>카테고리: <span id="categoryName" th:data-category-name="${post.categoryName}"
-                        th:text="${post.categoryName}"></span></h5>
+        <div class="d-flex justify-content-between align-items-center">
+            <h5>
+                카테고리:
+                <a id="categoryName"
+                   th:data-category-name="${post.categoryName}"
+                   th:text="${post.categoryName}"
+                   th:href="@{/posts (categoryName=${post.categoryName})}">
+                </a>
+            </h5>
 
+            <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
+                <a th:href="@{/posts/{postId}/updateForm (postId=${post.postId()})}"
+                   class="btn btn-warning inline-text">수정
+                </a>
+                <form th:action="@{/posts/{postId} (postId=${post.postId()}, categoryName=${post.categoryName})}"
+                      th:method="delete">
+                    <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                </form>
+            </div>
+
+        </div>
         <div class="post-header">
             <!-- 이벤트 시간 및 남은 시간 -->
             <div class="event-time"
@@ -151,17 +169,8 @@
                 <a data-report-type="기타" onclick="submitReport(this)">- 기타</a>
             </div>
 
-            <a class="btn-sm btn-secondary" onclick="history.back()">뒤로가기</a>
+            <a class="btn btn-sm btn-secondary" onclick="history.back()">뒤로가기</a>
 
-            <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
-                <a th:href="@{/posts/{postId}/updateForm (postId=${post.postId()})}"
-                   class="btn btn-sm btn-warning inline-text">수정
-                </a>
-                <form th:action="@{/posts/{postId} (postId=${post.postId()}, categoryName=${post.categoryName})}"
-                      th:method="delete">
-                    <button type="submit" class="btn btn-sm btn-danger inline-text">삭제</button>
-                </form>
-            </div>
         </div>
 
         <!-- 첨부파일 -->
