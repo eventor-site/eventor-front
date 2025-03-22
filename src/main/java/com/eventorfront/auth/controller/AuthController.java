@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -92,10 +91,9 @@ public class AuthController {
 	@GetMapping("/oauth2/login")
 	public String oauthLogin(@RequestParam String accessToken, @RequestParam String refreshToken,
 		@RequestParam(required = false) String error,
-		HttpServletResponse response, Model model) {
+		HttpServletResponse response) {
 
 		if (error != null && error.equals("탈퇴")) {
-			model.addAttribute("error", "탈퇴");
 			return "auth/oauthError";
 		}
 
