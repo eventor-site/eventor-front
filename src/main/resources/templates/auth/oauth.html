@@ -5,13 +5,8 @@
     <title>이벤터</title>
 </head>
 <body>
-<input type="hidden" id="error" name="error" th:value="${error}">
 <script>
-    const error = document.getElementById("error").value;
-
-    if (error === "탈퇴" && window.opener) {
-        window.opener.location.href = '/auth/oauth2/login/error';
-    } else if (window.opener) {
+    if (window.opener) {
         window.opener.location.href = '/';  // 부모 창 리다이렉트
     }
     window.close();  // 새 창을 닫음
