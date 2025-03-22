@@ -1,9 +1,5 @@
 package com.eventorfront.auth.controller;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.global.exception.UnauthorizedException;
 import com.eventorfront.global.util.CookieUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,15 +39,12 @@ public class AuthController {
 	public String login(@ModelAttribute LoginRequest request, HttpServletResponse response) {
 		LoginResponse loginResponse = authService.login(request).getData();
 
-		String accessToken;
-		String refreshToken;
+		String accessToken = loginResponse.accessToken();
+		String refreshToken = loginResponse.refreshToken();
 
-		if (Objects.isNull(loginResponse)) {
-			return "redirect:/auth/login?error=" + URLEncoder.encode("로그인 실패", StandardCharsets.UTF_8);
+		if (loginResponse.userStatusName().equals("탈퇴")) {
+			throw new UnauthorizedException("탈퇴한 사용자입니다. 관리자에게 문의해 주세요.");
 		}
-
-		accessToken = loginResponse.accessToken();
-		refreshToken = loginResponse.refreshToken();
 
 		if (accessToken != null) {
 			response.addCookie(CookieUtil.createCookie("access-token", accessToken));
