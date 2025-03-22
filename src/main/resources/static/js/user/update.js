@@ -1,5 +1,6 @@
-let isNicknameValid = true; // 닉네임 유효성 확인
-let isEditingEmail = false; // 이메일 수정 상태 추적
+let isNicknameValid = false // 닉네임 유효성 확인
+let isEditingEmail = true; // 이메일 수정 상태 추적
+isEmailCertified = true;
 
 // 수정 버튼 활성화 여부를 확인하는 함수
 function updateButtonState() {
@@ -49,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const certifyEmailCodeUpdate = async (emailInput, certifyCodeInput, type) => {
     const isSuccess = await certifyEmailCode(emailInput, certifyCodeInput, type);
-    
+
     if (isSuccess) {
         emailInput.setAttribute('readonly', 'true'); // 이메일 수정 불가
         certifyCodeInput.setAttribute('readonly', 'true'); // 인증번호 수정 불가
