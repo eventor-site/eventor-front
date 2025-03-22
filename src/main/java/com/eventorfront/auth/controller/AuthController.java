@@ -29,6 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/auth")
 public class AuthController {
 	private final AuthService authService;
+	private final String ACCESS_TOKEN = "access-token";
+	private final String REFRESH_TOKEN = "refresh-token";
 
 	@GetMapping("/login")
 	public String login() {
@@ -47,11 +49,11 @@ public class AuthController {
 		}
 
 		if (accessToken != null) {
-			response.addCookie(CookieUtil.createCookie("access-token", accessToken));
+			response.addCookie(CookieUtil.createCookie(ACCESS_TOKEN, accessToken));
 		}
 
 		if (refreshToken != null) {
-			response.addCookie(CookieUtil.createCookie("refresh-token", refreshToken));
+			response.addCookie(CookieUtil.createCookie(REFRESH_TOKEN, refreshToken));
 		}
 
 		return "redirect:/";
@@ -63,8 +65,8 @@ public class AuthController {
 	@PostMapping("/logout")
 	public String logout(HttpServletResponse response) {
 		authService.logout();
-		CookieUtil.revokeToken(response, "access-token");
-		CookieUtil.revokeToken(response, "refresh-token");
+		CookieUtil.revokeToken(response, ACCESS_TOKEN);
+		CookieUtil.revokeToken(response, REFRESH_TOKEN);
 		return "redirect:/";
 	}
 
@@ -86,11 +88,11 @@ public class AuthController {
 		HttpServletResponse response) {
 
 		if (accessToken != null) {
-			response.addCookie(CookieUtil.createCookie("access-token", accessToken));
+			response.addCookie(CookieUtil.createCookie(ACCESS_TOKEN, accessToken));
 		}
 
 		if (refreshToken != null) {
-			response.addCookie(CookieUtil.createCookie("refresh-token", refreshToken));
+			response.addCookie(CookieUtil.createCookie(REFRESH_TOKEN, refreshToken));
 		}
 
 		return "auth/oauth";
