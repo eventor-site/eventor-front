@@ -218,10 +218,4 @@ public class UserController {
 		}
 		return "user/recoverPasswordForm";
 	}
-
-	// @PostMapping("/recover/password")
-	// ResponseEntity<String> recoverPassword(@RequestParam String identifier) {
-	// 	return ResponseEntity.ok(userService.recoverPassword(identifier).getMessage());
-	// }
-
 }
