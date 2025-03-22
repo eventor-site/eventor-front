@@ -18,7 +18,6 @@ import com.eventorfront.global.util.CookieUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,13 +34,8 @@ public class AuthController {
 	private final String REFRESH_TOKEN = "refresh-token";
 
 	@GetMapping("/login")
-	public String login(HttpSession session, Model model) {
-		String errorMessage = (String)session.getAttribute("errorMessage");
-
-		if (errorMessage != null) {
-			model.addAttribute("errorMessage", errorMessage);
-			session.removeAttribute("errorMessage"); // 1회성 유지 후 삭제
-		}
+	public String login(@RequestParam(required = false) String errorMessage, Model model) {
+		model.addAttribute("errorMessage", errorMessage);
 		return "auth/login";
 	}
 
