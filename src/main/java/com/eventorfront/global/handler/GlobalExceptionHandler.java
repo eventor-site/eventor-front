@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler({UnauthorizedException.class, FeignException.Unauthorized.class})
 	public Object handleUnauthorizedException(HttpServletRequest request, RedirectAttributes redirectAttributes,
-		Exception e) {
+		UnauthorizedException e) {
 		// 💡 AJAX 요청인지 확인
 		String ajaxHeader = request.getHeader("X-Ajax-Request");
 
