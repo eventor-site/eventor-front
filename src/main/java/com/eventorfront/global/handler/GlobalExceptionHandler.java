@@ -20,16 +20,17 @@ import jakarta.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler({UnauthorizedException.class, FeignException.Unauthorized.class})
-	public Object handleUnauthorizedException(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	public Object handleUnauthorizedException(HttpServletRequest request, RedirectAttributes redirectAttributes,
+		Exception e) {
 		// 💡 AJAX 요청인지 확인
 		String ajaxHeader = request.getHeader("X-Ajax-Request");
 
 		if (ajaxHeader != null) {
 			// 🔹 AJAX 요청이면 JSON 응답 반환
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증에 실패 했습니다. 다시 로그인해 주세요");
-		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증에 실패 했습니다.");
+		} else {//"인증에 실패 했습니다. 다시 로그인해 주세요"
 			// 🔹 일반 요청이면 로그인 페이지로 리다이렉트
-			redirectAttributes.addFlashAttribute("errorMessage", "인증에 실패 했습니다. 다시 로그인해 주세요");
+			redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
 			return "redirect:/auth/login";
 		}
 	}
