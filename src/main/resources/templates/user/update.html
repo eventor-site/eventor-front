@@ -55,7 +55,7 @@
                                     <div class="d-flex align-items-center gap-2">
                                         <input id="type" type="hidden" name="type" value="이메일 수정">
                                         <input class="form-control" id="certifyCode" type="text"
-                                               placeholder="인증번호를 입력해주세요" required>
+                                               placeholder="인증번호를 입력해주세요">
                                         <button type="button" id="certifyCodeButton"
                                                 class="btn btn-outline-primary">
                                             인증번호 확인
@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" id="updateButton" class="btn btn-primary">수정</button>
+                            <button type="submit" id="updateButton" class="btn btn-primary" disabled>수정</button>
                             <a class="btn btn-secondary" href="/users/me">취소</a>
                         </div>
                     </form>
@@ -97,8 +97,8 @@
 </div>
 
 <th:block layout:fragment="script">
-    <script src="/js/user/update.js"></script>
     <script src="/js/user/certifyEmail.js"></script>
+    <script src="/js/user/update.js"></script>
 </th:block>
 </body>
 </html>
