@@ -5,9 +5,9 @@
     <title>이벤터</title>
 </head>
 <body>
-<div id="error" th:text="${error}"></div>
+<input type="hidden" id="error" name="error" th:value="${error}">
 <script>
-    const error = document.getElementById("error").innerText;
+    const error = document.getElementById("error").value;
 
     if (error === "탈퇴" && window.opener) {
         window.opener.location.href = '/auth/oauth2/login/error';
