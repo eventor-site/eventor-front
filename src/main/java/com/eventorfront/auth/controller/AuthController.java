@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.global.exception.UnauthorizedException;
 import com.eventorfront.global.util.CookieUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -89,7 +90,12 @@ public class AuthController {
 
 	@GetMapping("/oauth2/login")
 	public String oauthLogin(@RequestParam String accessToken, @RequestParam String refreshToken,
+		@RequestParam(required = false) String error,
 		HttpServletResponse response) {
+
+		if (error != null && error.equals("탈퇴")) {
+			throw new UnauthorizedException("탈퇴한 사용자입니다. 관리자에게 문의해 주세요.");
+		}
 
 		if (accessToken != null) {
 			response.addCookie(CookieUtil.createCookie("access-token", accessToken));
