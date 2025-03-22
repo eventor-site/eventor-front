@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eventorfront.global.exception.GlobalException;
 import com.eventorfront.global.exception.UnauthorizedException;
@@ -15,12 +14,13 @@ import com.eventorfront.global.exception.payload.ErrorStatus;
 
 import feign.FeignException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler({UnauthorizedException.class, FeignException.Unauthorized.class})
-	public Object handleUnauthorizedException(HttpServletRequest request, RedirectAttributes redirectAttributes,
+	public Object handleUnauthorizedException(HttpServletRequest request, HttpSession session,
 		Exception e) {
 		// 💡 AJAX 요청인지 확인
 		String ajaxHeader = request.getHeader("X-Ajax-Request");
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
 		} else {//"인증에 실패 했습니다. 다시 로그인해 주세요"
 			// 🔹 일반 요청이면 로그인 페이지로 리다이렉트
-			redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+			session.setAttribute("errorMessage", e.getMessage());
 			return "redirect:/auth/login";
 		}
 	}
