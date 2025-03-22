@@ -2,6 +2,7 @@ package com.eventorfront.auth.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.eventorfront.global.util.CookieUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +35,13 @@ public class AuthController {
 	private final String REFRESH_TOKEN = "refresh-token";
 
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpSession session, Model model) {
+		String errorMessage = (String)session.getAttribute("errorMessage");
+
+		if (errorMessage != null) {
+			model.addAttribute("errorMessage", errorMessage);
+			session.removeAttribute("errorMessage"); // 1회성 유지 후 삭제
+		}
 		return "auth/login";
 	}
 
