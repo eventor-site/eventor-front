@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (isComment) {
         commentFormContainer.innerHTML = `
             <form class="comment-form" id="commentForm" action="/posts/${postId}/comments" method="post">
-                <div class="form-group">
+                <div class="mb-2">
                     <textarea class="form-control" name="content" id="commentContent" rows="3" 
                         placeholder="댓글을 작성하세요..." maxlength="500" required></textarea>
                     <small id="charCount" class="text-muted">0 / 500</small>

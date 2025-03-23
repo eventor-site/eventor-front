@@ -61,4 +61,6 @@ public interface UserService {
 
 	ApiResponse<Void> recoverPassword(String identifier);
 
+	ApiResponse<Void> recover(String identifier);
+
 }

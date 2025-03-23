@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
+<head>
+    <th:block th:replace="~{common/fragments/config}"></th:block>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/signup/signup.css"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <form class="signup-form-container mb-2" id="signupForm" action="/users/me/recover" method="post">
+        <h5 class="text-center fw-bold">휴면 계정 복구</h5>
+        <hr>
+        <p>이메일 인증을 통해 휴면 계정 복구가 가능합니다.</p>
+        <div class="mb-2 mb-2">
+            <div class="d-flex align-items-center gap-2">
+                <input class="form-control" id="type" type="hidden" name="type" value="휴면계정 활성화">
+                <input class="form-control" id="email" type="email" name="identifier" placeholder="아이디" required>
+                <button type="button" id="certifyButton" class="btn btn-outline-primary"
+                        onclick="sendEmail()">인증번호
+                </button>
+            </div>
+            <small id="identifierFeedback" class="form-text text-muted"></small>
+        </div>
+
+        <div class="mb-2 mb-2">
+            <div class="d-flex align-items-center gap-2">
+                <input class="form-control" id="certifyCode" type="text" placeholder="인증번호를 입력해주세요" required>
+                <button type="button" id="certifyCodeButton" class="btn btn-outline-primary">
+                    인증번호 확인
+                </button>
+            </div>
+        </div>
+
+        <button type="submit" id="activeButton" class="signup-button btn btn-primary" disabled>휴면 해제</button>
+
+        <div class="font-weight-bold text-primary" th:text="${recoverMessage}"></div>
+    </form>
+</div>
+
+<th:block layout:fragment="script">
+    <script src="/js/user/recover.js"></script>
+    <script src="/js/user/certifyEmail.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</th:block>
+</body>
+</html>

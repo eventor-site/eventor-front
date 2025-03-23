@@ -21,12 +21,12 @@
                     <form th:action="@{/points/{pointId} (pointId=${point.pointId})}" th:method="put"
                           th:object="${point}">
 
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="name">포인트 이름</label>
                             <input type="text" class="form-control" id="name" th:field="*{name}" required>
                         </div>
 
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="amount">포인트 양</label>
                             <input type="number" class="form-control" id="amount" th:field="*{amount}" required>
                         </div>

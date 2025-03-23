@@ -1,5 +1,8 @@
 package com.eventorfront.auth.controller;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.eventorfront.auth.dto.request.LoginRequest;
 import com.eventorfront.auth.dto.response.LoginResponse;
 import com.eventorfront.auth.service.AuthService;
-import com.eventorfront.global.exception.UnauthorizedException;
 import com.eventorfront.global.util.CookieUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,12 +32,12 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/auth")
 public class AuthController {
 	private final AuthService authService;
-	private final String ACCESS_TOKEN = "access-token";
-	private final String REFRESH_TOKEN = "refresh-token";
+	private static final String ACCESS_TOKEN = "access-token";
+	private static final String REFRESH_TOKEN = "refresh-token";
 
 	@GetMapping("/login")
-	public String login(@RequestParam(required = false) String errorMessage, Model model) {
-		model.addAttribute("errorMessage", errorMessage);
+	public String login(@RequestParam(required = false) String error, Model model) {
+		model.addAttribute("error", error);
 		return "auth/login";
 	}
 
@@ -46,8 +48,13 @@ public class AuthController {
 		String accessToken = loginResponse.accessToken();
 		String refreshToken = loginResponse.refreshToken();
 
-		if (loginResponse.userStatusName().equals("탈퇴")) {
-			throw new UnauthorizedException("탈퇴한 사용자입니다. 관리자에게 문의해 주세요.");
+		switch (loginResponse.userStatusName()) {
+			case "탈퇴":
+				return "redirect:/auth/login?error=" + URLEncoder.encode("탈퇴한 사용자입니다. 관리자에게 문의해 주세요.",
+					StandardCharsets.UTF_8);
+			case "휴면":
+				return "redirect:/users/me/recover";
+			default:
 		}
 
 		if (accessToken != null) {

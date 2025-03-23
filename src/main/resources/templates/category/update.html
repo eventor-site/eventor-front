@@ -19,13 +19,13 @@
                     <h3>카테고리 수정 폼</h3>
                     <form th:action="@{/categories/{categoryId} (categoryId=${category.categoryId})}"
                           th:method="put" th:object="${category}">
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="parentCategoryName">상위 카테고리 이름</label>
                             <input type="text" class="form-control" id="parentCategoryName"
                                    th:field="*{parentCategoryName}">
                             <div id="categoryResults"></div>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="name">카테고리 이름</label>
                             <input type="text" class="form-control" id="name" th:field="*{name}" required>
                         </div>

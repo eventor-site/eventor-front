@@ -128,4 +128,9 @@ public class UserServiceImpl implements UserService {
 	public ApiResponse<Void> recoverPassword(String identifier) {
 		return userClient.recoverPassword(identifier).getBody();
 	}
+
+	@Override
+	public ApiResponse<Void> recover(String identifier) {
+		return userClient.recover(identifier).getBody();
+	}
 }

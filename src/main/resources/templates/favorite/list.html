@@ -12,7 +12,7 @@
             <section id="page-menu-container" th:insert="~{common/user-menu.html}"></section>
             <section id="page-content">
                 <section id="page-header">
-                    <h5>내 하트 목록</h5>
+                    <h5>내 하트 목록 (<span th:text="${objects.getTotalElements()}"></span>)</h5>
                 </section>
                 <hr>
                 <section id="page-body">
@@ -40,7 +40,7 @@
                                 <td>
                                     <form th:action="@{/favorites/{favoriteId} (favoriteId=${post.favoriteId})}"
                                           th:method="delete">
-                                        <button class="btn btn-sm btn-danger">삭제</button>
+                                        <button class="btn btn-danger">삭제</button>
                                     </form>
 
                                 </td>

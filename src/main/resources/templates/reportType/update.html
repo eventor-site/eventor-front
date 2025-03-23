@@ -20,7 +20,7 @@
                     <h3>신고 유형 수정 폼</h3>
                     <form th:action="@{/reportTypes/{reportTypeId} (reportTypeId=${reportType.reportTypeId})}"
                           th:method="put" th:object="${reportType}">
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="name">신고 유형 이름</label>
                             <input type="text" class="form-control" id="name" th:field="*{name}" required>
                         </div>

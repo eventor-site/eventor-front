@@ -15,7 +15,7 @@
                 <p>아이디를 입력하시면, 가입 여부를 확인할 수 있습니다.</p>
 
                 <!-- 아이디 찾기 폼 -->
-                <form class="mb-2" action="/users/recover/identifier" method="get">
+                <form class="mb-2" action="/users/me/recover/identifier" method="get">
                     <div class="d-flex align-items-center gap-2">
                         <input class="form-control" type="email" id="identifier" name="identifier"
                                th:value="${identifier}" placeholder="아이디를 입력해주세요" required>

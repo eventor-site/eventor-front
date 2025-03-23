@@ -24,9 +24,9 @@ public interface CommentService {
 
 	ApiResponse<Void> updateComment(Long postId, Long commentId, UpdateCommentRequest request);
 
-	ApiResponse<Void> recommendComment(Long postId, Long commentId);
+	ApiResponse<Void> recommendComment(Long commentId);
 
-	ApiResponse<Void> disrecommendComment(Long postId, Long commentId);
+	ApiResponse<Void> disrecommendComment(Long commentId);
 
-	ApiResponse<Void> deleteComment(Long postId, Long commentId);
+	ApiResponse<Void> deleteComment(Long commentId);
 }
