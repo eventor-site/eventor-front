@@ -38,6 +38,9 @@
                                        th:text="${comment.content}"></a>
                                 </td>
                                 <td>
+                                    <img class="grade"
+                                         th:src="@{/profile/{gradeName}.png (gradeName=${comment.gradeName})}"
+                                         alt="프로필">
                                     <span class="ml-2" th:text="${comment.writer}"></span>
                                 </td>
                                 <td th:text="${comment.recommendationCount}"></td>
