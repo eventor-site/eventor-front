@@ -19,16 +19,16 @@
                     <h3>등급 수정 폼</h3>
                     <form th:action="@{/grades/{gradeId} (gradeId=${grade.gradeId})}"
                           th:method="put" th:object="${grade}">
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="name">등급 이름</label>
                             <input type="text" class="form-control" id="name" th:field="*{name}" required>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="minAmount">최소 포인트</label>
                             <input type="number" class="form-control" id="minAmount" th:field="*{minAmount}"
                                    required>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="maxAmount">최대 포인트</label>
                             <input type="number" class="form-control" id="maxAmount" th:field="*{maxAmount}"
                                    required>

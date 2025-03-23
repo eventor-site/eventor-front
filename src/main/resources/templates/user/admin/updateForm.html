@@ -27,20 +27,20 @@
                                 <h6>회원 정보 수정</h6>
                             </div>
                             <div class="card-body">
-                                <!--                                    <div class="form-group">-->
+                                <!--                                    <div class="mb-2">-->
                                 <!--                                        <label for="name">이름</label>-->
                                 <!--                                        <input type="text" class="form-control" id="name" name="name"-->
                                 <!--                                               th:value="${user.name}" required>-->
                                 <!--                                    </div>-->
 
-                                <div class="form-group">
+                                <div class="mb-2">
                                     <label for="nickname">닉네임</label>
                                     <input type="text" class="form-control" id="nickname" name="nickname"
                                            th:value="${user.nickname}" required>
                                     <small id="nicknameFeedback" class="form-text text-muted"></small>
                                 </div>
 
-                                <div class="form-group mb-2">
+                                <div class="mb-2 mb-2">
                                     <label for="email">이메일</label>
                                     <div class="d-flex align-items-center gap-2">
                                         <input class="form-control" id="email" type="email" name="email"
@@ -63,19 +63,19 @@
                                     </div>
                                 </div>
 
-                                <!--                                    <div class="form-group">-->
+                                <!--                                    <div class="mb-2">-->
                                 <!--                                        <label for="phone">전화번호</label>-->
                                 <!--                                        <input type="text" class="form-control" id="phone" name="phone"-->
                                 <!--                                               th:value="${user.phone}" required>-->
                                 <!--                                    </div>-->
 
-                                <!--                                    <div class="form-group">-->
+                                <!--                                    <div class="mb-2">-->
                                 <!--                                        <label for="birth">생년월일</label>-->
                                 <!--                                        <input type="date" class="form-control" id="birth" name="birth"-->
                                 <!--                                               th:value="${user.birth}" required>-->
                                 <!--                                    </div>-->
 
-                                <!--                                    <div class="form-group">-->
+                                <!--                                    <div class="mb-2">-->
                                 <!--                                        <label for="gender">성별</label>-->
                                 <!--                                        <select class="form-control" id="gender" name="gender" required>-->
                                 <!--                                            <option value="M" th:selected="${user.gender == '남'}">남</option>-->
@@ -85,7 +85,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="mb-2">
                             <button type="submit" id="updateButton" class="btn btn-primary" disabled>수정</button>
                             <a th:href="@{/users/{userId} (userId=${userId})}" class="btn btn-secondary">뒤로가기</a>
                         </div>

@@ -21,9 +21,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.auth.dto.request.SignUpRequest;
 import com.eventorfront.auth.service.AuthService;
+import com.eventorfront.comment.dto.response.GetCommentByUserIdResponse;
+import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.global.util.CookieUtil;
 import com.eventorfront.global.util.PagingModel;
+import com.eventorfront.post.dto.response.GetPostSimpleResponse;
+import com.eventorfront.post.service.PostService;
 import com.eventorfront.status.service.StatusService;
 import com.eventorfront.user.dto.request.CertifyEmailRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
@@ -51,6 +55,8 @@ public class UserController {
 	private final StatusService statusService;
 	private final GradeService gradeService;
 	private final UserRoleService userRoleService;
+	private final PostService postService;
+	private final CommentService commentService;
 
 	@GetMapping("/search")
 	public ResponseEntity<List<GetUserByIdentifier>> searchUserByIdentifier(@RequestParam String keyword) {
@@ -202,7 +208,7 @@ public class UserController {
 		return ResponseEntity.ok(userService.certifyEmail(request));
 	}
 
-	@GetMapping("/recover/identifier")
+	@GetMapping("/me/recover/identifier")
 	public String recoverIdentifierPage(@RequestParam(required = false) String identifier, Model model) {
 		if (identifier != null) {
 			model.addAttribute("identifier", identifier);
@@ -211,11 +217,50 @@ public class UserController {
 		return "user/recoverIdentifierForm";
 	}
 
-	@GetMapping("/recover/password")
+	@GetMapping("/me/recover/password")
 	public String recoverPasswordPage(@ModelAttribute CertifyEmailRequest request, Model model) {
 		if (request.email() != null) {
 			model.addAttribute("recoverMessage", userService.recoverPassword(request.email()).getMessage());
 		}
 		return "user/recoverPasswordForm";
+	}
+
+	@GetMapping("/me/recover")
+	public String recoverPage() {
+		return "user/recover";
+	}
+
+	@PostMapping("/me/recover")
+	public String recover(@RequestParam String identifier, Model model, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", userService.recover(identifier).getMessage());
+		return "redirect:/auth/login";
+	}
+
+	@GetMapping("/me/posts")
+	public String getPostsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetPostSimpleResponse> posts = postService.getPostsByUserId(pageable).getData();
+		model.addAttribute("objects", posts);
+		PagingModel.pagingProcessing(pageable, model, posts, "/posts/me", 10);
+		return "post/me";
+	}
+
+	@DeleteMapping("/me/posts/{postId}")
+	public String deletePostMe(@PathVariable Long postId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", postService.deletePost(postId).getMessage());
+		return "redirect:/users/me/posts";
+	}
+
+	@GetMapping("/me/comments")
+	public String getCommentsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetCommentByUserIdResponse> comments = commentService.getCommentsByUserId(pageable).getData();
+		model.addAttribute("objects", comments);
+		PagingModel.pagingProcessing(pageable, model, comments, "/users/me/comments", 10);
+		return "comment/me";
+	}
+
+	@DeleteMapping("/me/comments/{commentId}")
+	public String deleteCommentMe(@PathVariable Long commentId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", commentService.deleteComment(commentId).getMessage());
+		return "redirect:/users/me/comments";
 	}
 }

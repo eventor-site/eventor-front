@@ -40,14 +40,6 @@ public class CommentController {
 		return "comment/admin";
 	}
 
-	@GetMapping("/users/me/comments")
-	public String getCommentsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetCommentByUserIdResponse> comments = commentService.getCommentsByUserId(pageable).getData();
-		model.addAttribute("objects", comments);
-		PagingModel.pagingProcessing(pageable, model, comments, "/users/me/comments", 10);
-		return "comment/me";
-	}
-
 	@GetMapping("/posts/{postId}/comments/{commentId}")
 	public String getComment(@PathVariable Long postId, @PathVariable Long commentId) {
 		Long page = commentService.getComment(postId, commentId).getData().page();
@@ -69,21 +61,21 @@ public class CommentController {
 		return "redirect:/posts/" + postId;
 	}
 
-	@PutMapping("/posts/{postId}/comments/{commentId}/recommend")
-	public ResponseEntity<String> recommendComment(@PathVariable Long postId, @PathVariable Long commentId,
+	@PutMapping("/comments/{commentId}/recommend")
+	public ResponseEntity<String> recommendComment(@PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return ResponseEntity.ok(commentService.recommendComment(postId, commentId).getMessage());
+			return ResponseEntity.ok(commentService.recommendComment(commentId).getMessage());
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
 	}
 
-	@PutMapping("/posts/{postId}/comments/{commentId}/disrecommend")
-	public ResponseEntity<String> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId,
+	@PutMapping("/comments/{commentId}/disrecommend")
+	public ResponseEntity<String> disrecommendComment(@PathVariable Long commentId,
 		HttpServletRequest request) {
 		if (authService.hasTokensInCookie(request)) {
-			return ResponseEntity.ok(commentService.disrecommendComment(postId, commentId).getMessage());
+			return ResponseEntity.ok(commentService.disrecommendComment(commentId).getMessage());
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
@@ -92,7 +84,7 @@ public class CommentController {
 	@DeleteMapping("/posts/{postId}/comments/{commentId}")
 	public String deleteComment(@PathVariable Long postId, @PathVariable Long commentId,
 		RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", commentService.deleteComment(postId, commentId).getMessage());
+		redirectAttributes.addFlashAttribute("message", commentService.deleteComment(commentId).getMessage());
 		return "redirect:/posts/" + postId;
 	}
 }

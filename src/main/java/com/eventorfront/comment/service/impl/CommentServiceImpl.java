@@ -51,17 +51,17 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public ApiResponse<Void> recommendComment(Long postId, Long commentId) {
-		return commentClient.recommendComment(postId, commentId).getBody();
+	public ApiResponse<Void> recommendComment(Long commentId) {
+		return commentClient.recommendComment(commentId).getBody();
 	}
 
 	@Override
-	public ApiResponse<Void> disrecommendComment(Long postId, Long commentId) {
-		return commentClient.disrecommendComment(postId, commentId).getBody();
+	public ApiResponse<Void> disrecommendComment(Long commentId) {
+		return commentClient.disrecommendComment(commentId).getBody();
 	}
 
 	@Override
-	public ApiResponse<Void> deleteComment(Long postId, Long commentId) {
-		return commentClient.deleteComment(postId, commentId).getBody();
+	public ApiResponse<Void> deleteComment(Long commentId) {
+		return commentClient.deleteComment(commentId).getBody();
 	}
 }

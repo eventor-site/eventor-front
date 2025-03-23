@@ -20,8 +20,8 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>카테고리 이름</th>
-                                <th>삭제</th>
+                                <th style="width: 90%;">카테고리 이름</th>
+                                <th style="width: 10%;"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -34,7 +34,7 @@
                                 <td>
                                     <form th:action="@{/bookmarks/{bookmarkId} (bookmarkId=${bookmark.bookmarkId})}"
                                           th:method="delete">
-                                        <button class="btn btn-sm btn-danger">삭제</button>
+                                        <button class="btn btn-danger">삭제</button>
                                     </form>
 
                                 </td>

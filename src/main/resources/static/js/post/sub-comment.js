@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         <!-- hidden 필드로 commentId 전송 -->
                         <input type="hidden" name="parentCommentId" value="${commentId}"/>
         
-                        <div class="form-group">
+                        <div class="mb-2">
                             <textarea class="form-control comment-textarea" name="content" rows="3" 
                                 placeholder="대댓글을 작성하세요..." maxlength="500" required></textarea>
                             <small class="char-count text-muted">0 / 500</small>
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 subCommentContainer.innerHTML = `
                     <form class="comment-form" action="/posts/${postId}/comments/${commentId}" method="post">
                         <input type="hidden" name="_method" value="PUT" />
-                        <div class="form-group">
+                        <div class="mb-2">
                             <textarea class="form-control comment-textarea" name="content" rows="3" 
                                 placeholder="수정할 내용을 작성하세요..." maxlength="500" required></textarea>
                             <small class="char-count text-muted">0 / 500</small>

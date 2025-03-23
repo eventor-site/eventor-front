@@ -5,7 +5,7 @@
     <th:block th:replace="~{common/fragments/config}"></th:block>
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/createOrUpdate.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/hotDeal.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/table.css"/>
 </head>
 
 <body>
@@ -23,14 +23,14 @@
             </div>
 
 
-            <div class="form-group">
-                <label for="title">제목</label>
-                <input type="text" class="form-control" id="title" name="title" th:value="${post.title}" required>
-            </div>
-
-            <div class="form-group">
+            <div class="mb-2">
                 <table class="table">
                     <tbody>
+                    <tr>
+                        <th>제목</th>
+                        <td><input type="text" class="form-control" id="title" name="title" th:value="${post.title}"
+                                   required></td>
+                    </tr>
                     <tr>
                         <th>링크</th>
                         <td><input type="text" class="form-control" id="hotDealLink" name="link"
@@ -57,28 +57,28 @@
                 </table>
             </div>
 
-            <div class="form-group">
+            <div class="mb-2">
                 <div id="toastUi"></div>
                 <input type="hidden" id="content" name="content" th:field="${post.content}">
             </div>
 
-            <div class="form-group">
+            <div class="mb-2">
                 <p>한파일당 최대 10MB 까지 업로드 가능하며, 최대 업로드 용량은 10MB 입니다.</p>
                 <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif", "webp", ".jfif"</p>
             </div>
 
-            <div id="image-select-box" class="form-group" style="display: none">
+            <div class="mb-2" id="image-select-box" style="display: none">
                 <button type="button" id="selectAllBtn" class="btn btn-sm btn-primary">전체 선택</button>
                 <button type="button" id="deselectAllBtn" class="btn btn-sm btn-primary">전체 선택 해제</button>
                 <button type="button" id="deleteImageBtn" class="btn btn-sm btn-danger">이미지 삭제</button>
             </div>
 
-            <div class="form-group">
+            <div class="mb-2">
                 <p>총 용량: <span id="totalSize" th:text="${post.totalSize}"></span> / 10MB</p>
             </div>
 
             <!-- 이미지 파일 선택 필드 추가 -->
-            <div class="form-group">
+            <div class="mb-2">
                 <label for="files">이미지</label>
                 <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple
                        style="width: 50%">
@@ -93,8 +93,11 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">등록</button>
-            <a class="btn btn-secondary" onclick="history.back()">취소</a>
+            <div class="mb-2">
+                <button type="submit" class="btn btn-primary">등록</button>
+                <a class="btn btn-secondary" onclick="history.back()">취소</a>
+            </div>
+
         </form>
     </div>
 </div>

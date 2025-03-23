@@ -19,7 +19,7 @@
                     <h3>상태 수정 폼</h3>
                     <form th:action="@{/statuses/{statusId} (statusId=${status.statusId})}"
                           th:method="put" th:object="${status}">
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="statusTypeId">상태 유형 이름</label>
                             <select class="form-control" id="statusTypeId" name="statusTypeId" required>
                                 <option value="" disabled>상태를 선택하세요</option>
@@ -29,7 +29,7 @@
                                         th:selected="${status.statusTypeName == statusType.name}"></option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="name">상태 이름</label>
                             <input type="text" class="form-control" id="name" th:field="*{name}" required>
                         </div>

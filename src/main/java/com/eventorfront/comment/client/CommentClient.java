@@ -46,12 +46,12 @@ public interface CommentClient {
 	ResponseEntity<ApiResponse<Void>> updateComment(@PathVariable Long postId, @PathVariable Long commentId,
 		@RequestBody UpdateCommentRequest request);
 
-	@PutMapping("/back/posts/{postId}/comments/{commentId}/recommend")
-	ResponseEntity<ApiResponse<Void>> recommendComment(@PathVariable Long postId, @PathVariable Long commentId);
+	@PutMapping("/back/comments/{commentId}/recommend")
+	ResponseEntity<ApiResponse<Void>> recommendComment(@PathVariable Long commentId);
 
-	@PutMapping("/back/posts/{postId}/comments/{commentId}/disrecommend")
-	ResponseEntity<ApiResponse<Void>> disrecommendComment(@PathVariable Long postId, @PathVariable Long commentId);
+	@PutMapping("/back/comments/{commentId}/disrecommend")
+	ResponseEntity<ApiResponse<Void>> disrecommendComment(@PathVariable Long commentId);
 
-	@DeleteMapping("/back/posts/{postId}/comments/{commentId}")
-	ResponseEntity<ApiResponse<Void>> deleteComment(@PathVariable Long postId, @PathVariable Long commentId);
+	@DeleteMapping("/back/comments/{commentId}")
+	ResponseEntity<ApiResponse<Void>> deleteComment(@PathVariable Long commentId);
 }

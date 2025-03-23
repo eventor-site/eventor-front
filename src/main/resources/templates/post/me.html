@@ -12,7 +12,7 @@
             <section id="page-menu-container" th:insert="~{common/user-menu.html}"></section>
             <section id="page-content">
                 <section id="page-header">
-                    <h5>내 글 목록</h5>
+                    <h5>내 글 목록 (<span th:text="${objects.getTotalElements()}"></span>)</h5>
                 </section>
                 <hr>
                 <section id="page-body">
@@ -22,10 +22,11 @@
                             <tr>
                                 <th style="width: 10%;">번호</th>
                                 <th style="width: 35%;">제목</th>
-                                <th style="width: 15%;">작성자</th>
+                                <th style="width: 20%;">작성자</th>
                                 <th style="width: 10%;">조회수</th>
                                 <th style="width: 10%;">추천수</th>
                                 <th style="width: 20%;">날짜</th>
+                                <th style="width: 10%;"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -33,18 +34,24 @@
                                 <td th:text="${(objects.totalElements - (objects.number * objects.size + index.count)) + 1}"></td>
                                 <td>
                                     <!-- 제목을 클릭하면 해당 게시글로 이동 -->
-                                    <a th:href="@{/posts/{postId} (postId=${post.postId()})}"
+                                    <a th:href="@{/posts/{postId} (postId=${post.postId})}"
                                        th:text="${post.title}"></a>
                                 </td>
                                 <td>
                                     <img class="grade"
-                                         th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName()})}"
+                                         th:src="@{/profile/{gradeName}.png (gradeName=${post.gradeName})}"
                                          alt="프로필">
                                     <span class="ml-2" th:text="${post.writer}"></span>
                                 </td>
                                 <td th:text="${post.viewCount}"></td>
                                 <td th:text="${post.recommendationCount}"></td>
                                 <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td>
+                                    <form th:action="@{/users/me/posts/{postId} (postId=${post.postId})}"
+                                          th:method="delete">
+                                        <button type="submit" class="btn btn-danger inline-text">삭제</button>
+                                    </form>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

@@ -19,7 +19,7 @@
                     <h3>권한 수정 폼</h3>
                     <form th:action="@{/roles/{roleId} (roleId=${role.roleId})}"
                           th:method="put" th:object="${role}">
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="name">권한 이름</label>
                             <input type="text" class="form-control" id="name" th:field="*{name}" required>
                         </div>

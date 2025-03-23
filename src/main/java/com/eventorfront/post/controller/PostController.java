@@ -244,15 +244,6 @@ public class PostController {
 		}
 	}
 
-	@AuthorizeRole("member")
-	@GetMapping("/me")
-	public String getPostsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetPostSimpleResponse> posts = postService.getPostsByUserId(pageable).getData();
-		model.addAttribute("objects", posts);
-		PagingModel.pagingProcessing(pageable, model, posts, "/posts/me", 10);
-		return "post/me";
-	}
-
 	@GetMapping("/{postId}")
 	public String getPost(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model,
 		@PathVariable Long postId) {

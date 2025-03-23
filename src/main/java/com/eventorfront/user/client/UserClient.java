@@ -88,9 +88,12 @@ public interface UserClient {
 	@PostMapping("/back/users/signup/certifyEmail")
 	ResponseEntity<ApiResponse<Boolean>> certifyEmail(@RequestBody CertifyEmailRequest request);
 
-	@PostMapping("/back/users/recover/identifier")
+	@PostMapping("/back/users/me/recover/identifier")
 	ResponseEntity<ApiResponse<Void>> recoverIdentifier(@RequestParam String identifier);
 
-	@PostMapping("/back/users/recover/password")
+	@PostMapping("/back/users/me/recover/password")
 	ResponseEntity<ApiResponse<Void>> recoverPassword(@RequestParam String identifier);
+
+	@PostMapping("/back/users/me/recover")
+	ResponseEntity<ApiResponse<Void>> recover(@RequestParam String identifier);
 }

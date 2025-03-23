@@ -19,7 +19,7 @@
                     <h3>상태유형 수정 폼</h3>
                     <form th:action="@{/statusTypes/{statusTypeId} (statusTypeId=${statusType.statusTypeId})}"
                           th:method="put" th:object="${statusType}">
-                        <div class="form-group">
+                        <div class="mb-2">
                             <label for="name">상태 이름</label>
                             <input type="text" class="form-control" id="name" th:field="*{name}" required>
                         </div>

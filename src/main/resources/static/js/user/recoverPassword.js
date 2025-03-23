@@ -2,9 +2,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const emailInput = document.getElementById("email");
     const certifyCodeInput = document.getElementById("certifyCode");
     const certifyButton = document.getElementById("certifyCodeButton");
+    const recoverButton = document.getElementById("recoverPasswordButton");
+    const form = document.getElementById("recoverPasswordForm");
 
     certifyButton.addEventListener("click", async () => {
         await certifyEmailCodeRecoverPassword(emailInput, certifyCodeInput, "비밀번호 찾기");
+    });
+
+    recoverButton.addEventListener("click", function () {
+        recoverButton.disabled = true;
+        form.submit(); // 폼 제출
     });
 });
 
