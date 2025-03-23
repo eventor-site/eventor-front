@@ -92,8 +92,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 iframe(node) {
                     const iframeSrc = node.attrs.src;
 
-                    // iframe src가 허용된 도메인에 해당하는지 확인
-                    const allowedDomains = ['https://www.google.com/maps', 'https://www.youtube.com'];
+                    // iframe src 가 허용된 도메인에 해당하는지 확인
+                    const allowedDomains = ['https://www.google.com/maps', 'https://www.youtube.com', 'https://www.facebook.com', 'https://www.instagram.com', 'https://x.com'];
                     if (allowedDomains.some(domain => iframeSrc.startsWith(domain))) {
                         return [
                             {
