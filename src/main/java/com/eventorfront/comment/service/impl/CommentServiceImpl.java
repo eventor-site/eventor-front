@@ -46,8 +46,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public ApiResponse<Void> updateComment(Long postId, Long commentId, UpdateCommentRequest request) {
-		return commentClient.updateComment(postId, commentId, request).getBody();
+	public ApiResponse<Void> updateComment(Long commentId, UpdateCommentRequest request) {
+		return commentClient.updateComment(commentId, request).getBody();
 	}
 
 	@Override

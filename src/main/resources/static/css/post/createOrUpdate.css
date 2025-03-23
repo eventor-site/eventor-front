@@ -51,4 +51,15 @@
     visibility: visible;
 }
 
-
+#categoryResults {
+    position: absolute;
+    top: 100%; /* 입력 필드 아래에 위치 */
+    left: 0;
+    width: 100%; /* 입력 필드와 동일한 너비 */
+    background: white;
+    border: 1px solid #ddd;
+    z-index: 9999; /* 다른 요소들보다 위로 배치 */
+    max-height: 200px; /* 스크롤 가능하도록 최대 높이 설정 */
+    overflow-y: auto;
+    display: none; /* 기본적으로 숨김 */
+}

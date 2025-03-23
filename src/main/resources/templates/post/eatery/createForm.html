@@ -19,24 +19,22 @@
             </div>
 
             <div class="mb-2">
-                <label for="categoryName">카테고리</label>
-
-                <!-- 드롭다운 리스트 (선택 가능) -->
-                <select class="form-control" id="categoryName" name="categoryName" th:value="${categoryName}">
-                    <option value="">카테고리 리스트</option>
-                    <option th:each="category : ${categories}"
-                            th:text="${category}"
-                            th:value="${category}"
-                            th:selected="${category == categoryName}">
-                    </option>
-                </select>
-            </div>
-
-            <hr>
-
-            <div class="mb-2">
                 <table class="table">
                     <tbody>
+                    <tr>
+                        <th>카테고리</th>
+                        <td>
+                            <select class="form-control" id="categoryName" name="categoryName"
+                                    th:value="${categoryName}">
+                                <option value="">카테고리 리스트</option>
+                                <option th:each="category : ${categories}"
+                                        th:text="${category}"
+                                        th:value="${category}"
+                                        th:selected="${category == categoryName}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <th>제목</th>
                         <td><input type="text" class="form-control" id="title" name="title" required></td>

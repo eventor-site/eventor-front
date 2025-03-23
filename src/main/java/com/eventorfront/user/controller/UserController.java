@@ -240,7 +240,7 @@ public class UserController {
 	public String getPostsByUserId(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
 		Page<GetPostSimpleResponse> posts = postService.getPostsByUserId(pageable).getData();
 		model.addAttribute("objects", posts);
-		PagingModel.pagingProcessing(pageable, model, posts, "/posts/me", 10);
+		PagingModel.pagingProcessing(pageable, model, posts, "/users/me/posts", 10);
 		return "post/me";
 	}
 

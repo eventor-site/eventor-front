@@ -5,11 +5,13 @@
     <title>이벤터</title>
 </head>
 <body>
-<script>
+<script th:inline="javascript">
+    const redirectUrl = [[${redirectUrl}]]; // 서버에서 전달된 리다이렉트 URL
+
     if (window.opener) {
-        window.opener.location.href = '/';  // 부모 창 리다이렉트
+        window.opener.location.href = redirectUrl;  // 부모 창을 지정된 URL로 이동
     }
-    window.close();  // 새 창을 닫음
+    window.close();  // 새 창 닫기
 </script>
 </body>
 </html>

@@ -57,7 +57,7 @@ public class CommentController {
 	public String updateComment(@PathVariable Long postId, @PathVariable Long commentId,
 		@ModelAttribute UpdateCommentRequest request, RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("message",
-			commentService.updateComment(postId, commentId, request).getMessage());
+			commentService.updateComment(commentId, request).getMessage());
 		return "redirect:/posts/" + postId;
 	}
 
