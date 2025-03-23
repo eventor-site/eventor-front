@@ -12,5 +12,6 @@ public record GetCommentByUserIdResponse(
 	String content,
 	Long recommendationCount,
 	Long decommendationCount,
-	LocalDateTime createdAt) {
+	LocalDateTime createdAt,
+	String gradeName) {
 }
