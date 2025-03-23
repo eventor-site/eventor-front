@@ -13,6 +13,7 @@ import com.eventorfront.user.dto.request.CertifyEmailRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
+import com.eventorfront.user.dto.request.RecoverOauthRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserAttributeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
@@ -132,5 +133,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public ApiResponse<Void> recover(String identifier) {
 		return userClient.recover(identifier).getBody();
+	}
+
+	@Override
+	public ApiResponse<Void> recoverOauth(RecoverOauthRequest request) {
+		return userClient.recoverOauth(request).getBody();
 	}
 }

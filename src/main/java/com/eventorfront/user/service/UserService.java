@@ -11,6 +11,7 @@ import com.eventorfront.user.dto.request.CertifyEmailRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
+import com.eventorfront.user.dto.request.RecoverOauthRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserAttributeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
@@ -62,5 +63,7 @@ public interface UserService {
 	ApiResponse<Void> recoverPassword(String identifier);
 
 	ApiResponse<Void> recover(String identifier);
+
+	ApiResponse<Void> recoverOauth(RecoverOauthRequest request);
 
 }

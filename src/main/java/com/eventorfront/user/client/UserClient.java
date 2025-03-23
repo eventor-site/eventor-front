@@ -21,6 +21,7 @@ import com.eventorfront.user.dto.request.CertifyEmailRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
+import com.eventorfront.user.dto.request.RecoverOauthRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserAttributeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
@@ -96,4 +97,7 @@ public interface UserClient {
 
 	@PostMapping("/back/users/me/recover")
 	ResponseEntity<ApiResponse<Void>> recover(@RequestParam String identifier);
+
+	@PostMapping("/back/users/me/recover/oauth")
+	ResponseEntity<ApiResponse<Void>> recoverOauth(@RequestBody RecoverOauthRequest request);
 }
