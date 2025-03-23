@@ -22,7 +22,7 @@ public interface CommentService {
 
 	ApiResponse<Void> createComment(Long postId, CreateCommentRequest request);
 
-	ApiResponse<Void> updateComment(Long postId, Long commentId, UpdateCommentRequest request);
+	ApiResponse<Void> updateComment(Long commentId, UpdateCommentRequest request);
 
 	ApiResponse<Void> recommendComment(Long commentId);
 

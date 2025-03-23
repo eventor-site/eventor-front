@@ -23,7 +23,7 @@
                 </a>
             </h5>
 
-            <div th:if="${post.isAuthorized}" style="display: flex; align-items: center;">
+            <div class="d-flex align-items-center mb-2" th:if="${post.isAuthorized}">
                 <a th:href="@{/posts/{postId}/updateForm (postId=${post.postId()})}"
                    class="btn btn-warning inline-text">수정
                 </a>

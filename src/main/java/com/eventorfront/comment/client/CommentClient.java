@@ -42,8 +42,8 @@ public interface CommentClient {
 	ResponseEntity<ApiResponse<Void>> createComment(@PathVariable Long postId,
 		@RequestBody CreateCommentRequest request);
 
-	@PutMapping("/back/posts/{postId}/comments/{commentId}")
-	ResponseEntity<ApiResponse<Void>> updateComment(@PathVariable Long postId, @PathVariable Long commentId,
+	@PutMapping("/back/comments/{commentId}")
+	ResponseEntity<ApiResponse<Void>> updateComment(@PathVariable Long commentId,
 		@RequestBody UpdateCommentRequest request);
 
 	@PutMapping("/back/comments/{commentId}/recommend")

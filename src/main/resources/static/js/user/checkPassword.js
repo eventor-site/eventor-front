@@ -8,11 +8,11 @@ document.getElementById('confirmPassword').addEventListener('input', checkPasswo
 function validatePassword() {
     const password = document.getElementById('password').value;
     const passwordFeedback = document.getElementById('passwordFeedback');
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
 
     // 규칙 검사
     if (!passwordRegex.test(password)) {
-        passwordFeedback.textContent = "비밀번호는 최소 8자 이상, 영문, 숫자, 특수문자를 포함해야 합니다.";
+        passwordFeedback.innerHTML = "비밀번호는 최소 8자 이상, 영문, 숫자, 특수문자를 포함해야 합니다. <br>사용 가능한 특수문자: !@#$%^&*()_+";
         passwordFeedback.className = "mismatch";
         isPasswordValid = false;
     } else {

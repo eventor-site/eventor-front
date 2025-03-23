@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const categoryInput = document.getElementById("categoryName");
+    const categoryResults = document.getElementById("categoryResults");
     const categorySelect = document.getElementById("categorySelect");
 
     // 드롭다운에서 선택 시 입력 필드에 반영
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     type: 'GET',
                     data: {keyword: query},
                     success: function (data) {
-                        $('#categoryResults').html(''); // 기존 검색 결과 초기화
+                        $('#categoryResults').html('').show(); // 기존 검색 결과 초기화 후 표시
                         data.forEach(function (category) {
                             $('#categoryResults').append(
                                 '<div class="list-group-item list-group-item-action" data-name="' + category.name + '">' + category.name + '</div>'
@@ -30,15 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         $('.list-group-item').on('click', function () {
                             const categoryName = $(this).data('name');
                             $('#categoryName').val(categoryName); // 선택된 상태 유형 설정
-                            $('#categoryResults').html(''); // 결과 초기화
+                            $('#categoryResults').hide(); // 결과 숨김
                         });
                     }
                 });
             } else {
-                $('#categoryResults').html(''); // 입력이 없으면 결과 초기화
+                $('#categoryResults').hide(); // 입력이 없으면 결과 숨김
             }
         });
+
     });
-
-
 });

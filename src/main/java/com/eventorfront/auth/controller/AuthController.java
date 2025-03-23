@@ -94,15 +94,24 @@ public class AuthController {
 
 	@GetMapping("/oauth2/login")
 	public String oauthLogin(@RequestParam String accessToken, @RequestParam String refreshToken,
-		HttpServletResponse response) {
+		@RequestParam(required = false) String error, HttpServletResponse response, Model model) {
 
-		if (accessToken != null) {
-			response.addCookie(CookieUtil.createCookie(ACCESS_TOKEN, accessToken));
+		String redirectUrl = "/";
+		if ("탈퇴".equals(error)) {
+			redirectUrl =
+				"/auth/login?error=" + URLEncoder.encode("탈퇴한 사용자입니다. 관리자에게 문의해 주세요.", StandardCharsets.UTF_8);
+		} else if ("휴면".equals(error)) {
+			redirectUrl = "/users/me/recover";
+		} else {
+			if (accessToken != null) {
+				response.addCookie(CookieUtil.createCookie(ACCESS_TOKEN, accessToken));
+			}
+			if (refreshToken != null) {
+				response.addCookie(CookieUtil.createCookie(REFRESH_TOKEN, refreshToken));
+			}
 		}
 
-		if (refreshToken != null) {
-			response.addCookie(CookieUtil.createCookie(REFRESH_TOKEN, refreshToken));
-		}
+		model.addAttribute("redirectUrl", redirectUrl);
 
 		return "auth/oauth";
 	}
