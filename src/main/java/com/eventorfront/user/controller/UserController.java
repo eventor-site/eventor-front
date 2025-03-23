@@ -33,6 +33,7 @@ import com.eventorfront.user.dto.request.CertifyEmailRequest;
 import com.eventorfront.user.dto.request.CheckIdentifierRequest;
 import com.eventorfront.user.dto.request.CheckNicknameRequest;
 import com.eventorfront.user.dto.request.ModifyPasswordRequest;
+import com.eventorfront.user.dto.request.RecoverOauthRequest;
 import com.eventorfront.user.dto.request.SendCodeRequest;
 import com.eventorfront.user.dto.request.UpdateUserAttributeRequest;
 import com.eventorfront.user.dto.request.UpdateUserRequest;
@@ -226,13 +227,25 @@ public class UserController {
 	}
 
 	@GetMapping("/me/recover")
-	public String recoverPage() {
-		return "user/recover";
+	public String recoverPage(@RequestParam(required = false) String oauthId, Model model) {
+		if (oauthId != null) {
+			model.addAttribute("oauthId", oauthId);
+			return "user/oauthRecover";
+		} else {
+			return "user/recover";
+		}
+
 	}
 
 	@PostMapping("/me/recover")
-	public String recover(@RequestParam String identifier, Model model, RedirectAttributes redirectAttributes) {
+	public String recover(@RequestParam String identifier, RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("message", userService.recover(identifier).getMessage());
+		return "redirect:/auth/login";
+	}
+
+	@PostMapping("/me/recover/oauth")
+	public String recoverOauth(@ModelAttribute RecoverOauthRequest request, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", userService.recoverOauth(request).getMessage());
 		return "redirect:/auth/login";
 	}
 
