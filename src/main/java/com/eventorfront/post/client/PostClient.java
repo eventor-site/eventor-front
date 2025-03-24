@@ -88,6 +88,9 @@ public interface PostClient {
 	ResponseEntity<ApiResponse<CreatePostResponse>> createPost(@RequestBody CreatePostRequest request,
 		@RequestParam boolean isTemp);
 
+	@PostMapping("/back/posts/{postId}/finish")
+	ResponseEntity<ApiResponse<Void>> finishEventPost(@PathVariable Long postId);
+
 	@PutMapping("/back/posts/{postId}")
 	ResponseEntity<ApiResponse<Void>> updatePost(@PathVariable Long postId, @RequestBody UpdatePostRequest request,
 		@RequestParam boolean isTemp);
