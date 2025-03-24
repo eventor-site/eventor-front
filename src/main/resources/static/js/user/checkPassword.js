@@ -5,6 +5,14 @@ let isPasswordMatch = false;
 document.getElementById('password').addEventListener('input', validatePassword);
 document.getElementById('confirmPassword').addEventListener('input', checkPasswordMatch);
 
+document.getElementById("togglePassword").addEventListener("click", function () {
+    togglePasswordVisibility("password", "togglePassword");
+});
+
+document.getElementById("toggleConfirmPassword").addEventListener("click", function () {
+    togglePasswordVisibility("confirmPassword", "toggleConfirmPassword");
+});
+
 function validatePassword() {
     const password = document.getElementById('password').value;
     const passwordFeedback = document.getElementById('passwordFeedback');
@@ -63,5 +71,20 @@ function updateButtonState() {
         updateSignupButtonState();
     } else if (updatePasswordForm) {
         updateUpdatePasswordButtonState();
+    }
+}
+
+function togglePasswordVisibility(inputId, iconId) {
+    const inputField = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+
+    if (inputField.type === "password") {
+        inputField.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    } else {
+        inputField.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
     }
 }

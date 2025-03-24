@@ -12,7 +12,7 @@
         <h5 class="text-center fw-bold">회원가입</h5>
         <hr>
         <p>이메일 형식의 아이디만 가입 가능합니다.</p>
-        <div class="mb-2 mb-2">
+        <div class="mb-2">
             <div class="d-flex align-items-center gap-2">
                 <input class="form-control" id="type" type="hidden" name="type" value="회원가입">
                 <input class="form-control" id="email" type="email" name="identifier" placeholder="아이디" required>
@@ -23,7 +23,7 @@
             <small id="identifierFeedback" class="form-text text-muted"></small>
         </div>
 
-        <div class="mb-2 mb-2">
+        <div class="mb-2">
             <div class="d-flex align-items-center gap-2">
                 <input class="form-control" id="certifyCode" type="text" placeholder="인증번호를 입력해주세요" required>
                 <button type="button" id="certifyCodeButton" class="btn btn-outline-primary">
@@ -32,19 +32,24 @@
             </div>
         </div>
 
-        <div class="mb-2 mb-2">
-            <input class="form-control" id="password" type="password" name="password" placeholder="비밀번호"
-                   required>
-            <small id="passwordFeedback" class="form-text text-muted"></small>
+        <div class="mb-2 position-relative">
+            <input class="form-control pr-5" id="password" type="password" name="password" placeholder="비밀번호"
+                   minlength="8" maxlength="50" required>
+            <i class="fa-solid fa-eye-slash position-absolute end-0 top-50 translate-middle-y me-3" id="togglePassword"
+               style="cursor: pointer;"></i>
         </div>
+        <div><small id="passwordFeedback" class="form-text text-muted"></small></div>
 
-        <div class="mb-2 mb-2">
+        <div class="mb-2 position-relative">
             <input class="form-control" id="confirmPassword" type="password" name="confirmPassword"
-                   placeholder="비밀번호 확인" required>
-            <small id="confirmPasswordFeedback" class="form-text text-muted"></small>
+                   placeholder="비밀번호 확인" minlength="8" maxlength="50" required>
+            <i class="fa-solid fa-eye-slash position-absolute end-0 top-50 translate-middle-y me-3"
+               id="toggleConfirmPassword"
+               style="cursor: pointer;"></i>
         </div>
+        <div><small id="confirmPasswordFeedback" class="form-text text-muted"></small></div>
 
-        <div class="mb-2 mb-2">
+        <div class="mb-2">
             <input class="form-control" id="nickname" type="text" name="nickname" placeholder="닉네임" required>
             <small id="nicknameFeedback" class="form-text text-muted"></small>
         </div>
