@@ -29,6 +29,7 @@ public record SearchPostsResponse(
 	LocalDateTime startTime,
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
 	LocalDateTime endTime,
+	String endType,
 
 	String imageUrl
 ) {

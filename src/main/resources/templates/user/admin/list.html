@@ -12,7 +12,7 @@
             <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
             <section id="page-content">
                 <section id="page-header">
-                    <h5>회원 관리</h5>
+                    <h5>회원 관리 (<span th:text="${objects.getTotalElements()}"></span>)</h5>
                 </section>
                 <hr>
                 <section id="page-body">

@@ -119,6 +119,7 @@
                         <div class="remaining-day" th:if="${post.eventStatusName == '예정'}">
                             <span th:text="'D-' + ${post.remainingDay}"></span>
                         </div>
+                        <div class="end-type" th:if="${post.endType}" th:text="${post.endType}"></div>
                     </div>
                     <div class="post-card-meta">
                         <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}" alt="프로필">
