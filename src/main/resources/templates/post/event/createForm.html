@@ -34,10 +34,10 @@
                     </tr>
                     <tr>
                         <th>카테고리</th>
-                        <td colspan="3" style="overflow: visible;">
+                        <td style="overflow: visible;">
                             <div class="d-flex align-items-center gap-2">
                                 <!-- 입력 필드 (검색 가능) -->
-                                <div style="width: 25%; position: relative;">
+                                <div style="width: 50%; position: relative;">
                                     <input class="form-control" type="text" id="categoryName" name="categoryName"
                                            th:value="${categoryName}"
                                            placeholder="카테고리 검색">
@@ -46,7 +46,7 @@
                                     <div id="categoryResults" class="list-group"></div> <!-- 검색 결과 출력 영역 -->
                                 </div>
 
-                                <div style="width: 25%">
+                                <div style="width: 50%">
                                     <select class="form-control" id="categorySelect">
                                         <option value="">[카테고리 리스트]</option>
                                         <option th:each="category : ${categories}"
@@ -54,6 +54,29 @@
                                         </option>
                                     </select>
                                 </div>
+                            </div>
+                        </td>
+
+                        <th>별도 종료 설정</th>
+                        <td>
+                            <div class="d-flex gap-3">
+                                <label>
+                                    <input type="checkbox" name="endType" value="상시"
+                                           onclick="endTypeLimitSelection(this)"/>
+                                    상시
+                                </label>
+
+                                <label>
+                                    <input type="checkbox" name="endType" value="별도 공지 시"
+                                           onclick="endTypeLimitSelection(this)"/>
+                                    별도 공지 시
+                                </label>
+
+                                <label>
+                                    <input type="checkbox" name="endType" value="별도 소진 시"
+                                           onclick="endTypeLimitSelection(this)"/>
+                                    별도 소진 시
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -123,6 +146,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/post/tempPostAlert.js"></script>
     <script src="/js/eventPost/categorySelect.js"></script>
+    <script src="/js/eventPost/endTypeLimitSelection.js"></script>
 </th:block>
 </body>
 </html>

@@ -11,22 +11,27 @@ import lombok.Builder;
 public record GetPostResponse(
 	Long postId,
 	String categoryName,
+	String statusName,
 	String writer,
 	String writerGrade,
 	String title,
-	String link,
-	String shoppingMall,
-	String productName,
-	Long price,
 	String content,
 	Long recommendationCount,
 	Long viewCount,
 	LocalDateTime createdAt,
+
+	String link,
+
 	LocalDateTime startTime,
 	LocalDateTime endTime,
-	String statusName,
+	String endType,
+
+	String shoppingMall,
+	String productName,
+	Long price,
+
 	List<GetImageResponse> images,
-	Long attachmentImageCount,
+	Integer attachmentImageCount,
 	Double totalSize,
 	Boolean isAuthorized,
 	Boolean isFavorite) {
