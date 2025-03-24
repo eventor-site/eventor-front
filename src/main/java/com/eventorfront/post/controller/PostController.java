@@ -132,9 +132,9 @@ public class PostController {
 		@RequestParam(defaultValue = "createdAt") String sortBy,
 		@RequestParam(defaultValue = "DESC") String direction,
 		@RequestParam(defaultValue = "") String keyword,
-		@RequestParam(required = false) String categoryName,
-		@RequestParam(required = false) String eventStatusName,
-		@RequestParam(required = false) String endType, Model model) {
+		@RequestParam(defaultValue = "") String categoryName,
+		@RequestParam(defaultValue = "") String eventStatusName,
+		@RequestParam(defaultValue = "") String endType, Model model) {
 		List<String> roles = userService.meRoles().getData();
 
 		if (categoryName != null && categoryName.isEmpty()) {
@@ -205,9 +205,9 @@ public class PostController {
 			"createdAt"}, direction = Sort.Direction.DESC) Pageable defaultPageable, Model model,
 		@RequestParam(defaultValue = "createdAt") String sortBy,
 		@RequestParam(defaultValue = "DESC") String direction,
-		@RequestParam String categoryName,
-		@RequestParam(required = false) String eventStatusName,
-		@RequestParam(required = false) String endType) {
+		@RequestParam(defaultValue = "") String categoryName,
+		@RequestParam(defaultValue = "") String eventStatusName,
+		@RequestParam(defaultValue = "") String endType) {
 		List<String> roles = userService.meRoles().getData();
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("isAuthorized",

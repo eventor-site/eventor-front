@@ -37,9 +37,9 @@ public interface PostClient {
 	ResponseEntity<ApiResponse<Page<SearchPostsResponse>>> searchPosts(
 		@PageableDefault(page = 1, size = 10, sort = "createdAt,desc") Pageable pageable,
 		@RequestParam(defaultValue = "") String keyword,
-		@RequestParam(required = false) String categoryName,
-		@RequestParam(required = false) String eventStatusName,
-		@RequestParam(required = false) String endType);
+		@RequestParam(defaultValue = "") String categoryName,
+		@RequestParam(defaultValue = "") String eventStatusName,
+		@RequestParam(defaultValue = "") String endType);
 
 	@GetMapping("/back/posts/all/paging")
 	ResponseEntity<ApiResponse<Page<GetPostSimpleResponse>>> getPosts(
@@ -70,9 +70,9 @@ public interface PostClient {
 	@GetMapping("/back/posts")
 	ResponseEntity<ApiResponse<Page<GetPostsByCategoryNameResponse>>> getPostsByCategoryName(
 		@PageableDefault(page = 1, size = 10, sort = "createdAt,desc") Pageable pageable,
-		@RequestParam String categoryName,
-		@RequestParam(required = false) String eventStatusName,
-		@RequestParam(required = false) String endType);
+		@RequestParam(defaultValue = "") String categoryName,
+		@RequestParam(defaultValue = "") String eventStatusName,
+		@RequestParam(defaultValue = "") String endType);
 
 	@GetMapping("/back/posts/me/paging")
 	ResponseEntity<ApiResponse<Page<GetPostSimpleResponse>>> getPostsByUserId(
