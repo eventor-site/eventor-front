@@ -104,6 +104,11 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public ApiResponse<Void> finishEventPost(Long postId) {
+		return postClient.finishEventPost(postId).getBody();
+	}
+
+	@Override
 	public ApiResponse<Void> updatePost(Long postId, UpdatePostRequest request, boolean isTemp) {
 		return postClient.updatePost(postId, request, isTemp).getBody();
 	}
