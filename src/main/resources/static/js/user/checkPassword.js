@@ -8,18 +8,30 @@ document.getElementById('confirmPassword').addEventListener('input', checkPasswo
 function validatePassword() {
     const password = document.getElementById('password').value;
     const passwordFeedback = document.getElementById('passwordFeedback');
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
 
-    // 규칙 검사
-    if (!passwordRegex.test(password)) {
-        passwordFeedback.innerHTML = "비밀번호는 최소 8자 이상, 영문, 숫자, 특수문자를 포함해야 합니다. <br>사용 가능한 특수문자: !@#$%^&*()_+";
-        passwordFeedback.className = "mismatch";
-        isPasswordValid = false;
-    } else {
-        passwordFeedback.textContent = "사용 가능한 비밀번호 입니다.";
-        passwordFeedback.className = "match";
-        isPasswordValid = true;
+    let messages = [];
+
+    if (password.length < 8) {
+        messages.push("비밀번호는 최소 8자 이상이어야 합니다.");
     }
+    if (!/[a-zA-Z]/.test(password)) {
+        messages.push("영문자를 포함해야 합니다.");
+    }
+    if (!/\d/.test(password)) {
+        messages.push("숫자를 포함해야 합니다.");
+    }
+    if (!/[!@#$%^&*()_+]/.test(password)) {
+        messages.push("특수문자 (!@#$%^&*()_+) 중 하나 이상 포함해야 합니다.");
+    }
+
+    if (messages.length > 0) {
+        passwordFeedback.innerHTML = messages.join("<br>");
+        passwordFeedback.className = "mismatch";
+    } else {
+        passwordFeedback.textContent = "사용 가능한 비밀번호입니다.";
+        passwordFeedback.className = "match";
+    }
+
     checkPasswordMatch();
 }
 

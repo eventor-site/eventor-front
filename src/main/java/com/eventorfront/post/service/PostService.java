@@ -22,7 +22,7 @@ import com.eventorfront.search.dto.response.SearchPostsResponse;
 public interface PostService {
 
 	ApiResponse<Page<SearchPostsResponse>> searchPosts(Pageable pageable, String keyword, String categoryName,
-		String eventStatusName);
+		String eventStatusName, String endType);
 
 	ApiResponse<Page<GetPostSimpleResponse>> getPosts(Pageable pageable);
 
@@ -41,7 +41,7 @@ public interface PostService {
 	ApiResponse<List<GetMainPostResponse>> getHotPostsByCategoryName(String categoryName);
 
 	ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable, String categoryName,
-		String eventStatusName);
+		String eventStatusName, String endType);
 
 	ApiResponse<Page<GetPostSimpleResponse>> getPostsByUserId(Pageable pageable);
 

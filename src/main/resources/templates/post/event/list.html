@@ -82,14 +82,16 @@
         </div>
 
         <div class="event-status-filter">
-            <a th:href="@{/posts (categoryName=${categoryName}, eventStatusName='전체')}"
-               th:classappend="${eventStatusName == '전체'} ? 'active'">전체</a>
+            <a th:href="@{/posts (categoryName=${categoryName})}"
+               th:classappend="${eventStatusName == null and endType == null} ? 'active'">전체</a>
             <a th:href="@{/posts (categoryName=${categoryName}, eventStatusName='예정')}"
                th:classappend="${eventStatusName == '예정'} ? 'active'">예정</a>
             <a th:href="@{/posts (categoryName=${categoryName}, eventStatusName='진행중')}"
                th:classappend="${eventStatusName == '진행중'} ? 'active'">진행중</a>
             <a th:href="@{/posts (categoryName=${categoryName}, eventStatusName='마감')}"
                th:classappend="${eventStatusName == '마감'} ? 'active'">마감</a>
+            <a th:href="@{/posts (categoryName=${categoryName}, endType='상시')}"
+               th:classappend="${endType == '상시'} ? 'active'">상시</a>
         </div>
 
         <hr>
