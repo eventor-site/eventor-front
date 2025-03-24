@@ -76,14 +76,16 @@
         <h5>검색 결과 <span th:text="${objects.getTotalElements()}"></span> 건</h5>
 
         <div class="event-status-filter" th:if="${isEvent}">
-            <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='전체')}"
-               th:classappend="${eventStatusName == '전체'} ? 'active'">전체</a>
+            <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword})}"
+               th:classappend="${eventStatusName == null and endType == null} ? 'active'">전체</a>
             <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='예정')}"
                th:classappend="${eventStatusName == '예정'} ? 'active'">예정</a>
             <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='진행중')}"
                th:classappend="${eventStatusName == '진행중'} ? 'active'">진행중</a>
             <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, eventStatusName='마감')}"
                th:classappend="${eventStatusName == '마감'} ? 'active'">마감</a>
+            <a th:href="@{/posts/search (categoryName=${categoryName}, keyword=${keyword}, endType='상시')}"
+               th:classappend="${endType == '상시'} ? 'active'">상시</a>
         </div>
 
         <div class="post-list" th:if="${objects.getTotalElements() > 0}">

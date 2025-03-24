@@ -133,7 +133,8 @@ public class PostController {
 		@RequestParam(defaultValue = "DESC") String direction,
 		@RequestParam(defaultValue = "") String keyword,
 		@RequestParam(required = false) String categoryName,
-		@RequestParam(defaultValue = "전체") String eventStatusName, Model model) {
+		@RequestParam(required = false) String eventStatusName,
+		@RequestParam(required = false) String endType, Model model) {
 		List<String> roles = userService.meRoles().getData();
 
 		if (categoryName != null && categoryName.isEmpty()) {
@@ -154,7 +155,8 @@ public class PostController {
 		model.addAttribute("sortBy", sortBy);
 		model.addAttribute("direction", direction);
 
-		Page<SearchPostsResponse> posts = postService.searchPosts(pageable, keyword, categoryName, eventStatusName)
+		Page<SearchPostsResponse> posts = postService.searchPosts(pageable, keyword, categoryName, eventStatusName,
+				endType)
 			.getData();
 
 		String encodedCategoryName =
@@ -167,9 +169,10 @@ public class PostController {
 
 		if (isEvent) {
 			model.addAttribute("eventStatusName", eventStatusName);
+			model.addAttribute("endType", endType);
 			PagingModel.pagingProcessing(pageable, model, posts,
 				"/posts/search?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy
-					+ "&keyword=" + encodedKeyword + "&eventStatusName=" + eventStatusName, 10);
+					+ "&keyword=" + encodedKeyword + "&eventStatusName=" + eventStatusName + "&endType=" + endType, 10);
 		} else {
 			PagingModel.pagingProcessing(pageable, model, posts,
 				"/posts/search?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy
@@ -203,7 +206,8 @@ public class PostController {
 		@RequestParam(defaultValue = "createdAt") String sortBy,
 		@RequestParam(defaultValue = "DESC") String direction,
 		@RequestParam String categoryName,
-		@RequestParam(defaultValue = "전체") String eventStatusName) {
+		@RequestParam(required = false) String eventStatusName,
+		@RequestParam(required = false) String endType) {
 		List<String> roles = userService.meRoles().getData();
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("isAuthorized",
@@ -216,7 +220,7 @@ public class PostController {
 		Pageable pageable = PageRequest.of(defaultPageable.getPageNumber(), defaultPageable.getPageSize(), sort);
 
 		Page<GetPostsByCategoryNameResponse> posts = postService.getPostsByCategoryName(pageable, categoryName,
-				eventStatusName)
+				eventStatusName, endType)
 			.getData();
 		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
 		model.addAttribute("objects", posts);
@@ -232,9 +236,10 @@ public class PostController {
 
 			if (CategoryUtils.eventCategories.contains(categoryName)) {
 				model.addAttribute("eventStatusName", eventStatusName);
+				model.addAttribute("endType", endType);
 				PagingModel.pagingProcessing(pageable, model, posts,
 					"/posts?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy
-						+ "&eventStatusName=" + eventStatusName, 10);
+						+ "&eventStatusName=" + eventStatusName + "&endType=" + endType, 10);
 				return "post/event/list";
 			} else {
 				PagingModel.pagingProcessing(pageable, model, posts,

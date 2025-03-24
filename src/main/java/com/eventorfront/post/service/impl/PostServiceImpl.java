@@ -33,8 +33,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public ApiResponse<Page<SearchPostsResponse>> searchPosts(Pageable pageable, String keyword, String categoryName,
-		String eventStatusName) {
-		return postClient.searchPosts(pageable, keyword, categoryName, eventStatusName).getBody();
+		String eventStatusName, String endType) {
+		return postClient.searchPosts(pageable, keyword, categoryName, eventStatusName, endType).getBody();
 	}
 
 	@Override
@@ -79,8 +79,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable,
-		String categoryName, String eventStatusName) {
-		return postClient.getPostsByCategoryName(pageable, categoryName, eventStatusName).getBody();
+		String categoryName, String eventStatusName, String endType) {
+		return postClient.getPostsByCategoryName(pageable, categoryName, eventStatusName, endType).getBody();
 	}
 
 	@Override
