@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.eventorfront.global.util.CookieUtil;
-
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,7 +32,10 @@ public class ReissueTokenAspect {
 			String newRefreshToken = responseEntity.getHeaders().getFirst("new-refresh-token");
 
 			if (newAccessToken != null) {
-				Cookie accessTokenCookie = CookieUtil.createCookie("access-token", newAccessToken, 60 * 10);
+				Cookie accessTokenCookie = new Cookie("access-token", newAccessToken);
+				accessTokenCookie.setHttpOnly(true);
+				accessTokenCookie.setPath("/");
+				accessTokenCookie.setMaxAge(60 * 60 * 24);
 				getHttpServletResponse().addCookie(accessTokenCookie);
 
 				// 현재 요청에 새로운 쿠키 정보 반영
@@ -42,7 +43,10 @@ public class ReissueTokenAspect {
 			}
 
 			if (newRefreshToken != null) {
-				Cookie refreshTokenCookie = CookieUtil.createCookie("refresh-token", newRefreshToken, 60 * 60 * 24);
+				Cookie refreshTokenCookie = new Cookie("refresh-token", newRefreshToken);
+				refreshTokenCookie.setHttpOnly(true);
+				refreshTokenCookie.setPath("/");
+				refreshTokenCookie.setMaxAge(60 * 60 * 24);
 				getHttpServletResponse().addCookie(refreshTokenCookie);
 
 				// 현재 요청에 새로운 쿠키 정보 반영
