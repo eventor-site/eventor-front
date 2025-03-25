@@ -35,9 +35,11 @@ function validatePassword() {
     if (messages.length > 0) {
         passwordFeedback.innerHTML = messages.join("<br>");
         passwordFeedback.className = "mismatch";
+        isPasswordValid = false;
     } else {
         passwordFeedback.textContent = "사용 가능한 비밀번호입니다.";
         passwordFeedback.className = "match";
+        isPasswordValid = true;
     }
 
     checkPasswordMatch();
