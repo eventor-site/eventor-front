@@ -58,11 +58,11 @@ public class AuthController {
 		}
 
 		if (accessToken != null) {
-			response.addCookie(CookieUtil.createCookie(ACCESS_TOKEN, accessToken));
+			response.addCookie(CookieUtil.createCookie(ACCESS_TOKEN, accessToken, 60 * 10));
 		}
 
 		if (refreshToken != null) {
-			response.addCookie(CookieUtil.createCookie(REFRESH_TOKEN, refreshToken));
+			response.addCookie(CookieUtil.createCookie(REFRESH_TOKEN, refreshToken, 60 * 60 * 24));
 		}
 
 		return "redirect:/";
@@ -110,10 +110,10 @@ public class AuthController {
 
 		} else {
 			if (accessToken != null) {
-				response.addCookie(CookieUtil.createCookie(ACCESS_TOKEN, accessToken));
+				response.addCookie(CookieUtil.createCookie(ACCESS_TOKEN, accessToken, 60 * 10));
 			}
 			if (refreshToken != null) {
-				response.addCookie(CookieUtil.createCookie(REFRESH_TOKEN, refreshToken));
+				response.addCookie(CookieUtil.createCookie(REFRESH_TOKEN, refreshToken, 60 * 60 * 24));
 			}
 		}
 
