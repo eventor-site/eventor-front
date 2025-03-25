@@ -1,5 +1,5 @@
-let isNicknameValid = false // 닉네임 유효성 확인
-let isEditingEmail = true; // 이메일 수정 상태 추적
+let isNicknameValid = true // 닉네임 유효성 확인
+let isEditingEmail = false; // 이메일 수정 상태 추적
 isEmailCertified = true;
 
 // 수정 버튼 활성화 여부를 확인하는 함수
