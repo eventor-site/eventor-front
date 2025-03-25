@@ -35,6 +35,7 @@ public class ReissueTokenAspect {
 				Cookie accessTokenCookie = new Cookie("access-token", newAccessToken);
 				accessTokenCookie.setHttpOnly(true);
 				accessTokenCookie.setPath("/");
+				accessTokenCookie.setMaxAge(60 * 10);
 				getHttpServletResponse().addCookie(accessTokenCookie);
 
 				// 현재 요청에 새로운 쿠키 정보 반영
@@ -45,6 +46,7 @@ public class ReissueTokenAspect {
 				Cookie refreshTokenCookie = new Cookie("refresh-token", newRefreshToken);
 				refreshTokenCookie.setHttpOnly(true);
 				refreshTokenCookie.setPath("/");
+				refreshTokenCookie.setMaxAge(60 * 60 * 24);
 				getHttpServletResponse().addCookie(refreshTokenCookie);
 
 				// 현재 요청에 새로운 쿠키 정보 반영

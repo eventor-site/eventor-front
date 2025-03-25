@@ -18,9 +18,10 @@ public class CookieUtil {
 	/**
 	 * 주어진 키와 값을 사용하여 쿠키를 생성합니다.
 	 */
-	public static Cookie createCookie(String key, String value) {
+	public static Cookie createCookie(String key, String value, int maxAge) {
 		Cookie cookie = new Cookie(key, URLEncoder.encode(value, StandardCharsets.UTF_8));
 		cookie.setPath("/");
+		cookie.setMaxAge(maxAge);
 		cookie.setHttpOnly(true);
 		return cookie;
 	}
