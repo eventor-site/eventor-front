@@ -32,7 +32,6 @@ import com.eventorfront.comment.service.CommentService;
 import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.global.exception.ForbiddenException;
 import com.eventorfront.global.util.CalendarUtils;
-import com.eventorfront.global.util.CategoryUtils;
 import com.eventorfront.global.util.PagingModel;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
@@ -76,7 +75,7 @@ public class PostController {
 		} else if (categoryName.equals("핫딜")) {
 			model.addAttribute("categoryType", "핫딜");
 			return "post/hotDeal/createForm";
-		} else if (CategoryUtils.bestFoodCategories.contains(categoryName)) {
+		} else if (categoryService.getCategoryNames("맛집").getData().contains(categoryName)) {
 			model.addAttribute("categoryType", "맛집");
 			model.addAttribute("categories", categoryService.getCategoryNames("맛집").getData());
 			return "post/eatery/createForm";
@@ -105,15 +104,17 @@ public class PostController {
 		String categoryName = post.categoryName();
 		model.addAttribute("post", post);
 
+		List<String> eateries = categoryService.getCategoryNames("맛집").getData();
+
 		if (categoryName.equals("자유")) {
 			model.addAttribute("categoryType", "자유");
 			return "post/updateForm";
 		} else if (categoryName.equals("핫딜")) {
 			model.addAttribute("categoryType", "핫딜");
 			return "post/hotDeal/updateForm";
-		} else if (CategoryUtils.bestFoodCategories.contains(categoryName)) {
+		} else if (eateries.contains(categoryName)) {
 			model.addAttribute("categoryType", "맛집");
-			model.addAttribute("categories", categoryService.getCategoryNames("맛집").getData());
+			model.addAttribute("categories", eateries);
 			return "post/eatery/updateForm";
 		} else if (categoryName.equals("공지")) {
 			model.addAttribute("categoryType", "공지");
@@ -141,10 +142,15 @@ public class PostController {
 			categoryName = null;
 		}
 
+		List<String> memberCategories = categoryService.getCategoryNames("맛집").getData();
+		memberCategories.addAll(List.of("맛집", "자유"));
+
+		categoryService.getCategoryNames("맛집").getData().addAll(List.of("맛집", "자유"));
+
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("isAuthorized",
-			roles.contains("admin") || (roles.contains("member") && CategoryUtils.memberCategories.contains(
+			roles.contains("admin") || (roles.contains("member") && memberCategories.contains(
 				categoryName))
 		);
 
@@ -164,7 +170,8 @@ public class PostController {
 		String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
 		model.addAttribute("objects", posts);
 
-		boolean isEvent = categoryName != null && CategoryUtils.eventCategories.contains(categoryName);
+		boolean isEvent =
+			categoryName != null && categoryService.getCategoryNames("이벤트").getData().contains(categoryName);
 		model.addAttribute("isEvent", isEvent);
 
 		if (isEvent) {
@@ -209,9 +216,12 @@ public class PostController {
 		@RequestParam(defaultValue = "") String eventStatusName,
 		@RequestParam(defaultValue = "") String endType) {
 		List<String> roles = userService.meRoles().getData();
+		List<String> memberCategories = categoryService.getCategoryNames("맛집").getData();
+		memberCategories.addAll(List.of("맛집", "자유"));
+
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("isAuthorized",
-			roles.contains("admin") || (roles.contains("member") && CategoryUtils.memberCategories.contains(
+			roles.contains("admin") || (roles.contains("member") && memberCategories.contains(
 				categoryName))
 		);
 
@@ -234,7 +244,7 @@ public class PostController {
 		} else {
 			model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName).getData());
 
-			if (CategoryUtils.eventCategories.contains(categoryName)) {
+			if (categoryService.getCategoryNames("이벤트").getData().contains(categoryName)) {
 				model.addAttribute("eventStatusName", eventStatusName);
 				model.addAttribute("endType", endType);
 				PagingModel.pagingProcessing(pageable, model, posts,
@@ -256,7 +266,7 @@ public class PostController {
 		GetPostResponse post = postService.getPost(postId).getData();
 		model.addAttribute("post", post);
 		model.addAttribute("objects", comments);
-		model.addAttribute("isEvent", CategoryUtils.eventCategories.contains(post.categoryName()));
+		model.addAttribute("isEvent", categoryService.getCategoryNames("이벤트").getData().contains(post.categoryName()));
 		PagingModel.pagingProcessing(pageable, model, comments, "/posts/" + postId, 10);
 		return "post/get";
 	}
