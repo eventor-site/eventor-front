@@ -28,8 +28,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public ApiResponse<List<String>> getCategories(String categoryName) {
-		return categoryClient.getCategories(categoryName).getBody();
+	public ApiResponse<List<String>> getCategoryNames(String categoryName) {
+		return categoryClient.getCategoryNames(categoryName).getBody();
 	}
 
 	@Override

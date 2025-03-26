@@ -78,7 +78,7 @@ public class PostController {
 			return "post/hotDeal/createForm";
 		} else if (CategoryUtils.bestFoodCategories.contains(categoryName)) {
 			model.addAttribute("categoryType", "맛집");
-			model.addAttribute("categories", categoryService.getCategories("맛집").getData());
+			model.addAttribute("categories", categoryService.getCategoryNames("맛집").getData());
 			return "post/eatery/createForm";
 		} else if (!roles.contains("admin")) {
 			throw new ForbiddenException();
@@ -89,7 +89,7 @@ public class PostController {
 			model.addAttribute("startTime", CalendarUtils.getDate());
 			model.addAttribute("endTime", CalendarUtils.getPlusDate(1));
 			model.addAttribute("categoryType", "이벤트");
-			model.addAttribute("categories", categoryService.getCategories("이벤트").getData());
+			model.addAttribute("categories", categoryService.getCategoryNames("이벤트").getData());
 			return "post/event/createForm";
 		}
 
@@ -113,14 +113,14 @@ public class PostController {
 			return "post/hotDeal/updateForm";
 		} else if (CategoryUtils.bestFoodCategories.contains(categoryName)) {
 			model.addAttribute("categoryType", "맛집");
-			model.addAttribute("categories", categoryService.getCategories("맛집").getData());
+			model.addAttribute("categories", categoryService.getCategoryNames("맛집").getData());
 			return "post/eatery/updateForm";
 		} else if (categoryName.equals("공지")) {
 			model.addAttribute("categoryType", "공지");
 			return "post/updateForm";
 		} else {
 			model.addAttribute("categoryType", "이벤트");
-			model.addAttribute("categories", categoryService.getCategories("이벤트").getData());
+			model.addAttribute("categories", categoryService.getCategoryNames("이벤트").getData());
 			return "post/event/updateForm";
 		}
 

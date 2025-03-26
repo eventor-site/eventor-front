@@ -29,7 +29,7 @@ public interface CategoryClient {
 	ResponseEntity<ApiResponse<List<GetCategoryNameResponse>>> searchCategories(@RequestParam String keyword);
 
 	@GetMapping("/back/categories")
-	ResponseEntity<ApiResponse<List<String>>> getCategories(@RequestParam String categoryName);
+	ResponseEntity<ApiResponse<List<String>>> getCategoryNames(@RequestParam String categoryName);
 
 	@GetMapping("/back/categories/paging")
 	ResponseEntity<ApiResponse<Page<GetCategoryListResponse>>> getCategories(

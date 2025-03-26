@@ -16,7 +16,7 @@ public interface CategoryService {
 
 	ApiResponse<List<GetCategoryNameResponse>> searchCategories(String keyword);
 
-	ApiResponse<List<String>> getCategories(String categoryName);
+	ApiResponse<List<String>> getCategoryNames(String categoryName);
 
 	ApiResponse<Page<GetCategoryListResponse>> getCategories(Pageable pageable);
 
