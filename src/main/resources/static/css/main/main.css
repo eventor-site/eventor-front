@@ -16,7 +16,7 @@
     margin: 0 40px;
 }
 
-.event-card img {
+.event-card img, .event-card video {
     width: 100%;
     height: 400px;
     object-fit: cover;

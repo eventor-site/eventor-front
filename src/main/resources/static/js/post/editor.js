@@ -303,8 +303,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             ImageContainer.classList.add('image-preview');  // 기존 클래스 사용
 
             // 이미지 또는 동영상 요소 생성
-            const isWebP = /\.webp$/i.test(image.url);
-            let tagName = isWebP ? "img" : "video";
+            let tagName = image.type === "image" ? "img" : "video";
             let imgElement = document.createElement(tagName);
             imgElement.src = image.url;
             imgElement.classList.add('image-preview');  // 기존 클래스 사용

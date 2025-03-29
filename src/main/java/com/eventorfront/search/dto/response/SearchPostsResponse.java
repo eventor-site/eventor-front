@@ -31,6 +31,7 @@ public record SearchPostsResponse(
 	LocalDateTime endTime,
 	String endType,
 
-	String imageUrl
+	String imageUrl,
+	String imageType
 ) {
 }

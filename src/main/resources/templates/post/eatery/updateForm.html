@@ -76,7 +76,8 @@
                 <div class="imagePreviewContainer" id="imagePreviewContainer">
                     <div th:each="image : ${post.images}" class="imageContainer">
                         <div class="image-preview">
-                            <img th:src="${image.url}" alt="이미지">
+                            <img th:if="${image.type == 'image'}" th:src="${image.url}" alt="이미지"/>
+                            <video th:if="${image.type == 'video'}" th:src="${image.url}"></video>
                             <span class="image-name" th:text="${image.originalName}"></span>
                             <input type="checkbox" class="imageCheckbox" th:data-image-id="${image.imageId}"/>
                         </div>
