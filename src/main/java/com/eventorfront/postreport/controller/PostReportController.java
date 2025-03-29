@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -37,11 +38,11 @@ public class PostReportController {
 		return ResponseEntity.ok(postReportService.createPostReport(postId, reportTypeName).getMessage());
 	}
 
-	@GetMapping("/posts/{postId}/postReports/{postReportId}/confirm")
+	@PutMapping("/posts/{postId}/postReports/{postReportId}/confirm")
 	public String confirmPostReport(@PathVariable Long postId, @PathVariable Long postReportId,
 		RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("message",
-			postReportService.confirmPostReport(postId, postReportId).getMessage());
+			postReportService.confirmPostReport(postReportId).getMessage());
 		return "redirect:/posts/" + postId;
 	}
 

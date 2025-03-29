@@ -25,7 +25,7 @@
 
             <div class="d-flex align-items-center mb-2 gap-2" th:if="${post.isAuthorized}">
                 <form th:action="@{/posts/{postId}/finish (postId=${post.postId})}"
-                      th:method="post">
+                      th:method="put">
                     <button type="submit" class="btn btn-secondary">종료</button>
                 </form>
                 <a th:href="@{/posts/{postId}/updateForm (postId=${post.postId})}"

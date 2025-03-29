@@ -26,18 +26,14 @@
                                 <th style="width: 15%;">회원 고유 ID</th>
                                 <th style="width: 20%;">신고한 시간</th>
                                 <th style="width: 10%;">확인여부</th>
-                                <th style="width: 7%;"></th>
+                                <th style="width: 12%;"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="commentReport, index : ${objects}">
                                 <td th:text="${(objects.totalElements - (objects.number * objects.size + index.count)) + 1}"></td>
                                 <td th:text="${commentReport.reportTypeName}"></td>
-                                <td>
-                                    <!-- 제목을 클릭하면 해당 게시글로 이동, 댓글 ID를 앵커로 포함 -->
-                                    <a th:href="@{/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm (postId=${commentReport.postId}, commentId=${commentReport.commentId}, commentReportId=${commentReport.commentReportId} )}"
-                                       th:text="${commentReport.content}"></a>
-                                </td>
+                                <td th:text="${commentReport.content}"></td>
                                 <td th:text="${commentReport.userId}"></td>
                                 <td th:text="${#temporals.format(commentReport.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
                                 <td>
@@ -45,11 +41,16 @@
                                     <span th:if="${!commentReport.isChecked}">❌</span>
                                 </td>
                                 <td>
-                                    <form th:action="@{/commentReports/{commentReportId} (commentReportId=${commentReport.commentReportId})}"
-                                          th:method="delete">
-                                        <button class="btn btn-sm btn-danger inline-text">삭제</button>
-                                    </form>
-
+                                    <div class="d-flex align-items-center">
+                                        <form th:action="@{/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm (postId=${commentReport.postId}, commentId=${commentReport.commentId}, commentReportId=${commentReport.commentReportId})}"
+                                              th:method="put">
+                                            <button class="btn btn-sm btn-primary inline-text">확인</button>
+                                        </form>
+                                        <form th:action="@{/commentReports/{commentReportId} (commentReportId=${commentReport.commentReportId})}"
+                                              th:method="delete">
+                                            <button class="btn btn-sm btn-danger inline-text">삭제</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>

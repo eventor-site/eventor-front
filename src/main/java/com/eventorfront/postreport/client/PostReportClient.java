@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.global.dto.ApiResponse;
@@ -24,8 +25,8 @@ public interface PostReportClient {
 	@PostMapping("/back/posts/{postId}/postReports")
 	ResponseEntity<ApiResponse<Void>> createPostReport(@PathVariable Long postId, @RequestParam String reportTypeName);
 
-	@GetMapping("/back/posts/{postId}/postReports/{postReportId}/confirm")
-	ResponseEntity<ApiResponse<Void>> confirmPostReport(@PathVariable Long postId, @PathVariable Long postReportId);
+	@PutMapping("/back/postReports/{postReportId}/confirm")
+	ResponseEntity<ApiResponse<Void>> confirmPostReport(@PathVariable Long postReportId);
 
 	@DeleteMapping("/back/postReports/{postReportId}")
 	ResponseEntity<ApiResponse<Void>> deletePostReport(@PathVariable Long postReportId);

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.commentreport.dto.response.GetCommentReportResponse;
@@ -25,9 +26,8 @@ public interface CommentReportClient {
 	ResponseEntity<ApiResponse<Void>> createCommentReport(@PathVariable Long commentId,
 		@RequestParam String reportTypeName);
 
-	@GetMapping("/back/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm")
-	ResponseEntity<ApiResponse<Void>> confirmCommentReport(@PathVariable Long postId, @PathVariable Long commentId,
-		@PathVariable Long commentReportId);
+	@PutMapping("/back/commentReports/{commentReportId}/confirm")
+	ResponseEntity<ApiResponse<Void>> confirmCommentReport(@PathVariable Long commentReportId);
 
 	@DeleteMapping("/back/commentReports/{commentReportId}")
 	ResponseEntity<ApiResponse<Void>> deleteCommentReport(@PathVariable Long commentReportId);
