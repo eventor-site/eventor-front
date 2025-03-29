@@ -64,7 +64,8 @@
 
             <div class="mb-2">
                 <p>한파일당 최대 10MB 까지 업로드 가능하며, 최대 업로드 용량은 10MB 입니다.</p>
-                <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif", "webp", ".jfif"</p>
+                <p>업로드 가능 파일: ".jpg", ".jpeg", ".png", ".gif", "webp", ".jfif", ".mp4", ".mov", ".avi", ".wmv", ".mkv",
+                    ".webm"</p>
             </div>
 
             <div class="mb-2" id="image-select-box" style="display: none">
@@ -79,11 +80,11 @@
 
             <!-- 이미지 파일 선택 필드 추가 -->
             <div class="mb-2">
-                <label for="files">이미지</label>
-                <input type="file" class="form-control" id="files" name="files" accept="image/*" multiple
+                <label for="files">파일</label>
+                <input type="file" class="form-control" id="files" name="files" accept="image/*, video/*" multiple
                        style="width: 50%">
                 <div class="imagePreviewContainer" id="imagePreviewContainer">
-                    <div th:each="image : ${post.images}" th:if="${!image.isThumbnail}" class="imageContainer">
+                    <div th:each="image : ${post.images}" class="imageContainer">
                         <div class="image-preview">
                             <img th:src="${image.url}" alt="이미지">
                             <span class="image-name" th:text="${image.originalName}"></span>

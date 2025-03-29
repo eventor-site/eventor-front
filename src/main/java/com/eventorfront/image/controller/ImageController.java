@@ -25,8 +25,9 @@ public class ImageController {
 
 	@PostMapping("/upload")
 	public List<GetImageResponse> uploadImage(@RequestParam("file") MultipartFile file,
-		@RequestParam Long postId, @RequestParam boolean isThumbnail, @RequestParam boolean isPasted) {
-		return imageService.upload(file, postId, isThumbnail, isPasted).getData();
+		@RequestParam Long postId, @RequestParam String categoryName, @RequestParam boolean isThumbnail,
+		@RequestParam boolean isPasted) {
+		return imageService.upload(file, postId, categoryName, isThumbnail, isPasted).getData();
 	}
 
 	@DeleteMapping
