@@ -128,26 +128,28 @@
             <div class="image-gallery" th:if="${isEvent}" th:classappend="${isEvent ? 'event-gallery' : ''}">
                 <div th:each="image : ${post.images}" th:if="${!image.isThumbnail and !image.isPasted}"
                      class="image-container">
-                    <!-- 이미지 출력 (파일 확장자가 .webp 인 경우) -->
-                    <img th:if="${#strings.endsWith(image.url, '.webp')}" th:src="${image.url}" alt="이미지"/>
+                    <img th:src="${image.url}" alt="이미지"/>
+                    <!--                    &lt;!&ndash; 이미지 출력 (파일 확장자가 .webp 인 경우) &ndash;&gt;-->
+                    <!--                    <img th:if="${#strings.endsWith(image.url, '.webp')}" th:src="${image.url}" alt="이미지"/>-->
 
-                    <!-- 동영상 출력 (파일 확장자가 .webp 가 아닌 경우) -->
-                    <video th:unless="${#strings.endsWith(image.url, '.webp')}" th:src="${image.url}" controls>
-                        브라우저가 비디오 태그를 지원하지 않습니다.
-                    </video>
+                    <!--                    &lt;!&ndash; 동영상 출력 (파일 확장자가 .webp 가 아닌 경우) &ndash;&gt;-->
+                    <!--                    <video th:unless="${#strings.endsWith(image.url, '.webp')}" th:src="${image.url}" controls>-->
+                    <!--                        브라우저가 비디오 태그를 지원하지 않습니다.-->
+                    <!--                    </video>-->
                 </div>
             </div>
 
             <div class="image-gallery" th:unless="${isEvent}" th:classappend="${isEvent ? 'event-gallery' : ''}">
                 <div th:each="image : ${post.images}" th:if="${!image.isPasted}"
                      class="image-container">
-                    <!-- 이미지 출력 (파일 확장자가 .webp 인 경우) -->
-                    <img th:if="${#strings.endsWith(image.url, '.webp')}" th:src="${image.url}" alt="이미지"/>
+                    <img th:src="${image.url}" alt="이미지"/>
+                    <!--                    &lt;!&ndash; 이미지 출력 (파일 확장자가 .webp 인 경우) &ndash;&gt;-->
+                    <!--                    <img th:if="${#strings.endsWith(image.url, '.webp')}" th:src="${image.url}" alt="이미지"/>-->
 
-                    <!-- 동영상 출력 (파일 확장자가 .webp 가 아닌 경우) -->
-                    <video th:unless="${#strings.endsWith(image.url, '.webp')}" th:src="${image.url}" controls>
-                        브라우저가 비디오 태그를 지원하지 않습니다.
-                    </video>
+                    <!--                    &lt;!&ndash; 동영상 출력 (파일 확장자가 .webp 가 아닌 경우) &ndash;&gt;-->
+                    <!--                    <video th:unless="${#strings.endsWith(image.url, '.webp')}" th:src="${image.url}" controls>-->
+                    <!--                        브라우저가 비디오 태그를 지원하지 않습니다.-->
+                    <!--                    </video>-->
                 </div>
             </div>
 
