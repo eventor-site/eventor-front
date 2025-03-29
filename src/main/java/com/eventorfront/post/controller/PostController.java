@@ -277,17 +277,17 @@ public class PostController {
 		return ResponseEntity.ok(postService.createPost(request, isTemp));
 	}
 
-	@PostMapping("/{postId}/finish")
-	public String finishEventPost(@PathVariable Long postId, RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", postService.finishEventPost(postId).getMessage());
-		return "redirect:/posts/" + postId;
-	}
-
 	@PutMapping("/{postId}")
 	public ResponseEntity<ApiResponse<Void>> updatePost(@PathVariable Long postId,
 		@ModelAttribute UpdatePostRequest request,
 		@RequestParam(defaultValue = "false") boolean isTemp) {
 		return ResponseEntity.ok(postService.updatePost(postId, request, isTemp));
+	}
+
+	@PutMapping("/{postId}/finish")
+	public String finishEventPost(@PathVariable Long postId, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", postService.finishEventPost(postId).getMessage());
+		return "redirect:/posts/" + postId;
 	}
 
 	@PutMapping("/{postId}/recommend")

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -42,11 +43,11 @@ public class CommentReportController {
 		return ResponseEntity.ok(commentReportService.createCommentReport(commentId, reportTypeName).getMessage());
 	}
 
-	@GetMapping("/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm")
+	@PutMapping("/posts/{postId}/comments/{commentId}/commentReports/{commentReportId}/confirm")
 	public String confirmCommentReport(@PathVariable Long postId, @PathVariable Long commentId,
 		@PathVariable Long commentReportId, RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("message",
-			commentReportService.confirmCommentReport(postId, commentReportId, commentReportId).getMessage());
+			commentReportService.confirmCommentReport(commentReportId).getMessage());
 		Long page = commentService.getComment(postId, commentId).getData().page();
 		return "redirect:/posts/" + postId + "?page=" + page + "&size=10" + "#" + commentId;
 	}

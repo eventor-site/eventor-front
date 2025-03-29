@@ -51,9 +51,9 @@ public interface PostService {
 
 	ApiResponse<CreatePostResponse> createPost(CreatePostRequest request, boolean isTemp);
 
-	ApiResponse<Void> finishEventPost(Long postId);
-
 	ApiResponse<Void> updatePost(Long postId, UpdatePostRequest request, boolean isTemp);
+
+	ApiResponse<Void> finishEventPost(Long postId);
 
 	ApiResponse<Void> recommendPost(Long postId);
 

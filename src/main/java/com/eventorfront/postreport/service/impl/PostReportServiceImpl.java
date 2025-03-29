@@ -27,8 +27,8 @@ public class PostReportServiceImpl implements PostReportService {
 	}
 
 	@Override
-	public ApiResponse<Void> confirmPostReport(Long postId, Long postReportId) {
-		return postReportClient.confirmPostReport(postId, postReportId).getBody();
+	public ApiResponse<Void> confirmPostReport(Long postReportId) {
+		return postReportClient.confirmPostReport(postReportId).getBody();
 	}
 
 	@Override

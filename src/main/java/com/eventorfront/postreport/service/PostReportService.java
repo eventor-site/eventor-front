@@ -12,7 +12,7 @@ public interface PostReportService {
 
 	ApiResponse<Void> createPostReport(Long postId, String reportTypeName);
 
-	ApiResponse<Void> confirmPostReport(Long postId, Long postReportId);
+	ApiResponse<Void> confirmPostReport(Long postReportId);
 
 	ApiResponse<Void> deletePostReport(Long postReportId);
 }

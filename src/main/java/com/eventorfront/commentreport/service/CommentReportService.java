@@ -12,7 +12,7 @@ public interface CommentReportService {
 
 	ApiResponse<Void> createCommentReport(Long commentId, String reportTypeName);
 
-	ApiResponse<Void> confirmCommentReport(Long postId, Long commentId, Long commentReportId);
+	ApiResponse<Void> confirmCommentReport(Long commentReportId);
 
 	ApiResponse<Void> deleteCommentReport(Long commentReportId);
 }

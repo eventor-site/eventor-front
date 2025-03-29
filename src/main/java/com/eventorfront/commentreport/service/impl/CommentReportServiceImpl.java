@@ -27,8 +27,8 @@ public class CommentReportServiceImpl implements CommentReportService {
 	}
 
 	@Override
-	public ApiResponse<Void> confirmCommentReport(Long postId, Long commentId, Long commentReportId) {
-		return commentReportClient.confirmCommentReport(postId, commentId, commentReportId).getBody();
+	public ApiResponse<Void> confirmCommentReport(Long commentReportId) {
+		return commentReportClient.confirmCommentReport(commentReportId).getBody();
 	}
 
 	@Override
