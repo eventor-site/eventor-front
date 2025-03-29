@@ -30,6 +30,12 @@
     object-fit: cover;
 }
 
+.event-card video {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
 .event-card-body {
     padding: 10px;
 }

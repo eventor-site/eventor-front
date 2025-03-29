@@ -65,8 +65,26 @@
                 <div th:if="${hotPosts.size() > 0}" th:each="post : ${hotPosts}">
                     <div class="event-card">
                         <a th:href="@{/posts/{postId} (postId=${post.postId()})}">
-                            <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">
-                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
+                            <!-- 게시물 리스트에서 썸네일 처리 -->
+                            <img class="post-card-img"
+                                 th:if="${post.imageUrl == null}"
+                                 src="/image/logo.png"
+                                 alt="썸네일"/>
+
+                            <div th:if="${post.imageUrl != null}">
+                                <img class="post-card-img"
+                                     th:if="${#strings.endsWith(post.imageUrl, '.webp')}"
+                                     th:src="${post.imageUrl}"
+                                     alt="썸네일"/>
+
+                                <!-- 동영상일 경우 썸네일 이미지 출력 -->
+                                <video class="post-card-img"
+                                       th:if="${!#strings.endsWith(post.imageUrl, '.webp')}"
+                                       th:src="${post.imageUrl}"></video>
+                            </div>
+
+                            <!--                            <img th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="이벤트 이미지">-->
+                            <!--                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">-->
                         </a>
                         <div class="event-card-body">
                             <div class="event-card-title" th:text="${post.title}"></div>
@@ -80,8 +98,27 @@
         <!-- 게시글 목록 -->
         <div class="post-list" th:if="${objects.getTotalElements() > 0}">
             <a th:each="post : ${objects}" th:href="@{/posts/{postId}(postId=${post.postId()})}" class="post-card">
-                <img class="post-card-img" th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="썸네일">
-                <img class="post-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">
+
+                <!-- 게시물 리스트에서 썸네일 처리 -->
+                <img class="post-card-img"
+                     th:if="${post.imageUrl == null}"
+                     src="/image/logo.png"
+                     alt="썸네일"/>
+
+                <div th:if="${post.imageUrl != null}">
+                    <img class="post-card-img"
+                         th:if="${#strings.endsWith(post.imageUrl, '.webp')}"
+                         th:src="${post.imageUrl}"
+                         alt="썸네일"/>
+
+                    <!-- 동영상일 경우 썸네일 이미지 출력 -->
+                    <video class="post-card-img"
+                           th:if="${!#strings.endsWith(post.imageUrl, '.webp')}"
+                           th:src="${post.imageUrl}"></video>
+                </div>
+
+                <!--                <img class="post-card-img" th:if="${post.imageUrl}" th:src="${post.imageUrl}" alt="썸네일">-->
+                <!--                <img class="post-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png" alt="이벤트 이미지">-->
                 <div class="post-card-body">
                     <div class="post-card-title-container">
                         <span class="post-card-category">[<span th:text="${categoryName}"></span>] </span>

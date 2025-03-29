@@ -27,9 +27,9 @@ public class ImageServiceImpl implements ImageService {
 	private final ImageClient imageClient;
 
 	@Override
-	public ApiResponse<List<GetImageResponse>> upload(MultipartFile file, Long postId, boolean isThumbnail,
-		boolean isPasted) {
-		return imageClient.upload(convertToWebp(file), "postimage", postId, isThumbnail, isPasted)
+	public ApiResponse<List<GetImageResponse>> upload(MultipartFile file, Long postId, String categoryName,
+		boolean isThumbnail, boolean isPasted) {
+		return imageClient.upload(convertToWebp(file), "postimage", postId, categoryName, isThumbnail, isPasted)
 			.getBody();
 	}
 
@@ -51,6 +51,12 @@ public class ImageServiceImpl implements ImageService {
 			}
 
 			String originalFilename = file.getOriginalFilename();
+			String contentType = file.getContentType();
+
+			// 동영상 파일은 변환 없이 그대로 반환
+			if (contentType != null && contentType.startsWith("video/")) {
+				return file;
+			}
 
 			if (originalFilename.endsWith(".webp")) {
 				return file;

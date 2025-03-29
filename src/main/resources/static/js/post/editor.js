@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // }
 
                 const file = new File([blob], `pasted-image.png`, {type: blob.type});
-                const uploadedImages = await uploadImage(file, postId, false, true);
+                const uploadedImages = await uploadImage(file, postId, categoryName, false, true);
                 callback(uploadedImages[uploadedImages.length - 1].url, '업로드된 이미지');
 
                 updatePreview(uploadedImages);
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             // }
 
             for (const file of files) {
-                const uploadedImages = await uploadImage(file, postId, true, false);
+                const uploadedImages = await uploadImage(file, postId, categoryName, true, false);
                 updatePreview(uploadedImages);
                 updateTotalSize(uploadedImages);
             }
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         // }
 
         for (const file of files) {
-            const uploadedImages = await uploadImage(file, postId, false, false);
+            const uploadedImages = await uploadImage(file, postId, categoryName, false, false);
             updatePreview(uploadedImages);
             updateTotalSize(uploadedImages);
         }
@@ -224,10 +224,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     // 🛠️ **단일 이미지 업로드 함수**
-    async function uploadImage(file, postId, isThumbnail, isPasted) {
+    async function uploadImage(file, postId, categoryName, isThumbnail, isPasted) {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("postId", postId);
+        formData.append("categoryName", categoryName);
         formData.append("isThumbnail", isThumbnail);
         formData.append("isPasted", isPasted);
 
@@ -270,6 +271,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             },
             body: JSON.stringify({
                 postId: postId,
+                categoryName: categoryName,
                 imageIds: imageIds
             })
         });
@@ -293,15 +295,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         images.forEach(image => {
             let previewContainer = document.getElementById('imagePreviewContainer');
 
-            if (image.isThumbnail) {
+            if (categoryType === '이벤트' && image.isThumbnail) {
                 previewContainer = document.getElementById('thumbnailPreviewContainer');
             }
 
             const ImageContainer = document.createElement('div');
             ImageContainer.classList.add('image-preview');  // 기존 클래스 사용
 
-            // 이미지 요소 생성
-            const imgElement = document.createElement('img');
+            // 이미지 또는 동영상 요소 생성
+            const isWebP = /\.webp$/i.test(image.url);
+            let tagName = isWebP ? "img" : "video";
+            let imgElement = document.createElement(tagName);
             imgElement.src = image.url;
             imgElement.classList.add('image-preview');  // 기존 클래스 사용
 

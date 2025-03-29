@@ -20,7 +20,7 @@ public interface ImageClient {
 
 	@PostMapping(value = "/back/images/upload", consumes = "multipart/form-data")
 	ResponseEntity<ApiResponse<List<GetImageResponse>>> upload(@RequestPart("file") MultipartFile file,
-		@RequestParam String folderName, @RequestParam Long postId,
+		@RequestParam String folderName, @RequestParam Long postId, @RequestParam String categoryName,
 		@RequestParam boolean isThumbnail,
 		@RequestParam boolean isPasted);
 
