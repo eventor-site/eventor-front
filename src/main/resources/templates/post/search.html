@@ -93,19 +93,9 @@
 
         <div class="post-list" th:if="${objects.getTotalElements() > 0}">
             <a th:each="post : ${objects}" th:href="@{/posts/{postId}(postId=${post.postId()})}" class="post-card">
-                <img class="post-card-img"
-                     th:if="${post.imageUrl == null}"
-                     src="/image/logo.png"
-                     alt="썸네일"/>
-                <div th:if="${post.imageUrl != null}">
-                    <img class="post-card-img"
-                         th:if="${#strings.endsWith(post.imageUrl, '.webp')}"
-                         th:src="${post.imageUrl}"
-                         alt="썸네일"/>
-                    <video class="post-card-img"
-                           th:if="${!#strings.endsWith(post.imageUrl, '.webp')}"
-                           th:src="${post.imageUrl}"></video>
-                </div>
+                <img class="post-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                <img class="post-card-img" th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                <video class="post-card-img" th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
 
                 <div class="post-card-body" th:if="${post.startTime == null}">
                     <div class="post-card-title-container">
