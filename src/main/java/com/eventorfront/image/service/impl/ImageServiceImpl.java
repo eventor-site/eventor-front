@@ -43,6 +43,7 @@ public class ImageServiceImpl implements ImageService {
 		imageClient.deleteTempImage();
 	}
 
+	@Override
 	public MultipartFile convertToWebp(MultipartFile file) {
 		try {
 
@@ -82,5 +83,85 @@ public class ImageServiceImpl implements ImageService {
 			throw new ImageConvertException();
 		}
 	}
+
+	// 업로드 이미지 높이가 길면 자동으로 분할 하는 기능
+	// public ApiResponse<List<GetImageResponse>> improveUpload(MultipartFile file, Long postId, String categoryName,
+	// 	boolean isThumbnail, boolean isPasted) {
+	// 	List<MultipartFile> files = convertToWebpAndSplit(file);
+	// 	ApiResponse<List<GetImageResponse>> lastResponse = null;
+	//
+	// 	for (MultipartFile newFile : files) {
+	// 		lastResponse = imageClient.upload(newFile, "postimage", postId, categoryName, isThumbnail, isPasted)
+	// 			.getBody();
+	// 	}
+	//
+	// 	return lastResponse;
+	//
+	// }
+
+	// public List<MultipartFile> convertToWebpAndSplit(MultipartFile file) {
+	// 	try {
+	// 		if (file == null || file.isEmpty() || file.getOriginalFilename() == null) {
+	// 			throw new ImageConvertException();
+	// 		}
+	//
+	// 		String originalFilename = file.getOriginalFilename();
+	// 		String contentType = file.getContentType();
+	//
+	// 		// 동영상 파일은 변환 없이 그대로 반환
+	// 		if (contentType != null && contentType.startsWith("video/")) {
+	// 			return List.of(file);
+	// 		}
+	//
+	// 		if (originalFilename.endsWith(".webp")) {
+	// 			return List.of(file);
+	// 		}
+	//
+	// 		ImmutableImage image = ImmutableImage.loader().fromStream(file.getInputStream());
+	// 		int width = image.width;
+	// 		int height = image.height;
+	// 		int maxSegmentHeight = 16000; // 한 조각당 최대 높이 설정
+	// 		List<MultipartFile> webpFiles = new ArrayList<>();
+	//
+	// 		// 이미지가 maxSegmentHeight보다 크면 분할
+	// 		if (height > maxSegmentHeight) {
+	// 			int segmentCount = (int)Math.ceil((double)height / maxSegmentHeight);
+	//
+	// 			for (int i = 0; i < segmentCount; i++) {
+	// 				int startY = i * maxSegmentHeight;
+	// 				int segmentHeight = Math.min(maxSegmentHeight, height - startY);
+	//
+	// 				ImmutableImage segment = image.subimage(0, startY, width, segmentHeight);
+	// 				File tempFile = File.createTempFile("segment_" + i, ".webp");
+	// 				segment.output(WebpWriter.DEFAULT, tempFile);
+	//
+	// 				ByteArrayInputStream webpData = new ByteArrayInputStream(Files.readAllBytes(tempFile.toPath()));
+	// 				tempFile.delete();
+	//
+	// 				webpFiles.add(new CustomMultipartFile(
+	// 					webpData,
+	// 					originalFilename.substring(0, originalFilename.lastIndexOf('.')) + "_part" + i + ".webp",
+	// 					"image/webp"
+	// 				));
+	// 			}
+	// 		} else {
+	// 			// 분할할 필요 없으면 기존 방식으로 변환
+	// 			File tempFile = new File(originalFilename);
+	// 			image.output(WebpWriter.DEFAULT, tempFile);
+	//
+	// 			ByteArrayInputStream webpData = new ByteArrayInputStream(Files.readAllBytes(tempFile.toPath()));
+	// 			tempFile.delete();
+	//
+	// 			webpFiles.add(new CustomMultipartFile(
+	// 				webpData,
+	// 				originalFilename.substring(0, originalFilename.lastIndexOf('.')) + ".webp",
+	// 				"image/webp"
+	// 			));
+	// 		}
+	// 		return webpFiles;
+	// 	} catch (IOException e) {
+	// 		throw new ImageConvertException();
+	// 	}
+	// }
 
 }

@@ -11,11 +11,12 @@ import com.eventorfront.image.dto.response.GetImageResponse;
 public interface ImageService {
 
 	ApiResponse<List<GetImageResponse>> upload(MultipartFile file, Long postId, String categoryName,
-		boolean isThumbnail,
-		boolean isPasted);
+		boolean isThumbnail, boolean isPasted);
 
 	ApiResponse<List<GetImageResponse>> deleteImages(DeleteImageRequest request);
 
 	void deleteTempImage();
+
+	MultipartFile convertToWebp(MultipartFile file);
 
 }
