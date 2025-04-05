@@ -13,7 +13,8 @@ public class CalendarUtils {
 
 	// 오늘 00:00 반환 (String)
 	public static String getDate() {
-		return formatDate(getPlusDateAsDate(0));
+		Calendar calendar = getMidnightCalendar();
+		return formatDate(calendar.getTime());
 	}
 
 	// N일 후 00:00 반환 (String)
@@ -26,10 +27,11 @@ public class CalendarUtils {
 		return getPlusDateAsDate(0);
 	}
 
-	// N일 후 00:00 반환 (Date)
+	// N일 후 1분전 오후 11:59 반환 (Date)
 	public static Date getPlusDateAsDate(int amount) {
 		Calendar calendar = getMidnightCalendar();
 		calendar.add(Calendar.DAY_OF_YEAR, amount);
+		calendar.add(Calendar.MINUTE, -1);
 		return calendar.getTime();
 	}
 
