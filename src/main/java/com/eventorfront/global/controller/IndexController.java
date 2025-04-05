@@ -9,6 +9,7 @@ import com.eventorfront.bookmark.service.BookmarkService;
 import com.eventorfront.post.service.PostService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -24,7 +25,7 @@ public class IndexController {
 	// }
 
 	@GetMapping("/")
-	public String mainPage(HttpServletRequest request, Model model) {
+	public String mainPage(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("isLogin", authService.hasTokensInCookie(request));
 		model.addAttribute("hotPosts", postService.getHotEventPosts().getData());
 		model.addAttribute("latestPosts", postService.getLatestEventPosts().getData());
