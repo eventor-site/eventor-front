@@ -14,6 +14,7 @@ import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
 import com.eventorfront.post.dto.response.GetEventPostCountByAdminResponse;
+import com.eventorfront.post.dto.response.GetMainHotPostResponse;
 import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
@@ -48,7 +49,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public ApiResponse<List<GetMainPostResponse>> getHotEventPosts() {
+	public ApiResponse<List<GetMainHotPostResponse>> getHotEventPosts() {
 		return postClient.getHotEventPosts().getBody();
 	}
 
