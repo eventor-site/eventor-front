@@ -20,12 +20,12 @@ a {
     border-radius: 5px;
     overflow: hidden;
     text-align: center;
-    margin: 0 40px;
-    padding: 0 100px;
+    margin: 0 50px;
+    padding: 0 50px;
 }
 
 .top-card-title {
-    font-size: 28px;
+    font-size: 36px;
     font-weight: 700;
     color: #333;
     margin-bottom: 10px;
@@ -33,14 +33,13 @@ a {
 }
 
 .top-card-period {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 500;
-    color: #777;
+    color: #B22222;
 }
 
 .top-card-body {
     width: 50%;
-    padding: 20px 0;
 }
 
 .top-card-img {
