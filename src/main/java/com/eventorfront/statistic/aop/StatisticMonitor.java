@@ -33,6 +33,11 @@ public class StatisticMonitor {
 		if (args.length > 0 && args[0] instanceof HttpServletRequest request
 			&& args[1] instanceof HttpServletResponse response) {
 
+			String userAgent = request.getHeader("User-Agent");
+			if (userAgent != null && userAgent.toLowerCase().matches(".*(bot|spider|crawl).*")) {
+				return;
+			}
+
 			// 1. 쿠키 조회: uuid 가 있는지 확인
 			Optional<Cookie> uuidCookieOpt = CookieUtil.getCookie(request, "uuid");
 
