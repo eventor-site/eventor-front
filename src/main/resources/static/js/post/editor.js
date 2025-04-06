@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         height: '500px',
         initialEditType: 'wysiwyg',
         previewStyle: 'vertical',
-        initialValue: document.querySelector('#content').value,
+        // initialValue: document.querySelector('#content').value,
         hooks: {
             addImageBlobHook: async (blob, callback) => {
                 if (!postId) {
@@ -112,6 +112,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         }
     });
+
+    // 👉 여기서 setHTML로 초기 내용 주입
+    const savedContent = document.querySelector('#content').value;
+    editor.setHTML(savedContent);
 
     // 게시물 업데이트 요청
     async function updatePostWithImage() {
