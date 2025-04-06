@@ -22,6 +22,7 @@ import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
 import com.eventorfront.post.dto.response.GetEventPostCountByAdminResponse;
+import com.eventorfront.post.dto.response.GetMainHotPostResponse;
 import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
@@ -50,7 +51,7 @@ public interface PostClient {
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/posts/event/hot")
-	ResponseEntity<ApiResponse<List<GetMainPostResponse>>> getHotEventPosts();
+	ResponseEntity<ApiResponse<List<GetMainHotPostResponse>>> getHotEventPosts();
 
 	@GetMapping("/back/posts/event/latest")
 	ResponseEntity<ApiResponse<List<GetMainPostResponse>>> getLatestEventPosts();

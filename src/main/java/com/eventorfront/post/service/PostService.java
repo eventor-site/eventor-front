@@ -11,6 +11,7 @@ import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
 import com.eventorfront.post.dto.response.GetEventPostCountByAdminResponse;
+import com.eventorfront.post.dto.response.GetMainHotPostResponse;
 import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
@@ -28,7 +29,7 @@ public interface PostService {
 
 	ApiResponse<Page<GetPostSimpleResponse>> monitorPosts(Pageable pageable);
 
-	ApiResponse<List<GetMainPostResponse>> getHotEventPosts();
+	ApiResponse<List<GetMainHotPostResponse>> getHotEventPosts();
 
 	ApiResponse<List<GetMainPostResponse>> getLatestEventPosts();
 
