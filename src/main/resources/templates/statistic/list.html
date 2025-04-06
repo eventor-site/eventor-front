@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
+<head>
+    <th:block th:replace="~{common/fragments/config}"></th:block>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="body-container">
+        <section id="page">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>통계 정보</h5>
+                </section>
+                <hr>
+                <section id="page-body">
+                    <h5>기준: 메인페이지</h5>
+                    <div th:if="${objects.getTotalElements() > 0}">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th style="width: 10%;">번호</th>
+                                <th style="width: 20%;">날짜</th>
+                                <th style="width: 15%;">조회수</th>
+                                <th style="width: 15%;">방문자수</th>
+                                <th style="width: 15%;">로그인수</th>
+                                <th style="width: 15%;">가입자수</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="statistic, index : ${objects}">
+                                <td th:text="${(objects.totalElements - (objects.number * objects.size + index.count)) + 1}"></td>
+                                <td th:text="${#temporals.format(statistic.date, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${statistic.visitedCount}"></td>
+                                <td th:text="${statistic.visitorCount}"></td>
+                                <td th:text="${statistic.loginCount}"></td>
+                                <td th:text="${statistic.signupCount}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:if="${objects.getTotalElements() == 0}">
+                        <p>통계 정보가 없습니다.</p>
+                    </div>
+
+                    <!-- 페이징 처리 시작-->
+                    <div th:insert="~{common/paging.html}"></div>
+                    <!-- 페이징 처리 끝-->
+
+                </section>
+            </section>
+
+        </section>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+
+</th:block>
+</body>
+</html>
