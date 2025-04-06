@@ -39,6 +39,8 @@ public interface PostService {
 
 	ApiResponse<List<GetRecommendPostResponse>> getTrendingEventPosts();
 
+	ApiResponse<List<GetMainPostResponse>> getCommunityPosts();
+
 	ApiResponse<List<GetMainPostResponse>> getHotPostsByCategoryName(String categoryName);
 
 	ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable, String categoryName,
