@@ -45,7 +45,7 @@ a {
 
 .top-card-img {
     width: 50%;
-    padding: 20px 0;
+    padding: 25px 0 0 0;
     display: flex;
     justify-content: flex-end; /* 오른쪽으로 정렬 */
     border-radius: 5px;
