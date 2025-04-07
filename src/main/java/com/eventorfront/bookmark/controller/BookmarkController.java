@@ -40,5 +40,5 @@ public class BookmarkController {
 	public String deleteBookmark(@PathVariable Long bookmarkId, RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("message", bookmarkService.deleteBookmark(bookmarkId).getMessage());
 		return "redirect:/users/me/bookmarks";
-	} // 배포 테스트
+	}
 }
