@@ -20,6 +20,6 @@ public interface StatisticClient {
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@PostMapping("/back/statistics/visitors")
-	ResponseEntity<ApiResponse<Void>> saveVisitor(@RequestParam String uuid);
+	ResponseEntity<ApiResponse<Void>> increaseVisitor();
 
 }

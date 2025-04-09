@@ -52,7 +52,7 @@ public class StatisticMonitor {
 			String value = uuidCookieOpt.get().getValue(); // 예: uuid or uuid_날짜
 
 			if (!value.contains("_")) {
-				// 기존 형식(uuid만 있는 경우) -> 재발급
+				// 기존 형식(uuid 만 있는 경우) -> 재발급
 				reissueUuidCookie(response);
 			} else {
 				// 이미 uuid_날짜 형식이면 재발급 필요 없음
@@ -78,7 +78,7 @@ public class StatisticMonitor {
 		response.addCookie(uuidCookie);
 
 		// 통계 저장 등 부가 처리
-		statisticService.saveVisitor(uuid);
+		statisticService.increaseVisitor();
 	}
 }
 
