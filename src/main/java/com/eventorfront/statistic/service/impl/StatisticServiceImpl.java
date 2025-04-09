@@ -22,7 +22,7 @@ public class StatisticServiceImpl implements StatisticService {
 	}
 
 	@Override
-	public void saveVisitor(String uuid) {
-		statisticClient.saveVisitor(uuid);
+	public void increaseVisitor() {
+		statisticClient.increaseVisitor();
 	}
 }
