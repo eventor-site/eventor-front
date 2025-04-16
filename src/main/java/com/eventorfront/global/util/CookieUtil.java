@@ -42,7 +42,7 @@ public class CookieUtil {
 	 * 주어진 쿠키 이름을 사용하여 토큰을 무효화합니다.
 	 */
 	public static void revokeToken(HttpServletResponse response, String cookieName) {
-		jakarta.servlet.http.Cookie revokedTokenCookie = new jakarta.servlet.http.Cookie(cookieName, "");
+		Cookie revokedTokenCookie = new Cookie(cookieName, "");
 		revokedTokenCookie.setHttpOnly(true);
 		revokedTokenCookie.setMaxAge(0);
 		revokedTokenCookie.setPath("/");
