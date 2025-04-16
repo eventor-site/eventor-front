@@ -83,7 +83,7 @@ public interface PostClient {
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/posts/{postId}")
-	ResponseEntity<ApiResponse<GetPostResponse>> getPost(@PathVariable Long postId);
+	ResponseEntity<ApiResponse<GetPostResponse>> getPost(@RequestParam(required = false) String uuid, @PathVariable Long postId);
 
 	@GetMapping("/back/posts/temp")
 	ResponseEntity<ApiResponse<GetTempPostResponse>> getTempPost();
