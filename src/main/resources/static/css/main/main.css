@@ -36,6 +36,7 @@ a {
     font-size: 24px;
     font-weight: 500;
     color: #B22222;
+    margin-bottom: 10px;
 }
 
 .top-card-body {
@@ -56,6 +57,18 @@ a {
     object-fit: cover;
     display: block; /* 인라인 요소 특성 제거 */
     border-radius: 5px;
+}
+
+.top-card-detail-btn {
+    background-color: #FF8A3D; /* 따뜻한 오렌지 톤 */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
 
 .event-section {
