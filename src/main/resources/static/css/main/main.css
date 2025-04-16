@@ -291,3 +291,27 @@ a {
     overflow: hidden; /* 넘치는 텍스트 숨김 */
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
+
+
+.custom-event-more-btn {
+    display: inline-block;
+    background-color: #FF8A3D; /* 따뜻한 오렌지 톤 */
+    color: white;
+    text-decoration: none;
+    padding: 10px 50px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-event-more-btn:hover {
+    background-color: #FF6B00;
+    transform: translateY(-2px);
+}
+
+.custom-event-more-btn:active {
+    background-color: #e95e00;
+    transform: translateY(1px);
+}
