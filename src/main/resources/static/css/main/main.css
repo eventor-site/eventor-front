@@ -87,12 +87,12 @@ a {
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin: 0 40px;
+    margin: 0 20px;
 }
 
 .event-card img, .event-card video {
     width: 100%;
-    height: 400px;
+    height: 300px;
     object-fit: cover;
     display: block; /* 인라인 요소 특성 제거 */
 }
