@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -100,7 +101,7 @@ public class PostController {
 			throw new ForbiddenException();
 		}
 
-		GetPostResponse post = postService.getPost(postId).getData();
+		GetPostResponse post = postService.getPost(null, postId).getData();
 		String categoryName = post.categoryName();
 		model.addAttribute("post", post);
 
@@ -261,9 +262,9 @@ public class PostController {
 
 	@GetMapping("/{postId}")
 	public String getPost(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model,
-		@PathVariable Long postId) {
+		@CookieValue(value = "uuid", required = false) String uuid, @PathVariable Long postId) {
 		Page<GetCommentResponse> comments = commentService.getCommentsByPostId(pageable, postId).getData();
-		GetPostResponse post = postService.getPost(postId).getData();
+		GetPostResponse post = postService.getPost(uuid, postId).getData();
 		model.addAttribute("post", post);
 		model.addAttribute("objects", comments);
 		model.addAttribute("isEvent", categoryService.getCategoryNames("이벤트").getData().contains(post.categoryName()));

@@ -1,10 +1,10 @@
 .alert-box {
     display: none; /* Hidden by default */
     position: fixed;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
-    background-color: #4CAF50; /* Green background */
-    color: white;
+    background-color: #ffc107; /* Green background */
+    color: #212529;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -18,7 +18,7 @@
 
 .alert-box .closeBtn {
     margin-left: 15px;
-    color: white;
+    color: #212529;
     font-weight: bold;
     float: right;
     font-size: 22px;
