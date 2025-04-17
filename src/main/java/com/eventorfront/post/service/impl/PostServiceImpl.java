@@ -95,8 +95,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public ApiResponse<GetPostResponse> getPost(Long postId) {
-		return postClient.getPost(postId).getBody();
+	public ApiResponse<GetPostResponse> getPost(String uuid, Long postId) {
+		return postClient.getPost(uuid, postId).getBody();
 	}
 
 	@Override

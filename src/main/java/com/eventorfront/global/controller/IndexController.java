@@ -25,7 +25,7 @@ public class IndexController {
 	// }
 
 	@GetMapping("/")
-	public String mainPage(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String mainPage(HttpServletRequest request, Model model) {
 		model.addAttribute("isLogin", authService.hasTokensInCookie(request));
 		model.addAttribute("hotPosts", postService.getHotEventPosts().getData());
 		model.addAttribute("latestPosts", postService.getLatestEventPosts().getData());

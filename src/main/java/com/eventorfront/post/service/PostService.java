@@ -48,7 +48,7 @@ public interface PostService {
 
 	ApiResponse<Page<GetPostSimpleResponse>> getPostsByUserId(Pageable pageable);
 
-	ApiResponse<GetPostResponse> getPost(Long postId);
+	ApiResponse<GetPostResponse> getPost(String uuid, Long postId);
 
 	ApiResponse<GetTempPostResponse> getTempPost();
 
