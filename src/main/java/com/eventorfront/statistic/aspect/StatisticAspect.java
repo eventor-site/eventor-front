@@ -1,4 +1,4 @@
-package com.eventorfront.statistic.aop;
+package com.eventorfront.statistic.aspect;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -27,14 +27,13 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Transactional
-public class StatisticMonitor {
+public class StatisticAspect {
 	private final StatisticService statisticService;
 
-	@AfterReturning("execution(* com.eventorfront..controller..*(..))")
-	public void collectInfoAfterReturningGetMainPage() {
+	@Before("execution(* com.eventorfront..controller..*(..))")
+	public void checkAndReissueUuidCookie() {
 
 		HttpServletRequest request = getHttpServletRequest();
-		HttpServletResponse response = getHttpServletResponse();
 
 		String userAgent = request.getHeader("User-Agent");
 		if (userAgent != null && userAgent.toLowerCase().matches(".*(bot|spider|crawl).*")) {
@@ -45,7 +44,7 @@ public class StatisticMonitor {
 		Optional<Cookie> uuidCookieOpt = CookieUtil.getCookie(request, "uuid");
 
 		if (uuidCookieOpt.isEmpty()) {
-			reissueUuidCookie(response); // 쿠키가 없을 때
+			reissueUuidCookie(); // 쿠키가 없을 때
 			return;
 		}
 
@@ -53,14 +52,13 @@ public class StatisticMonitor {
 
 		if (!value.contains("_")) {
 			// 기존 형식(uuid 만 있는 경우) -> 재발급
-			reissueUuidCookie(response);
-		} else {
-			// 이미 uuid_날짜 형식이면 재발급 필요 없음
+			reissueUuidCookie();
 		}
 
 	}
 
-	private void reissueUuidCookie(HttpServletResponse response) {
+	private void reissueUuidCookie() {
+		HttpServletResponse response = getHttpServletResponse();
 		String uuid = UUID.randomUUID().toString();
 
 		// 현재 시각을 yyyyMMddHHmmss 형식으로
