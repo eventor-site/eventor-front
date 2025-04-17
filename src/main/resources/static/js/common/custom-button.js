@@ -1,57 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const scrollBtn = document.createElement("button");
-    scrollBtn.id = "scrollToTopBtn";
-    scrollBtn.title = "맨 위로";
-    scrollBtn.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
-    document.body.appendChild(scrollBtn);
+    // 버튼 생성
+    const scrollTopBtn = document.createElement("button");
+    scrollTopBtn.id = "scrollToTopBtn";
+    scrollTopBtn.title = "맨 위로";
+    scrollTopBtn.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
 
-    // 스타일 삽입
-    const style = document.createElement("style");
-    style.innerHTML = `
-        #scrollToTopBtn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
+    const scrollBottomBtn = document.createElement("button");
+    scrollBottomBtn.id = "scrollToBottomBtn";
+    scrollBottomBtn.title = "맨 아래로";
+    scrollBottomBtn.innerHTML = `<i class="fa-solid fa-arrow-down"></i>`;
 
-        #scrollToTopBtn:hover {
-            background-color: #0056b3;
-        }
+    // 추가
+    document.body.appendChild(scrollTopBtn);
+    document.body.appendChild(scrollBottomBtn);
 
-        #scrollToTopBtn.show {
-            opacity: 1;
-            visibility: visible;
-        }
-    `;
-    document.head.appendChild(style);
-
-    // 스크롤 이벤트 감지
+    // 스크롤 이벤트
     window.addEventListener("scroll", function () {
-        if (window.scrollY > 100) {
-            scrollBtn.classList.add("show");
-        } else {
-            scrollBtn.classList.remove("show");
-        }
+        const shouldShow = window.scrollY > 100;
+        scrollTopBtn.classList.toggle("show", shouldShow);
+        scrollBottomBtn.classList.toggle("show", shouldShow);
     });
 
-    // 버튼 클릭 → 부드럽게 최상단 이동
-    scrollBtn.addEventListener("click", function () {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+    // 스크롤 이동
+    scrollTopBtn.addEventListener("click", function () {
+        window.scrollTo({top: 0, behavior: "smooth"});
+    });
+
+    scrollBottomBtn.addEventListener("click", function () {
+        window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
     });
 });
