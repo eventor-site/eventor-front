@@ -51,6 +51,31 @@ $(document).ready(function () {
         ]
     });
 
+    $('.recommend-vertical-slider').slick({
+        vertical: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        arrows: false,
+        dots: true,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                }
+            }
+        ]
+    });
+
     $('.community-slider').slick({
         infinite: true,
         slidesToShow: 5,
