@@ -4,5 +4,8 @@ Disallow: /
 User-agent: Bytespider
 Disallow: /
 
+User-agent: AhrefsBot
+Disallow: /
+
 User-agent: *
 Allow: /
