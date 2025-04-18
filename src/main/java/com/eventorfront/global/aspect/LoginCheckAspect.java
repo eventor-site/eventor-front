@@ -1,5 +1,7 @@
 package com.eventorfront.global.aspect;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -23,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class LoginCheckAspect {
 	private final AuthService authService;
-
 
 	@AfterReturning(pointcut = "execution(* com.eventorfront.post.controller..*(..)) || execution(* com.eventorfront.global.controller.IndexController.mainPage(..))")
 	public void loginCheckAspect() {
@@ -56,9 +57,13 @@ public class LoginCheckAspect {
 			// 2. 방문 횟수 쿠키 갱신
 			count++;
 
+			LocalDateTime now = LocalDateTime.now();
+			LocalDateTime midnight = now.toLocalDate().plusDays(1).atStartOfDay();
+			int secondsUntilMidnight = (int)Duration.between(now, midnight).getSeconds();
+
 			Cookie countCookie = new Cookie("guest-access-count", String.valueOf(count));
 			countCookie.setPath("/");
-			countCookie.setMaxAge(60 * 60 * 24);
+			countCookie.setMaxAge(secondsUntilMidnight);
 			response.addCookie(countCookie);
 		}
 	}
@@ -85,7 +90,6 @@ public class LoginCheckAspect {
 			}
 		}
 	}
-
 
 	private HttpServletRequest getHttpServletRequest() {
 		ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
