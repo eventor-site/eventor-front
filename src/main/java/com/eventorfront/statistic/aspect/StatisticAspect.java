@@ -36,7 +36,7 @@ public class StatisticAspect {
 		HttpServletRequest request = getHttpServletRequest();
 
 		String userAgent = request.getHeader("User-Agent");
-		if (userAgent != null && userAgent.toLowerCase().matches(".*(bot|spider|crawl|bytespider).*")) {
+		if (userAgent != null && userAgent.toLowerCase().matches(".*(bot|spider|crawl|bytespider|ahrefsbot).*")) {
 			return;
 		}
 
