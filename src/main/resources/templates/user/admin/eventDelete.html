@@ -17,9 +17,10 @@
                 <hr>
                 <section id="page-body">
 
-                    <form action="/posts/event" th:method="delete" onsubmit="return confirm('정말 삭제하시겠습니까?')">
+                    <form action="/posts/event" th:method="delete" onsubmit="return validateKeyword()">
                         <div class="mb-2 d-flex align-items-center">
-                            <input class="form-control" name="keyword" placeholder="제목에 포함된 키워드 입력" required>
+                            <input class="form-control" id="keywordInput" name="keyword" placeholder="제목에 포함된 키워드 입력"
+                                   required>
                             <button type="submit" class="btn btn-danger">삭제</button>
                         </div>
 
@@ -34,7 +35,20 @@
 </div>
 
 <th:block layout:fragment="script">
+    <script>
+        function validateKeyword() {
+            const input = document.getElementById('keywordInput');
+            const value = input.value.trim();
 
+            if (value.length < 3) {
+                alert("3글자 이상 입력해주세요.");
+                input.focus();
+                return false;
+            }
+
+            return confirm("정말 삭제하시겠습니까?");
+        }
+    </script>
 </th:block>
 </body>
 </html>

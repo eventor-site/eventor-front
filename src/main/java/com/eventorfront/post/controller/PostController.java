@@ -350,8 +350,10 @@ public class PostController {
 
 	@AuthorizeRole("admin")
 	@DeleteMapping("/event")
-	public String deleteEventPostsByTitleContainKeyword(@RequestParam String keyword, Model model) {
-		model.addAttribute("message", postService.deleteEventPostsByTitleContainKeyword(keyword).getMessage());
+	public String deleteEventPostsByTitleContainKeyword(@RequestParam String keyword,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message",
+			postService.deleteEventPostsByTitleContainKeyword(keyword).getMessage());
 		return "redirect:/posts/event";
 	}
 }
