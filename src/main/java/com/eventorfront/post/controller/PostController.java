@@ -341,4 +341,17 @@ public class PostController {
 
 		return "user/admin/statistic";
 	}
+
+	@AuthorizeRole("admin")
+	@GetMapping("/event")
+	public String deleteEventPostsPage() {
+		return "user/admin/eventDelete";
+	}
+
+	@AuthorizeRole("admin")
+	@DeleteMapping("/event")
+	public String deleteEventPostsByTitleContainKeyword(@RequestParam String keyword, Model model) {
+		model.addAttribute("message", postService.deleteEventPostsByTitleContainKeyword(keyword).getMessage());
+		return "redirect:/posts/event";
+	}
 }

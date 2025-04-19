@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.global.dto.ApiResponse;
-import com.eventorfront.image.client.ImageClient;
 import com.eventorfront.post.client.PostClient;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
@@ -30,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 	private final PostClient postClient;
-	private final ImageClient imageClient;
 
 	@Override
 	public ApiResponse<Page<SearchPostsResponse>> searchPosts(Pageable pageable, String keyword, String categoryName,
@@ -148,6 +146,11 @@ public class PostServiceImpl implements PostService {
 	public ApiResponse<List<GetEventPostCountByAdminResponse>> getEventPostCountByAdmin(
 		LocalDateTime startTime, LocalDateTime endTime) {
 		return postClient.getEventPostCountByAdmin(startTime, endTime).getBody();
+	}
+
+	@Override
+	public ApiResponse<Void> deleteEventPostsByTitleContainKeyword(String keyword) {
+		return postClient.deleteEventPostsByTitleContainKeyword(keyword).getBody();
 	}
 
 }

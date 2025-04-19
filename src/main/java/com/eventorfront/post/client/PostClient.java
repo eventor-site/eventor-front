@@ -83,7 +83,8 @@ public interface PostClient {
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/posts/{postId}")
-	ResponseEntity<ApiResponse<GetPostResponse>> getPost(@RequestParam(required = false) String uuid, @PathVariable Long postId);
+	ResponseEntity<ApiResponse<GetPostResponse>> getPost(@RequestParam(required = false) String uuid,
+		@PathVariable Long postId);
 
 	@GetMapping("/back/posts/temp")
 	ResponseEntity<ApiResponse<GetTempPostResponse>> getTempPost();
@@ -118,4 +119,8 @@ public interface PostClient {
 	ResponseEntity<ApiResponse<List<GetEventPostCountByAdminResponse>>> getEventPostCountByAdmin(
 		@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
 		@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime);
+
+	@DeleteMapping("/back/posts/event")
+	ResponseEntity<ApiResponse<Void>> deleteEventPostsByTitleContainKeyword(
+		@RequestParam String keyword);
 }

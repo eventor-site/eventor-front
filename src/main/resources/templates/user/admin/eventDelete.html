@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
+<head>
+    <th:block th:replace="~{common/fragments/config}"></th:block>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="body-container">
+        <section id="page">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>이벤트 제목 기반 삭제</h5>
+                </section>
+                <hr>
+                <section id="page-body">
+
+                    <form action="/posts/event" th:method="delete" onsubmit="return confirm('정말 삭제하시겠습니까?')">
+                        <div class="mb-2 d-flex align-items-center">
+                            <input class="form-control" name="keyword" placeholder="제목에 포함된 키워드 입력" required>
+                            <button type="submit" class="btn btn-danger">삭제</button>
+                        </div>
+
+                    </form>
+
+                </section>
+            </section>
+
+        </section>
+
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+
+</th:block>
+</body>
+</html>
