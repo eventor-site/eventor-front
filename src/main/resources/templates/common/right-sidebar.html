@@ -8,13 +8,6 @@
     <aside class="sidebar sidebar-right" id="right-sidebar">
         <h3>검색</h3>
 
-        <!--        <form class="search-form" action="/posts/search" method="get">-->
-        <!--            <input class="search-input" type="text" name="keyword" placeholder="검색어를 입력해주세요.">-->
-        <!--            <button class="search-button" type="submit">-->
-        <!--                <i class="fa-solid fa-magnifying-glass"></i>-->
-        <!--            </button>-->
-        <!--        </form>-->
-
         <form class="search-form" th:action="@{/posts/search (categoryName=${categoryName})}" method="get">
             <input type="hidden" name="categoryName" th:value="${categoryName}">
             <input class="search-input" type="text" name="keyword" placeholder="검색어를 입력해주세요.">
