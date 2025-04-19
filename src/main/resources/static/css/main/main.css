@@ -62,7 +62,7 @@ a {
 }
 
 .event-slider {
-    padding: 27px 60px 0 60px; /* 화살표 공간 확보 */
+    padding: 0 60px; /* 화살표 공간 확보 */
 }
 
 .event-card {
@@ -105,6 +105,10 @@ a {
     padding: 1em;
 }
 
+.community-slider .slick-slide {
+    padding: 0.5em;
+}
+
 .recommended-list .slick-slide {
     padding: 0;
 }
@@ -135,7 +139,6 @@ a {
     padding: 25px;
     border: 2px solid black;
     border-radius: 10px;
-    margin-top: 27px;
     margin-bottom: 3rem;
 }
 
@@ -257,12 +260,12 @@ a {
 
 .community-slider {
     position: relative;
-    padding: 27px 60px 0 60px; /* 화살표 공간 확보 */
+    padding: 0 60px; /* 화살표 공간 확보 */
 }
 
 .event-more-btn-container {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .custom-event-more-btn {
@@ -389,8 +392,8 @@ a {
         padding: 0.3em;
     }
 
-    .community-slider .slick-slide > div {
-        padding-top: 0.3em; /* 원하는 만큼 조절 */
+    .community-slider .slick-slide {
+        padding: 0.3em;
     }
 
 }
