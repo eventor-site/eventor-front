@@ -315,7 +315,7 @@ a {
 
     .top-card-body {
         width: 100%;
-        padding: 1em;
+        padding: 1em 1em 0 1em;
     }
 
     .top-card img,
@@ -332,7 +332,10 @@ a {
     }
 
     .top-card-title {
-        font-size: 1.2rem
+        font-size: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .top-card-period {

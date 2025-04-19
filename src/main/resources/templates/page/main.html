@@ -31,7 +31,7 @@
         <hr>
 
         <div class="event-section">
-            <h3 style="margin-bottom: 27px">🔥 핫 이벤트</h3>
+            <h3>🔥 핫 이벤트</h3>
             <div class="top-slider">
                 <div th:if="${hotPosts.size() > 0}" th:each="post : ${hotPosts}">
                     <a th:href="@{/posts/{postId} (postId=${post.postId})}">
