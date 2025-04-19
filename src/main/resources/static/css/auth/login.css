@@ -181,7 +181,7 @@ label {
     }
 
     .header {
-        font-size: 30px; /* 모바일에서는 헤더 폰트 크기 축소 */
-        padding: 15px;
+        font-size: 1.5em; /* 모바일에서는 헤더 폰트 크기 축소 */
+        padding: 1vw;
     }
 }

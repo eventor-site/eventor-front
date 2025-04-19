@@ -144,8 +144,8 @@
     word-wrap: break-word; /* 긴 단어가 줄 바꿈이 되도록 설정 */
 }
 
-.post-body img {
-    max-width: 100%;
+.post-body img, .post-body video, .post-body iframe {
+    max-width: 100%; /* 부모 요소의 너비를 초과하지 않도록 제한 */
 }
 
 /* 첨부파일 텍스트의 hover 효과 */
