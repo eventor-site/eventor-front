@@ -70,4 +70,6 @@ public interface PostService {
 
 	ApiResponse<List<GetEventPostCountByAdminResponse>> getEventPostCountByAdmin(
 		LocalDateTime startTime, LocalDateTime endTime);
+
+	ApiResponse<Void> deleteEventPostsByTitleContainKeyword(String keyword);
 }
