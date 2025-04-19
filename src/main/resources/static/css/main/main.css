@@ -132,7 +132,7 @@ a {
 }
 
 .recommended-container {
-    padding: 1%;
+    padding: 25px;
     border: 2px solid black;
     border-radius: 10px;
     margin-top: 27px;
@@ -162,7 +162,6 @@ a {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .recommend-event-card img {
@@ -203,7 +202,7 @@ a {
     display: flex;
     align-items: center;
     flex-direction: row;
-    padding: 10px;
+    padding: 5px;
     gap: 10px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -218,7 +217,7 @@ a {
 
 /* 이미지 스타일 */
 .recommended-card img, .recommended-card video {
-    width: 100px;
+    width: 80px;
     aspect-ratio: 1 / 1;
     border-radius: 8px;
     object-fit: cover;
@@ -347,6 +346,10 @@ a {
     .recommend-card-title,
     .recommend-list-title {
         font-size: 1rem;
+    }
+
+    .recommended-container {
+        padding: 1%;
     }
 
     .recommend-slider {

@@ -136,18 +136,14 @@
                             <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
                             <!-- 제목 및 추가 정보 -->
                             <div class="recommended-card-body">
-                                <span class="recommend-list-title" th:text="${post.title}"></span> <!-- 제목 -->
+                                <span class="recommend-list-title" th:text="${post.title}"></span>
                                 <div class="recommend-list-data">
                                     <div class="recommend-writer">
-                                        작성자: <span th:text="${post.writer}"></span>
+                                        작성자 <span th:text="${post.writer}"></span>
                                     </div>
                                     <div class="recommend-stats">
-                                        조회수: <span th:text="${post.viewCount}"></span> ·
-                                        추천수: <span th:text="${post.recommendationCount}"></span>
-                                    </div>
-                                    <div class="recommend-time">
-                                        작성시간: <span
-                                            th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                                        조회수 <span th:text="${post.viewCount}"></span> ·
+                                        추천수 <span th:text="${post.recommendationCount}"></span>
                                     </div>
                                 </div>
                             </div>
@@ -191,15 +187,11 @@
                                 <span class="recommend-list-title" th:text="${post.title}"></span> <!-- 제목 -->
                                 <div class="recommend-list-data">
                                     <div class="recommend-writer">
-                                        작성자: <span th:text="${post.writer}"></span>
+                                        작성자 <span th:text="${post.writer}"></span>
                                     </div>
                                     <div class="recommend-stats">
-                                        조회수: <span th:text="${post.viewCount}"></span> ·
-                                        추천수: <span th:text="${post.recommendationCount}"></span>
-                                    </div>
-                                    <div class="recommend-time">
-                                        작성시간: <span
-                                            th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                                        조회수 <span th:text="${post.viewCount}"></span> ·
+                                        추천수 <span th:text="${post.recommendationCount}"></span>
                                     </div>
                                 </div>
                             </div>
