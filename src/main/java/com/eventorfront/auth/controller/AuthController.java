@@ -122,4 +122,9 @@ public class AuthController {
 		return "auth/oauth";
 	}
 
+	@GetMapping("/login/modal")
+	public String getLoginModal() {
+		return "auth/login-modal";
+	}
+
 }

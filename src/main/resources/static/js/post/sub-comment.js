@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     commentSection.addEventListener("click", function (event) {
         const button = event.target;
 
+        const commentWrapper = button.closest(".comment-container");
+        if (!commentWrapper) return;
+        
         // 해당 댓글의 postId와 commentId 가져오기
         const commentContainer = button.closest(".comment-container").parentElement;
 

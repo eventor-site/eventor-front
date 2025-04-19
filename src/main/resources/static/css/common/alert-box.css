@@ -1,14 +1,14 @@
 .alert-box {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #ffc107; /* Green background */
+    background-color: #ffc107;
     color: #212529;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Make sure it is on top of other elements */
+    z-index: 1000;
     font-size: 16px;
 }
 
@@ -24,4 +24,21 @@
     font-size: 22px;
     line-height: 20px;
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .alert-box {
+        top: 10px;
+        right: 10px;
+        padding: 12px 16px;
+        font-size: 14px;
+        max-width: 90%; /* 너무 길어지지 않도록 제한 */
+        word-break: break-word; /* 긴 문장 줄바꿈 */
+    }
+
+    .alert-box .closeBtn {
+        font-size: 18px;
+        line-height: 18px;
+        margin-left: 10px;
+    }
 }

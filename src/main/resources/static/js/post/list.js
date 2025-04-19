@@ -11,17 +11,19 @@ $(document).ready(function () {
         nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-caret-right"></i></button>',
         responsive: [
             {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    arrows: false
+                }
+            },
+            {
                 breakpoint: 768,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
+                    arrows: false
                 }
             }
         ]
