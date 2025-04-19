@@ -132,7 +132,7 @@ a {
 }
 
 .recommended-container {
-    padding: 2vw;
+    padding: 1%;
     border: 2px solid black;
     border-radius: 10px;
     margin-top: 27px;
@@ -300,10 +300,6 @@ a {
     .top-slider, .event-slider, .community-slider {
         flex-direction: column;
         align-items: center;
-        padding: 0;
-    }
-
-    .top-slider {
         padding: 0;
     }
 
