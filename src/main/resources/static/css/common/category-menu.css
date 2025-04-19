@@ -142,3 +142,9 @@
 .eatery-category-item:hover .eatery-sub-category {
     display: block;
 }
+
+@media (min-width: 768px) {
+    .category-menu .desktop-only {
+        display: flex;
+    }
+}

@@ -2,14 +2,9 @@ a {
     color: inherit; /* 부모 요소의 색상 상속 */
 }
 
-.main-top-container {
-    background-color: #FFF0E0; /* 따뜻하고 생기 있는 톤 */
-    border-radius: 5px;
-}
-
 .top-slider {
-    position: relative;
-    padding: 0 50px; /* 화살표 공간 확보 */
+    padding: 27px 60px 0 60px; /* 화살표 공간 확보 */
+    background-color: #FFF0E0; /* 따뜻하고 생기 있는 톤 */
 }
 
 .top-card {
@@ -21,7 +16,10 @@ a {
     overflow: hidden;
     text-align: center;
     margin: 0 50px;
-    padding: 0 50px;
+}
+
+.top-card-body {
+    width: 50%;
 }
 
 .top-card-title {
@@ -39,23 +37,12 @@ a {
     margin-bottom: 10px;
 }
 
-.top-card-body {
-    width: 50%;
-}
-
-.top-card-img {
-    width: 50%;
-    padding: 25px 0 0 0;
-    display: flex;
-    justify-content: flex-end; /* 오른쪽으로 정렬 */
-    border-radius: 5px;
-}
-
 .top-card img, .top-card video {
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
+    width: 35%;
+    aspect-ratio: 1 / 1;
     display: block; /* 인라인 요소 특성 제거 */
+    justify-content: flex-end; /* 오른쪽으로 정렬 */
+    object-fit: cover;
     border-radius: 5px;
 }
 
@@ -68,7 +55,6 @@ a {
     font-size: 16px;
     font-weight: 600;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
 }
 
 .event-section {
@@ -76,24 +62,29 @@ a {
 }
 
 .event-slider {
-    position: relative;
-    padding: 0 50px; /* 화살표 공간 확보 */
+    padding: 27px 60px 0 60px; /* 화살표 공간 확보 */
 }
 
 .event-card {
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    border-radius: 5px;
     background-color: white;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin: 0 20px;
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
 }
 
 .event-card img, .event-card video {
     width: 100%;
-    height: 300px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+    object-position: center;
     display: block; /* 인라인 요소 특성 제거 */
 }
 
@@ -110,10 +101,18 @@ a {
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
 
+.slick-slide {
+    padding: 1em;
+}
+
+.recommended-list .slick-slide {
+    padding: 0;
+}
+
 /* 커스텀 화살표 스타일 */
 .slick-prev:before, .slick-next:before {
     font-size: 50px !important; /* 아이콘 크기 */
-    color: black !important;
+    color: #333 !important;
 }
 
 .slick-prev {
@@ -133,10 +132,11 @@ a {
 }
 
 .recommended-container {
-    padding: 20px;
+    padding: 2vw;
     border: 2px solid black;
     border-radius: 10px;
-    margin-bottom: 40px;
+    margin-top: 27px;
+    margin-bottom: 3rem;
 }
 
 .recommended-wrapper {
@@ -148,40 +148,38 @@ a {
     display: flex;
     width: 50%;
     height: 100%;
-    padding: 0 50px; /* 화살표 공간 확보 */
+    padding: 27px 50px 0 50px; /* 화살표 공간 확보 */
 }
 
 .recommend-event-card {
-    margin: 40px;
-    border: 1px solid #ddd;
-    height: 600px;
-    flex: 0 0 100%;
     display: flex;
     flex-direction: column; /* 제목을 이미지 아래로 정렬 */
     justify-content: center;
-    align-items: center;
-    border-radius: 5px;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    margin: 0 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
+
 }
 
 .recommend-event-card img {
     width: 100%;
-    height: 550px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
 }
 
 .recommend-event-card-body {
-    width: 500px;
     padding: 10px;
 }
 
 .recommend-event-card-title {
+    height: 5rem;
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 10px;
     white-space: nowrap; /* 줄 바꿈 방지 */
     overflow: hidden; /* 넘치는 텍스트 숨김 */
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
@@ -202,34 +200,35 @@ a {
 
 /* 개별 추천 아이템 */
 .recommended-card {
-    padding: 10px;
     display: flex;
     align-items: center;
     flex-direction: row;
+    padding: 10px;
+    gap: 10px;
+    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     transition: transform 0.3s, background-color 0.3s;
-    background-color: #fff;
-    gap: 10px;
 }
 
 .recommended-card:hover {
-    background-color: #f9f9f9;
+    transform: translateY(-5px);
     text-decoration: none; /* 기본 밑줄 제거 */
 }
 
 /* 이미지 스타일 */
-.recommended-card-img {
-    width: 120px;
-    height: 120px;
+.recommended-card img, .recommended-card video {
+    width: 100px;
+    aspect-ratio: 1 / 1;
     border-radius: 8px;
     object-fit: cover;
 }
 
 /* 정보 영역 */
 .recommended-card-body {
-    width: 600px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
     white-space: nowrap; /* 줄 바꿈 방지 */
     overflow: hidden; /* 넘치는 텍스트 숨김 */
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
@@ -247,8 +246,9 @@ a {
 .recommend-list-data {
     display: flex;
     align-items: center;
-    gap: 10px;
     margin-bottom: 10px;
+    gap: 10px;
+    color: #444;
 }
 
 .recommend-list-data span {
@@ -256,42 +256,15 @@ a {
     color: black;
 }
 
-
 .community-slider {
     position: relative;
-    padding: 0 70px; /* 화살표 공간 확보 */
+    padding: 27px 60px 0 60px; /* 화살표 공간 확보 */
 }
 
-.community-card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.event-more-btn-container {
     text-align: center;
-    margin: 0 10px;
+    margin-bottom: 3rem;
 }
-
-.community-card img, .community-card video {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block; /* 인라인 요소 특성 제거 */
-}
-
-.community-card-body {
-    padding: 10px;
-}
-
-.community-card-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    white-space: nowrap; /* 줄 바꿈 방지 */
-    overflow: hidden; /* 넘치는 텍스트 숨김 */
-    text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
-}
-
 
 .custom-event-more-btn {
     display: inline-block;
@@ -304,6 +277,7 @@ a {
     font-size: 20px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
 }
 
 .custom-event-more-btn:hover {
@@ -314,4 +288,107 @@ a {
 .custom-event-more-btn:active {
     background-color: #e95e00;
     transform: translateY(1px);
+}
+
+/* 모바일: 화면 너비가 768px 이하일 때 적용 */
+@media (max-width: 768px) {
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    .top-slider, .event-slider, .community-slider {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    .top-slider {
+        padding: 0;
+    }
+
+    .top-card {
+        flex-direction: column; /* 세로 정렬 */
+        text-align: center;
+        margin: auto;
+    }
+
+    .top-card-body {
+        width: 100%;
+        padding: 1em;
+    }
+
+    .top-card img,
+    .top-card video {
+        order: 1; /* 먼저 표시: 이미지 */
+        width: 100%;
+        aspect-ratio: 2 / 1; /* 가로:세로 비율 2:1 */
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .top-card-body {
+        order: 2;
+    }
+
+    .top-card-title {
+        font-size: 1.2rem
+    }
+
+    .top-card-period {
+        font-size: 1rem
+    }
+
+    .top-card-detail-btn {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+
+    .event-card-title,
+    .recommend-card-title,
+    .recommend-list-title {
+        font-size: 1rem;
+    }
+
+    .recommend-slider {
+        display: none !important;
+    }
+
+    .recommend-list-data {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 0.8rem;
+        color: #444;
+        gap: 2px;
+        margin-top: 5px;
+    }
+
+    .recommend-list-data div {
+        line-height: 1.4;
+    }
+
+    .recommend-list-data span {
+        font-size: 0.8rem;
+    }
+
+    .recommend-time {
+        font-size: 0.8rem;
+        color: #777;
+    }
+
+
+    .custom-event-more-btn {
+        width: 90%;
+        font-size: 1rem;
+    }
+
+    .slick-slide {
+        padding: 0.3em;
+    }
+
+    .community-slider .slick-slide > div {
+        padding-top: 0.3em; /* 원하는 만큼 조절 */
+    }
+
 }

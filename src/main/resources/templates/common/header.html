@@ -3,16 +3,16 @@
         <div class="first-container">
             <a href="/" class="site-brand">
                 <img class="logo-image" src="/image/logo.png" alt="로고">
+                <span class="site-name">EVENTOR</span>
             </a>
 
-            <a href="/" class="site-name">EVENTOR</a>
+            <!--            <form class="search-form" action="/posts/search" method="get">-->
+            <!--                <input class="search-input" type="text" name="keyword" placeholder="통합 검색">-->
+            <!--                <button class="search-button" type="submit">-->
+            <!--                    <i class="fa-solid fa-magnifying-glass"></i>-->
+            <!--                </button>-->
+            <!--            </form>-->
 
-            <form class="search-form" action="/posts/search" method="get">
-                <input class="search-input" type="text" name="keyword" placeholder="통합 검색">
-                <button class="search-button" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
         </div>
 
         <div class="second-container">
@@ -20,9 +20,11 @@
                 <div class="category-menu" th:insert="~{common/category-menu}"></div>
 
                 <div class="right-menu">
+                    <div th:insert="~{common/right-sidebar}"></div>
+
                     <a id="myPageLink" th:href="@{/users/me}" style="white-space: nowrap; display:none;">
                         <i class="fa-solid fa-user"></i>
-                        <span>마이페이지</span>
+                        <span>My</span>
                     </a>
 
                     <form id="loginForm" action="/auth/login" method="get">

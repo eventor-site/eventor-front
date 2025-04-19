@@ -1,0 +1,77 @@
+<style>
+    .footer-links {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .footer-links a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: blue;
+    }
+
+    .footer-links a:hover {
+        text-decoration: underline;
+    }
+
+    .oauth-circle-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 10px;
+    }
+
+    .oauth-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <h5 class="modal-title text-center fw-bold w-100" id="loginModalLabel">EVENTOR</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/auth/login" method="post">
+                    <div class="mb-2">
+                        <label for="identifier">아이디</label>
+                        <input type="text" class="form-control" name="identifier" id="identifier" required>
+                    </div>
+                    <div class="mb-2">
+                        <label for="password">비밀번호</label>
+                        <input type="password" class="form-control" name="password" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">로그인</button>
+
+                    <div class="footer-links">
+                        <a href="/users/me/recover/identifier" class="btn-oauth">아이디 찾기</a>
+                        |
+                        <a href="/users/me/recover/password" class="btn-oauth">비밀번호 찾기</a>
+                        |
+                        <a href="/users/signup" class="btn-oauth">회원가입</a>
+                    </div>
+
+                    <div class="oauth-buttons mt-3">
+                        <a href="javascript:void(0);" onclick="openOAuthWindow('kakao')">
+                            <img class="oauth-circle-img" alt="kakao login"
+                                 src="/image/oauth/kakao_rectangular_login.png">
+                        </a>
+                        <a href="javascript:void(0);" onclick="openOAuthWindow('naver')">
+                            <img class="oauth-circle-img" alt="naver login" src="/image/oauth/naver_circle_login.png">
+                        </a>
+                        <a href="javascript:void(0);" onclick="openOAuthWindow('google')">
+                            <img class="oauth-circle-img" alt="google login" src="/image/oauth/google_circle_login.png">
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

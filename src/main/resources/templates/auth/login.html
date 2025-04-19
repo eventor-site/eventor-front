@@ -17,48 +17,45 @@
         </div>
 
         <div class="form-section">
-            <div class="upper-form">
-                <form class="login-form-container" action="/auth/login" method="post">
-                    <div class="mb-2">
-                        <label for="identifier"><i class="fas fa-envelope"></i> 아이디</label>
-                        <input id="identifier" type="text" name="identifier" class="form-control"
-                               placeholder="아이디를 입력해주세요"
-                               required>
-                    </div>
-                    <div class="mb-2">
-                        <label for="password"><i class="fas fa-lock"></i> 비밀번호</label>
-                        <input id="password" type="password" name="password" class="form-control"
-                               placeholder="비밀번호를 입력해주세요" required>
-                    </div>
-                    <div class="mb-2">
-                        <!-- 로그인 실패 메시지 출력 -->
-                        <div th:if="${error}" class="text-danger" th:data-error="${error}">
-                            <small th:text="${error}"></small>
-                        </div>
-                    </div>
-                    <button type="submit" id="loginButton">로그인
-                    </button>
-                </form>
-            </div>
-
-            <div class="lower-form">
-                <div class="oauth-img-container">
-                    <a href="javascript:void(0);" onclick="openOAuthWindow('kakao')">
-                        <img class="oauth-img" alt="kakao login" src="/image/oauth/kakao_login.png">
-                    </a>
-                    <a href="javascript:void(0);" onclick="openOAuthWindow('naver')">
-                        <img class="oauth-img" alt="naver login" src="/image/oauth/naver_login.png">
-                    </a>
-                    <a href="javascript:void(0);" onclick="openOAuthWindow('google')">
-                        <img class="oauth-img" alt="google login" src="/image/oauth/google_login.png">
-                    </a>
+            <form class="login-container" action="/auth/login" method="post">
+                <div class="mb-2">
+                    <label for="identifier"><i class="fas fa-envelope"></i> 아이디</label>
+                    <input id="identifier" type="text" name="identifier" class="form-control"
+                           placeholder="아이디를 입력해주세요"
+                           required>
                 </div>
+                <div class="mb-2">
+                    <label for="password"><i class="fas fa-lock"></i> 비밀번호</label>
+                    <input id="password" type="password" name="password" class="form-control"
+                           placeholder="비밀번호를 입력해주세요" required>
+                </div>
+                <div class="mb-2">
+                    <!-- 로그인 실패 메시지 출력 -->
+                    <div th:if="${error}" class="text-danger" th:data-error="${error}">
+                        <small th:text="${error}"></small>
+                    </div>
+                </div>
+                <button type="submit" id="loginButton">로그인</button>
 
                 <div class="footer-links">
                     <a href="/users/me/recover/identifier" class="btn-oauth">아이디 찾기</a>
+                    |
                     <a href="/users/me/recover/password" class="btn-oauth">비밀번호 찾기</a>
+                    |
                     <a href="/users/signup" class="btn-oauth">회원가입</a>
                 </div>
+            </form>
+
+            <div class="oauth-img-container">
+                <a href="javascript:void(0);" onclick="openOAuthWindow('kakao')">
+                    <img class="oauth-img" alt="kakao login" src="/image/oauth/kakao_login.png">
+                </a>
+                <a href="javascript:void(0);" onclick="openOAuthWindow('naver')">
+                    <img class="oauth-img" alt="naver login" src="/image/oauth/naver_login.png">
+                </a>
+                <a href="javascript:void(0);" onclick="openOAuthWindow('google')">
+                    <img class="oauth-img" alt="google login" src="/image/oauth/google_login.png">
+                </a>
             </div>
 
         </div>

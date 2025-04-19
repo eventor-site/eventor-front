@@ -22,7 +22,6 @@
                             <tr>
                                 <th style="width: 10%;">번호</th>
                                 <th style="width: 35%;">내용</th>
-                                <th style="width: 15%;">작성자</th>
                                 <th style="width: 10%;">추천수</th>
                                 <th style="width: 10%;">비추천수</th>
                                 <th style="width: 20%;">날짜</th>
@@ -36,12 +35,6 @@
                                     <!-- 제목을 클릭하면 해당 게시글로 이동, 댓글 ID를 앵커로 포함 -->
                                     <a th:href="@{/posts/{postId}/comments/{commentId} (postId=${comment.postId}, commentId=${comment.commentId})}"
                                        th:text="${comment.content}"></a>
-                                </td>
-                                <td>
-                                    <img class="grade"
-                                         th:src="@{/profile/{gradeName}.png (gradeName=${comment.gradeName})}"
-                                         alt="프로필">
-                                    <span class="ml-2" th:text="${comment.writer}"></span>
                                 </td>
                                 <td th:text="${comment.recommendationCount}"></td>
                                 <td th:text="${comment.decommendationCount}"></td>

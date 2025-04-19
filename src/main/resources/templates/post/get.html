@@ -41,30 +41,28 @@
         <div class="post-header">
             <!-- 이벤트 시간 및 남은 시간 -->
             <div class="event-time"
-                 th:if="${isEvent or post.categoryName == '핫딜'}">
+                 th:if="${isEvent}">
+
                 <div class="left">
-                    <span class="label">이벤트 시작 시간:</span>
-                    <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"></span>
-                </div>
-                <div class="left">
-                    <span class="label">이벤트 종료 시간:</span>
-                    <span id="endTime"
-                          th:data-end-time="${post.endTime != null ? post.endTime : ''}"
-                          th:text="${post.endTime != null ? #temporals.format(post.endTime, 'yyyy-MM-dd HH:mm') : '별도 공지시'}">
+                    <span class="label">
+                        기간:
+                        <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"></span>
+                        ~
+                        <span id="endTime" th:data-end-time="${post.endTime != null ? post.endTime : ''}"
+                              th:text="${post.endTime != null ? #temporals.format(post.endTime, 'yyyy-MM-dd HH:mm') : '별도 공지시'}"></span>
                     </span>
                 </div>
+
                 <div class="right">
-                    <span class="label">남은 시간:</span>
-                    <span id="remainingTime" class="remaining-time">계산중...</span>
+                    <span class="label">남은 시간: <span id="remainingTime" class="remaining-time">계산중...</span></span>
                 </div>
             </div>
 
-            <hr style="width: 100%"
-                th:if="${isEvent or post.categoryName == '핫딜'}"/>
+            <hr th:if="${isEvent}"/>
 
             <!-- 제목 및 작성시간 -->
             <div class="title-section">
-                <div th:text="${post.title}"></div>
+                <strong th:text="${post.title}"></strong>
             </div>
 
             <hr>
@@ -74,19 +72,19 @@
                 <div class="left">
                     <img class="grade" th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}"
                          alt="프로필">
-                    <p><strong class="label">작성자:</strong> <span th:text="${post.writer()}"></span></p>
+                    <span th:text="${post.writer}"></span>
                 </div>
                 <div class="right">
-                    <p><strong class="label">조회수:</strong> <span th:text="${post.viewCount}"></span></p>
-                    <p><strong class="label">추천수:</strong> <span th:text="${post.recommendationCount}"></span></p>
-                    <p><strong class="label">댓글수:</strong> <span th:text="${objects.getTotalElements()}"></span></p>
-                    <p><strong class="label">작성시간:</strong><span
+                    <p><strong class="label">조회수</strong><span th:text="${post.viewCount}"></span></p>
+                    <p><strong class="label">추천</strong><span th:text="${post.recommendationCount}"></span></p>
+                    <p><strong class="label">댓글</strong><span th:text="${objects.getTotalElements()}"></span></p>
+                    <p><strong class="label"></strong><span
                             th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
                 </div>
             </div>
         </div>
 
-        <div th:if="${isEvent or post.categoryName == '핫딜'}">
+        <div th:if="${isEvent}">
             <table class="table">
                 <tbody>
                 <tr>
@@ -153,13 +151,13 @@
                  th:data-url="@{/posts/{postId}/recommend (postId=${post.postId})}"
                  data-method="PUT"
                  onclick="setupAlertBox(this)"
-                 src="/image/comment/recommend.png" alt="비추천">
+                 src="/image/comment/recommend.svg" alt="추천">
 
             <img class="btn btn-sm btn-outline-primary recommend-button-img"
                  th:data-url="@{/posts/{postId}/disrecommend (postId=${post.postId})}"
                  data-method="PUT"
                  onclick="setupAlertBox(this)"
-                 src="/image/comment/disrecommend.png" alt="비추천">
+                 src="/image/comment/disrecommend.svg" alt="비추천">
 
 
             <!-- 좋아요 -->
@@ -231,7 +229,7 @@
                              th:data-url="@{/comments/{commentId}/recommend (commentId=${comment.commentId})}"
                              data-method="PUT"
                              onclick="setupAlertBox(this)"
-                             src="/image/comment/recommend.png" alt="추천">
+                             src="/image/comment/recommend.svg" alt="추천">
 
                         <span th:text="${comment.recommendationCount}"></span>
 
@@ -239,7 +237,7 @@
                              th:data-url="@{/comments/{commentId}/disrecommend (commentId=${comment.commentId})}"
                              data-method="PUT"
                              onclick="setupAlertBox(this)"
-                             src="/image/comment/disrecommend.png" alt="비추천">
+                             src="/image/comment/disrecommend.svg" alt="비추천">
 
                         <span th:text="${comment.decommendationCount}"></span>
 

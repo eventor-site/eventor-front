@@ -81,7 +81,7 @@
                        class="btn btn-info inline-text">회원 정보 수정</a>
                     <a th:href="@{/users/me/updatePasswordForm}"
                        class="btn btn-warning inline-text">비밀번호 변경</a>
-                    <form th:action="@{/users/me}" th:method="delete">
+                    <form th:action="@{/users/me}" th:method="delete" onsubmit="return confirm('정말 탈퇴하시겠습니까?')">
                         <button type="submit" class="btn btn-danger inline-text">탈퇴</button>
                     </form>
                 </div>

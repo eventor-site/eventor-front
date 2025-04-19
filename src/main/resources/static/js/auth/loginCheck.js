@@ -17,63 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function showLoginModal() {
-        const modalHtml = `
-    <style>
-      .oauth-circle-img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin: 10px;
-      }
-      .oauth-buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        margin-top: 20px;
-      }
-    </style>
-    
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-3">
-              <div class="modal-header">
-                <h5 class="modal-title text-center fw-bold w-100" id="loginModalLabel">EVENTOR</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form action="/auth/login" method="post">
-                  <div class="mb-2">
-                    <label for="identifier">아이디</label>
-                    <input type="text" class="form-control" name="identifier" id="identifier" required>
-                  </div>
-                  <div class="mb-2">
-                    <label for="password">비밀번호</label>
-                    <input type="password" class="form-control" name="password" id="password" required>
-                  </div>
-                  <button type="submit" class="btn btn-primary w-100">로그인</button>
-                  
-                  <div class="oauth-buttons">
-                    <a href="javascript:void(0);" onclick="openOAuthWindow('kakao')">
-                        <img class="oauth-circle-img" alt="kakao login" src="/image/oauth/kakao_rectangular_login.png">
-                    </a>
-                    <a href="javascript:void(0);" onclick="openOAuthWindow('naver')">
-                        <img class="oauth-circle-img" alt="naver login" src="/image/oauth/naver_circle_login.png">
-                    </a>
-                    <a href="javascript:void(0);" onclick="openOAuthWindow('google')">
-                        <img class="oauth-circle-img" alt="google login" src="/image/oauth/google_circle_login.png">
-                    </a>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>`;
-
-        document.body.insertAdjacentHTML("beforeend", modalHtml);
-        const modal = new bootstrap.Modal(document.getElementById('loginModal'));
-        modal.show();
+        fetch("/auth/login/modal") // 이 경로는 실제 위치에 맞게 조정
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML("beforeend", html);
+                const modal = new bootstrap.Modal(document.getElementById('loginModal'));
+                modal.show();
+            })
+            .catch(err => {
+                console.error("모달 HTML 로딩 실패:", err);
+            });
     }
 });
 

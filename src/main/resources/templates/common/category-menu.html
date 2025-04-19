@@ -1,4 +1,4 @@
-<div class="category-menu">
+<div class="category-menu desktop-only">
     <div class="category-item" id="category-menu-button">
         <a href="/posts?categoryName=이벤트"><i class="fa-solid fa-bars"></i> 카테고리</a>
     </div>
@@ -17,7 +17,6 @@
                 <a href="/posts?categoryName=피자">피자</a>
                 <a href="/posts?categoryName=패스트푸드">패스트푸드</a>
                 <a href="/posts?categoryName=카페">카페</a>
-
             </div>
         </div>
         <!-- 패션 -->
@@ -34,7 +33,7 @@
         </div>
         <!-- 뷰티 -->
         <div class="category-item">
-            <a href="/posts?categoryName=뷰티"> <i class="fa-solid fa-magic"></i> 뷰티</a>
+            <a href="/posts?categoryName=뷰티"><i class="fa-solid fa-magic"></i> 뷰티</a>
             <div class="sub-category">
                 <a href="/posts?categoryName=스킨케어">스킨케어</a>
                 <a href="/posts?categoryName=메이크업">메이크업</a>
@@ -150,3 +149,51 @@
     </div>
 </div>
 
+<div class="mobile-only">
+    <div onclick="toggleSidebar('left-sidebar')"><i class="fa-solid fa-bars"></i> 카테고리</div>
+
+    <aside class="sidebar sidebar-left" id="left-sidebar">
+        <button id="close-sidebar" onclick="closeSidebar('left-sidebar')">×</button>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">게시판</div>
+            <div class="grid grid-3">
+                <a href="/posts?categoryName=공지"><i class="fa-solid fa-bullhorn"></i> 공지</a>
+                <a href="/posts?categoryName=핫딜"><i class="fa-solid fa-fire"></i> 핫딜</a>
+                <a href="/posts?categoryName=자유"><i class="fa-solid fa-comment"></i> 자유</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- 이벤트 (2열 구성) -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title"><i class="fa-solid fa-calendar-check"></i> 이벤트</div>
+            <div class="grid grid-2">
+                <a href="/posts?categoryName=이벤트"><i class="fa-solid fa-bars"></i> 전체</a>
+                <a href="/posts?categoryName=음식"><i class="fa-solid fa-utensils"></i> 음식</a>
+                <a href="/posts?categoryName=패션"><i class="fa-solid fa-tshirt"></i> 패션</a>
+                <a href="/posts?categoryName=뷰티"><i class="fa-solid fa-magic"></i> 뷰티</a>
+                <a href="/posts?categoryName=전자제품"><i class="fa-solid fa-plug"></i> 전자제품</a>
+                <a href="/posts?categoryName=축제"><i class="fa-solid fa-calendar-day"></i> 축제</a>
+                <a href="/posts?categoryName=엔터"><i class="fa-solid fa-theater-masks"></i> 엔터</a>
+                <a href="/posts?categoryName=금융"><i class="fa-solid fa-credit-card"></i> 금융</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- 맛집 (2열 구성) -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title"><i class="fa-solid fa-utensils"></i> 맛집</div>
+            <div class="grid grid-2">
+                <a href="/posts?categoryName=맛집"><i class="fa-solid fa-bars"></i> 전체</a>
+                <a href="/posts?categoryName=서울">서울</a>
+                <a href="/posts?categoryName=광역시">광역시</a>
+                <a href="/posts?categoryName=8도">8도</a>
+                <a href="/posts?categoryName=제주도">제주도</a>
+            </div>
+        </div>
+    </aside>
+
+</div>

@@ -37,7 +37,7 @@
 .table th {
     text-align: center;
     vertical-align: middle;
-    width: 150px; /* 원하는 너비 조정 가능 */
+    width: 15%; /* 원하는 너비 조정 가능 */
     background-color: #f8f9fa; /* 라벨 배경색 */
 }
 
@@ -45,4 +45,12 @@
 .table td {
     text-align: left;
     vertical-align: middle;
+}
+
+@media screen and (max-width: 768px) {
+
+    .table th {
+        width: 25%;
+    }
+
 }

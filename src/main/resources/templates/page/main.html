@@ -19,46 +19,40 @@
 <div layout:fragment="content">
     <div class="main-page-container">
 
+        <div th:if="${isLogin}">
+            <span>즐겨찾기: </span>
+            <div th:each="bookmark : ${bookmarks}" style="display: inline;">
+                <a class="btn btn-sm btn-outline-primary" th:href="@{/posts(categoryName=${bookmark.categoryName})}">
+                    <span th:text="${bookmark.categoryName}"></span>
+                </a>
+            </div>
+        </div>
+
+        <hr>
+
         <div class="event-section">
-            <div th:if="${isLogin}">
-                <span>즐겨찾기: </span>
-                <div th:each="bookmark : ${bookmarks}" style="display: inline;">
-                    <a th:href="@{/posts(categoryName=${bookmark.categoryName})}"
-                       class="btn btn-sm btn-outline-primary"
-                       style="width: 120px;">
-                        <span th:text="${bookmark.categoryName}"></span>
+            <h3 style="margin-bottom: 27px">🔥 핫 이벤트</h3>
+            <div class="top-slider">
+                <div th:if="${hotPosts.size() > 0}" th:each="post : ${hotPosts}">
+                    <a th:href="@{/posts/{postId} (postId=${post.postId})}">
+                        <div class="top-card">
+                            <div class="top-card-body">
+                                <div class="top-card-title" th:text="${post.title}"></div>
+                                <div class="top-card-period">
+                                    기간:
+                                    <span th:text="${#temporals.format(post.startTime, 'yyyy.MM.dd')}"></span> ~
+                                    <span th:text="${#temporals.format(post.endTime, 'yyyy.MM.dd')}"></span>
+                                </div>
+                                <button class="top-card-detail-btn">자세히 보기</button>
+                            </div>
+
+                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                            <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                            <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+                        </div>
                     </a>
                 </div>
-            </div>
-
-            <hr>
-
-            <h3>🔥 핫 이벤트</h3>
-            <div class="main-top-container">
-                <div class="top-slider">
-                    <div th:if="${hotPosts.size() > 0}" th:each="post : ${hotPosts}">
-                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
-                            <div class="top-card">
-                                <div class="top-card-body">
-                                    <div class="top-card-title" th:text="${post.title}"></div>
-                                    <div class="top-card-period">
-                                        기간:
-                                        <span th:text="${#temporals.format(post.startTime, 'yyyy.MM.dd')}"></span> ~
-                                        <span th:text="${#temporals.format(post.endTime, 'yyyy.MM.dd')}"></span>
-                                    </div>
-                                    <button class="top-card-detail-btn">자세히 보기</button>
-                                </div>
-
-                                <div class="top-card-img">
-                                    <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
-                                    <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
-                                    <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <p th:if="${hotPosts.size() == 0}">핫 이벤트가 없습니다.</p>
-                </div>
+                <p th:if="${hotPosts.size() == 0}">핫 이벤트가 없습니다.</p>
             </div>
         </div>
 
@@ -67,23 +61,26 @@
             <h3>🌟 최신 이벤트</h3>
             <div class="event-slider">
                 <div th:if="${latestPosts.size() > 0}" th:each="post : ${latestPosts}">
-                    <div class="event-card">
+                    <div>
                         <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
                         <a th:href="@{/posts/{postId} (postId=${post.postId})}">
-                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
-                            <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
-                            <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+                            <div class="event-card">
+                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                                <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                                <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+
+                                <div class="event-card-body">
+                                    <div class="event-card-title" th:text="${post.title}"></div>
+                                </div>
+                            </div>
                         </a>
-                        <div class="event-card-body">
-                            <div class="event-card-title" th:text="${post.title}"></div>
-                        </div>
                     </div>
                 </div>
                 <p th:if="${latestPosts.size() == 0}">최신 이벤트가 없습니다.</p>
             </div>
         </div>
 
-        <div class="event-more-btn-container" style="text-align: center; margin-top: 20px;">
+        <div class="event-more-btn-container">
             <a href="/posts?categoryName=이벤트" class="custom-event-more-btn">이벤트 더보기</a>
         </div>
 
@@ -92,16 +89,18 @@
             <h3>⏰️ 마감 임박 이벤트</h3>
             <div class="event-slider">
                 <div th:if="${deadlinePosts.size() > 0}" th:each="post : ${deadlinePosts}">
-                    <div class="event-card">
-                        <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
+                    <div>
                         <a th:href="@{/posts/{postId} (postId=${post.postId})}">
-                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
-                            <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
-                            <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+                            <div class="event-card">
+                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                                <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                                <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+
+                                <div class="event-card-body">
+                                    <div class="event-card-title" th:text="${post.title}"></div>
+                                </div>
+                            </div>
                         </a>
-                        <div class="event-card-body">
-                            <div class="event-card-title" th:text="${post.title}"></div>
-                        </div>
                     </div>
                 </div>
                 <p th:if="${deadlinePosts.size() == 0}">마감 임박 이벤트가 없습니다.</p>
@@ -132,28 +131,29 @@
                 <div class="recommended-list recommend-vertical-slider">
                     <a th:each="post : ${recommendedPosts}" th:href="@{/posts/{postId} (postId=${post.postId})}">
                         <div class="recommended-card">
-                            <!-- 썸네일 이미지 -->
-                            <img class="recommended-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png"
-                                 alt="썸네일"/>
-                            <img class="recommended-card-img" th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}"
-                                 alt="썸네일"/>
-                            <video class="recommended-card-img" th:if="${post.imageType == 'video'}"
-                                   th:src="${post.imageUrl}"></video>
+                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                            <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                            <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
                             <!-- 제목 및 추가 정보 -->
                             <div class="recommended-card-body">
                                 <span class="recommend-list-title" th:text="${post.title}"></span> <!-- 제목 -->
                                 <div class="recommend-list-data">
-                                    <span>작성자: <span th:text="${post.writer}"></span></span>
-                                    <span>· 추천수: <span th:text="${post.recommendationCount}"></span></span>
-                                    <span>· 조회수: <span th:text="${post.viewCount}"></span></span>
-                                    <span>· 작성시간: <span
-                                            th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span></span>
+                                    <div class="recommend-writer">
+                                        작성자: <span th:text="${post.writer}"></span>
+                                    </div>
+                                    <div class="recommend-stats">
+                                        조회수: <span th:text="${post.viewCount}"></span> ·
+                                        추천수: <span th:text="${post.recommendationCount}"></span>
+                                    </div>
+                                    <div class="recommend-time">
+                                        작성시간: <span
+                                            th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
-
 
             </div>
         </div>
@@ -179,25 +179,29 @@
                 </div>
 
                 <!-- 오른쪽: 추천 목록 -->
-                <div class="recommended-list">
-                    <a th:each="post : ${trendingPosts}" th:href="@{/posts/{postId} (postId=${post.postId})}"
-                       class="recommended-card">
-                        <!-- 썸네일 이미지 -->
-                        <img class="recommended-card-img" th:if="${post.imageUrl == null}" src="/image/logo.png"
-                             alt="썸네일"/>
-                        <img class="recommended-card-img" th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}"
-                             alt="썸네일"/>
-                        <video class="recommended-card-img" th:if="${post.imageType == 'video'}"
-                               th:src="${post.imageUrl}"></video>
-                        <!-- 제목 및 추가 정보 -->
-                        <div class="recommended-card-body">
-                            <span class="recommend-list-title" th:text="${post.title}"></span> <!-- 제목 -->
-                            <div class="recommend-list-data">
-                                <span>작성자: <span th:text="${post.writer}"></span></span>
-                                <span>· 추천수: <span th:text="${post.recommendationCount}"></span></span>
-                                <span>· 일주일 상승 조회수: <span th:text="${post.viewCount}"></span></span>
-                                <span>· 작성시간: <span
-                                        th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span></span>
+                <div class="recommended-list recommend-vertical-slider">
+                    <a th:each="post : ${trendingPosts}" th:href="@{/posts/{postId} (postId=${post.postId})}">
+                        <div class="recommended-card">
+                            <!-- 썸네일 이미지 -->
+                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                            <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                            <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+                            <!-- 제목 및 추가 정보 -->
+                            <div class="recommended-card-body">
+                                <span class="recommend-list-title" th:text="${post.title}"></span> <!-- 제목 -->
+                                <div class="recommend-list-data">
+                                    <div class="recommend-writer">
+                                        작성자: <span th:text="${post.writer}"></span>
+                                    </div>
+                                    <div class="recommend-stats">
+                                        조회수: <span th:text="${post.viewCount}"></span> ·
+                                        추천수: <span th:text="${post.recommendationCount}"></span>
+                                    </div>
+                                    <div class="recommend-time">
+                                        작성시간: <span
+                                            th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -211,18 +215,20 @@
             <h3>💬 커뮤니티</h3>
             <div class="community-slider">
                 <div th:if="${latestPosts.size() > 0}" th:each="post : ${communityPosts}">
-                    <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
-                    <a th:href="@{/posts/{postId} (postId=${post.postId})}">
-                        <div class="community-card">
-                            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
-                            <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
-                            <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+                    <div>
+                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
+                            <div class="event-card">
+                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                                <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                                <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
 
-                            <div class="community-card-body">
-                                <div class="community-card-title" th:text="${post.title}"></div>
+                                <div class="event-card-body">
+                                    <div class="event-card-title" th:text="${post.title}"></div>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+
                 </div>
                 <p th:if="${latestPosts.size() == 0}">커뮤니티 최신글이 없습니다.</p>
             </div>

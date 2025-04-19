@@ -11,6 +11,7 @@ html, body {
     justify-content: space-between;
     font-size: 16px;
     font-family: "Helvetica Neue", Arial, sans-serif;
+    box-sizing: border-box;
 }
 
 .wrapper {
@@ -33,14 +34,17 @@ html, body {
 
 
 .body-container {
-    width: 60%;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .main-page-container {
-    width: 80%;
+    max-width: 1500px;
+    width: 100%;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 0 1rem;
 }
 
 hr {
@@ -116,8 +120,6 @@ input:focus {
 }
 
 #page-body {
-    margin-top: 1rem;
-    padding: 0 1rem;
     display: flex;
     flex-direction: column;
 }
@@ -162,4 +164,70 @@ table th {
 .mismatch {
     color: red;
     font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px; /* 전체 폰트 크기 살짝 줄임 */
+        box-sizing: border-box;
+    }
+
+    .body-container,
+    .main-page-container {
+        width: 100%;
+        padding: 0.5rem;
+    }
+
+    #page {
+        display: flex;
+        flex-direction: column; /* 모바일에서는 세로 방향으로 배치 */
+    }
+
+    #page-menu-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap; /* 줄바꿈 허용 */
+        justify-content: flex-start; /* 왼쪽 정렬 */
+        align-items: center;
+        min-width: auto;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+    }
+
+    #page-menu-container a {
+        width: 25%;
+        display: flex;
+        align-items: center; /* 세로 중앙 정렬 */
+        justify-content: flex-start; /* 왼쪽 정렬 */
+        padding: 0.5rem;
+        height: auto;
+        flex-direction: row; /* 아이콘과 텍스트 가로 정렬 */
+        gap: 0.25rem;
+        font-size: 0.9rem;
+        white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    }
+
+    #page-menu-container a:hover {
+        font-size: 1.1rem;
+    }
+
+    #page-content {
+        border-left: none;
+        padding: 1rem 0.5rem;
+    }
+
+    #page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    table {
+        font-size: 0.9rem;
+        word-break: break-word;
+    }
+
+    .grade {
+        width: 24px;
+        height: 24px;
+    }
 }
