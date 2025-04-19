@@ -163,8 +163,7 @@ public class PostController {
 		model.addAttribute("direction", direction);
 
 		Page<SearchPostsResponse> posts = postService.searchPosts(pageable, keyword, categoryName, eventStatusName,
-				endType)
-			.getData();
+			endType).getData();
 
 		String encodedCategoryName =
 			categoryName != null ? URLEncoder.encode(categoryName, StandardCharsets.UTF_8) : "";
@@ -265,6 +264,7 @@ public class PostController {
 		@CookieValue(value = "uuid", required = false) String uuid, @PathVariable Long postId) {
 		Page<GetCommentResponse> comments = commentService.getCommentsByPostId(pageable, postId).getData();
 		GetPostResponse post = postService.getPost(uuid, postId).getData();
+		model.addAttribute("categoryName", post.categoryName());
 		model.addAttribute("post", post);
 		model.addAttribute("objects", comments);
 		model.addAttribute("isEvent", categoryService.getCategoryNames("이벤트").getData().contains(post.categoryName()));
