@@ -181,4 +181,7 @@
         gap: 8px;
     }
 
+    .popup {
+        transform: translateX(-50%);
+    }
 }
