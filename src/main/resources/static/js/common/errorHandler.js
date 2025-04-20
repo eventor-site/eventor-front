@@ -9,6 +9,7 @@ window.fetch = async (...args) => {
         if (!response.ok) {
             // 응답 본문을 한 번만 읽어서 저장
             responseBody = await response.text();
+            const knownErrorStatuses = [401, 403, 404, 413, 500];
 
             if (response.status === 401) {
                 alert("🔒" + responseBody);
@@ -17,7 +18,7 @@ window.fetch = async (...args) => {
 
             }
             // 다른 에러 처리
-            else {
+            else if (knownErrorStatuses.includes(response.status)) {
                 alert(`❌ 요청 실패 (${response.status}): ${responseBody}`);
             }
         }
