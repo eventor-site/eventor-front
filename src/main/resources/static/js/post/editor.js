@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function () {
     let postId = document.getElementById("postId").value; // 포스트 이름
 
-    const MAX_SIZE = 10 * 1024 * 1024; // 최대 용량 10MB
+    const MAX_SIZE = 20 * 1024 * 1024; // 최대 용량 50MB
 
     const totalSizeElement = document.getElementById('totalSize');
     const categoryName = document.getElementById("categoryName").value; // 카테고리 이름 가져오기
@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                     await createTempPost();
                 }
 
-                // if (await getTotalSize() + blob.size > MAX_SIZE) {
-                //     alert("업로드 용량이 10MB를 초과할 수 없습니다.");
-                //     return;
-                // }
+                if (await getTotalSize() + blob.size > MAX_SIZE) {
+                    alert("업로드 용량이 " + formatSize(MAX_SIZE) + "를 초과할 수 없습니다.");
+                    return;
+                }
 
                 const file = new File([blob], `pasted-image.png`, {type: blob.type});
                 const uploadedImages = await uploadImage(file, postId, categoryName, false, true);
@@ -148,13 +148,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                 await createTempPost();
             }
 
-            // // 파일 크기 체크 및 용량 계산
-            // for (const file of files) {
-            //     if (await getTotalSize() + file.size > MAX_SIZE) {
-            //         alert("업로드 용량이 10MB를 초과할 수 없습니다.");
-            //         return;
-            //     }
-            // }
+            // 파일 크기 체크 및 용량 계산
+            for (const file of files) {
+                if (await getTotalSize() + file.size > MAX_SIZE) {
+                    alert("업로드 용량이 " + formatSize(MAX_SIZE) + "를 초과할 수 없습니다.");
+                    return;
+                }
+            }
 
             for (const file of files) {
                 const uploadedImages = await uploadImage(file, postId, categoryName, true, false);
@@ -173,13 +173,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             await createTempPost();
         }
 
-        // // 파일 크기 체크 및 용량 계산
-        // for (const file of files) {
-        //     if (await getTotalSize() + file.size > MAX_SIZE) {
-        //         alert("업로드 용량이 10MB를 초과할 수 없습니다.");
-        //         return;
-        //     }
-        // }
+        // 파일 크기 체크 및 용량 계산
+        for (const file of files) {
+            if (await getTotalSize() + file.size > MAX_SIZE) {
+                alert("업로드 용량이 " + formatSize(MAX_SIZE) + "를 초과할 수 없습니다.");
+                return;
+            }
+        }
 
         for (const file of files) {
             const uploadedImages = await uploadImage(file, postId, categoryName, false, false);

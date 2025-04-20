@@ -63,10 +63,15 @@ public class ImageServiceImpl implements ImageService {
 				return file;
 			}
 
-			File tempFile = new File(file.getOriginalFilename());
 			ImmutableImage image = ImmutableImage.loader().fromStream(file.getInputStream());
 
+			// ✅ WebP 최대 허용 크기 체크
+			if (image.awt().getWidth() > 16383 || image.awt().getHeight() > 16383) {
+				throw new ImageConvertException("이미지 크기가 너무 큽니다. \n최대 크기: 16383x16383 픽셀");
+			}
+
 			// WebP로 변환 (손실 압축)
+			File tempFile = new File(file.getOriginalFilename());
 			image.output(WebpWriter.DEFAULT, tempFile);
 
 			// 변환된 데이터를 메모리에 저장 후 임시 파일 삭제
