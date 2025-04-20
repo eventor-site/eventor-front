@@ -101,7 +101,7 @@
     text-decoration: none; /* 기본 밑줄 제거 */
 }
 
-.post-card img, .post-card video {
+.post-card > img, .post-card > video {
     width: 120px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
@@ -149,12 +149,13 @@
 .post-card-meta img {
     width: 24px;
     aspect-ratio: 1 /1;
-    margin: 0;
+    margin-right: 5px;
 }
 
 .post-card-meta span {
     font-size: 14px;
-    color: #555;
+    font-weight: 600;
+    color: #333;
 }
 
 .post-card-stats {
@@ -265,7 +266,7 @@
         font-size: 12px;
     }
 
-    .post-card img, .post-card video {
+    .post-card > img, .post-card > video {
         width: 90px;
         margin-right: 5px;
     }
@@ -273,7 +274,6 @@
     .post-card-meta img {
         width: 16px;
         aspect-ratio: 1 /1;
-        margin: 0;
     }
 
     .status-scheduled,

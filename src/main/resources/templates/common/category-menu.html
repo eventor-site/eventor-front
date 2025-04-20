@@ -170,16 +170,104 @@
         <div class="sidebar-section">
             <div class="sidebar-section-title"><i class="fa-solid fa-calendar-check"></i> 이벤트</div>
             <div class="grid grid-2">
-                <a href="/posts?categoryName=이벤트"><i class="fa-solid fa-bars"></i> 전체</a>
-                <a href="/posts?categoryName=음식"><i class="fa-solid fa-utensils"></i> 음식</a>
-                <a href="/posts?categoryName=패션"><i class="fa-solid fa-tshirt"></i> 패션</a>
-                <a href="/posts?categoryName=뷰티"><i class="fa-solid fa-magic"></i> 뷰티</a>
-                <a href="/posts?categoryName=전자제품"><i class="fa-solid fa-plug"></i> 전자제품</a>
-                <a href="/posts?categoryName=축제"><i class="fa-solid fa-calendar-day"></i> 축제</a>
-                <a href="/posts?categoryName=엔터"><i class="fa-solid fa-theater-masks"></i> 엔터</a>
-                <a href="/posts?categoryName=금융"><i class="fa-solid fa-credit-card"></i> 금융</a>
-                <a href="/posts?categoryName=라이프%20스타일"><i class="fa-solid fa-basket-shopping"></i> 라이프 스타일</a>
+                <div class="parent-title" id="event-toggle" style="cursor: pointer;">
+                    <i class="fa-solid fa-bars"></i> 전체
+                </div>
+                <div class="parent-title" id="food-toggle">
+                    <i class="fa-solid fa-utensils"></i> 음식
+                </div>
+                <div class="parent-title" id="fashion-toggle">
+                    <i class="fa-solid fa-tshirt"></i> 패션
+                </div>
+                <div class="parent-title" id="beauty-toggle">
+                    <i class="fa-solid fa-magic"></i> 뷰티
+                </div>
+                <div class="parent-title" id="electronics-toggle">
+                    <i class="fa-solid fa-plug"></i> 전자제품
+                </div>
+                <div class="parent-title" id="festival-toggle">
+                    <i class="fa-solid fa-calendar-day"></i> 축제
+                </div>
+                <div class="parent-title" id="entertainment-toggle">
+                    <i class="fa-solid fa-theater-masks"></i> 엔터
+                </div>
+                <div class="parent-title" id="finance-toggle">
+                    <i class="fa-solid fa-credit-card"></i> 금융
+                </div>
+                <div class="parent-title" id="lifestyle-toggle">
+                    <i class="fa-solid fa-basket-shopping"></i> 라이프 스타일
+                </div>
+
             </div>
+            <!-- 음식 -->
+            <div class="subcategory grid" id="food-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=음식"><i class="fa-solid fa-utensils"></i> 음식</a>
+                <a href="/posts?categoryName=밥">밥</a>
+                <a href="/posts?categoryName=치킨">치킨</a>
+                <a href="/posts?categoryName=피자">피자</a>
+                <a href="/posts?categoryName=패스트푸드">패스트푸드</a>
+                <a href="/posts?categoryName=카페%20%26%20디저트">카페 & 디저트</a>
+            </div>
+            <!-- 패션 -->
+            <div class="subcategory grid" id="fashion-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=패션"><i class="fa-solid fa-tshirt"></i> 패션</a>
+                <a href="/posts?categoryName=의류">의류</a>
+                <a href="/posts?categoryName=신발">신발</a>
+                <a href="/posts?categoryName=액세서리">액세서리</a>
+                <a href="/posts?categoryName=시즌기획전">시즌기획전</a>
+            </div>
+            <!-- 뷰티 -->
+            <div class="subcategory grid" id="beauty-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=뷰티"><i class="fa-solid fa-magic"></i> 뷰티</a>
+                <a href="/posts?categoryName=스킨케어">스킨케어</a>
+                <a href="/posts?categoryName=메이크업">메이크업</a>
+                <a href="/posts?categoryName=향수">향수</a>
+            </div>
+            <!-- 전자제품 -->
+            <div class="subcategory grid" id="electronics-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=전자제품"><i class="fa-solid fa-plug"></i> 전자제품</a>
+                <a href="/posts?categoryName=가전제품">가전제품</a>
+                <a href="/posts?categoryName=모바일%20%26%20PC">모바일 & PC</a>
+                <a href="/posts?categoryName=건강%2F미용%20가전">건강/미용 가전</a>
+            </div>
+            <!-- 축제 -->
+            <div class="subcategory grid" id="festival-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=축제"><i class="fa-solid fa-calendar-day"></i> 축제</a>
+                <a href="/posts?categoryName=먹거리">먹거리</a>
+                <a href="/posts?categoryName=계절축제">계절축제</a>
+                <a href="/posts?categoryName=음악">음악</a>
+                <a href="/posts?categoryName=지역축제">지역축제</a>
+            </div>
+            <!-- 엔터 -->
+            <div class="subcategory grid" id="entertainment-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=엔터"><i class="fa-solid fa-theater-masks"></i> 엔터</a>
+                <a href="/posts?categoryName=콘서트%2F공연">콘서트/공연</a>
+                <a href="/posts?categoryName=굿즈%20%26%20팝업스토어">굿즈 & 팝업스토어</a>
+                <a href="/posts?categoryName=스포츠">스포츠</a>
+                <a href="/posts?categoryName=영화">영화</a>
+            </div>
+            <!-- 금융 -->
+            <div class="subcategory grid" id="finance-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=금융"><i class="fa-solid fa-credit-card"></i> 금융</a>
+                <a href="/posts?categoryName=카드혜택">카드혜택</a>
+                <a href="/posts?categoryName=예·적금">예·적금</a>
+            </div>
+            <!-- 라이프 스타일 -->
+            <div class="subcategory grid" id="lifestyle-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=라이프%20스타일">
+                    <i class="fa-solid fa-basket-shopping"></i> 라이프 스타일</a>
+                <a href="/posts?categoryName=가구">가구</a>
+                <a href="/posts?categoryName=생활용품">생활용품</a>
+            </div>
+
         </div>
 
         <hr>
@@ -187,14 +275,109 @@
         <!-- 맛집 (2열 구성) -->
         <div class="sidebar-section">
             <div class="sidebar-section-title"><i class="fa-solid fa-utensils"></i> 맛집</div>
+
             <div class="grid grid-2">
-                <a href="/posts?categoryName=맛집"><i class="fa-solid fa-bars"></i> 전체</a>
-                <a href="/posts?categoryName=서울">서울</a>
-                <a href="/posts?categoryName=광역시">광역시</a>
-                <a href="/posts?categoryName=8도">8도</a>
-                <a href="/posts?categoryName=제주도">제주도</a>
+                <div class="parent-title" id="restaurant-toggle" style="cursor: pointer;">
+                    <i class="fa-solid fa-bars"></i> 전체
+                </div>
+                <div class="parent-title" id="seoul-toggle">
+                    서울
+                </div>
+                <div class="parent-title" id="metropolitan-city-toggle">
+                    광역시
+                </div>
+                <div class="parent-title" id="8-area-toggle">
+                    8도
+                </div>
+                <div class="parent-title" id="jeju-toggle">
+                    제주도
+                </div>
             </div>
+
+            <!-- 광역시 -->
+            <div class="subcategory grid" id="metropolitan-city-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=광역시">광역시</a>
+                <a href="/posts?categoryName=광주">광주</a>
+                <a href="/posts?categoryName=대구">대구</a>
+                <a href="/posts?categoryName=대전">대전</a>
+                <a href="/posts?categoryName=부산">부산</a>
+                <a href="/posts?categoryName=울산">울산</a>
+                <a href="/posts?categoryName=인천">인천</a>
+            </div>
+            <!-- 8도 -->
+            <div class="subcategory grid" id="8-area-subcategory" style="display: none;">
+                <hr>
+                <a class="parent-title" href="/posts?categoryName=8도">8도</a>
+                <a href="/posts?categoryName=강원도">강원도</a>
+                <a href="/posts?categoryName=경기도">경기도</a>
+                <a href="/posts?categoryName=경남">경남</a>
+                <a href="/posts?categoryName=경북">경북</a>
+                <a href="/posts?categoryName=전북">전북</a>
+                <a href="/posts?categoryName=전남">전남</a>
+                <a href="/posts?categoryName=충북">충북</a>
+                <a href="/posts?categoryName=충남">충남 </a>
+            </div>
+
         </div>
     </aside>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleMap = {
+            'food-toggle': 'food-subcategory',
+            'beauty-toggle': 'beauty-subcategory',
+            'fashion-toggle': 'fashion-subcategory',
+            'electronics-toggle': 'electronics-subcategory',
+            'festival-toggle': 'festival-subcategory',
+            'entertainment-toggle': 'entertainment-subcategory',
+            'finance-toggle': 'finance-subcategory',
+            'lifestyle-toggle': 'lifestyle-subcategory',
+            'metropolitan-city-toggle': 'metropolitan-city-subcategory',
+            '8-area-toggle': '8-area-subcategory'
+        };
+
+        let currentVisibleId = null;
+
+        Object.keys(toggleMap).forEach(toggleId => {
+            const toggleEl = document.getElementById(toggleId);
+            const subcategoryId = toggleMap[toggleId];
+
+            toggleEl.addEventListener('click', function () {
+                const subcategoryEl = document.getElementById(subcategoryId);
+
+                // 이미 열려 있는 경우 닫기
+                if (currentVisibleId === subcategoryId) {
+                    subcategoryEl.style.display = 'none';
+                    currentVisibleId = null;
+                } else {
+                    // 모든 하위카테고리 닫기
+                    Object.values(toggleMap).forEach(id => {
+                        document.getElementById(id).style.display = 'none';
+                    });
+                    // 새로운 하위카테고리 열기
+                    subcategoryEl.style.display = 'block';
+                    currentVisibleId = subcategoryId;
+                }
+            });
+        });
+    });
+
+    document.getElementById('event-toggle').addEventListener('click', function () {
+        window.location.href = '/posts?categoryName=이벤트';
+    });
+
+    document.getElementById('restaurant-toggle').addEventListener('click', function () {
+        window.location.href = '/posts?categoryName=맛집';
+    });
+
+    document.getElementById('seoul-toggle').addEventListener('click', function () {
+        window.location.href = '/posts?categoryName=서울';
+    });
+
+    document.getElementById('jeju-toggle').addEventListener('click', function () {
+        window.location.href = '/posts?categoryName=제주도';
+    });
+</script>
