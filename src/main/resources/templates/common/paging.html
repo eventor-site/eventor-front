@@ -36,3 +36,14 @@
         </li>
     </ul>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (window.innerWidth <= 768) {
+            const pagination = document.querySelector('.pagination');
+            if (pagination) {
+                pagination.classList.add('pagination-sm');
+            }
+        }
+    });
+</script>
