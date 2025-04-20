@@ -102,6 +102,17 @@
     cursor: pointer;
 }
 
+.btn-custom {
+    background-color: #ff6600;
+    border: 1px solid #ff6600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: #e65c00;
+    border-color: #e65c00;
+}
+
 @media screen and (max-width: 768px) {
 
     .logo-image {
