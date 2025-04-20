@@ -7,6 +7,7 @@ $(document).ready(function () {
         dots: true,
         arrows: true,
         autoplay: true,
+        swipeToSlide: true,
         autoplaySpeed: 3000,
         responsive: [
             {
@@ -45,6 +46,7 @@ $(document).ready(function () {
         dots: true,
         arrows: true,
         autoplay: true,
+        swipeToSlide: true,
         autoplaySpeed: 5000,
         responsive: [
             {
@@ -80,8 +82,9 @@ $(document).ready(function () {
         mobileFirst: true,
         infinite: true,
         autoplay: true,
-        autoplaySpeed: 2500,
+        swipeToSlide: true,
         arrows: false,
+        autoplaySpeed: 2500,
         responsive: [
             {
                 breakpoint: 480,
@@ -115,6 +118,7 @@ $(document).ready(function () {
         dots: true,
         arrows: true,
         autoplay: true,
+        swipeToSlide: true,
         autoplaySpeed: 5000,
         responsive: [
             {

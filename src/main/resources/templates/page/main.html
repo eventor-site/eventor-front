@@ -134,8 +134,10 @@
                             <div class="recommended-card-body">
                                 <span class="recommend-list-title" th:text="${post.title}"></span>
                                 <div class="recommend-list-data">
-                                    <div class="recommend-writer">
-                                        작성자 <span th:text="${post.writer}"></span>
+                                    <div class="post-card-meta">
+                                        <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}"
+                                             alt="프로필">
+                                        <span th:text="${post.writer}"></span>
                                     </div>
                                     <div class="recommend-stats">
                                         조회수 <span th:text="${post.viewCount}"></span> ·
@@ -182,8 +184,10 @@
                             <div class="recommended-card-body">
                                 <span class="recommend-list-title" th:text="${post.title}"></span> <!-- 제목 -->
                                 <div class="recommend-list-data">
-                                    <div class="recommend-writer">
-                                        작성자 <span th:text="${post.writer}"></span>
+                                    <div class="post-card-meta">
+                                        <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}"
+                                             alt="프로필">
+                                        <span th:text="${post.writer}"></span>
                                     </div>
                                     <div class="recommend-stats">
                                         조회수 <span th:text="${post.viewCount}"></span> ·

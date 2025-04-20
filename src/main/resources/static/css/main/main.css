@@ -135,6 +135,17 @@ a {
     position: relative !important;
 }
 
+.post-card-meta {
+    display: flex;
+    align-items: center;
+}
+
+.post-card-meta img {
+    width: 24px;
+    aspect-ratio: 1 /1;
+    margin: 0;
+}
+
 .recommended-container {
     padding: 25px;
     border: 2px solid black;
@@ -219,7 +230,7 @@ a {
 }
 
 /* 이미지 스타일 */
-.recommended-card img, .recommended-card video {
+.recommended-card > img, .recommended-card > video {
     width: 80px;
     aspect-ratio: 1 / 1;
     border-radius: 8px;
@@ -382,6 +393,11 @@ a {
         color: #777;
     }
 
+    .post-card-meta img {
+        width: 16px;
+        aspect-ratio: 1 /1;
+        margin: 0;
+    }
 
     .custom-event-more-btn {
         width: 90%;
