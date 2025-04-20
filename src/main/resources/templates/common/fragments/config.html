@@ -4,20 +4,6 @@
       xmlns:th="http://www.thymeleaf.org"
       th:fragment="config">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N2NEDG5TV6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'G-N2NEDG5TV6');
-    </script>
-
     <title>이벤터</title>
     <meta name="description" content="Eventor 에서 최신 이벤트와 핫딜 정보를 빠르게 확인하고, 커뮤니티와 소통할 수 있는 기회를 놓치지 마세요.">
     <meta charset="utf-8"/>
@@ -48,6 +34,10 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/custom-button.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/components.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/sidebar.css"/>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N2NEDG5TV6"></script>
+    <script src="/js/common/google-analytics.js"></script>
 </head>
 
 </html>
