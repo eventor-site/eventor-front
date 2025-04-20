@@ -147,4 +147,11 @@
     .category-menu .desktop-only {
         display: flex;
     }
+
+    /*.subcategory {*/
+    /*    display: none;*/
+    /*    margin-top: 1rem; !* 음식 항목이 보여지면 밑으로 밀리게 여백을 줍니다 *!*/
+    /*    transition: all 0.3s ease;*/
+    /*}*/
+
 }

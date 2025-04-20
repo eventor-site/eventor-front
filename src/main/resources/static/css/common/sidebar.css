@@ -78,6 +78,17 @@
     gap: 0.4rem;
 }
 
+/* 상위 카테고리 제목 */
+.parent-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+    padding-left: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
 /* 링크 공통 스타일 */
 .sidebar-section a,
 .grid a {
@@ -92,6 +103,7 @@
     transition: all 0.2s ease;
 }
 
+.parent-title:hover,
 .sidebar-section a:hover,
 .grid a:hover {
     background-color: rgba(0, 123, 255, 0.08);
