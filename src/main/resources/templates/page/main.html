@@ -20,7 +20,7 @@
     <div class="main-page-container">
 
         <div th:if="${isLogin}">
-            <span>즐겨찾기: </span>
+            <strong>즐겨찾기: </strong>
             <div th:each="bookmark : ${bookmarks}" style="display: inline;">
                 <a class="btn btn-sm btn-outline-primary" th:href="@{/posts(categoryName=${bookmark.categoryName})}">
                     <span th:text="${bookmark.categoryName}"></span>
