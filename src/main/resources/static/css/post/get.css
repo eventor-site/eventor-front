@@ -100,16 +100,16 @@
 }
 
 .post-recommend-container {
-    display: flex; /* flexbox 레이아웃 사용 */
-    align-items: center; /* 세로 가운데 정렬 */
-    justify-content: center; /* 수평 가운데 정렬 */
-    gap: 10px; /* 요소 간 간격 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-.comment-recommend-container {
-    display: flex; /* flexbox 레이아웃 사용 */
-    align-items: center; /* 세로 가운데 정렬 */
-    gap: 10px; /* 요소 간 간격 */
+.comment-function-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .popup {
