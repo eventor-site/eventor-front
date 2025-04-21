@@ -11,14 +11,19 @@
 <body>
 <div layout:fragment="content">
     <div class="body-container">
-        <form action="/posts" method="post" id="form" enctype="multipart/form-data">
 
+        <h5>카테고리:
+            <a th:href="@{/posts(categoryName=${categoryName})}">
+                <span th:text="${categoryName}"></span>
+            </a>
+        </h5>
+
+        <form action="/posts" method="post" id="form" enctype="multipart/form-data">
             <div>
                 <input type="hidden" id="postId" th:value="${tempPost?.postId}">
                 <input type="hidden" id="categoryType" name="categoryType" th:value="${categoryType}">
             </div>
 
-            <h5>카테고리: <span th:text="${categoryName}"></span></h5>
             <hr>
 
             <div class="mb-2">
