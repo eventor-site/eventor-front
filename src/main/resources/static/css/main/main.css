@@ -40,7 +40,6 @@ a {
 .top-card img, .top-card video {
     width: 35%;
     aspect-ratio: 1 / 1;
-    display: block; /* 인라인 요소 특성 제거 */
     justify-content: flex-end; /* 오른쪽으로 정렬 */
     object-fit: cover;
     border-radius: 5px;
@@ -76,12 +75,12 @@ a {
     transition: transform 0.3s ease;
 }
 
-.event-card img, .event-card video {
+.event-card img, .event-card video,
+.recommend-event-card img, .recommend-event-card video {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: center;
-    display: block; /* 인라인 요소 특성 제거 */
 }
 
 .event-card-body {
@@ -103,7 +102,7 @@ a {
     padding: 0.5em;
 }
 
-.recommended-list .slick-slide {
+.vertical-slider .slick-slide {
     padding: 0.2em;
 }
 
@@ -140,16 +139,13 @@ a {
     margin: 0;
 }
 
-.recommended-container {
+.double-slide-container {
+    display: flex;
+    align-items: center;
     padding: 20px;
     border: 2px solid black;
     border-radius: 5px;
     margin-bottom: 3rem;
-}
-
-.recommended-wrapper {
-    display: flex;
-    align-items: center;
 }
 
 .recommend-slider {
@@ -159,49 +155,21 @@ a {
     padding: 27px 50px 0 50px; /* 화살표 공간 확보 */
 }
 
-.recommend-event-card {
-    width: auto;
-    height: auto;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.recommend-event-card img, .recommend-event-card video {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 5px 5px 0 0;
-}
-
-.recommend-event-card-body {
-    padding: 10px;
-}
-
-.recommend-event-card-title {
-    font-weight: bold;
-    white-space: nowrap; /* 줄 바꿈 방지 */
-    overflow: hidden; /* 넘치는 텍스트 숨김 */
-    text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
-}
-
 /* 추천 게시글 컨테이너 */
-.recommended-list {
+.vertical-slider {
     display: flex;
     flex-direction: column;
     width: 100%;
     overflow: hidden;
 }
 
-.recommended-list:hover {
+.vertical-slider:hover {
     background-color: #f9f9f9;
     text-decoration: none; /* 기본 밑줄 제거 */
 }
 
 /* 개별 추천 아이템 */
-.recommended-card {
+.vertical-card {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -214,13 +182,12 @@ a {
 }
 
 .event-card:hover,
-.recommend-event-card:hover,
-.recommended-card:hover {
+.vertical-card:hover {
     transform: translateY(-5px);
 }
 
 /* 이미지 스타일 */
-.recommended-card > img, .recommended-card > video {
+.vertical-card > img, .vertical-card > video {
     width: 100px;
     aspect-ratio: 1 / 1;
     border-radius: 5px;
@@ -228,7 +195,7 @@ a {
 }
 
 /* 정보 영역 */
-.recommended-card-body {
+.vertical-card-body {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -237,7 +204,7 @@ a {
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
 
-.recommend-list-title {
+.vertical-title {
     font-weight: bold;
     margin-bottom: 5px;
     white-space: nowrap; /* 줄 바꿈 방지 */
@@ -245,14 +212,14 @@ a {
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
 
-.recommend-list-data {
+.vertical-data {
     display: flex;
     align-items: center;
     gap: 10px;
     color: #444;
 }
 
-.recommend-list-data span {
+.vertical-data span {
     font-size: 14px;
     color: black;
 }
@@ -346,11 +313,11 @@ a {
 
     .event-card-title,
     .recommend-card-title,
-    .recommend-list-title {
+    .vertical-title {
         font-size: 1rem;
     }
 
-    .recommended-container {
+    .double-slide-container {
         padding: 1%;
     }
 
@@ -358,7 +325,7 @@ a {
         display: none !important;
     }
 
-    .recommend-list-data {
+    .vertical-data {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -368,11 +335,11 @@ a {
         margin-top: 5px;
     }
 
-    .recommend-list-data div {
+    .vertical-data div {
         line-height: 1.4;
     }
 
-    .recommend-list-data span {
+    .vertical-data span {
         font-size: 0.8rem;
     }
 

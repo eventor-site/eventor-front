@@ -63,7 +63,6 @@
                                 <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
                                 <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
                                 <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
-
                                 <div class="event-card-body">
                                     <div class="event-card-title" th:text="${post.title}"></div>
                                 </div>
@@ -90,7 +89,6 @@
                                 <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
                                 <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
                                 <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
-
                                 <div class="event-card-body">
                                     <div class="event-card-title" th:text="${post.title}"></div>
                                 </div>
@@ -104,101 +102,95 @@
 
         <!--ㅡ추천 이벤트ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <h3>✅ 추천 이벤트</h3>
-        <div class="recommended-container">
-            <div class="recommended-wrapper">
-                <!-- 왼쪽: 추천 배너 슬라이드 -->
-                <div class="recommend-slider">
-                    <div th:each="post : ${recommendedPosts}">
-                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
-                            <div class="recommend-event-card">
-                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
-                                <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
-                                <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
-
-                                <div class="recommend-event-card-body">
-                                    <div class="recommend-event-card-title" th:text="${post.title}"></div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 오른쪽: 추천 목록 -->
-                <div class="recommended-list recommend-vertical-slider">
-                    <a th:each="post : ${recommendedPosts}" th:href="@{/posts/{postId} (postId=${post.postId})}">
-                        <div class="recommended-card">
+        <div class="double-slide-container">
+            <!-- 왼쪽: 추천 배너 슬라이드 -->
+            <div class="recommend-slider">
+                <div th:each="post : ${recommendedPosts}">
+                    <a th:href="@{/posts/{postId} (postId=${post.postId})}">
+                        <div class="event-card">
                             <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
                             <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
                             <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
-                            <!-- 제목 및 추가 정보 -->
-                            <div class="recommended-card-body">
-                                <span class="recommend-list-title" th:text="${post.title}"></span>
-                                <div class="recommend-list-data">
-                                    <div class="post-card-meta">
-                                        <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}"
-                                             alt="프로필">
-                                        <span th:text="${post.writer}"></span>
-                                    </div>
-                                    <div class="recommend-stats">
-                                        조회수 <span th:text="${post.viewCount}"></span> ·
-                                        추천수 <span th:text="${post.recommendationCount}"></span>
-                                    </div>
-                                </div>
+
+                            <div class="event-card-body">
+                                <div class="event-card-title" th:text="${post.title}"></div>
                             </div>
                         </div>
                     </a>
                 </div>
+            </div>
 
+            <!-- 오른쪽: 추천 목록 -->
+            <div class="vertical-slider">
+                <a th:each="post : ${recommendedPosts}" th:href="@{/posts/{postId} (postId=${post.postId})}">
+                    <div class="vertical-card">
+                        <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                        <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                        <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+                        <!-- 제목 및 추가 정보 -->
+                        <div class="vertical-card-body">
+                            <span class="vertical-title" th:text="${post.title}"></span>
+                            <div class="vertical-data">
+                                <div class="post-card-meta">
+                                    <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}"
+                                         alt="프로필">
+                                    <span th:text="${post.writer}"></span>
+                                </div>
+                                <div class="vertical-stats">
+                                    조회수 <span th:text="${post.viewCount}"></span> ·
+                                    추천수 <span th:text="${post.recommendationCount}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
 
         <!--ㅡ인기 급상승 이벤트ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <h3>📈 인기 급상승 이벤트</h3>
-        <div class="recommended-container">
-            <div class="recommended-wrapper">
-                <!-- 왼쪽: 추천 배너 슬라이드 -->
-                <div class="recommend-slider">
-                    <div th:each="post : ${trendingPosts}">
-                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
-                            <div class="recommend-event-card">
-                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
-                                <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
-                                <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
-                                <div class="recommend-event-card-body">
-                                    <div class="recommend-event-card-title" th:text="${post.title}"></div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 오른쪽: 추천 목록 -->
-                <div class="recommended-list recommend-vertical-slider">
-                    <a th:each="post : ${trendingPosts}" th:href="@{/posts/{postId} (postId=${post.postId})}">
-                        <div class="recommended-card">
-                            <!-- 썸네일 이미지 -->
+        <div class="double-slide-container">
+            <!-- 왼쪽: 추천 배너 슬라이드 -->
+            <div class="recommend-slider">
+                <div th:each="post : ${trendingPosts}">
+                    <a th:href="@{/posts/{postId} (postId=${post.postId})}">
+                        <div class="event-card">
                             <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
                             <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
                             <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
-                            <!-- 제목 및 추가 정보 -->
-                            <div class="recommended-card-body">
-                                <span class="recommend-list-title" th:text="${post.title}"></span> <!-- 제목 -->
-                                <div class="recommend-list-data">
-                                    <div class="post-card-meta">
-                                        <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}"
-                                             alt="프로필">
-                                        <span th:text="${post.writer}"></span>
-                                    </div>
-                                    <div class="recommend-stats">
-                                        조회수 <span th:text="${post.viewCount}"></span> ·
-                                        추천수 <span th:text="${post.recommendationCount}"></span>
-                                    </div>
-                                </div>
+                            <div class="event-card-body">
+                                <div class="event-card-title" th:text="${post.title}"></div>
                             </div>
                         </div>
                     </a>
                 </div>
+            </div>
 
+            <!-- 오른쪽: 추천 목록 -->
+            <div class="vertical-slider">
+                <a th:each="post : ${trendingPosts}" th:href="@{/posts/{postId} (postId=${post.postId})}">
+                    <div class="vertical-card">
+                        <!-- 썸네일 이미지 -->
+                        <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                        <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                        <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+                        <!-- 제목 및 추가 정보 -->
+                        <div class="vertical-card-body">
+                            <span class="vertical-title" th:text="${post.title}"></span> <!-- 제목 -->
+                            <div class="vertical-data">
+                                <div class="post-card-meta">
+                                    <img th:src="@{/profile/{gradeName}.png (gradeName=${post.writerGrade})}"
+                                         alt="프로필">
+                                    <span th:text="${post.writer}"></span>
+                                </div>
+                                <div class="vertical-stats">
+                                    조회수 <span th:text="${post.viewCount}"></span> ·
+                                    추천수 <span th:text="${post.recommendationCount}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
 
