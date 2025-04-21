@@ -109,16 +109,17 @@
                 <!-- 왼쪽: 추천 배너 슬라이드 -->
                 <div class="recommend-slider">
                     <div th:each="post : ${recommendedPosts}">
-                        <div class="recommend-event-card">
-                            <a th:href="@{/posts/{postId} (postId=${post.postId})}">
+                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
+                            <div class="recommend-event-card">
                                 <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
                                 <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
                                 <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
-                            </a>
-                            <div class="recommend-event-card-body">
-                                <div class="recommend-event-card-title" th:text="${post.title}"></div>
+
+                                <div class="recommend-event-card-body">
+                                    <div class="recommend-event-card-title" th:text="${post.title}"></div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
@@ -158,16 +159,16 @@
                 <!-- 왼쪽: 추천 배너 슬라이드 -->
                 <div class="recommend-slider">
                     <div th:each="post : ${trendingPosts}">
-                        <div class="recommend-event-card">
-                            <a th:href="@{/posts/{postId} (postId=${post.postId})}">
+                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
+                            <div class="recommend-event-card">
                                 <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
                                 <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
                                 <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
-                            </a>
-                            <div class="recommend-event-card-body">
-                                <div class="recommend-event-card-title" th:text="${post.title}"></div>
+                                <div class="recommend-event-card-body">
+                                    <div class="recommend-event-card-title" th:text="${post.title}"></div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
