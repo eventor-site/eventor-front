@@ -76,10 +76,6 @@ a {
     transition: transform 0.3s ease;
 }
 
-.event-card:hover {
-    transform: translateY(-5px);
-}
-
 .event-card img, .event-card video {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -217,10 +213,10 @@ a {
     transition: transform 0.3s, background-color 0.3s;
 }
 
-.recommend-card:hover,
+.event-card:hover,
+.recommend-event-card:hover,
 .recommended-card:hover {
     transform: translateY(-5px);
-    text-decoration: none; /* 기본 밑줄 제거 */
 }
 
 /* 이미지 스타일 */
