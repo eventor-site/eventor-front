@@ -23,7 +23,8 @@
             </h5>
 
             <div class="d-flex align-items-center mb-2 gap-2" th:if="${post.isAuthorized}">
-                <form th:action="@{/posts/{postId}/finish (postId=${post.postId})}"
+                <form th:if="${isEvent}"
+                      th:action="@{/posts/{postId}/finish (postId=${post.postId})}"
                       th:method="put">
                     <button type="submit" class="btn btn-secondary">종료</button>
                 </form>

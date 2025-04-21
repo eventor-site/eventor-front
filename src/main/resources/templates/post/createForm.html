@@ -12,8 +12,14 @@
 <body>
 <div layout:fragment="content">
     <div class="body-container">
-        <h5>카테고리: <span th:text="${categoryName}">전체</span></h5>
+        <h5>카테고리:
+            <a th:href="@{/posts(categoryName=${categoryName})}">
+                <span th:text="${categoryName}"></span>
+            </a>
+        </h5>
+
         <hr>
+        
         <form action="/posts" method="post" id="form" enctype="multipart/form-data">
 
             <div>
