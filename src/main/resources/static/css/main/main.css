@@ -93,9 +93,7 @@ a {
 }
 
 .event-card-title {
-    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 10px;
     white-space: nowrap; /* 줄 바꿈 방지 */
     overflow: hidden; /* 넘치는 텍스트 숨김 */
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
@@ -191,7 +189,6 @@ a {
 
 .recommend-event-card-title {
     height: 5rem;
-    font-size: 20px;
     font-weight: bold;
     white-space: nowrap; /* 줄 바꿈 방지 */
     overflow: hidden; /* 넘치는 텍스트 숨김 */
@@ -248,7 +245,6 @@ a {
 }
 
 .recommend-list-title {
-    font-size: 20px;
     font-weight: bold;
     margin-bottom: 5px;
     white-space: nowrap; /* 줄 바꿈 방지 */
