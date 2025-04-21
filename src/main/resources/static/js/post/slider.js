@@ -75,7 +75,7 @@ $(document).ready(function () {
         ]
     });
 
-    $('.recommend-vertical-slider').slick({
+    $('.vertical-slider').slick({
         vertical: true,
         slidesToShow: 5,
         slidesToScroll: 1,
