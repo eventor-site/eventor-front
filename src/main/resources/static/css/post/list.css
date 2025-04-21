@@ -90,7 +90,7 @@
     padding: 10px;
     background: #fff;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 5px;
     text-decoration: none; /* 기본 밑줄 제거 */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -105,7 +105,7 @@
     width: 120px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-right: 20px;
 }
 
@@ -287,4 +287,14 @@
     .post-card-status, .remaining-day, .end-type {
         margin-left: 5px;
     }
+
+    .category-name h5 {
+        font-size: 1.2rem;
+    }
+
+    .category-search-input {
+        width: 100%;
+        height: 90%;
+    }
+
 }
