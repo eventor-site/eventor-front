@@ -275,6 +275,7 @@ h5 {
     .post-card > img, .post-card > video {
         width: 90px;
         margin-right: 5px;
+        display: block; /* 인라인 요소 특성 제거 */
     }
 
     .post-card-meta img {
