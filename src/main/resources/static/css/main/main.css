@@ -43,6 +43,7 @@ a {
     justify-content: flex-end; /* 오른쪽으로 정렬 */
     object-fit: cover;
     border-radius: 5px;
+    display: block; /* 인라인 요소 특성 제거 */
 }
 
 .top-card-detail-btn {
@@ -81,6 +82,7 @@ a {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: center;
+    display: block; /* 인라인 요소 특성 제거 */
 }
 
 .event-card-body {
@@ -192,6 +194,7 @@ a {
     aspect-ratio: 1 / 1;
     border-radius: 5px;
     object-fit: cover;
+    display: block; /* 인라인 요소 특성 제거 */
 }
 
 /* 정보 영역 */
@@ -289,6 +292,7 @@ a {
         aspect-ratio: 2 / 1; /* 가로:세로 비율 2:1 */
         object-fit: cover;
         border-radius: 5px;
+        display: block; /* 인라인 요소 특성 제거 */
     }
 
     .top-card-body {
