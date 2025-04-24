@@ -89,14 +89,14 @@ $(document).ready(function () {
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 5,
                     slidesToScroll: 1,
                 }
             },
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 5,
                     slidesToScroll: 1,
                 }
             },
