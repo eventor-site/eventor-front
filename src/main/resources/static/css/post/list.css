@@ -78,7 +78,9 @@ h5 {
 }
 
 .slick-prev:hover i, .slick-next:hover i {
-    color: rgb(71, 71, 71); /* 호버 시 아이콘 색상 변경 */
+    color: #f00 !important;
+    cursor: pointer;
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
 }
 
 

@@ -9,6 +9,8 @@ $(document).ready(function () {
         autoplay: true,
         swipeToSlide: true,
         autoplaySpeed: 3000,
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-square-caret-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-square-caret-right"></i></button>',
         responsive: [
             {
                 breakpoint: 480,
@@ -120,6 +122,8 @@ $(document).ready(function () {
         autoplay: true,
         swipeToSlide: true,
         autoplaySpeed: 5000,
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-square-caret-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-square-caret-right"></i></button>',
         responsive: [
             {
                 breakpoint: 480,
