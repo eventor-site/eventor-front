@@ -31,7 +31,7 @@ public class PostViewController {
 		Page<GetMainPostResponse> postViews = response.getData();
 		model.addAttribute("objects", postViews);
 		PagingModel.pagingProcessing(pageable, model, postViews, "/users/me/postViews", 10);
-		return "common/fragments/postViews :: #postViews";
+		return "postView/list :: #postViews";
 	}
 
 	@DeleteMapping("/postViews/{postViewId}")
