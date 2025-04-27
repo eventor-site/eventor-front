@@ -1,4 +1,4 @@
-<div id="postList" class="post-list">
+<div id="postViews" class="post-list">
     <a th:each="post : ${objects}" th:href="@{/posts/{postId}(postId=${post.postId})}">
         <div class="post-card">
             <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
