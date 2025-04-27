@@ -32,7 +32,7 @@
                             <tbody>
                             <tr th:each="comment, index : ${objects}">
                                 <td th:text="${(objects.totalElements - (objects.number * objects.size + index.count)) + 1}"></td>
-                                <td>
+                                <td style="text-align: left;">
                                     <!-- 제목을 클릭하면 해당 게시글로 이동, 댓글 ID를 앵커로 포함 -->
                                     <a th:href="@{/posts/{postId}/comments/{commentId} (postId=${comment.postId}, commentId=${comment.commentId})}"
                                        th:text="${comment.content}"></a>
