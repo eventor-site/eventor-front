@@ -1,16 +1,16 @@
 /* 게시글 목록 스타일 */
-.post-list {
+.post-view-list {
     width: 100%;
     display: flex;
     flex-direction: column;
     margin-top: 10px;
 }
 
-.post-list a {
+.post-view-list a {
     padding: 5px;
 }
 
-.post-card {
+.post-view-card {
     width: 100%;
     display: flex;
     align-items: center;
@@ -22,7 +22,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.post-card > img, .post-card > video {
+.post-view-card > img, .post-view-ard > video {
     width: 70px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
@@ -31,7 +31,7 @@
     display: block; /* 인라인 요소 특성 제거 */
 }
 
-.post-card-body {
+.post-view-card-body {
     flex: 1;
     text-align: left;
     white-space: nowrap; /* 줄 바꿈 방지 */
@@ -39,7 +39,7 @@
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
 
-.post-title {
+.post-view-title {
     font-size: 16px;
     font-weight: bold;
     white-space: nowrap; /* 줄 바꿈 방지 */
@@ -47,18 +47,18 @@
     text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
 }
 
-.post-card-title {
+.post-view-card-title {
     color: #007bff;
 }
 
 @media screen and (max-width: 768px) {
 
-    .post-card {
+    .post-view-card {
         padding: 5px;
     }
 
-    .post-card-title-container span {
-        font-size: 14px !important;
+    .post-view-title {
+        font-size: 14px;
     }
 
     .post-card span, .post-card div {
