@@ -1,0 +1,13 @@
+<div id="postList" class="post-list">
+    <a th:each="post : ${objects}" th:href="@{/posts/{postId}(postId=${post.postId})}">
+        <div class="post-card">
+            <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+            <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+            <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}" controls></video>
+
+            <div class="post-card-body">
+                <span class="post-title" th:text="${post.title}"></span>
+            </div>
+        </div>
+    </a>
+</div>
