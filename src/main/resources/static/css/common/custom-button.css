@@ -1,9 +1,9 @@
+#postViewBtn,
 #scrollToTopBtn,
 #scrollToBottomBtn {
     position: fixed;
     z-index: 1000;
-    background-color: #007bff;
-    color: white;
+    background-color: #FFFFFFE6;
     border: none;
     border-radius: 50%;
     width: 50px;
@@ -19,8 +19,13 @@
     transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
+#postViewBtn {
+    bottom: 150px;
+    right: 30px;
+}
+
 #scrollToTopBtn {
-    bottom: 100px;
+    bottom: 90px;
     right: 30px;
 }
 
@@ -29,11 +34,13 @@
     right: 30px;
 }
 
+#postViewBtn:hover,
 #scrollToTopBtn:hover,
 #scrollToBottomBtn:hover {
-    background-color: #0056b3;
+    background-color: #E6E6E6;
 }
 
+#postViewBtn.show,
 #scrollToTopBtn.show,
 #scrollToBottomBtn.show {
     opacity: 1;
@@ -41,6 +48,7 @@
 }
 
 @media (max-width: 768px) {
+    #postViewBtn,
     #scrollToTopBtn,
     #scrollToBottomBtn {
         width: 40px;
@@ -50,8 +58,12 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
     }
 
+    #postViewBtn {
+        bottom: 120px;
+    }
+
     #scrollToTopBtn {
-        bottom: 80px;
+        bottom: 70px;
     }
 
     #scrollToBottomBtn {
