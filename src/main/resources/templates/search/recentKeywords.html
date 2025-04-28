@@ -1,0 +1,9 @@
+<div id="recentKeywords" class="grid grid-2">
+    <div th:each="keyword : ${recentKeywords}">
+        <div class="keyword-item-wrapper">
+            <div class="keyword-item" th:text="${keyword}" th:onclick="|searchKeyword(${keyword})|"></div>
+            <span class="delete-button" th:onclick="|deleteKeyword(${keyword})|">×</span>
+        </div>
+    </div>
+    <button th:onclick="|clearAllKeywords()|">전체 삭제</button>
+</div>
