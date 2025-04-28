@@ -22,7 +22,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.post-view-card > img, .post-view-ard > video {
+.post-view-card > img, .post-view-card > video {
     width: 70px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
