@@ -61,11 +61,11 @@
         font-size: 14px;
     }
 
-    .post-card span, .post-card div {
+    .post-view-card span, .post-view-card div {
         font-size: 12px;
     }
 
-    .post-card > img, .post-card > video {
+    .post-view-card > img, .post-view-card > video {
         width: 60px;
         margin-right: 5px;
         display: block; /* 인라인 요소 특성 제거 */
