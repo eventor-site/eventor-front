@@ -22,8 +22,8 @@ public record GetUserResponse(
 	String oauthType,
 	LocalDateTime connectTime,
 	LocalDateTime createdAt,
-	LocalDateTime updatedTime,
-	LocalDateTime lastNicknameChangeTime,
-	LocalDateTime lastLoginTime
+	LocalDateTime updatedAt,
+	LocalDateTime nicknameChangedAt,
+	LocalDateTime loginAt
 ) {
 }
