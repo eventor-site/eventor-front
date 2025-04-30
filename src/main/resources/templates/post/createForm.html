@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
-      lang="ko">
-<head>
-    <th:block th:replace="~{common/fragments/config}"></th:block>
+      th:with="titlePrefix='게시물 작성'" lang="ko">
 
+<head>
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/createOrUpdate.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/table.css"/>
@@ -19,7 +18,7 @@
         </h5>
 
         <hr>
-        
+
         <form action="/posts" method="post" id="form" enctype="multipart/form-data">
 
             <div>

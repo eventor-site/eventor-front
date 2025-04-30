@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
-      lang="ko">
+      th:with="titlePrefix=${post.title}" lang="ko">
+
 <head>
-    <th:block th:replace="~{common/fragments/config}"></th:block>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/get.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/table.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/comment/list.css"/>
@@ -16,13 +16,14 @@
             <h5>
                 카테고리:
                 <a id="categoryName"
-                   th:data-category-name="${post.categoryName}"
+                   th:categoryName="${post.categoryName}"
                    th:text="${post.categoryName}"
                    th:href="@{/posts (categoryName=${post.categoryName})}">
                 </a>
             </h5>
 
             <div id="thumbnailUrl" th:text="${thumbnailUrl}" hidden></div>
+            <div id="isEvent" th:attr="isEvent=${isEvent}" hidden></div>
 
             <div class="d-flex align-items-center mb-2 gap-2" th:if="${post.isAuthorized}">
                 <form th:if="${isEvent}"
@@ -50,7 +51,7 @@
                         기간:
                         <span th:text="${#temporals.format(post.startTime, 'yyyy-MM-dd HH:mm')}"></span>
                         ~
-                        <span id="endTime" th:data-end-time="${post.endTime != null ? post.endTime : ''}"
+                        <span id="endTime" th:attr="endTime=${post.endTime != null ? post.endTime : ''}"
                               th:text="${post.endTime != null ? #temporals.format(post.endTime, 'yyyy-MM-dd HH:mm') : '별도 공지시'}"></span>
                     </span>
                 </div>
@@ -96,22 +97,6 @@
                 </tbody>
             </table>
         </div>
-
-        <!--        <div class="share-buttons">-->
-        <!--            &lt;!&ndash; X &ndash;&gt;-->
-        <!--            <a id="btnTwitter" class="link-icon x" href="javascript:shareX();"></a>-->
-
-        <!--            &lt;!&ndash; Facebook &ndash;&gt;-->
-        <!--            <a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();"></a>-->
-
-        <!--            &lt;!&ndash; KakaoTalk &ndash;&gt;-->
-        <!--            <a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao();"></a>-->
-
-        <!--            <button class="link-icon"><i class="fa-regular fa-paste"></i></button>-->
-        <!--        </div>-->
-
-        <!--        <button class="link-icon"><i class="fa-solid fa-share-nodes"></i></button>-->
-
 
         <div th:if="${post.categoryName == '핫딜'}">
             <table class="table">

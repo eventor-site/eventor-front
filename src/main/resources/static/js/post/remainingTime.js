@@ -1,14 +1,19 @@
-const categoryName = document.getElementById("categoryName").getAttribute("data-category-name");
+document.addEventListener("DOMContentLoaded", function () {
+    const isEvent = document.getElementById("isEvent").getAttribute("isEvent") === 'true';
 
-function updateRemainingTime() {
+    if (isEvent) {
+        // 초기 계산 및 1초마다 업데이트
+        updateRemainingTime();
+        setInterval(updateRemainingTime, 1000);
+    }
 
-    if (categoryName !== "자유" && categoryName !== "공지" && categoryName !== "맛집" && categoryName !== "핫딜") {
+    function updateRemainingTime() {
         const endTimeElement = document.getElementById('endTime');
         const remainingTimeElement = document.getElementById('remainingTime');
-        const endTime = new Date(endTimeElement.getAttribute('data-end-time'));
+        const endTime = new Date(endTimeElement.getAttribute('endTime'));
 
         // 종료 시간이 없는 경우 (null)
-        if (!endTimeElement.getAttribute('data-end-time')) {
+        if (!endTimeElement.getAttribute('endTime')) {
             remainingTimeElement.textContent = "별도 공지시까지";
             return;
         }
@@ -33,13 +38,7 @@ function updateRemainingTime() {
         // 남은 시간 표시
         remainingTimeElement.textContent =
             `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+
     }
 
-}
-
-if (categoryName !== "자유" && categoryName !== "공지" && categoryName !== "맛집" && categoryName !== "핫딜") {
-    // 초기 계산 및 1초마다 업데이트
-    updateRemainingTime();
-    setInterval(updateRemainingTime, 1000);
-}
-
+});
