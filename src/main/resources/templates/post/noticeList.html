@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
-      lang="ko">
+      th:with="titlePrefix='공지'" lang="ko">
 <head>
-    <th:block th:replace="~{common/fragments/config}"></th:block>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/list.css"/>
 </head>
 
@@ -18,13 +17,13 @@
                 </button>
             </h5>
 
-            <!--            <form class="search-form" th:action="@{/posts/search (categoryName=${categoryName})}" method="get">-->
-            <!--                <input type="hidden" name="categoryName" th:value="${categoryName}">-->
-            <!--                <input class="search-input" type="text" name="keyword" placeholder="카테고리 내 검색">-->
-            <!--                <button class="search-button" type="submit">-->
-            <!--                    <i class="fa-solid fa-magnifying-glass"></i>-->
-            <!--                </button>-->
-            <!--            </form>-->
+            <form class="search-form" th:action="@{/posts/search (categoryName=${categoryName})}" method="get">
+                <input type="hidden" name="categoryName" th:value="${categoryName}">
+                <input class="search-input" type="text" name="keyword" placeholder="공지 내 검색">
+                <button class="search-button" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
         </div>
 
         <hr>
