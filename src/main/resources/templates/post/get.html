@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/post/table.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/comment/list.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/common/highlight.css"/>
-    <!--    <link rel="stylesheet" type="text/css" media="screen" href="/css/post/share.css"/>-->
 </head>
 
 <body>
@@ -22,6 +21,8 @@
                    th:href="@{/posts (categoryName=${post.categoryName})}">
                 </a>
             </h5>
+
+            <div id="thumbnailUrl" th:text="${thumbnailUrl}" hidden></div>
 
             <div class="d-flex align-items-center mb-2 gap-2" th:if="${post.isAuthorized}">
                 <form th:if="${isEvent}"
@@ -63,7 +64,7 @@
 
             <!-- 제목 및 작성시간 -->
             <div class="title-section">
-                <strong th:text="${post.title}"></strong>
+                <strong id="postTitle" th:text="${post.title}"></strong>
             </div>
 
             <hr>
@@ -160,7 +161,7 @@
                 </div>
             </div>
 
-            <p th:utext="${post.content}"></p>
+            <p id="postContent" th:utext="${post.content}"></p>
         </div>
 
         <div class="post-recommend-container">
