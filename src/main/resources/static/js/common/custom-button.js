@@ -1,18 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 버튼 생성
-    const scrollTopBtn = document.createElement("button");
-    scrollTopBtn.id = "scrollToTopBtn";
-    scrollTopBtn.title = "맨 위로";
-    scrollTopBtn.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
+    const scrollTopBtn = document.getElementById("scrollToTopBtn");
+    const scrollBottomBtn = document.getElementById("scrollToBottomBtn");
 
-    const scrollBottomBtn = document.createElement("button");
-    scrollBottomBtn.id = "scrollToBottomBtn";
-    scrollBottomBtn.title = "맨 아래로";
-    scrollBottomBtn.innerHTML = `<i class="fa-solid fa-arrow-down"></i>`;
-
-    // 추가
-    document.body.appendChild(scrollTopBtn);
-    document.body.appendChild(scrollBottomBtn);
+    const shareBtns = document.getElementById("shareBtns");
+    const shareBtn = document.getElementById("postDetailView") ? document.getElementById("shareBtn") : null;
 
     // 스크롤 이벤트
     window.addEventListener("scroll", function () {
@@ -25,6 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         scrollTopBtn.classList.toggle("show", shouldShow);
         scrollBottomBtn.classList.toggle("show", shouldShow);
+
+        if (shareBtn != null) {
+            shareBtn.classList.toggle("show", shouldShow);
+        }
+
+        if (shareBtns.classList.contains("show") && !shouldShow) {
+            shareBtns.classList.remove("show");
+        }
+
     });
 
     // 스크롤 이동
@@ -35,4 +35,26 @@ document.addEventListener("DOMContentLoaded", function () {
     scrollBottomBtn.addEventListener("click", function () {
         window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
     });
+
+    if (shareBtn != null) {
+        shareBtn.addEventListener("click", function (e) {
+            e.stopPropagation(); // 버튼 클릭 시 이벤트 전파 방지
+            shareBtns.classList.toggle("show");
+        });
+
+        document.addEventListener("click", function (e) {
+            if (shareBtns.classList.contains("show")) {
+                shareBtns.classList.remove("show");
+            }
+        });
+
+        const btnKakao = document.getElementById("btnKakao");
+        if (btnKakao) {
+            btnKakao.addEventListener("click", function () {
+                // 카카오 링크 동작 전에 공유 리스트를 닫음
+                shareBtns.classList.remove("show");
+            });
+        }
+    }
+
 });
