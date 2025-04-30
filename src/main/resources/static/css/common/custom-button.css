@@ -1,6 +1,4 @@
-#postViewBtn,
-#scrollToTopBtn,
-#scrollToBottomBtn {
+.functionBtn {
     position: fixed;
     z-index: 1000;
     background-color: #FFFFFFE6;
@@ -19,7 +17,58 @@
     transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
-#postViewBtn {
+.floating-share-container {
+    position: fixed;
+    bottom: 150px;
+    right: 90px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.share-buttons-horizontal {
+    display: none;
+    flex-direction: row;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.share-buttons-horizontal.show {
+    display: flex;
+}
+
+.link-icon {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* 아이콘의 크기 */
+    height: 50px; /* 아이콘의 크기 */
+    border-radius: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-color: #FFFFFFE6;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.link-icon.x {
+    background-image: url('../../image/share/icon-x.png'); /* 트위터 아이콘 */
+}
+
+.link-icon.facebook {
+    background-image: url('../../image/share/icon-facebook.png'); /* 페이스북 아이콘 */
+}
+
+.link-icon.kakao {
+    background-image: url('../../image/share/icon-kakao.png'); /* 카카오톡 아이콘 */
+}
+
+#shareBtn {
     bottom: 150px;
     right: 30px;
 }
@@ -34,23 +83,21 @@
     right: 30px;
 }
 
-#postViewBtn:hover,
-#scrollToTopBtn:hover,
-#scrollToBottomBtn:hover {
+.functionBtn:hover {
     background-color: #E6E6E6;
 }
 
-#postViewBtn.show,
-#scrollToTopBtn.show,
-#scrollToBottomBtn.show {
+.link-icon:hover {
+    filter: brightness(0.85); /* 어둡게 */
+}
+
+.functionBtn.show {
     opacity: 1;
     visibility: visible;
 }
 
 @media (max-width: 768px) {
-    #postViewBtn,
-    #scrollToTopBtn,
-    #scrollToBottomBtn {
+    .functionBtn, .link-icon {
         width: 40px;
         height: 40px;
         font-size: 16px;
@@ -58,7 +105,12 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
     }
 
-    #postViewBtn {
+    .floating-share-container {
+        bottom: 120px;
+        right: 60px;
+    }
+
+    #shareBtn {
         bottom: 120px;
     }
 

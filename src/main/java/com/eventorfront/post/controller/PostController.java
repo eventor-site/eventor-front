@@ -34,6 +34,7 @@ import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.global.exception.ForbiddenException;
 import com.eventorfront.global.util.CalendarUtils;
 import com.eventorfront.global.util.PagingModel;
+import com.eventorfront.image.dto.response.GetImageResponse;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
@@ -264,6 +265,14 @@ public class PostController {
 		@CookieValue(value = "uuid", required = false) String uuid, @PathVariable Long postId) {
 		Page<GetCommentResponse> comments = commentService.getCommentsByPostId(pageable, postId).getData();
 		GetPostResponse post = postService.getPost(uuid, postId).getData();
+
+		String thumbnailUrl = post.images().stream()
+			.filter(GetImageResponse::isThumbnail)
+			.map(GetImageResponse::url)
+			.findFirst()
+			.orElse("https://www.eventor.store/postimage/common/logo.png");
+
+		model.addAttribute("thumbnailUrl", thumbnailUrl);
 		model.addAttribute("categoryName", post.categoryName());
 		model.addAttribute("post", post);
 		model.addAttribute("objects", comments);
