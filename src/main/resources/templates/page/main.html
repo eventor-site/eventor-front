@@ -11,9 +11,12 @@
 </head>
 
 <body>
-<div layout:fragment="content">
-    <div class="main-page-container">
 
+<div layout:fragment="content">
+
+    <div th:insert="~{advertisement/modal}"></div>
+    
+    <div class="main-page-container">
         <div th:if="${isLogin}">
             <strong>즐겨찾기: </strong>
             <div th:each="bookmark : ${bookmarks}" style="display: inline;">
