@@ -1,4 +1,4 @@
-package com.eventorfront.monitor.client;
+package com.eventorfront.actuator.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.eventorfront.global.dto.ApiResponse;
 
-@FeignClient(name = "monitor-client", url = "${feignClient.url}")
-public interface MonitorClient {
+@FeignClient(name = "actuator-client", url = "${feignClient.url}")
+public interface ActuatorClient {
 
 	@GetMapping(value = "/back/monitors/health")
 	ResponseEntity<ApiResponse<Boolean>> backCheckHealth();
