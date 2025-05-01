@@ -16,12 +16,12 @@ public class HealthController {
 	@Value("${server.port}")
 	private int port;
 
-	@GetMapping("/monitors/health")
+	@GetMapping("/actuator/health")
 	public Boolean checkHealth() {
 		return true;
 	}
 
-	@GetMapping("/monitors/version")
+	@GetMapping("/actuator/version")
 	public String checkVersion() {
 		if (port == 8001 || port == 8002) {
 			return "blue";
@@ -30,12 +30,12 @@ public class HealthController {
 		}
 	}
 
-	@GetMapping("/back/monitors/health")
+	@GetMapping("/back/actuator/health")
 	public Boolean checkBackHealth() {
 		return monitorService.backCheckHealth().getData();
 	}
 
-	@GetMapping("/back/monitors/version")
+	@GetMapping("/back/actuator/version")
 	public String checkBackVersion() {
 		return monitorService.backCheckVersion().getData();
 	}
