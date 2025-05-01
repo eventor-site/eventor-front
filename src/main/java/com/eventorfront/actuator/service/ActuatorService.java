@@ -1,8 +1,8 @@
-package com.eventorfront.monitor.service;
+package com.eventorfront.actuator.service;
 
 import com.eventorfront.global.dto.ApiResponse;
 
-public interface MonitorService {
+public interface ActuatorService {
 
 	ApiResponse<Boolean> backCheckHealth();
 
