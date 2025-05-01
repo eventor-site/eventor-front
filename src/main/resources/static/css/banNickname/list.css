@@ -1,0 +1,23 @@
+.ban-nickname-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    background-color: #e9ecef;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    margin-left: 6px;
+    font-size: 16px;
+    color: #dc3545;
+    cursor: pointer;
+}

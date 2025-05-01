@@ -352,7 +352,7 @@ public class PostController {
 	}
 
 	@AuthorizeRole("admin")
-	@GetMapping("/event")
+	@GetMapping("/event/deleteForm")
 	public String deleteEventPostsPage() {
 		return "user/admin/eventDelete";
 	}
