@@ -1,42 +1,42 @@
-<!-- 광고 모달 -->
-<div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content p-0 border-0 overflow-hidden">
-            <img src="/image/advertisement/signup-event.png" alt="광고 이미지" class="w-100"/>
+<!--&lt;!&ndash; 광고 모달 &ndash;&gt;-->
+<!--<div class="modal fade" id="adModal" tabindex="-1" aria-labelledby="adModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-dialog-centered">-->
+<!--        <div class="modal-content p-0 border-0 overflow-hidden">-->
+<!--            <img src="/image/advertisement/signup-event.png" alt="광고 이미지" class="w-100"/>-->
 
-            <div class="d-flex justify-content-between p-3">
-                <button id="dismissTodayBtn" class="btn btn-secondary">오늘 하루 보지 않기</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!--            <div class="d-flex justify-content-between p-3">-->
+<!--                <button id="dismissTodayBtn" class="btn btn-secondary">오늘 하루 보지 않기</button>-->
+<!--                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 
-<script>
-    function setCookie(name, value, hours) {
-        const date = new Date();
-        date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
-        document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
-    }
+<!--<script>-->
+<!--    function setCookie(name, value, hours) {-->
+<!--        const date = new Date();-->
+<!--        date.setTime(date.getTime() + (hours * 60 * 60 * 1000));-->
+<!--        document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;-->
+<!--    }-->
 
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
+<!--    function getCookie(name) {-->
+<!--        const value = `; ${document.cookie}`;-->
+<!--        const parts = value.split(`; ${name}=`);-->
+<!--        if (parts.length === 2) return parts.pop().split(';').shift();-->
+<!--    }-->
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const dismissTodayBtn = document.getElementById("dismissTodayBtn");
-        const adModal = new bootstrap.Modal(document.getElementById("adModal"));
+<!--    document.addEventListener("DOMContentLoaded", function () {-->
+<!--        const dismissTodayBtn = document.getElementById("dismissTodayBtn");-->
+<!--        const adModal = new bootstrap.Modal(document.getElementById("adModal"));-->
 
-        if (!getCookie("hideAdToday")) {
-            adModal.show();
-        }
+<!--        if (!getCookie("hideAdToday")) {-->
+<!--            adModal.show();-->
+<!--        }-->
 
-        dismissTodayBtn?.addEventListener("click", function () {
-            setCookie("hideAdToday", "true", 24);
-            adModal.hide();
-        });
-    });
-</script>
+<!--        dismissTodayBtn?.addEventListener("click", function () {-->
+<!--            setCookie("hideAdToday", "true", 24);-->
+<!--            adModal.hide();-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
