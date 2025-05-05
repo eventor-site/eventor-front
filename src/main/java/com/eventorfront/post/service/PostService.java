@@ -27,7 +27,7 @@ public interface PostService {
 
 	ApiResponse<Page<GetPostSimpleResponse>> getPosts(Pageable pageable);
 
-	ApiResponse<Page<GetPostSimpleResponse>> monitorPosts(Pageable pageable);
+	ApiResponse<Page<GetPostSimpleResponse>> getSpecialNoticeEventPosts(Pageable pageable);
 
 	ApiResponse<List<GetMainHotPostResponse>> getHotEventPosts();
 
