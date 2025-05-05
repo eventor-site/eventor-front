@@ -14,8 +14,8 @@
 
 <div layout:fragment="content">
 
-    <div th:insert="~{advertisement/modal}"></div>
-    
+    <!--    <div th:insert="~{advertisement/modal}"></div>-->
+
     <div class="main-page-container">
         <div th:if="${isLogin}">
             <strong>즐겨찾기: </strong>
@@ -227,6 +227,7 @@
 <th:block layout:fragment="script">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="/js/post/slider.js"></script>
+    <script src="/js/advertisement/main.js"></script>
 </th:block>
 </body>
 </html>
