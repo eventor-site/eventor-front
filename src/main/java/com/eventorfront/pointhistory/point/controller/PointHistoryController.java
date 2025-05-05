@@ -36,6 +36,7 @@ public class PointHistoryController {
 		if (startTime == null || endTime == null) {
 			model.addAttribute("startTime", CalendarUtils.getDate());
 			model.addAttribute("endTime", CalendarUtils.getPlusDate(7));
+			model.addAttribute("objects", Page.empty());
 		} else {
 			model.addAttribute("startTime", startTime);
 			model.addAttribute("endTime", endTime);
