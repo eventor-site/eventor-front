@@ -12,7 +12,7 @@ function getCookie(name) {
 
 
 function showAdModal() {
-    fetch("/advertisement/modal")
+    fetch("/advertisement/eventModal")
         .then(response => response.text())
         .then(html => {
             document.body.insertAdjacentHTML("beforeend", html);

@@ -36,8 +36,8 @@ public class IndexController {
 		return "page/main";
 	}
 
-	@GetMapping("/advertisement/modal")
+	@GetMapping("/advertisement/eventModal")
 	public String advertisementModal() {
-		return "advertisement/modal";
+		return "advertisement/eventModal";
 	}
 }
