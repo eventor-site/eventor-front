@@ -9,7 +9,7 @@ import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.pointhistory.point.dto.response.GetUserPointTotalResponse;
 
 public interface PointHistoryService {
-	ApiResponse<Page<GetUserPointTotalResponse>> getUserPointTotalsByPeriod(LocalDateTime startDate,
-		LocalDateTime endDate, Pageable pageable);
+	ApiResponse<Page<GetUserPointTotalResponse>> getUserPointTotalsByPeriod(LocalDateTime startTime,
+		LocalDateTime endTime, Pageable pageable);
 
 }

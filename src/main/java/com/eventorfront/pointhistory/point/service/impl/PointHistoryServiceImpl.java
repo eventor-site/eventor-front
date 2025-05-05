@@ -19,8 +19,8 @@ public class PointHistoryServiceImpl implements PointHistoryService {
 	private final PointHistoryClient pointClient;
 
 	@Override
-	public ApiResponse<Page<GetUserPointTotalResponse>> getUserPointTotalsByPeriod(LocalDateTime startDate,
-		LocalDateTime endDate, Pageable pageable) {
-		return pointClient.getUserPointTotalsByPeriod(startDate, endDate, pageable).getBody();
+	public ApiResponse<Page<GetUserPointTotalResponse>> getUserPointTotalsByPeriod(LocalDateTime startTime,
+		LocalDateTime endTime, Pageable pageable) {
+		return pointClient.getUserPointTotalsByPeriod(startTime, endTime, pageable).getBody();
 	}
 }
