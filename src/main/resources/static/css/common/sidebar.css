@@ -69,7 +69,7 @@
 /* 각 섹션 제목 */
 .sidebar-section-title {
     font-weight: 600;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     color: #333;
     margin-bottom: 0.6rem;
     padding-left: 0.3rem;
@@ -81,7 +81,7 @@
 /* 상위 카테고리 제목 */
 .parent-title {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #333;
     padding-left: 0.6rem;
     display: flex;
@@ -97,7 +97,7 @@
     gap: 0.4rem;
     text-decoration: none !important;
     color: #333;
-    font-size: 1rem;
+    font-size: 1.2rem;
     padding: 0.4rem 0.6rem;
     border-radius: 8px;
     transition: all 0.2s ease;
