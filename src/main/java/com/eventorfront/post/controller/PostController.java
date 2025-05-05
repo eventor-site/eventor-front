@@ -199,11 +199,11 @@ public class PostController {
 	}
 
 	@AuthorizeRole("admin")
-	@GetMapping("/monitor")
-	public String monitorPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
-		Page<GetPostSimpleResponse> posts = postService.monitorPosts(pageable).getData();
+	@GetMapping("/event/special/notice")
+	public String getSpecialNoticeEventPosts(@PageableDefault(page = 1, size = 10) Pageable pageable, Model model) {
+		Page<GetPostSimpleResponse> posts = postService.getSpecialNoticeEventPosts(pageable).getData();
 		model.addAttribute("objects", posts);
-		PagingModel.pagingProcessing(pageable, model, posts, "/posts/monitor", 10);
+		PagingModel.pagingProcessing(pageable, model, posts, "/posts/event/special/notice", 10);
 		return "post/all";
 	}
 

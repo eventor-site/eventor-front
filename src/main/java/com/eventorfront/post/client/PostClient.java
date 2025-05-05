@@ -45,8 +45,8 @@ public interface PostClient {
 	ResponseEntity<ApiResponse<Page<GetPostSimpleResponse>>> getPosts(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
-	@GetMapping("/back/posts/monitor/paging")
-	ResponseEntity<ApiResponse<Page<GetPostSimpleResponse>>> monitorPosts(
+	@GetMapping("/back/posts/event/special/notice/paging")
+	ResponseEntity<ApiResponse<Page<GetPostSimpleResponse>>> getSpecialNoticeEventPosts(
 		@PageableDefault(page = 1, size = 10) Pageable pageable);
 
 	@GetMapping("/back/posts/event/hot")
