@@ -17,14 +17,14 @@ function showAdModal() {
         .then(html => {
             document.body.insertAdjacentHTML("beforeend", html);
 
-            const modalEl = document.getElementById("adModal");
-            const adModal = new bootstrap.Modal(modalEl);
-            adModal.show();
+            const modalEl = document.getElementById("eventModal");
+            const eventModal = new bootstrap.Modal(modalEl);
+            eventModal.show();
 
             // 이벤트 바인딩
             modalEl.querySelector("#dismissTodayBtn")?.addEventListener("click", function () {
                 setCookie("hideAdToday", "true", 24);
-                adModal.hide();
+                eventModal.hide();
             });
         })
         .catch(err => {
