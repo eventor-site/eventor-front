@@ -7,7 +7,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -117,8 +116,8 @@ public interface PostClient {
 
 	@GetMapping("/back/posts/statistic/users/admin")
 	ResponseEntity<ApiResponse<List<GetEventPostCountByAdminResponse>>> getEventPostCountByAdmin(
-		@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
-		@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime);
+		@RequestParam(required = false) LocalDateTime startTime,
+		@RequestParam(required = false) LocalDateTime endTime);
 
 	@DeleteMapping("/back/posts/event")
 	ResponseEntity<ApiResponse<Void>> deleteEventPostsByTitleContainKeyword(
