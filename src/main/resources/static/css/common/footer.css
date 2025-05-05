@@ -49,3 +49,14 @@ footer {
 .footer-right a:hover {
     text-decoration: underline; /* 마우스 올릴 때만 밑줄 표시 */
 }
+
+.footer-social a {
+    margin-right: 10px;
+    font-size: 1.5rem;
+    color: white;
+    transition: color 0.3s;
+}
+
+.footer-social a:hover {
+    color: #ff4d4d;
+}
