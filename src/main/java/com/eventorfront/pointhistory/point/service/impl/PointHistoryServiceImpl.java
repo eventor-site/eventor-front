@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class PointHistoryServiceImpl implements PointHistoryService {
-	private final PointHistoryClient pointClient;
+	private final PointHistoryClient pointHistoryClient;
 
 	@Override
 	public ApiResponse<Page<GetUserPointTotalResponse>> getUserPointTotalsByPeriod(LocalDateTime startTime,
 		LocalDateTime endTime, Pageable pageable) {
-		return pointClient.getUserPointTotalsByPeriod(startTime, endTime, pageable).getBody();
+		return pointHistoryClient.getUserPointTotalsByPeriod(startTime, endTime, pageable).getBody();
 	}
 }
