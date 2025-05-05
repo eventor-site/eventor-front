@@ -9,7 +9,6 @@ import com.eventorfront.bookmark.service.BookmarkService;
 import com.eventorfront.post.service.PostService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -35,5 +34,10 @@ public class IndexController {
 		model.addAttribute("communityPosts", postService.getCommunityPosts().getData());
 		model.addAttribute("bookmarks", bookmarkService.getBookmarksByUserId().getData());
 		return "page/main";
+	}
+
+	@GetMapping("/advertisement/modal")
+	public String advertisementModal() {
+		return "advertisement/modal";
 	}
 }

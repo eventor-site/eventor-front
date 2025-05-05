@@ -11,34 +11,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    function setCookie(name, value, hours) {
-        const date = new Date();
-        date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
-        document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
-    }
-
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const dismissTodayBtn = document.getElementById("dismissTodayBtn");
-        const adModal = new bootstrap.Modal(document.getElementById("adModal"));
-
-        if (!getCookie("hideAdToday")) {
-            adModal.show();
-        }
-
-        dismissTodayBtn?.addEventListener("click", function () {
-            setCookie("hideAdToday", "true", 24);
-            adModal.hide();
-        });
-    });
-</script>
-
-<!--// TODO: 추후 수정-->
