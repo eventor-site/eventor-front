@@ -66,7 +66,7 @@ public class GlobalExceptionHandler {
 			return ResponseEntity.status(status).body(errorMessage);
 		} else {
 			model.addAttribute("errorMessage", errorMessage);
-			model.addAttribute("status", status);
+			model.addAttribute("status", status.value());
 			model.addAttribute("timestamp", timestamp);
 
 			return "common/error";
