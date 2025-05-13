@@ -9,10 +9,10 @@ import com.eventorfront.global.dto.ApiResponse;
 @FeignClient(name = "actuator-client", url = "${feignClient.url}")
 public interface ActuatorClient {
 
-	@GetMapping(value = "/back/monitors/health")
+	@GetMapping(value = "/back/actuator/health")
 	ResponseEntity<ApiResponse<Boolean>> backCheckHealth();
 
-	@GetMapping(value = "/back/monitors/version")
+	@GetMapping(value = "/back/actuator/version")
 	ResponseEntity<ApiResponse<String>> backCheckVersion();
 
 }
