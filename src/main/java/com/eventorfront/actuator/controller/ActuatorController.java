@@ -30,14 +30,14 @@ public class ActuatorController {
 		}
 	}
 
-	@GetMapping("/back/actuator/health")
-	public Boolean checkBackendHealth() {
-		return actuatorService.backCheckHealth().getData();
-	}
-
-	@GetMapping("/back/actuator/version")
-	public String checkBackVersion() {
-		return actuatorService.backCheckVersion().getData();
-	}
+	// @GetMapping("/back/actuator/health")
+	// public Boolean checkBackendHealth() {
+	// 	return actuatorService.backCheckHealth().getData();
+	// }
+	//
+	// @GetMapping("/back/actuator/version")
+	// public String checkBackVersion() {
+	// 	return actuatorService.backCheckVersion().getData();
+	// }
 
 }
