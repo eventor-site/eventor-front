@@ -1,0 +1,11 @@
+<div id="topKeywords" class="topKeywords-slider">
+    <a th:each="keyword, stat : ${topKeywords}"
+       th:href="@{/posts/search(keyword=${keyword})}">
+        <div class="keyword-item">
+            <span th:text="${stat.index + 1}"
+                  class="me-2"
+                  th:classappend="${stat.index < 3} ? 'rank-top' : ''"></span>
+            <span th:text="${keyword}"></span>
+        </div>
+    </a>
+</div>
