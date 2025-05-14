@@ -119,6 +119,23 @@
     border-color: #e65c00;
 }
 
+.keyword-item {
+    width: 140px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.keyword-item:hover {
+    cursor: pointer;
+    color: #111;
+}
+
+.rank-top {
+    color: red;
+}
+
 @media screen and (max-width: 768px) {
 
     .logo-image {
@@ -150,6 +167,10 @@
         text-align: center;
         gap: 1rem; /* 요소 간 간격 */
         padding: 0 1rem;
+    }
+
+    .keyword-item {
+        width: 100px;
     }
 
 }

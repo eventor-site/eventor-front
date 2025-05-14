@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const logoutButton = document.getElementById("logout");
     const myPageLink = document.getElementById("myPageLink");
 
+    fetchTopKeywords();
+
     if (isDisplayed) {
         // 로그인한 경우
         loginButton.style.display = "none";
@@ -34,4 +36,26 @@ const hasTokens = async () => {
         console.error('Error:', error);
         return false;
     }
+}
+
+function fetchTopKeywords() {
+    fetch('/searches/topKeywords')
+        .then(response => response.text())
+        .then(html => {
+            $('#topKeywords').replaceWith(html);
+
+            $('.topKeywords-slider').slick({
+                vertical: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: true,
+                autoplay: true,
+                swipeToSlide: true,
+                arrows: false,
+                autoplaySpeed: 1000,
+            });
+        })
+        .catch(error => {
+            console.error('인기 검색어 가져오기 실패:', error);
+        });
 }
