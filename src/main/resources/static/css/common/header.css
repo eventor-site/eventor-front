@@ -119,6 +119,10 @@
     border-color: #e65c00;
 }
 
+.topKeywords-slider {
+    padding: 0 !important;
+}
+
 .keyword-item {
     width: 140px;
     font-size: 1rem;
