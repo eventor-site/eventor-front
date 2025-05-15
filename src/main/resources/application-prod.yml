@@ -13,5 +13,10 @@ spring:
   thymeleaf:
     cache: true
 
+  data:
+    redis:
+      host: redis
+      password: ${REDIS_PASSWORD}
+
 feignClient:
   url: eventor-gateway:8090
