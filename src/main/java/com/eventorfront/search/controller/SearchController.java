@@ -17,7 +17,7 @@ public class SearchController {
 
 	@GetMapping("/topKeywords")
 	public String getTopKeywords(Model model) {
-		model.addAttribute("topKeywords", searchService.getTopKeywords().getData());
+		model.addAttribute("topKeywords", searchService.getTopKeywords());
 		return "search/topKeywords :: #topKeywords";
 	}
 
