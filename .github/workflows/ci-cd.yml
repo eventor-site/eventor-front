@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           export $(grep -v '^#' .env | xargs)
-          cd eventor-front/src  # ← 여기를 pom.xml 있는 경로로 수정
+          cd eventor-front/src
           mvn install
         shell: bash
 
