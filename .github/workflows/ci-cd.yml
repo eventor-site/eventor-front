@@ -10,10 +10,12 @@ jobs:
     steps:
 
       # ✅ .env 파일 생성
-      - name: Write ENV_FILE content to .env file
+      - name: Load ENV_FILE and export as environment variables
         run: |
-          mkdir -p .github/docker
-          echo "${{ secrets.ENV_FILE }}" > .github/docker/.env
+          echo "${{ secrets.ENV_FILE }}" > .env
+          export $(grep -v '^#' .env | xargs)
+          mvn install
+        shell: bash
 
       - name: Checkout repository
         uses: actions/checkout@v3
