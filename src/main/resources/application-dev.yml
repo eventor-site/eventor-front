@@ -13,7 +13,7 @@ spring:
   data:
     redis:
       host: localhost
-      password: wkddngurqudtls!
+      password: ${REDIS_PASSWORD}
 
 logging:
   file:

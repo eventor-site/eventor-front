@@ -16,7 +16,7 @@ spring:
   data:
     redis:
       host: redis
-      password: wkddngurqudtls!
+      password: ${REDIS_PASSWORD}
 
 feignClient:
   url: eventor-gateway:8090
