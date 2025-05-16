@@ -6,10 +6,6 @@ on:
 
 jobs:
   build:
-    # 테스트용 환경 변수
-    env:
-      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
-
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
