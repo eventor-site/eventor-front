@@ -27,20 +27,10 @@ jobs:
       - name: Clean with Maven
         run: mvn clean
 
-      - name: Print directory structure
-        run: |
-          pwd
-          ls -al
-
-      - name: Print nested directory structure
-        run: |
-          ls -al ./eventor-front
-
       - name: Load .env and Install with Maven
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           export $(grep -v '^#' .env | xargs)
-          cd eventor-front/src
           mvn install
         shell: bash
 
