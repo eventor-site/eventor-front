@@ -8,6 +8,13 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
+
+      # ✅ .env 파일 생성
+      - name: Write ENV_FILE content to .env file
+        run: |
+          mkdir -p .github/docker
+          echo "${{ secrets.ENV_FILE }}" > .github/docker/.env
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
