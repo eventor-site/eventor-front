@@ -8,16 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-
-      # ✅ .env 파일 생성
-      - name: Load .env and Install with Maven
-        run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
-          export $(grep -v '^#' .env | xargs)
-          cd eventor-front/src  # ← 여기를 pom.xml 있는 경로로 수정
-          mvn install
-        shell: bash
-
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -37,8 +27,13 @@ jobs:
       - name: Clean with Maven
         run: mvn clean
 
-      - name: Install with Maven
-        run: mvn install
+      - name: Load .env and Install with Maven
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+          export $(grep -v '^#' .env | xargs)
+          cd eventor-front/src  # ← 여기를 pom.xml 있는 경로로 수정
+          mvn install
+        shell: bash
 
       - name: Set up Docker Compose
         run: |
