@@ -7,8 +7,9 @@ const observer = new MutationObserver((mutationsList, observer) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
             if (sidebarRight.classList.contains('show')) {
                 // show 클래스가 추가되었으면 => 사이드바 열림
-                fetchRecentPosts();
+                fetchSidebarTopKeywords();
                 loadRecentKeywords();
+                fetchRecentPosts();
             }
         }
     }
