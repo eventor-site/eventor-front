@@ -10,10 +10,11 @@ jobs:
     steps:
 
       # ✅ .env 파일 생성
-      - name: Load ENV_FILE and export as environment variables
+      - name: Load .env and Install with Maven
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           export $(grep -v '^#' .env | xargs)
+          cd eventor-front/src  # ← 여기를 pom.xml 있는 경로로 수정
           mvn install
         shell: bash
 
