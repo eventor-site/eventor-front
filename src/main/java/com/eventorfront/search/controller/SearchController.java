@@ -21,4 +21,10 @@ public class SearchController {
 		return "search/topKeywords :: #topKeywords";
 	}
 
+	@GetMapping("/topKeywords/sidebar")
+	public String getSidebarTopKeywords(Model model) {
+		model.addAttribute("topKeywords", searchService.getTopKeywords());
+		return "search/sidebarTopKeywords :: #sidebarTopKeywords";
+	}
+
 }
