@@ -9,7 +9,11 @@
 <div layout:fragment="content">
     <div class="body-container">
         <div class="d-flex justify-content-between align-items-center">
-            <h5>카테고리: <span th:text="${categoryName}"></span>
+            
+            <h5>카테고리:
+                <a th:href="@{/posts(categoryName=${categoryName})}">
+                    <span th:text="${categoryName}"></span>
+                </a>
                 <button class="btn btn-sm btn-outline-primary"
                         th:data-url="@{/categories/{categoryName}/bookmarks (categoryName=${categoryName})}"
                         data-method="post"
@@ -57,6 +61,17 @@
                class="btn btn-primary">게시글 작성</a>
         </div>
 
+        <!-- 고정 게시글 목록 -->
+        <div class="post-list">
+            <a th:each="post : ${fixedPosts}" th:href="@{/posts/{postId}(postId=${post.postId()})}" class="post-card">
+                <div class="post-card-body">
+                    <div class="post-card-title-container">
+                        <span class="post-card-category">[<span th:text="${categoryName}"></span>] </span>
+                        <span class="post-card-title" th:text="${post.title}"></span>
+                    </div>
+                </div>
+            </a>
+        </div>
 
         <!-- 게시글 목록 -->
         <div class="post-list" th:if="${objects.getTotalElements() > 0}">
@@ -79,6 +94,7 @@
                 </div>
             </a>
         </div>
+
         <div th:if="${objects.getTotalElements() == 0}">
             <p>게시글이 없습니다.</p>
         </div>

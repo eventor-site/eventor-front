@@ -22,6 +22,7 @@ import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
 import com.eventorfront.post.dto.response.GetEventPostCountByAdminResponse;
+import com.eventorfront.post.dto.response.GetFixedPostResponse;
 import com.eventorfront.post.dto.response.GetMainHotPostResponse;
 import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
@@ -71,6 +72,10 @@ public interface PostClient {
 	@GetMapping("/back/posts/hot")
 	ResponseEntity<ApiResponse<List<GetMainPostResponse>>> getHotPostsByCategoryName(@RequestParam String categoryName);
 
+	@GetMapping("/back/posts/fixed")
+	ResponseEntity<ApiResponse<List<GetFixedPostResponse>>> getFixedPostsByCategoryName(
+		@RequestParam(defaultValue = "") String categoryName);
+
 	@GetMapping("/back/posts")
 	ResponseEntity<ApiResponse<Page<GetPostsByCategoryNameResponse>>> getPostsByCategoryName(
 		@PageableDefault(page = 1, size = 10, sort = "createdAt,desc") Pageable pageable,
@@ -111,6 +116,9 @@ public interface PostClient {
 
 	@GetMapping("/back/posts/{postId}/isAuthorized")
 	ResponseEntity<ApiResponse<Boolean>> isAuthorizedToEdit(@PathVariable Long postId);
+
+	@PutMapping("/back/posts/{postId}/isFixed")
+	ResponseEntity<ApiResponse<Void>> updatePostIsFixed(@PathVariable Long postId, @RequestParam boolean isFixed);
 
 	@DeleteMapping("/back/posts/temp")
 	ResponseEntity<ApiResponse<Void>> deleteTempPost();

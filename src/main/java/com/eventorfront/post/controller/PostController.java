@@ -38,6 +38,7 @@ import com.eventorfront.image.dto.response.GetImageResponse;
 import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
+import com.eventorfront.post.dto.response.GetFixedPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
 import com.eventorfront.post.dto.response.GetPostSimpleResponse;
 import com.eventorfront.post.dto.response.GetPostsByCategoryNameResponse;
@@ -230,10 +231,11 @@ public class PostController {
 		Sort sort = Sort.by(sortDirection, sortBy);
 		Pageable pageable = PageRequest.of(defaultPageable.getPageNumber(), defaultPageable.getPageSize(), sort);
 
+		List<GetFixedPostResponse> fixedPosts = postService.getFixedPostsByCategoryName(categoryName).getData();
 		Page<GetPostsByCategoryNameResponse> posts = postService.getPostsByCategoryName(pageable, categoryName,
-				eventStatusName, endType)
-			.getData();
+			eventStatusName, endType).getData();
 		String encodedCategoryName = URLEncoder.encode(categoryName, StandardCharsets.UTF_8);
+		model.addAttribute("fixedPosts", fixedPosts);
 		model.addAttribute("objects", posts);
 		model.addAttribute("sortBy", sortBy);
 		model.addAttribute("direction", direction);
@@ -241,7 +243,7 @@ public class PostController {
 		if (categoryName.equals("공지")) {
 			PagingModel.pagingProcessing(pageable, model, posts,
 				"/posts?categoryName=" + encodedCategoryName + "&direction=" + direction + "&sortBy=" + sortBy, 10);
-			return "post/noticeList";
+			return "post/notice/list";
 		} else {
 			model.addAttribute("hotPosts", postService.getHotPostsByCategoryName(categoryName).getData());
 
@@ -316,6 +318,13 @@ public class PostController {
 		} else {
 			return ResponseEntity.ok().body("로그인 후 다시 시도하세요.");
 		}
+	}
+
+	@PutMapping("/{postId}/isFixed")
+	public String updatePostIsFixed(@PathVariable Long postId, @RequestParam Boolean isFixed,
+		RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", postService.updatePostIsFixed(postId, isFixed).getMessage());
+		return "redirect:/posts/" + postId;
 	}
 
 	@DeleteMapping("/{postId}")

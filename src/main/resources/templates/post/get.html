@@ -26,6 +26,10 @@
             <div id="isEvent" th:attr="isEvent=${isEvent}" hidden></div>
 
             <div class="d-flex align-items-center mb-2 gap-2" th:if="${post.isAuthorized}">
+                <form th:action="@{/posts/{postId}/isFixed (postId=${post.postId}, isFixed=${!post.isFixed})}"
+                      th:method="put">
+                    <button type="submit" class="btn btn-secondary" th:text="${post.isFixed} ? '고정 해제' : '고정'"></button>
+                </form>
                 <form th:if="${isEvent}"
                       th:action="@{/posts/{postId}/finish (postId=${post.postId})}"
                       th:method="put">

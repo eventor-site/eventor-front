@@ -19,6 +19,7 @@ public record GetPostResponse(
 	Long recommendationCount,
 	Long viewCount,
 	LocalDateTime createdAt,
+	Boolean isFixed,
 
 	String link,
 

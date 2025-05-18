@@ -11,6 +11,7 @@ import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
 import com.eventorfront.post.dto.response.GetEventPostCountByAdminResponse;
+import com.eventorfront.post.dto.response.GetFixedPostResponse;
 import com.eventorfront.post.dto.response.GetMainHotPostResponse;
 import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
@@ -43,6 +44,8 @@ public interface PostService {
 
 	ApiResponse<List<GetMainPostResponse>> getHotPostsByCategoryName(String categoryName);
 
+	ApiResponse<List<GetFixedPostResponse>> getFixedPostsByCategoryName(String categoryName);
+
 	ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable, String categoryName,
 		String eventStatusName, String endType);
 
@@ -65,6 +68,8 @@ public interface PostService {
 	ApiResponse<Void> deletePost(Long postId);
 
 	ApiResponse<Boolean> isAuthorizedToEdit(Long postId);
+
+	ApiResponse<Void> updatePostIsFixed(Long postId, Boolean isFixed);
 
 	void deleteTempPost();
 

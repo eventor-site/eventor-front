@@ -13,6 +13,7 @@ import com.eventorfront.post.dto.request.CreatePostRequest;
 import com.eventorfront.post.dto.request.UpdatePostRequest;
 import com.eventorfront.post.dto.response.CreatePostResponse;
 import com.eventorfront.post.dto.response.GetEventPostCountByAdminResponse;
+import com.eventorfront.post.dto.response.GetFixedPostResponse;
 import com.eventorfront.post.dto.response.GetMainHotPostResponse;
 import com.eventorfront.post.dto.response.GetMainPostResponse;
 import com.eventorfront.post.dto.response.GetPostResponse;
@@ -82,6 +83,11 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public ApiResponse<List<GetFixedPostResponse>> getFixedPostsByCategoryName(String categoryName) {
+		return postClient.getFixedPostsByCategoryName(categoryName).getBody();
+	}
+
+	@Override
 	public ApiResponse<Page<GetPostsByCategoryNameResponse>> getPostsByCategoryName(Pageable pageable,
 		String categoryName, String eventStatusName, String endType) {
 		return postClient.getPostsByCategoryName(pageable, categoryName, eventStatusName, endType).getBody();
@@ -135,6 +141,11 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public ApiResponse<Boolean> isAuthorizedToEdit(Long postId) {
 		return postClient.isAuthorizedToEdit(postId).getBody();
+	}
+
+	@Override
+	public ApiResponse<Void> updatePostIsFixed(Long postId, Boolean isFixed) {
+		return postClient.updatePostIsFixed(postId, isFixed).getBody();
 	}
 
 	@Override
