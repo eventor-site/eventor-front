@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -56,5 +57,15 @@ public class RedisConfig {
 		return sessionRedisTemplate;
 	}
 
+	@Primary
+	@Bean("sessionRedisConnectionFactory")
+	public RedisConnectionFactory sessionRedisConnectionFactory() {
+		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
+		redisStandaloneConfiguration.setHostName(hostname);
+		redisStandaloneConfiguration.setPort(6379);
+		redisStandaloneConfiguration.setPassword(password);
+		redisStandaloneConfiguration.setDatabase(5);
+		return new LettuceConnectionFactory(redisStandaloneConfiguration);
+	}
 }
 

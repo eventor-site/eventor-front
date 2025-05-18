@@ -22,6 +22,11 @@ spring:
   jpa:
     open-in-view: false
 
+  session:
+    redis:
+      flush-mode: on-save
+      sto
+
 logging:
   file:
     path: ./logs
