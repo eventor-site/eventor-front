@@ -105,6 +105,18 @@
 
         <hr>
 
+        <!-- 고정 게시글 목록 -->
+        <div class="post-list">
+            <a th:each="post : ${fixedPosts}" th:href="@{/posts/{postId}(postId=${post.postId()})}" class="post-card">
+                <div class="post-card-body">
+                    <div class="post-card-title-container">
+                        <span class="post-card-category">[<span th:text="${categoryName}"></span>] </span>
+                        <span class="post-card-title" th:text="${post.title}"></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
         <!-- 게시글 목록 -->
         <div class="post-list" th:if="${objects.getTotalElements() > 0}">
             <a th:each="post : ${objects}" th:href="@{/posts/{postId}(postId=${post.postId})}">
