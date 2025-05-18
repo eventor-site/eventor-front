@@ -25,7 +25,6 @@ spring:
   session:
     redis:
       flush-mode: on-save
-      sto
 
 logging:
   file:
