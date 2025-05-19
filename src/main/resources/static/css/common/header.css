@@ -129,6 +129,7 @@
     font-weight: bold;
     color: #333;
     white-space: nowrap; /* 줄바꿈 방지 */
+    overflow: hidden;
 }
 
 .keyword-item:hover {

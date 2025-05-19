@@ -13,38 +13,26 @@
             <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
             <section id="page-content">
                 <section id="page-header">
-                    <h5>금지닉네임 관리</h5>
+                    <h5>인기검색어 관리</h5>
                 </section>
                 <hr>
                 <section id="page-body">
-                    <h3>금지닉네임 리스트 (<span th:text="${banNicknames.size()}"></span>)</h3>
-                    <form action="/banNicknames" method="post">
-                        <div class="mb-2 d-flex align-items-center w-50 gap-2">
-                            <input type="text" class="form-control" id="nickname" name="nickname"
-                                   placeholder="금지할 닉네임 입력" required>
-                            <button type="submit" class="btn btn-primary">추가</button>
-                        </div>
-                    </form>
+                    <h3>인기검색어 리스트 (<span th:text="${keywords.size()}"></span>)</h3>
 
-                    <div th:if="${banNicknames.size() > 0}">
+                    <div th:if="${keywords.size() > 0}">
                         <div class="custom-tags">
-                            <div th:each="banNickname, iterStat : ${banNicknames}" class="tag">
+                            <div th:each="keyword, iterStat : ${keywords}" class="tag">
                                 <div>
                                     <span class="index" th:text="${iterStat.index + 1} + '.'"></span>
-                                    <span class="keyword-text" th:text="${banNickname.nickname}"></span>
+                                    <span class="keyword-text" th:text="${keyword}"></span>
                                 </div>
-
-                                <form th:action="@{/banNicknames/{banNicknameId}(banNicknameId=${banNickname.banNicknameId()})}"
+                                <form th:action="@{/searches/keywords (keyword=${keyword})}"
                                       th:method="delete"
                                       onsubmit="return confirm('정말 삭제하시겠습니까?');">
                                     <button type="submit" class="delete-btn">&times;</button>
                                 </form>
                             </div>
                         </div>
-                    </div>
-
-                    <div th:if="${banNicknames.size() == 0}">
-                        <p>금지닉네임이 없습니다.</p>
                     </div>
 
                 </section>
