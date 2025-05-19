@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
-      lang="ko">
+      th:with="titlePrefix='통계 관리'" lang="ko">
 <head>
 
 </head>
@@ -12,7 +12,7 @@
             <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
             <section id="page-content">
                 <section id="page-header">
-                    <h5>통계 정보</h5>
+                    <h5>통계 관리</h5>
                 </section>
                 <hr>
                 <section id="page-body">
