@@ -23,4 +23,20 @@ public class SearchServiceImpl implements SearchService {
 			.toList();
 	}
 
+	@Override
+	public List<String> getKeywords() {
+		return keywordRedisTemplate.opsForZSet()
+			.reverseRange("search_keywords:score", 0, 99)
+			.stream()
+			.map(String::valueOf)
+			.toList();
+	}
+
+	@Override
+	public void deleteKeyword(String keyword) {
+		keywordRedisTemplate.opsForZSet().remove("search_keywords:total", keyword);
+		keywordRedisTemplate.opsForZSet().remove("search_keywords:score", keyword);
+		keywordRedisTemplate.opsForHash().delete("search_keywords:last_used", keyword);
+	}
+
 }

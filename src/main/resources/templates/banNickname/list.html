@@ -3,7 +3,7 @@
       lang="ko">
 
 <head>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/banNickname/list.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/custom-tag.css"/>
 </head>
 
 <body>
@@ -27,9 +27,13 @@
                     </form>
 
                     <div th:if="${banNicknames.size() > 0}">
-                        <div class="ban-nickname-tags">
-                            <div th:each="banNickname : ${banNicknames}" class="tag">
-                                <span th:text="${banNickname.nickname}"></span>
+                        <div class="custom-tags">
+                            <div th:each="banNickname, iterStat : ${banNicknames}" class="tag">
+                                <div>
+                                    <span class="index" th:text="${iterStat.index + 1} + '.'"></span>
+                                    <span class="keyword-text" th:text="${banNickname.nickname}"></span>
+                                </div>
+
                                 <form th:action="@{/banNicknames/{banNicknameId}(banNicknameId=${banNickname.banNicknameId()})}"
                                       th:method="delete"
                                       onsubmit="return confirm('정말 삭제하시겠습니까?');">
@@ -38,7 +42,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--//test-->
+
                     <div th:if="${banNicknames.size() == 0}">
                         <p>금지닉네임이 없습니다.</p>
                     </div>

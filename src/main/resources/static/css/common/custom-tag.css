@@ -1,0 +1,48 @@
+.custom-tags {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.tag {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 8px 12px;
+    display: flex; /* 그리드 아이템 내부 flex */
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    white-space: nowrap; /* 전체 태그는 nowrap 유지 */
+}
+
+.tag > div {
+    display: flex; /* 인덱스+키워드 묶음 */
+    min-width: 0; /* 축소 허용 */
+}
+
+.index {
+    color: #007bff;
+    font-weight: bold;
+    margin-right: 4px;
+    flex-shrink: 0; /* 인덱스 고정 */
+}
+
+.keyword-text {
+    flex: 1 1 auto; /* 키워드 텍스트 최대한 늘리고 축소 가능 */
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ff5c5c;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    padding-left: 8px;
+    line-height: 1;
+    flex-shrink: 0; /* 버튼 크기 고정 */
+}

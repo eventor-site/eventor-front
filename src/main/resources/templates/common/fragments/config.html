@@ -39,5 +39,8 @@
 <link rel="stylesheet" type="text/css" media="screen" href="/css/common/sidebar.css"/>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-N2NEDG5TV6"></script>
-<script src="/js/common/google-analytics.js"></script>
+<th:block th:if="${!@environment.acceptsProfiles('dev')}">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N2NEDG5TV6"></script>
+    <script src="/js/common/google-analytics.js"></script>
+</th:block>
+

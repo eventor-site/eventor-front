@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      lang="ko">
+
+<head>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/common/custom-tag.css"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="body-container">
+        <section id="page">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>인기검색어 관리</h5>
+                </section>
+                <hr>
+                <section id="page-body">
+                    <h3>인기검색어 리스트 (<span th:text="${keywords.size()}"></span>)</h3>
+
+                    <div th:if="${keywords.size() > 0}">
+                        <div class="custom-tags">
+                            <div th:each="keyword, iterStat : ${keywords}" class="tag">
+                                <div>
+                                    <span class="index" th:text="${iterStat.index + 1} + '.'"></span>
+                                    <span class="keyword-text" th:text="${keyword}"></span>
+                                </div>
+                                <form th:action="@{/searches/keywords (keyword=${keyword})}"
+                                      th:method="delete"
+                                      onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                                    <button type="submit" class="delete-btn">&times;</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+
+        </section>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+
+</th:block>
+</body>
+</html>
