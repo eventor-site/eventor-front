@@ -32,14 +32,13 @@ public class SearchController {
 
 	@GetMapping("/keywords")
 	public String getKeywords(Model model) {
-		model.addAttribute("keywords", searchService.getKeywords());
+		model.addAttribute("keywords", searchService.getKeywords().getData());
 		return "search/keywords";
 	}
 
 	@DeleteMapping("/keywords")
 	public String deleteKeyword(@RequestParam String keyword, RedirectAttributes redirectAttributes) {
-		searchService.deleteKeyword(keyword);
-		redirectAttributes.addFlashAttribute("message", "인기 검색어가 삭제 되었습니다.");
+		redirectAttributes.addFlashAttribute("message", searchService.deleteKeyword(keyword).getMessage());
 		return "redirect:/searches/keywords";
 	}
 

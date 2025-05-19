@@ -2,12 +2,14 @@ package com.eventorfront.search.service;
 
 import java.util.List;
 
+import com.eventorfront.global.dto.ApiResponse;
+
 public interface SearchService {
 
 	List<String> getTopKeywords();
 
-	List<String> getKeywords();
+	ApiResponse<List<String>> getKeywords();
 
-	void deleteKeyword(String keyword);
+	ApiResponse<Void> deleteKeyword(String keyword);
 
 }

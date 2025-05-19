@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.eventorfront.global.dto.ApiResponse;
+import com.eventorfront.search.client.SearchClient;
 import com.eventorfront.search.service.SearchService;
 
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SearchServiceImpl implements SearchService {
 	private final RedisTemplate<String, Object> keywordRedisTemplate;
+	private final SearchClient searchClient;
 
 	@Override
 	public List<String> getTopKeywords() {
@@ -24,19 +27,13 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	@Override
-	public List<String> getKeywords() {
-		return keywordRedisTemplate.opsForZSet()
-			.reverseRange("search_keywords:score", 0, 99)
-			.stream()
-			.map(String::valueOf)
-			.toList();
+	public ApiResponse<List<String>> getKeywords() {
+		return searchClient.getKeywords().getBody();
 	}
 
 	@Override
-	public void deleteKeyword(String keyword) {
-		keywordRedisTemplate.opsForZSet().remove("search_keywords:total", keyword);
-		keywordRedisTemplate.opsForZSet().remove("search_keywords:score", keyword);
-		keywordRedisTemplate.opsForHash().delete("search_keywords:last_used", keyword);
+	public ApiResponse<Void> deleteKeyword(String keyword) {
+		return searchClient.deleteKeyword(keyword).getBody();
 	}
 
 }
