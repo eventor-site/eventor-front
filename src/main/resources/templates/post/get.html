@@ -119,7 +119,7 @@
                 </tr>
                 <tr>
                     <th>가격</th>
-                    <td th:text="${post.price}"></td>
+                    <td th:text="${#numbers.formatInteger(post.price, 3, 'COMMA')} + ' 원'"></td>
                 </tr>
                 </tbody>
             </table>
