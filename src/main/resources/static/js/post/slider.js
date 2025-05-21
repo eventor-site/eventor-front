@@ -112,11 +112,45 @@ $(document).ready(function () {
         ]
     });
 
+    $('.hotDeal-slider').slick({
+        infinite: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+        autoplay: true,
+        swipeToSlide: true,
+        autoplaySpeed: 0,
+        speed: 3000,
+        cssEase: 'linear',
+        responsive: [
+            {
+                breakpoint: 480,
+                settings: {
+                    rows: 2,
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    rows: 2,
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 5,
+                }
+            }
+        ]
+    });
+
     $('.community-slider').slick({
         infinite: true,
         slidesToShow: 5,
         slidesToScroll: 5,
-        // mobileFirst: true,
         dots: true,
         arrows: true,
         autoplay: true,

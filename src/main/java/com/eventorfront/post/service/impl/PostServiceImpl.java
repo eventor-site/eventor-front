@@ -73,6 +73,11 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public ApiResponse<List<GetMainPostResponse>> getHotDealPosts() {
+		return postClient.getHotDealPosts().getBody();
+	}
+
+	@Override
 	public ApiResponse<List<GetMainPostResponse>> getCommunityPosts() {
 		return postClient.getCommunityPosts().getBody();
 	}

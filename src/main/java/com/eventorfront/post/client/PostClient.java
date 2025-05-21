@@ -66,8 +66,11 @@ public interface PostClient {
 	@GetMapping("/back/posts/event/trending")
 	ResponseEntity<ApiResponse<List<GetRecommendPostResponse>>> getTrendingEventPosts();
 
+	@GetMapping("/back/posts/hotDeal")
+	ResponseEntity<ApiResponse<List<GetMainPostResponse>>> getHotDealPosts();
+
 	@GetMapping("/back/posts/community")
-	public ResponseEntity<ApiResponse<List<GetMainPostResponse>>> getCommunityPosts();
+	ResponseEntity<ApiResponse<List<GetMainPostResponse>>> getCommunityPosts();
 
 	@GetMapping("/back/posts/hot")
 	ResponseEntity<ApiResponse<List<GetMainPostResponse>>> getHotPostsByCategoryName(@RequestParam String categoryName);
