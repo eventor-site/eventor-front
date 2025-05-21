@@ -101,6 +101,33 @@
             </div>
         </div>
 
+        <div class="event-section">
+            <h3>🏷️ 최신 핫딜</h3>
+            <div class="hotDeal-slider">
+                <div th:if="${latestPosts.size() > 0}" th:each="post : ${hotDealPosts}">
+                    <div>
+                        <a th:href="@{/posts/{postId} (postId=${post.postId})}">
+                            <div class="event-card">
+                                <img th:if="${post.imageUrl == null}" src="/image/logo.png" alt="썸네일"/>
+                                <img th:if="${post.imageType == 'image'}" th:src="${post.imageUrl}" alt="썸네일"/>
+                                <video th:if="${post.imageType == 'video'}" th:src="${post.imageUrl}"></video>
+
+                                <div class="event-card-body">
+                                    <div class="event-card-title" th:text="${post.title}"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <p th:if="${latestPosts.size() == 0}">최신 핫딜이 없습니다.</p>
+            </div>
+        </div>
+
+        <div class="event-more-btn-container">
+            <a href="/posts?categoryName=핫딜" class="custom-event-more-btn hotDeal-red">핫딜 더보기</a>
+        </div>
+
         <!--ㅡ추천 이벤트ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <h3>✅ 추천 이벤트</h3>
         <div class="double-slide-container">

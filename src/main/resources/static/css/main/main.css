@@ -100,6 +100,7 @@ a {
     padding: 1em;
 }
 
+.hotDeal-slider .slick-slide,
 .community-slider .slick-slide {
     padding: 0.5em;
 }
@@ -131,6 +132,7 @@ a {
 }
 
 .event-slider .slick-prev,
+.hotDeal-slider .slick-prev,
 .community-slider .slick-prev {
     position: absolute !important;
     top: -8% !important;
@@ -141,6 +143,7 @@ a {
 }
 
 .event-slider .slick-next,
+.hotDeal-slider .slick-next,
 .community-slider .slick-next {
     position: absolute !important;
     top: -8% !important;
@@ -150,6 +153,7 @@ a {
 }
 
 .event-slider .slick-prev i, .event-slider .slick-next i,
+.hotDeal-slider .slick-prev i, .hotDeal-slider .slick-next i,
 .community-slider .slick-prev i, .community-slider .slick-next i {
     font-size: 40px; /* 아이콘 크기 */
     color: #555 !important;
@@ -163,6 +167,8 @@ a {
 .recommend-slider .slick-next:hover:before,
 .event-slider .slick-prev i:hover,
 .event-slider .slick-next i:hover,
+.hotDeal-slider .slick-prev i:hover,
+.hotDeal-slider .slick-next i:hover,
 .community-slider .slick-prev i:hover,
 .community-slider .slick-next i:hover {
     color: #f00 !important;
@@ -267,11 +273,6 @@ a {
     color: black;
 }
 
-/*.community-slider {*/
-/*    position: relative;*/
-/*    padding: 0 60px; !* 화살표 공간 확보 *!*/
-/*}*/
-
 .event-more-btn-container {
     text-align: center;
     margin-bottom: 1rem;
@@ -301,6 +302,18 @@ a {
     transform: translateY(1px);
 }
 
+.custom-event-more-btn.hotDeal-red {
+    background-color: #FF3B3B; /* 강렬한 레드 */
+}
+
+.custom-event-more-btn.hotDeal-red:hover {
+    background-color: #e63232; /* 살짝 어두운 레드 */
+}
+
+.custom-event-more-btn.hotDeal-red:active {
+    background-color: #cc2b2b; /* 눌렀을 때 딥 레드 */
+}
+
 /* 모바일: 화면 너비가 768px 이하일 때 적용 */
 @media (max-width: 768px) {
 
@@ -308,7 +321,7 @@ a {
         font-size: 1.5rem;
     }
 
-    .top-slider, .event-slider, .community-slider {
+    .top-slider, .event-slider, .hotDeal-slider, .community-slider {
         flex-direction: column;
         align-items: center;
         padding: 0;
@@ -407,6 +420,7 @@ a {
         padding: 0.3em;
     }
 
+    .hotDeal-slider .slick-slide,
     .community-slider .slick-slide {
         padding: 0.3em;
     }
