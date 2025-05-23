@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      th:with="titlePrefix='회원 기간별 적립 포인트 통계'" lang="ko">
+<head>
+
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="body-container">
+        <section id="page">
+            <section id="page-menu-container" th:insert="~{common/admin-menu.html}"></section>
+            <section id="page-content">
+                <section id="page-header">
+                    <h5>사이트맵 관리</h5>
+                </section>
+                <hr>
+                <section id="page-body">
+                    <form action="/posts/sitemap" th:method="post" id="form"
+                          class="d-flex justify-content-between align-items-center">
+                        <!--                        <div class="mb-2 d-flex align-items-center">-->
+                        <!--                            <input type="datetime-local" class="form-control" id="startTime" name="startTime"-->
+                        <!--                                   th:value="${startTime}" required>-->
+                        <!--                            <div class="mx-2 fw-bold fs-4 text-secondary">~</div>-->
+                        <!--                            <input type="datetime-local" class="form-control" id="endTime" name="endTime"-->
+                        <!--                                   th:value="${endTime}" required>-->
+                        <!--                        </div>-->
+                        <button type="submit" class="btn btn-primary">갱신</button>
+                    </form>
+
+                </section>
+
+            </section>
+
+        </section>
+
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+
+</th:block>
+</body>
+</html>

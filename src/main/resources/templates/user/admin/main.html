@@ -14,25 +14,32 @@
                 <section id="page-header">
                     <h5>관리자 페이지</h5>
                 </section>
+
                 <hr>
 
-                <a th:href="@{/posts/createForm (categoryName='이벤트')}"
-                   class="btn btn-warning inline-text">이벤트 게시물 작성</a>
+                <div class="d-grid grid-2 gap-2">
+                    <a th:href="@{/posts/createForm (categoryName='이벤트')}"
+                       class="btn btn-warning inline-text">이벤트 게시물 작성</a>
 
-                <a th:href="@{/posts/statistic/users/admin}"
-                   class="btn btn-warning inline-text">관리자별 통계</a>
+                    <a th:href="@{/posts/statistic/users/admin}"
+                       class="btn btn-warning inline-text">관리자별 통계</a>
 
-                <a th:href="@{/posts/event/special/notice}"
-                   class="btn btn-warning inline-text">별도 공지 게시물</a>
+                    <a th:href="@{/posts/event/special/notice}"
+                       class="btn btn-warning inline-text">별도 공지 게시물</a>
 
-                <a th:href="@{/statistics}"
-                   class="btn btn-warning inline-text">통계 정보</a>
+                    <a th:href="@{/statistics}"
+                       class="btn btn-warning inline-text">통계 정보</a>
 
-                <a th:href="@{/posts/event/deleteForm}"
-                   class="btn btn-warning inline-text">이벤트 제목 기반 삭제</a>
+                    <a th:href="@{/posts/event/deleteForm}"
+                       class="btn btn-warning inline-text">이벤트 제목 기반 삭제</a>
 
-                <a th:href="@{/pointHistories}"
-                   class="btn btn-warning inline-text">회원 기간별 적립 포인트 조회</a>
+                    <a th:href="@{/pointHistories}"
+                       class="btn btn-warning inline-text">회원 기간별 적립 포인트 조회</a>
+
+                    <a th:href="@{/posts/sitemap}"
+                       class="btn btn-warning inline-text">사이트맵 관리</a>
+                </div>
+
             </section>
         </section>
     </div>

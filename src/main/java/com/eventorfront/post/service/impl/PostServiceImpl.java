@@ -169,4 +169,9 @@ public class PostServiceImpl implements PostService {
 		return postClient.deleteEventPostsByTitleContainKeyword(keyword).getBody();
 	}
 
+	@Override
+	public ApiResponse<Void> createSitemap() {
+		return postClient.createSitemap().getBody();
+	}
+
 }
