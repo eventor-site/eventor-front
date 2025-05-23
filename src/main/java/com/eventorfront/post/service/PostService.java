@@ -79,4 +79,6 @@ public interface PostService {
 		LocalDateTime startTime, LocalDateTime endTime);
 
 	ApiResponse<Void> deleteEventPostsByTitleContainKeyword(String keyword);
+
+	ApiResponse<Void> createSitemap();
 }

@@ -134,4 +134,7 @@ public interface PostClient {
 	@DeleteMapping("/back/posts/event")
 	ResponseEntity<ApiResponse<Void>> deleteEventPostsByTitleContainKeyword(
 		@RequestParam String keyword);
+
+	@PostMapping("/back/posts/sitemap")
+	ResponseEntity<ApiResponse<Void>> createSitemap();
 }

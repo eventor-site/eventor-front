@@ -366,12 +366,23 @@ public class PostController {
 		return "user/admin/eventDelete";
 	}
 
-	@AuthorizeRole("admin")
 	@DeleteMapping("/event")
 	public String deleteEventPostsByTitleContainKeyword(@RequestParam String keyword,
 		RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("message",
 			postService.deleteEventPostsByTitleContainKeyword(keyword).getMessage());
 		return "redirect:/posts/event";
+	}
+
+	@AuthorizeRole("admin")
+	@GetMapping("/sitemap")
+	public String getSitemapPage() {
+		return "user/admin/sitemap";
+	}
+
+	@PostMapping("/sitemap")
+	public String createSitemap(RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", postService.createSitemap().getMessage());
+		return "redirect:/posts/sitemap";
 	}
 }
