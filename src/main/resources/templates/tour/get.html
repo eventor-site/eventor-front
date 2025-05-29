@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      th:with="titlePrefix=${tour.title}" lang="ko">
+
+<head>
+    <style>
+        .tour-detail h2 {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .tour-detail h4 {
+            margin-top: 1rem;
+            color: #2980b9;
+        }
+
+        .tour-detail ul {
+            padding-left: 1.2rem;
+        }
+    </style>
+
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div id="postDetailView" class="body-container">
+        <div class="tour-detail card shadow-sm p-4 mb-4">
+            <h2 id="title" class="mb-3" th:text="${tour.title}">제목</h2>
+
+            <!-- 기본 정보 -->
+            <section class="mb-4">
+                <h4>기본 정보</h4>
+                <p><strong>개요:</strong> <span th:text="${tour.overview}">관광지 소개입니다.</span></p>
+                <p><strong>주소:</strong> <span id="address" th:text="${tour.address}">서울시 중구 세종대로</span></p>
+                <p><strong>우편번호:</strong> <span th:text="${tour.zipcode}">04524</span></p>
+                <p><strong>전화번호:</strong> <span th:text="${tour.tel}">02-1234-5678</span></p>
+                <p th:if="${tour.homepage}">
+                    <strong>홈페이지:</strong> <a th:href="${tour.homepage}" th:text="${tour.homepage}"
+                                              target="_blank">링크</a>
+                </p>
+            </section>
+
+            <!-- 운영 정보 -->
+            <section class="mb-4">
+                <h4>운영 정보</h4>
+                <ul>
+                    <li><strong>운영일:</strong> <span th:text="${tour.openDate}">연중무휴</span></li>
+                    <li><strong>휴무일:</strong> <span th:text="${tour.restDate}">매주 월요일</span></li>
+                    <li><strong>운영 시간:</strong> <span th:text="${tour.useTime}">09:00 ~ 18:00</span></li>
+                    <li><strong>이용 요금:</strong> <span th:text="${tour.admission}">무료</span></li>
+                </ul>
+            </section>
+
+            <!-- 편의시설 -->
+            <section class="mb-4">
+                <h4>편의 시설</h4>
+                <ul>
+                    <li><strong>주차:</strong> <span th:text="${tour.parking}">가능</span></li>
+                    <li><strong>유모차 대여:</strong> <span th:text="${tour.babyCarriage}">가능</span></li>
+                    <li><strong>반려동물 동반:</strong> <span th:text="${tour.petAllowed}">불가</span></li>
+                    <li><strong>화장실:</strong> <span th:text="${tour.toilet}">있음</span></li>
+                    <li><strong>신용카드 사용:</strong> <span th:text="${tour.creditCard}">가능</span></li>
+                </ul>
+            </section>
+
+            <!-- 안내소 -->
+            <section class="mb-4" th:if="${tour.infoCenter}">
+                <h4>관광안내소</h4>
+                <p th:text="${tour.infoCenter}">안내소 정보</p>
+            </section>
+
+            <!-- 지도 좌표 (간단하게 출력) -->
+            <section class="mb-4">
+                <h4>위치 좌표</h4>
+                <p>X: <span th:text="${tour.mapX}"></span>, Y: <span th:text="${tour.mapY}"></span></p>
+            </section>
+
+            <!-- 이미지 갤러리 -->
+            <section th:if="${tour.images != null and !tour.images.isEmpty()}" class="mb-4">
+                <h4>이미지</h4>
+                <div class="row">
+                    <div class="col-md-4 mb-3" th:each="img : ${tour.images}">
+                        <img th:src="${img}" class="img-fluid rounded shadow-sm" alt="관광지 이미지"/>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 썸네일 hidden 요소 -->
+            <span id="thumbnailUrl"
+                  th:text="${(tour.images != null and !tour.images.isEmpty()) ? tour.images[0] : 'https://www.eventor.store/postimage/common/share-logo.png'}"
+                  style="display: none;"></span>
+            
+        </div>
+
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script th:inline="javascript" src="/js/tour/share-button.js"></script>
+</th:block>
+</body>
+</html>
