@@ -110,7 +110,6 @@ a {
 }
 
 /* 커스텀 화살표 스타일 */
-
 .top-slider .slick-prev:before, .top-slider .slick-next:before,
 .recommend-slider .slick-prev:before, .recommend-slider .slick-next:before {
     font-size: 50px !important; /* 아이콘 크기 */

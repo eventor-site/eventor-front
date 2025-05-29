@@ -3,21 +3,11 @@
       th:with="titlePrefix=${tour.title}" lang="ko">
 
 <head>
-    <style>
-        .tour-detail h2 {
-            color: #2c3e50;
-            font-weight: bold;
-        }
-
-        .tour-detail h4 {
-            margin-top: 1rem;
-            color: #2980b9;
-        }
-
-        .tour-detail ul {
-            padding-left: 1.2rem;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/tour/get.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
 
 </head>
 
@@ -26,6 +16,15 @@
     <div id="postDetailView" class="body-container">
         <div class="tour-detail card shadow-sm p-4 mb-4">
             <h2 id="title" class="mb-3" th:text="${tour.title}">제목</h2>
+
+            <!-- 이미지 갤러리 -->
+            <div class="event-section" th:if="${tour.images != null and !tour.images.isEmpty()}">
+                <div class="event-slider">
+                    <div class="col-md-4 mb-3" th:each="img : ${tour.images}">
+                        <img th:src="${img}" class="img-fluid rounded shadow-sm" alt="관광지 이미지"/>
+                    </div>
+                </div>
+            </div>
 
             <!-- 기본 정보 -->
             <section class="mb-4">
@@ -63,28 +62,15 @@
                 </ul>
             </section>
 
+            <!-- 지도 -->
+            <div id="map" style="width:500px;height:400px;"></div>
+            <span id="mapX" th:text="${tour.mapX}" style="display: none;"></span>
+            <span id="mapY" th:text="${tour.mapY}" style="display: none;"></span>
+
             <!-- 안내소 -->
             <section class="mb-4" th:if="${tour.infoCenter}">
                 <h4>관광안내소</h4>
                 <p th:text="${tour.infoCenter}">안내소 정보</p>
-            </section>
-
-            <!-- 지도 좌표 (간단하게 출력) -->
-            <section class="mb-4">
-                <h4>위치 좌표</h4>
-                <p>
-                    X: <span id="mapX" th:text="${tour.mapX}"></span>,
-                    Y: <span id="mapY" th:text="${tour.mapY}"></span></p>
-            </section>
-
-            <!-- 이미지 갤러리 -->
-            <section th:if="${tour.images != null and !tour.images.isEmpty()}" class="mb-4">
-                <h4>이미지</h4>
-                <div class="row">
-                    <div class="col-md-4 mb-3" th:each="img : ${tour.images}">
-                        <img th:src="${img}" class="img-fluid rounded shadow-sm" alt="관광지 이미지"/>
-                    </div>
-                </div>
             </section>
 
             <!-- 썸네일 hidden 요소 -->
@@ -92,7 +78,7 @@
                   th:text="${(tour.images != null and !tour.images.isEmpty()) ? tour.images[0] : 'https://www.eventor.store/postimage/common/share-logo.png'}"
                   style="display: none;"></span>
 
-            <div id="map" style="width:500px;height:400px;"></div>
+
         </div>
 
     </div>
@@ -104,6 +90,9 @@
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3949b86d8bbaedada3bb7fbdb5e6715"></script>
     <script th:inline="javascript" src="/js/tour/kakao-map.js"></script>
+    <script th:inline="javascript" src="/js/tour/slider.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
 </th:block>
 </body>
 </html>
