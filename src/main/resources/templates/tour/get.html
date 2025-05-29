@@ -72,7 +72,9 @@
             <!-- 지도 좌표 (간단하게 출력) -->
             <section class="mb-4">
                 <h4>위치 좌표</h4>
-                <p>X: <span th:text="${tour.mapX}"></span>, Y: <span th:text="${tour.mapY}"></span></p>
+                <p>
+                    X: <span id="mapX" th:text="${tour.mapX}"></span>,
+                    Y: <span id="mapY" th:text="${tour.mapY}"></span></p>
             </section>
 
             <!-- 이미지 갤러리 -->
@@ -89,7 +91,8 @@
             <span id="thumbnailUrl"
                   th:text="${(tour.images != null and !tour.images.isEmpty()) ? tour.images[0] : 'https://www.eventor.store/postimage/common/share-logo.png'}"
                   style="display: none;"></span>
-            
+
+            <div id="map" style="width:500px;height:400px;"></div>
         </div>
 
     </div>
@@ -98,6 +101,9 @@
 <th:block layout:fragment="script">
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script th:inline="javascript" src="/js/tour/share-button.js"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3949b86d8bbaedada3bb7fbdb5e6715"></script>
+    <script th:inline="javascript" src="/js/tour/kakao-map.js"></script>
 </th:block>
 </body>
 </html>
