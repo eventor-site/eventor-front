@@ -18,8 +18,8 @@
             <h2 id="title" class="mb-3" th:text="${tour.title}">제목</h2>
 
             <!-- 이미지 갤러리 -->
-            <div class="event-section" th:if="${tour.images != null and !tour.images.isEmpty()}">
-                <div class="event-slider">
+            <div class="image-section" th:if="${tour.images != null and !tour.images.isEmpty()}">
+                <div class="image-slider">
                     <div class="col-md-4 mb-3" th:each="img : ${tour.images}">
                         <img th:src="${img}" class="img-fluid rounded shadow-sm" alt="관광지 이미지"/>
                     </div>
@@ -63,7 +63,7 @@
             </section>
 
             <!-- 지도 -->
-            <div id="map" style="width:500px;height:400px;"></div>
+            <div id="map" class="map-section"></div>
             <span id="mapX" th:text="${tour.mapX}" style="display: none;"></span>
             <span id="mapY" th:text="${tour.mapY}" style="display: none;"></span>
 
@@ -85,12 +85,12 @@
 </div>
 
 <th:block layout:fragment="script">
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script th:inline="javascript" src="/js/tour/share-button.js"></script>
+    <script src="/js/tour/slider.js"></script>
+    <script src="/js/tour/kakao-map.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3949b86d8bbaedada3bb7fbdb5e6715"></script>
-    <script th:inline="javascript" src="/js/tour/kakao-map.js"></script>
-    <script th:inline="javascript" src="/js/tour/slider.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
 </th:block>
