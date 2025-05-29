@@ -1,0 +1,66 @@
+.tour-detail h2 {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.tour-detail h4 {
+    margin-top: 1rem;
+    color: #2980b9;
+}
+
+.tour-detail ul {
+    padding-left: 1.2rem;
+}
+
+.event-section {
+    margin-top: 1em;
+    margin-bottom: 50px;
+}
+
+.event-slider {
+    overflow: visible !important; /* 화살표가 잘리지 않도록 */
+    position: relative;
+    padding: 10px 0;
+}
+
+.slick-slide {
+    padding: 0.5em;
+}
+
+.slick-prev i, .slick-next i {
+    font-size: 40px; /* 아이콘 크기 */
+    color: #555 !important;
+    top: 50%; /* 슬라이더의 높이를 기준으로 수직 중앙 */
+    transform: translateY(-50%); /* 실제 위치를 중앙으로 보정 */
+}
+
+.slick-prev i:hover,
+.slick-next i:hover {
+    color: #f00 !important;
+    cursor: pointer;
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+
+.slick-prev {
+    position: absolute !important;
+    top: -8% !important;
+    width: 30px !important;
+    height: 30px !important;
+    right: 60px !important;
+    left: auto !important;
+}
+
+.slick-next {
+    position: absolute !important;
+    top: -8% !important;
+    width: 30px !important;
+    height: 30px !important;
+    right: 20px !important;
+}
+
+.slick-prev:hover i, .slick-next:hover i {
+    color: #f00 !important;
+    cursor: pointer;
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
