@@ -17,8 +17,10 @@
             <div style="color: #333333; word-wrap: break-word"
                  th:text="'Timestamp: ' + ${#temporals.format(timestamp, 'yyyy-MM-dd HH:mm')}"></div>
             <br/>
-            <div style="color: #333333; word-wrap: break-word"
-                 th:text="${errorMessage != null ? 'Message: '+ errorMessage : ''}"></div>
+            <div style="color: #333333; word-wrap: break-word; max-height: 300px; overflow-y: auto;
+            white-space: pre-wrap; border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;"
+                 th:text="${errorMessage != null ? 'Message: ' + errorMessage : ''}">
+            </div>
             <br/>
             <a href="javascript:history.back()">돌아가기</a>
         </div>
