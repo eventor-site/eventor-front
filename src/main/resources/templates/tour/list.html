@@ -9,44 +9,166 @@
 <body>
 <div layout:fragment="content">
     <div class="tour-container">
-        <div class="d-flex flex-column flex-md-row justify-content-between">
-            <div class="category-name">
-                <h5>
-                    <a th:href="@{/tours}">여행</a>
-                    <span>: 관광지, 음식점, 숙박</span>
-                </h5>
+
+        <div class="desktop-only">
+            <div class="d-flex flex-column flex-md-row justify-content-between">
+                <div class="category-name">
+                    <h5>
+                        <a th:href="@{/tours}">여행</a>
+                        <span>: 관광지 / 음식점 / 숙박</span>
+                    </h5>
+                </div>
+
+                <form class="search-form" th:action="@{/tours/search}" method="get">
+                    <select name="radius" class="form-select" style="width: 100px">
+                        <option value="1000" th:selected="${radius == '1000'}">1km</option>
+                        <option value="3000" th:selected="${radius == '3000'}">3km</option>
+                        <option value="5000" th:selected="${radius == '5000'}">5km</option>
+                        <option value="10000" th:selected="${radius == '10000'}">10km</option>
+                        <option value="20000" th:selected="${radius == '20000'}">20km</option>
+                    </select>
+
+                    <input class="search-input" type="text" name="address" th:value="${address}"
+                           placeholder="여행갈 위치를 입력해주세요.">
+                    <button class="search-button" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
             </div>
 
-            <form class="search-form" th:action="@{/tours/search}" method="get">
-                <select id="radius" name="radius" class="form-select" style="width: 100px">
-                    <option value="1000" th:selected="${radius == '1000'}">1km</option>
-                    <option value="3000" th:selected="${radius == '3000'}">3km</option>
-                    <option value="5000" th:selected="${radius == '5000'}">5km</option>
-                    <option value="10000" th:selected="${radius == '10000'}">10km</option>
-                    <option value="20000" th:selected="${radius == '20000'}">20km</option>
-                </select>
+            <hr>
 
-                <input class="search-input" type="text" name="address" th:value="${address}"
-                       placeholder="여행갈 위치를 입력해주세요.">
-                <button class="search-button" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
+            <!-- 관광지 목록 -->
+            <div class="row row-cols-3 g-2" th:if="${response != null}">
+                <div class="col">
+                    <div class="category tour">
+                        <span>관광지 (<span th:text="${response.tours.size}"></span>)</span>
+                        <div class="post-list">
+                            <a th:each="tour : ${response.tours}"
+                               th:href="@{/tours/{contentId}(contentId=${tour.contentid}, contentTypeId=${tour.contentTypeId})}">
+                                <div class="post-card">
+                                    <img th:if="${tour.firstimage == null || tour.firstimage.isEmpty}"
+                                         src="/image/logo.png"
+                                         alt="썸네일"/>
+                                    <img th:if="${tour.firstimage != null && !tour.firstimage.isEmpty}"
+                                         th:src="${tour.firstimage}" alt="썸네일"/>
+
+                                    <div class="post-card-body">
+                                        <div class="d-flex">
+                                            <div class="post-card-title-container">
+                                                <span class="post-card-title" th:text="${tour.title}"></span>
+                                            </div>
+                                            <div class="distance" th:text="${tour.dist}"></div>
+                                        </div>
+                                        <div class="post-card-stats" th:text="${tour.addr1}"></div>
+                                        <div class="post-card-stats" th:text="${tour.tel}"></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 음식점 목록 -->
+                <div class="col">
+                    <div class="category food">
+                        <span>음식점 (<span th:text="${response.eateries.size}"></span>)</span>
+                        <div class="post-list">
+                            <a th:each="eatery : ${response.eateries}"
+                               th:href="@{/tours/{contentId}(contentId=${eatery.contentid}, contentTypeId=${eatery.contentTypeId})}">
+                                <div class="post-card">
+                                    <img th:if="${eatery.firstimage == null || eatery.firstimage.isEmpty}"
+                                         src="/image/logo.png"
+                                         alt="썸네일"/>
+                                    <img th:if="${eatery.firstimage != null && !eatery.firstimage.isEmpty}"
+                                         th:src="${eatery.firstimage}" alt="썸네일"/>
+
+                                    <div class="post-card-body">
+                                        <div class="d-flex">
+                                            <div class="post-card-title-container">
+                                                <span class="post-card-title" th:text="${eatery.title}"></span>
+                                            </div>
+                                            <div class="distance" th:text="${eatery.dist}"></div>
+                                        </div>
+                                        <div class="post-card-stats" th:text="${eatery.addr1}"></div>
+                                        <div class="post-card-stats" th:text="${eatery.tel}"></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 숙박 목록 -->
+                <div class="col">
+                    <div class="category hotel">
+                        <span>숙박 (<span th:text="${response.hotels.size}"></span>)</span>
+                        <div class="post-list">
+                            <a th:each="hotel : ${response.hotels}"
+                               th:href="@{/tours/{contentId}(contentId=${hotel.contentid}, contentTypeId=${hotel.contentTypeId})}">
+                                <div class="post-card">
+                                    <img th:if="${hotel.firstimage == null || hotel.firstimage.isEmpty}"
+                                         src="/image/logo.png"
+                                         alt="썸네일"/>
+                                    <img th:if="${hotel.firstimage != null && !hotel.firstimage.isEmpty}"
+                                         th:src="${hotel.firstimage}" alt="썸네일"/>
+
+                                    <div class="post-card-body">
+                                        <div class="d-flex">
+                                            <div class="post-card-title-container">
+                                                <span class="post-card-title" th:text="${hotel.title}"></span>
+                                            </div>
+                                            <span class="distance" th:text="${hotel.dist}"></span>
+                                        </div>
+                                        <div class="post-card-stats" th:text="${hotel.addr1}"></div>
+                                        <div class="post-card-stats" th:text="${hotel.tel}"></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <hr>
+        <div class="mobile-only">
+            <div class="d-flex flex-column flex-md-row justify-content-between">
+                <div class="category-name">
+                    <h5>
+                        <a th:href="@{/tours}">여행</a>
+                        <span>: 관광지 / 음식점 / 숙박</span>
+                    </h5>
+                </div>
 
-        <!-- 관광지 목록 -->
-        <div class="row row-cols-3 g-2" th:if="${response != null}">
-            <div class="col">
+                <form class="search-form" th:action="@{/tours/search}" method="get">
+                    <select name="radius" class="form-select" style="width: 100px">
+                        <option value="1000" th:selected="${radius == '1000'}">1km</option>
+                        <option value="3000" th:selected="${radius == '3000'}">3km</option>
+                        <option value="5000" th:selected="${radius == '5000'}">5km</option>
+                        <option value="10000" th:selected="${radius == '10000'}">10km</option>
+                        <option value="20000" th:selected="${radius == '20000'}">20km</option>
+                    </select>
+
+                    <input class="search-input" type="text" name="address" th:value="${address}"
+                           placeholder="여행갈 위치를 입력해주세요.">
+                    <button class="search-button" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+
+            <hr>
+
+            <!-- 관광지 목록 -->
+            <div class="d-flex flex-column gap-3" th:if="${response != null}">
                 <div class="category tour">
                     <span>관광지 (<span th:text="${response.tours.size}"></span>)</span>
                     <div class="post-list">
                         <a th:each="tour : ${response.tours}"
                            th:href="@{/tours/{contentId}(contentId=${tour.contentid}, contentTypeId=${tour.contentTypeId})}">
                             <div class="post-card">
-                                <img th:if="${tour.firstimage == null || tour.firstimage.isEmpty}" src="/image/logo.png"
-                                     alt="썸네일"/>
+                                <img th:if="${tour.firstimage == null || tour.firstimage.isEmpty}"
+                                     src="/image/logo.png" alt="썸네일"/>
                                 <img th:if="${tour.firstimage != null && !tour.firstimage.isEmpty}"
                                      th:src="${tour.firstimage}" alt="썸네일"/>
 
@@ -59,18 +181,14 @@
                                     </div>
                                     <div class="post-card-stats" th:text="${tour.addr1}"></div>
                                     <div class="post-card-stats" th:text="${tour.tel}"></div>
-                                    <!--                        <div class="post-card-stats">-->
-                                    <!--                            <span>조회수: <span th:text="${post.viewCount}"></span></span>-->
-                                    <!--                            <span>추천수: <span th:text="${post.recommendationCount}"></span></span>-->
-                                    <!--                        </div>-->
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-            </div>
-            <!-- 음식점 목록 -->
-            <div class="col">
+
+
+                <!-- 음식점 목록 -->
                 <div class="category food">
                     <span>음식점 (<span th:text="${response.eateries.size}"></span>)</span>
                     <div class="post-list">
@@ -97,10 +215,8 @@
                         </a>
                     </div>
                 </div>
-            </div>
 
-            <!-- 숙박 목록 -->
-            <div class="col">
+                <!-- 숙박 목록 -->
                 <div class="category hotel">
                     <span>숙박 (<span th:text="${response.hotels.size}"></span>)</span>
                     <div class="post-list">
@@ -122,22 +238,15 @@
                                     </div>
                                     <div class="post-card-stats" th:text="${hotel.addr1}"></div>
                                     <div class="post-card-stats" th:text="${hotel.tel}"></div>
-                                    <!--                        <div class="post-card-stats">-->
-                                    <!--                            <span>조회수: <span th:text="${post.viewCount}"></span></span>-->
-                                    <!--                            <span>추천수: <span th:text="${post.recommendationCount}"></span></span>-->
-                                    <!--                        </div>-->
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
+
             </div>
 
         </div>
-
-        <!--        &lt;!&ndash; 페이징 처리 시작&ndash;&gt;-->
-        <!--        <div th:insert="~{common/paging.html}"></div>-->
-        <!--        &lt;!&ndash; 페이징 처리 끝&ndash;&gt;-->
     </div>
 </div>
 
