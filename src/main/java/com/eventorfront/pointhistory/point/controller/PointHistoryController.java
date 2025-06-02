@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.eventorfront.auth.annotation.AuthorizeRole;
 import com.eventorfront.global.util.CalendarUtils;
@@ -44,7 +45,15 @@ public class PointHistoryController {
 			Page<GetUserPointTotalResponse> points = pointHistoryService.getUserPointTotalsByPeriod(
 				startTime, endTime, pageable).getData();
 			model.addAttribute("objects", points);
-			PagingModel.pagingProcessing(pageable, model, points, "/pointHistories", 10);
+
+			String baseUrl = UriComponentsBuilder
+				.fromPath("/pointHistories")
+				.queryParam("startTime", startTime)
+				.queryParam("endTime", endTime)
+				.build()
+				.toUriString();
+
+			PagingModel.pagingProcessing(pageable, model, points, baseUrl, 10);
 
 		}
 		return "user/admin/pointStatistic";
