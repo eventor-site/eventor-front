@@ -14,7 +14,7 @@ document.querySelectorAll('.category-item').forEach(item => {
     });
 });
 
-document.querySelectorAll('.eatery-category-item').forEach(item => {
+document.querySelectorAll('.tour-category-item').forEach(item => {
     item.addEventListener('mouseenter', function () {
         const subCategory = this.querySelector('.sub-category');
         if (subCategory) {

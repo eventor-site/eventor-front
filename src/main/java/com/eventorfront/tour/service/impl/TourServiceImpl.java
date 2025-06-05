@@ -1,10 +1,13 @@
 package com.eventorfront.tour.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.tour.client.TourClient;
 import com.eventorfront.tour.dto.response.GetTourResponse;
+import com.eventorfront.tour.dto.response.SearchFestivalResponse;
 import com.eventorfront.tour.dto.response.SearchTourResponse;
 import com.eventorfront.tour.service.TourService;
 
@@ -23,5 +26,10 @@ public class TourServiceImpl implements TourService {
 	@Override
 	public ApiResponse<GetTourResponse> getTour(String contentId, String contentTypeId) {
 		return tourClient.getTour(contentId, contentTypeId).getBody();
+	}
+
+	@Override
+	public ApiResponse<List<SearchFestivalResponse>> searchFestival2() {
+		return tourClient.searchFestival2().getBody();
 	}
 }

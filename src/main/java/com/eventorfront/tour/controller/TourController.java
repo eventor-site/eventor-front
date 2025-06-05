@@ -1,5 +1,7 @@
 package com.eventorfront.tour.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.tour.dto.response.GetTourResponse;
+import com.eventorfront.tour.dto.response.SearchFestivalResponse;
 import com.eventorfront.tour.dto.response.SearchTourResponse;
 import com.eventorfront.tour.service.TourService;
 
@@ -42,6 +45,13 @@ public class TourController {
 		GetTourResponse tour = tourService.getTour(contentId, contentTypeId).getData();
 		model.addAttribute("tour", tour);
 		return "tour/get";
+	}
+
+	@GetMapping("/festival2")
+	public String searchFestival2(Model model) {
+		List<SearchFestivalResponse> festivals = tourService.searchFestival2().getData();
+		model.addAttribute("festivals", festivals);
+		return "tour/festival";
 	}
 
 }
