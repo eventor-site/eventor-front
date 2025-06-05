@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.eventorfront.global.dto.ApiResponse;
 import com.eventorfront.tour.client.TourClient;
+import com.eventorfront.tour.dto.response.GetOngoingFestivalResponse;
 import com.eventorfront.tour.dto.response.GetTourResponse;
 import com.eventorfront.tour.dto.response.SearchFestivalResponse;
 import com.eventorfront.tour.dto.response.SearchTourResponse;
@@ -31,5 +32,10 @@ public class TourServiceImpl implements TourService {
 	@Override
 	public ApiResponse<List<SearchFestivalResponse>> searchFestival2() {
 		return tourClient.searchFestival2().getBody();
+	}
+
+	@Override
+	public ApiResponse<List<GetOngoingFestivalResponse>> getOngoingFestivals() {
+		return tourClient.getOngoingFestivals().getBody();
 	}
 }

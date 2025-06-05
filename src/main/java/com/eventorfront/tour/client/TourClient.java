@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eventorfront.global.dto.ApiResponse;
+import com.eventorfront.tour.dto.response.GetOngoingFestivalResponse;
 import com.eventorfront.tour.dto.response.GetTourResponse;
 import com.eventorfront.tour.dto.response.SearchFestivalResponse;
 import com.eventorfront.tour.dto.response.SearchTourResponse;
@@ -26,4 +27,7 @@ public interface TourClient {
 
 	@GetMapping("/festival2")
 	ResponseEntity<ApiResponse<List<SearchFestivalResponse>>> searchFestival2();
+
+	@GetMapping("/festivals/ongoing")
+	ResponseEntity<ApiResponse<List<GetOngoingFestivalResponse>>> getOngoingFestivals();
 }

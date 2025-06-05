@@ -224,6 +224,32 @@
 
         <!--ㅡ자유 카테고리 최신글ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <div class="event-section">
+            <h3>🎉 진행중인 축제</h3>
+            <div class="community-slider">
+                <div th:if="${ongoingFestivals.size() > 0}" th:each="festival : ${ongoingFestivals}">
+                    <div>
+                        <a th:href="@{/tours/{contentId} (contentId=${festival.contentId}, contentTypeId=${festival.contentTypeId})}">
+                            <div class="event-card">
+                                <img th:if="${festival.firstImage == null}" src="/image/logo.png" alt="썸네일"/>
+                                <img th:src="${festival.firstImage}" alt="썸네일"/>
+
+                                <div class="event-card-body">
+                                    <div class="event-card-title" th:text="${festival.title}"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="event-more-btn-container">
+            <a href="/tours/festival2" class="custom-event-more-btn">축제 더보기</a>
+        </div>
+
+        <!--ㅡ자유 카테고리 최신글ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+        <div class="event-section">
             <h3>💬 커뮤니티</h3>
             <div class="community-slider">
                 <div th:if="${latestPosts.size() > 0}" th:each="post : ${communityPosts}">
