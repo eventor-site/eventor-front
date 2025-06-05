@@ -23,6 +23,13 @@
     padding: 10px 0;
 }
 
+.image-slider img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+}
+
 .slick-slide {
     padding: 0.5em;
 }

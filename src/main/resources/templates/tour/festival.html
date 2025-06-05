@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/fragments/defaultLayout}"
+      th:with="titlePrefix='여행'" lang="ko">
+
+<head>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/tour/festival.css"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="tour-container">
+
+        <div class="d-flex flex-column flex-md-row justify-content-between">
+            <div class="category-name">
+                <h5>
+                    <span>여행: </span>
+                    <a th:href="@{/tours/festival2}">축제</a>
+                </h5>
+            </div>
+
+            <!--                <form class="search-form" th:action="@{/tours/search}" method="get">-->
+            <!--                    <select name="radius" class="form-select" style="width: 100px">-->
+            <!--                        <option value="1000" th:selected="${radius == '1000'}">1km</option>-->
+            <!--                        <option value="3000" th:selected="${radius == '3000'}">3km</option>-->
+            <!--                        <option value="5000" th:selected="${radius == '5000'}">5km</option>-->
+            <!--                        <option value="10000" th:selected="${radius == '10000'}">10km</option>-->
+            <!--                        <option value="20000" th:selected="${radius == '20000'}">20km</option>-->
+            <!--                    </select>-->
+
+            <!--                    <input class="search-input" type="text" name="address" th:value="${address}"-->
+            <!--                           placeholder="여행갈 위치를 입력해주세요.">-->
+            <!--                    <button class="search-button" type="submit">-->
+            <!--                        <i class="fa-solid fa-magnifying-glass"></i>-->
+            <!--                    </button>-->
+            <!--                </form>-->
+        </div>
+
+        <hr>
+
+        <!-- 축제 목록 -->
+        <div class="festival-slider-grid" id="festivalGrid">
+            <div th:each="festival, iterStat : ${festivals}" class="post-card"
+                 th:classappend="' festival-page-' + ${iterStat.index / 10}">
+                <a th:href="@{/tours/{contentId} (contentId=${festival.contentId}, contentTypeId=${festival.contentTypeId})}">
+                    <img class="image-wrapper"
+                         th:src="${festival.firstImage != null} ? ${festival.firstImage} : '/image/logo.png'" alt="썸네일">
+
+                    <div class="d-flex justify-content-center align-items-center p-1">
+                        <div class="post-card-status" th:text="${festival.eventStatusName}"
+                             th:classappend="${festival.eventStatusName == '예정' ? 'status-scheduled' : (festival.eventStatusName == '진행중' ? 'status-ongoing' : (festival.eventStatusName == '마감' ? 'status-closed' : ''))}"></div>
+                        <div th:if="${festival.eventStatusName == '예정'}" class="remaining-day"
+                             th:text="'D-' + ${festival.remainingDay}"></div>
+                    </div>
+
+                    <div class="post-card-body">
+                        <div class="d-flex justify-content-between">
+                            <span class="post-card-title-container" th:text="${festival.title}"></span>
+
+                        </div>
+                        <div class="post-card-stats"
+                             th:text="${festival.eventStartDate} + ' ~ ' + ${festival.eventEndDate}"></div>
+                        <div class="post-card-stats" th:text="${festival.addr2}"></div>
+                        <div class="post-card-stats" th:text="${festival.addr1}"></div>
+                        <div class="post-card-stats" th:text="${festival.tel}"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="festival-slider-header">
+            <button class="nav-btn prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <span class="page-indicator"><span id="currentPage">1</span> / <span id="totalPages">N</span></span>
+            <button class="nav-btn next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+    </div>
+</div>
+
+
+<th:block layout:fragment="script">
+    <script src="/js/tour/festival.js"></script>
+</th:block>
+</body>
+</html>
