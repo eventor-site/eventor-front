@@ -43,7 +43,8 @@
                  th:classappend="' festival-page-' + ${iterStat.index / 10}">
                 <a th:href="@{/tours/{contentId} (contentId=${festival.contentId}, contentTypeId=${festival.contentTypeId})}">
                     <img class="image-wrapper"
-                         th:src="${festival.firstImage != null} ? ${festival.firstImage} : '/image/logo.png'" alt="썸네일">
+                         th:src="${festival.firstImage != null && !festival.firstImage.isEmpty} ? ${festival.firstImage} : '/image/logo.png'"
+                         alt="썸네일">
 
                     <div class="d-flex justify-content-center align-items-center p-1">
                         <div class="post-card-status" th:text="${festival.eventStatusName}"
