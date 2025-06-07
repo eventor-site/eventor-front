@@ -74,7 +74,7 @@ h5 {
     text-decoration: none; /* 기본 밑줄 제거 */
 }
 
-.image-wrapper {
+.post-card img {
     width: 100%;
     aspect-ratio: 1 / 1.5;
     object-fit: cover;
@@ -140,25 +140,9 @@ h5 {
 }
 
 @media screen and (max-width: 480px) {
+    
     .post-list {
         gap: 5px;
-
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 8px;
-        scroll-snap-type: x mandatory;
-    }
-
-    .post-card {
-        padding: 5px;
-
-        width: 100%;
-        flex: 0 0 auto;
-        scroll-snap-align: start;
-        border-radius: 10px;
-        overflow: hidden;
     }
 
     .post-card-title-container span {
@@ -171,13 +155,6 @@ h5 {
 
     .post-card > img {
         width: 90px;
-        margin-right: 5px;
-        display: block; /* 인라인 요소 특성 제거 */
-    }
-
-    .distance {
-        margin-left: 5px;
-        border-width: 1px;
     }
 
     .category-name {
