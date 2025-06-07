@@ -16,14 +16,14 @@
                 </section>
                 <hr>
                 <section id="page-body">
-                    <h5>기준: 메인페이지</h5>
                     <div th:if="${objects.getTotalElements() > 0}">
                         <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th style="width: 10%;">번호</th>
                                 <th style="width: 20%;">날짜</th>
-                                <th style="width: 15%;">조회수</th>
+                                <th style="width: 15%;">메인 조회수</th>
+                                <th style="width: 15%;">게시물 조회수</th>
                                 <th style="width: 15%;">방문자수</th>
                                 <th style="width: 15%;">로그인수</th>
                                 <th style="width: 15%;">가입자수</th>
@@ -33,7 +33,8 @@
                             <tr th:each="statistic, index : ${objects}">
                                 <td th:text="${(objects.totalElements - (objects.number * objects.size + index.count)) + 1}"></td>
                                 <td th:text="${#temporals.format(statistic.date, 'yyyy-MM-dd')}"></td>
-                                <td th:text="${statistic.visitedCount}"></td>
+                                <td th:text="${statistic.mainViewCount}"></td>
+                                <td th:text="${statistic.postViewCount}"></td>
                                 <td th:text="${statistic.visitorCount}"></td>
                                 <td th:text="${statistic.loginCount}"></td>
                                 <td th:text="${statistic.signupCount}"></td>
