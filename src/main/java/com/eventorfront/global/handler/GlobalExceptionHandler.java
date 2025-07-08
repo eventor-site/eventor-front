@@ -78,7 +78,7 @@ public class GlobalExceptionHandler {
 	public Object handleTypeMismatch(HttpServletRequest request, Model model) {
 		String ajaxHeader = request.getHeader("X-Ajax-Request");
 
-		String errorMessage = "잘못된 요청입니다";
+		String errorMessage = "잘못된 요청입니다.";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		LocalDateTime timestamp = LocalDateTime.now();
 
