@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.eventorfront.global.exception.GlobalException;
 import com.eventorfront.global.exception.UnauthorizedException;
@@ -61,6 +62,25 @@ public class GlobalExceptionHandler {
 		String errorMessage = errorStatus.getMessage();
 		HttpStatus status = errorStatus.getStatus();
 		LocalDateTime timestamp = errorStatus.getTimestamp();
+
+		if (ajaxHeader != null) {
+			return ResponseEntity.status(status).body(errorMessage);
+		} else {
+			model.addAttribute("errorMessage", errorMessage);
+			model.addAttribute("status", status.value());
+			model.addAttribute("timestamp", timestamp);
+
+			return "common/error";
+		}
+	}
+
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public Object handleTypeMismatch(HttpServletRequest request, Model model) {
+		String ajaxHeader = request.getHeader("X-Ajax-Request");
+
+		String errorMessage = "잘못된 요청입니다";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		LocalDateTime timestamp = LocalDateTime.now();
 
 		if (ajaxHeader != null) {
 			return ResponseEntity.status(status).body(errorMessage);
