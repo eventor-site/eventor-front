@@ -272,7 +272,7 @@ public class PostController {
 			.filter(GetImageResponse::isThumbnail)
 			.map(GetImageResponse::url)
 			.findFirst()
-			.orElse("https://www.eventor.store/postimage/common/share-logo.png");
+			.orElse("https://www.eventor.kr/postimage/common/share-logo.png");
 
 		model.addAttribute("thumbnailUrl", thumbnailUrl);
 		model.addAttribute("categoryName", post.categoryName());
