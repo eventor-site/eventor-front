@@ -1,10 +1,14 @@
-# OpenJDK 21 기반 이미지 사용
-FROM eclipse-temurin:21-jdk
-
+# Build stage
+FROM node:18-alpine as build
 WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
 
-# JAR 파일 복사
-COPY target/eventor-front-0.0.1-SNAPSHOT.jar eventor-front.jar
-
-# 애플리케이션 실행
-ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "eventor-front.jar"]
+# Production stage
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
