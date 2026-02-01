@@ -14,12 +14,12 @@ import com.eventorfront.global.dto.ApiResponse;
 @FeignClient(name = "auth-feign-client", url = "${feignClient.url}")
 public interface AuthClient {
 
-	@PostMapping("/auth/login")
+	@PostMapping("/back/auth/login")
 	ResponseEntity<ApiResponse<LoginResponse>> login(@RequestBody LoginRequest loginRequest);
 
-	@PostMapping("/auth/logout")
+	@PostMapping("/back/auth/logout")
 	ResponseEntity<ApiResponse<Void>> logout();
 
-	@GetMapping("/oauth2/authorization/{registrationId}")
+	@GetMapping("/back/oauth2/authorization/{registrationId}")
 	ResponseEntity<ApiResponse<String>> oauthAuthorization(@PathVariable String registrationId);
 }
