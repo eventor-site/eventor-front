@@ -18,7 +18,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.FeignException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class FeignErrorDecoder implements ErrorDecoder {
 	private final ObjectMapper objectMapper = new ObjectMapper();
@@ -45,6 +47,7 @@ public class FeignErrorDecoder implements ErrorDecoder {
 				default -> throw new ServerException(errorMessage);
 			};
 		} catch (Exception ex) {
+			log.info("에러: {}", ex);
 			return new FeignException.FeignClientException(
 				response.status(), "Feign 에러 디코딩 실패", response.request(), new byte[0], response.headers());
 		}
