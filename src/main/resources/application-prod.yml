@@ -21,4 +21,4 @@ spring:
 feignClient:
   url: http://nginx
 
-#test5
+#test6
