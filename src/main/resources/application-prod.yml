@@ -19,6 +19,6 @@ spring:
       password: ${REDIS_PASSWORD}
 
 feignClient:
-  url: eventor-gateway:8090
+  url: https://eventor.kr/back
 
 #test
