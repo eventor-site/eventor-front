@@ -131,11 +131,6 @@ a {
     transition: all 0.3s ease;
 }
 
-.event-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
 .event-card img, .event-card video,
 .recommend-event-card img, .recommend-event-card video {
     width: 100%;
@@ -291,7 +286,7 @@ a {
 .event-card:hover,
 .vertical-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    /*box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);*/
 }
 
 /* 이미지 스타일 */
