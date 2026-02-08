@@ -25,6 +25,11 @@
                 <div class="right-menu">
                     <div th:insert="~{common/right-sidebar}"></div>
 
+                    <a class="search-button" onclick="toggleSidebar('right-sidebar')">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>검색</span>
+                    </a>
+
                     <a id="myPageLink" href="/users/me" style="display:none;">
                         <i class="fa-solid fa-user"></i>
                         <span>My</span>
