@@ -20,5 +20,3 @@ spring:
 
 feignClient:
   url: https://eventor.kr
-
-#test1
