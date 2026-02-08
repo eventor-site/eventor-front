@@ -7,7 +7,19 @@
 }
 
 .post-view-list a {
-    padding: 5px;
+    padding: 5px 0;
+    text-decoration: none;
+    display: block;
+}
+
+.post-view-list a:hover .post-view-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: translateX(4px);
+}
+
+.post-view-list a:hover .post-view-title,
+.post-view-list a:hover .post-view-card-body {
+    color: white !important;
 }
 
 .post-view-card {
@@ -15,11 +27,11 @@
     display: flex;
     align-items: center;
     padding: 10px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-decoration: none; /* 기본 밑줄 제거 */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #f8f9fa;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .post-view-card > img, .post-view-card > video {
@@ -42,9 +54,11 @@
 .post-view-title {
     font-size: 16px;
     font-weight: bold;
-    white-space: nowrap; /* 줄 바꿈 방지 */
-    overflow: hidden; /* 넘치는 텍스트 숨김 */
-    text-overflow: ellipsis; /* 말줄임표 (...) 표시 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #333;
+    transition: color 0.3s ease;
 }
 
 .post-view-card-title {

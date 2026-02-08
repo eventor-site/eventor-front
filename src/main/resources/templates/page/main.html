@@ -27,7 +27,13 @@
         <hr>
 
         <div class="event-section">
-            <h3>🔥 핫 이벤트</h3>
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="section-icon">🔥</span>
+                    <h3>핫 이벤트</h3>
+                </div>
+                <p class="section-desc">지금 가장 인기있는 이벤트를 만나보세요</p>
+            </div>
             <div class="top-slider">
                 <div th:if="${hotPosts.size() > 0}" th:each="post : ${hotPosts}">
                     <a th:href="@{/posts/{postId} (postId=${post.postId})}">
@@ -54,7 +60,13 @@
 
         <!--ㅡ최신 이벤트ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <div class="event-section">
-            <h3>🌟 최신 이벤트</h3>
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="section-icon">🌟</span>
+                    <h3>최신 이벤트</h3>
+                </div>
+                <p class="section-desc">방금 등록된 따끈따끈한 이벤트</p>
+            </div>
             <div class="event-slider">
                 <div th:if="${latestPosts.size() > 0}" th:each="post : ${latestPosts}">
                     <div>
@@ -81,7 +93,13 @@
 
         <!--ㅡ마감 직전 이벤트ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <div class="event-section">
-            <h3>⏰️ 마감 임박 이벤트</h3>
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="section-icon">⏰</span>
+                    <h3>마감 임박 이벤트</h3>
+                </div>
+                <p class="section-desc">놓치면 후회할 마지막 기회</p>
+            </div>
             <div class="event-slider">
                 <div th:if="${deadlinePosts.size() > 0}" th:each="post : ${deadlinePosts}">
                     <div>
@@ -102,7 +120,13 @@
         </div>
 
         <div class="event-section">
-            <h3>🏷️ 최신 핫딜</h3>
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="section-icon">🏷️</span>
+                    <h3>최신 핫딜</h3>
+                </div>
+                <p class="section-desc">특가 할인 정보를 빠르게 확인하세요</p>
+            </div>
             <div class="hotDeal-slider">
                 <div th:if="${latestPosts.size() > 0}" th:each="post : ${hotDealPosts}">
                     <div>
@@ -129,7 +153,13 @@
         </div>
 
         <!--ㅡ추천 이벤트ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
-        <h3>✅ 추천 이벤트</h3>
+        <div class="section-header">
+            <div class="section-title">
+                <span class="section-icon">✅</span>
+                <h3>추천 이벤트</h3>
+                <p class="section-desc">당신을 위한 맞춤 추천</p>
+            </div>
+        </div>
         <div class="double-slide-container">
             <!-- 왼쪽: 추천 배너 슬라이드 -->
             <div class="recommend-slider">
@@ -176,7 +206,13 @@
         </div>
 
         <!--ㅡ인기 급상승 이벤트ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
-        <h3>📈 인기 급상승 이벤트</h3>
+        <div class="section-header">
+            <div class="section-title">
+                <span class="section-icon">📈</span>
+                <h3>인기 급상승 이벤트</h3>
+                <p class="section-desc">실시간으로 뜨고 있는 이벤트</p>
+            </div>
+        </div>
         <div class="double-slide-container">
             <!-- 왼쪽: 추천 배너 슬라이드 -->
             <div class="recommend-slider">
@@ -224,8 +260,14 @@
 
         <!--ㅡ자유 카테고리 최신글ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <div class="event-section">
-            <h3>🎉 진행중인 축제</h3>
-            <div class="community-slider">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="section-icon">🎉</span>
+                    <h3>진행중인 축제</h3>
+                </div>
+                <p class="section-desc">전국 각지의 다채로운 축제 정보</p>
+            </div>
+            <div class="community-slider" style="margin-top: 50px">
                 <div th:if="${ongoingFestivals.size() > 0}" th:each="festival : ${ongoingFestivals}">
                     <div>
                         <a th:href="@{/tours/{contentId} (contentId=${festival.contentId}, contentTypeId=${festival.contentTypeId})}">
@@ -250,8 +292,14 @@
 
         <!--ㅡ자유 카테고리 최신글ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
         <div class="event-section">
-            <h3>💬 커뮤니티</h3>
-            <div class="community-slider">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="section-icon">💬</span>
+                    <h3>커뮤니티</h3>
+                </div>
+                <p class="section-desc">사용자들의 자유로운 정보 공유</p>
+            </div>
+            <div class="community-slider" style="margin-top: 50px">
                 <div th:if="${latestPosts.size() > 0}" th:each="post : ${communityPosts}">
                     <div>
                         <a th:href="@{/posts/{postId} (postId=${post.postId})}">

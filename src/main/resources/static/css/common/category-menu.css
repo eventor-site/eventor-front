@@ -1,33 +1,45 @@
 /* 카테고리를 가로 정렬 */
 .category-menu {
     display: flex;
-    flex-direction: row; /* 가로 배치 */
-    gap: 10px;
+    flex-direction: row;
+    gap: 0.5rem;
     position: relative;
 }
 
 /* 카테고리 버튼 */
 .category-item {
     position: relative;
-    padding: 10px;
+    padding: 0.6rem 1.2rem;
     cursor: pointer;
-    white-space: nowrap; /* 글자가 줄바꿈되지 않도록 설정 */
+    white-space: nowrap;
+    color: white;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.category-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 /* 하위 카테고리 그룹 */
 .category-group {
     display: flex;
-    flex-direction: row; /* 가로 배치 */
+    flex-direction: row;
     gap: 1rem;
-    background-color: white;
-    border: 1px solid black;
+    background: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px);
     left: 0;
     z-index: 10;
-    visibility: hidden; /* 기본적으로 숨김 */
+    visibility: hidden;
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    padding: 1rem;
+    transition: all 0.3s ease;
 }
 
 /* #category-menu-button 또는 .category-group 에 마우스를 올렸을 때 하위 카테고리 표시 */
@@ -35,8 +47,8 @@
 .category-group:hover {
     visibility: visible;
     opacity: 1;
+    transform: translateY(0);
 }
-
 
 /* 개별 하위 카테고리 */
 .sub-category {
@@ -44,24 +56,28 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: white;
-    border: 1px solid black;
+    background: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     width: 150px;
     z-index: 10;
+    overflow: hidden;
 }
 
 /* 하위 카테고리 링크 */
 .sub-category a {
-    padding: 10px;
+    padding: 0.8rem 1rem;
     text-decoration: none;
     display: block;
-    color: black;
+    color: #333;
+    transition: all 0.2s ease;
 }
 
 .sub-category a:hover {
-    font-weight: bold;
-    background-color: #ddd;
-    color: #5783f1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
 }
 
 /* 상위 카테고리에 마우스를 올렸을 때 하위 카테고리 표시 */
@@ -75,33 +91,45 @@
 /* 카테고리를 가로 정렬 */
 .tour-category-menu {
     display: flex;
-    flex-direction: row; /* 가로 배치 */
-    gap: 10px;
+    flex-direction: row;
+    gap: 0.5rem;
     position: relative;
 }
 
 /* 카테고리 버튼 */
 .tour-category-item {
     position: relative;
-    padding: 10px;
+    padding: 0.6rem 1.2rem;
     cursor: pointer;
-    white-space: nowrap; /* 글자가 줄바꿈되지 않도록 설정 */
+    white-space: nowrap;
+    color: white;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.tour-category-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 /* 하위 카테고리 그룹 */
 .tour-category-group {
     display: flex;
-    flex-direction: row; /* 가로 배치 */
+    flex-direction: row;
     gap: 1rem;
-    background-color: white;
-    border: 1px solid black;
+    background: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px);
     left: 70%;
     z-index: 10;
-    visibility: hidden; /* 기본적으로 숨김 */
+    visibility: hidden;
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    padding: 1rem;
+    transition: all 0.3s ease;
 }
 
 /* #category-menu-button 또는 .category-group 에 마우스를 올렸을 때 하위 카테고리 표시 */
@@ -109,8 +137,8 @@
 .tour-category-group:hover {
     visibility: visible;
     opacity: 1;
+    transform: translateY(0);
 }
-
 
 /* 개별 하위 카테고리 */
 .tour-sub-category {
@@ -118,24 +146,28 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: white;
-    border: 1px solid black;
+    background: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     width: 150px;
     z-index: 10;
+    overflow: hidden;
 }
 
 /* 하위 카테고리 링크 */
 .tour-sub-category a {
-    padding: 10px;
+    padding: 0.8rem 1rem;
     text-decoration: none;
     display: block;
-    color: black;
+    color: #333;
+    transition: all 0.2s ease;
 }
 
 .tour-sub-category a:hover {
-    font-weight: bold;
-    background-color: #ddd;
-    color: #5783f1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
 }
 
 /* 상위 카테고리에 마우스를 올렸을 때 하위 카테고리 표시 */

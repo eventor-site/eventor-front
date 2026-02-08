@@ -1,26 +1,41 @@
 .keyword-item-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* 좌우 끝 정렬 */
+    justify-content: space-between;
     width: 100%;
-    padding: 5px 0;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
+    padding: 0.6rem 0.8rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.keyword-item-wrapper:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: translateX(4px);
+}
+
+.keyword-item-wrapper:hover .keyword-item {
+    color: white;
 }
 
 .keyword-item {
     flex-grow: 1;
     text-align: left;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.2s ease;
 }
 
 .delete-button {
     flex-shrink: 0;
     cursor: pointer;
     color: #888;
-    padding: 0 10px;
-    font-size: 18px;
+    padding: 0 0.5rem;
+    font-size: 1.1rem;
+    transition: color 0.2s ease;
 }
 
 .delete-button:hover {
-    color: red;
+    color: #ff4444;
 }

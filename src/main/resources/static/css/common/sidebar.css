@@ -3,14 +3,65 @@
     top: 0;
     width: 25%;
     height: 100%;
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    background: white;
     padding: 2rem 1.5rem;
-    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.1);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
     overflow-y: auto;
+}
+
+.sidebar h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 1rem 0;
+}
+
+.sidebar .search-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar .search-input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.sidebar .search-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.sidebar .search-button {
+    padding: 0.8rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.sidebar .search-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.sidebar .search-button i {
+    color: black;
 }
 
 .sidebar-left {
@@ -51,31 +102,45 @@
 /* 닫기 버튼 */
 #close-sidebar {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 1.5rem;
+    right: 1.5rem;
     font-size: 2rem;
     background: none;
     border: none;
     cursor: pointer;
     color: #999;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
 #close-sidebar:hover {
-    color: #ff5e5e;
-    transform: scale(1.1);
+    background: #f5f5f5;
+    color: #667eea;
+    transform: rotate(90deg);
 }
 
 /* 각 섹션 제목 */
 .sidebar-section-title {
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 1.1rem;
     color: #333;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.8rem;
     padding-left: 0.3rem;
     display: flex;
     align-items: center;
     gap: 0.4rem;
+}
+
+.sidebar hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+    margin: 0.5rem 0;
 }
 
 /* 상위 카테고리 제목 */
@@ -96,19 +161,33 @@
     align-items: center;
     gap: 0.4rem;
     text-decoration: none !important;
-    color: #333;
-    font-size: 1.2rem;
-    padding: 0.4rem 0.6rem;
-    border-radius: 8px;
+    color: #555;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
     transition: all 0.2s ease;
+    background: #f8f9fa;
 }
 
-.parent-title:hover,
 .sidebar-section a:hover,
 .grid a:hover {
-    background-color: rgba(0, 123, 255, 0.08);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateX(4px);
+}
+
+#clearAllKeywords {
+    color: #667eea;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease;
     font-weight: 500;
-    color: #007bff;
+}
+
+#clearAllKeywords:hover {
+    color: #764ba2;
+    text-decoration: underline;
 }
 
 /* 게시판, 이벤트, 맛집: 그리드 레이아웃 */
