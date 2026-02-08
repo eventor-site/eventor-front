@@ -9,13 +9,18 @@
 /* 카테고리 버튼 */
 .category-item {
     position: relative;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.category-item > a {
+    display: block;
     padding: 0.6rem 1.2rem;
     cursor: pointer;
     white-space: nowrap;
     color: white;
     font-weight: 500;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .category-item:hover {
@@ -40,6 +45,10 @@
     opacity: 0;
     padding: 1rem;
     transition: all 0.3s ease;
+}
+
+.category-group .category-item > a {
+    color: #333;
 }
 
 /* #category-menu-button 또는 .category-group 에 마우스를 올렸을 때 하위 카테고리 표시 */
@@ -99,13 +108,18 @@
 /* 카테고리 버튼 */
 .tour-category-item {
     position: relative;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.tour-category-item > a {
+    display: block;
     padding: 0.6rem 1.2rem;
     cursor: pointer;
     white-space: nowrap;
     color: white;
     font-weight: 500;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .tour-category-item:hover {
