@@ -39,6 +39,21 @@
 <script src="/js/common/alert-box.js"></script>
 <script src="/js/auth/loginCheck.js"></script>
 
+<script>
+    // 하루에 한 번만 열기:
+    document.addEventListener('click', function () {
+        const lastShown = localStorage.getItem('popupLastShown');
+        const today = new Date().toDateString();
+
+        if (lastShown !== today) {
+            window.open('https://coinsensor.kr', '_blank');
+            localStorage.setItem('popupLastShown', today);
+        }
+    }, {once: true});
+
+
+</script>
+
 <th:block layout:fragment="script"></th:block>
 
 </body>
