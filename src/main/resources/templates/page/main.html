@@ -67,7 +67,7 @@
                 </div>
                 <p class="section-desc">방금 등록된 따끈따끈한 이벤트</p>
             </div>
-            <div class="event-slider">
+            <div class="event-slider" style="margin-top: 50px">
                 <div th:if="${latestPosts.size() > 0}" th:each="post : ${latestPosts}">
                     <div>
                         <!-- 이미지 클릭 시 상세보기 페이지로 이동 -->
@@ -100,7 +100,7 @@
                 </div>
                 <p class="section-desc">놓치면 후회할 마지막 기회</p>
             </div>
-            <div class="event-slider">
+            <div class="event-slider" style="margin-top: 50px">
                 <div th:if="${deadlinePosts.size() > 0}" th:each="post : ${deadlinePosts}">
                     <div>
                         <a th:href="@{/posts/{postId} (postId=${post.postId})}">
