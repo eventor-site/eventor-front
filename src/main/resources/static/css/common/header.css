@@ -115,6 +115,10 @@
     transition: all 0.3s ease;
 }
 
+.search-button span {
+    font-size: 1rem;
+}
+
 .btn-custom {
     background: white;
     color: #333;
