@@ -8,13 +8,14 @@
 
 <body>
 <div class="container-fluid" layout:fragment="content">
-    <div class="header">EVENTOR</div>
+    <div class="header">
+        <a href="/" class="header-brand">
+            <img src="/image/logo.png" alt="logo" class="header-logo">
+            <span>EVENTOR</span>
+        </a>
+    </div>
 
     <div class="content">
-        <div class="icon-section">
-            <a href="/"><img src="/image/logo.png" alt="logo"></a>
-        </div>
-
         <div class="form-section">
             <form class="login-container" action="/auth/login" method="post">
                 <div class="mb-2">
@@ -29,7 +30,6 @@
                            placeholder="비밀번호를 입력해주세요" required>
                 </div>
                 <div class="mb-2">
-                    <!-- 로그인 실패 메시지 출력 -->
                     <div th:if="${error}" class="text-danger" th:data-error="${error}">
                         <small th:text="${error}"></small>
                     </div>
@@ -45,6 +45,7 @@
                 </div>
             </form>
 
+            <div class="oauth-separator"></div>
             <div class="oauth-img-container">
                 <a href="javascript:void(0);" onclick="openOAuthWindow('kakao')">
                     <img class="oauth-img" alt="kakao login" src="/image/oauth/kakao_login.png">
@@ -56,10 +57,8 @@
                     <img class="oauth-img" alt="google login" src="/image/oauth/google_login.png">
                 </a>
             </div>
-
         </div>
     </div>
-
 </div>
 
 <th:block layout:fragment="script">

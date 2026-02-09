@@ -7,6 +7,7 @@
 html, body {
     height: 100%;
     font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .container-fluid {
@@ -16,86 +17,117 @@ html, body {
     flex-direction: column;
     margin: 0;
     padding: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .header {
-    background-color: #FF6600;
-    border: 5px solid black;
-    padding: 20px;
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    font-family: 'Headland One', serif; /* Headland One 폰트 적용 */
-    color: black;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: none;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: 'Headland One', serif;
+    letter-spacing: 2px;
+    transition: opacity 0.3s ease;
+}
+
+.header-brand:hover {
+    opacity: 0.8;
+}
+
+.header-logo {
+    height: 3.5rem;
+    width: auto;
 }
 
 .content {
     flex: 1;
     display: flex;
-}
-
-.icon-section {
-    flex: 1;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    border-right: 5px solid black;
-    border-bottom: 2px solid black;
-}
-
-.icon-section img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-}
-
-.icon-section img:hover {
-    transform: scale(1.01);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    padding: 2rem;
 }
 
 .form-section {
-    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    height: 100%;
-    padding: 20px 0;
-    border-bottom: 2px solid black;
-}
-
-.form-section input,
-.form-section button {
-    width: 30vw;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 2px solid #000000;
-    border-radius: 4px;
-}
-
-.form-section button {
-    background-color: gold;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-}
-
-.form-section button:hover {
-    background-color: goldenrod;
-}
-
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 100%;
 }
 
+.login-container {
+    background: white;
+    padding: 3rem 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 450px;
+}
+
+.form-section input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.5rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-section input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-section button {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-section button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
 label {
-    text-align: left; /* 텍스트 왼쪽 정렬 */
-    display: block; /* label 요소가 블록 레벨로 처리되도록 */
-    margin-bottom: 0.5rem; /* 간격 조정 (필요시) */
+    text-align: left;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.oauth-separator {
+    width: 100%;
+    max-width: 500px;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 1.5rem auto;
 }
 
 .oauth-img-container {
@@ -103,85 +135,68 @@ label {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin: 20px 0;
-    gap: 10px;
+    margin: 0 auto;
+    gap: 0.8rem;
 }
 
 .oauth-img-container .oauth-img {
     width: 100%;
     height: auto;
-    border-radius: 6px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: block;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .oauth-img:hover {
-    transform: scale(1.01);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .footer-links {
     text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
 }
 
 .footer-links a {
-    margin: 0 10px;
+    margin: 0 0.8rem;
     text-decoration: none;
-    color: blue;
+    color: #667eea;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
+    color: #764ba2;
     text-decoration: underline;
 }
 
 .text-danger {
-    color: red;
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
 }
 
-/* 모바일 반응형 디자인 */
 @media (max-width: 768px) {
-    .container-fluid {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
     .content {
-        flex-direction: column;
+        padding: 1rem;
     }
 
-    .icon-section {
-        border-right: none;
-    }
-
-    .icon-section a {
-        width: 50%;
-    }
-
-    .form-section {
-        flex: 1;
-        padding: 20px 10px;
-        border-bottom: none;
-    }
-
-    .form-section input,
-    .form-section button {
-        width: 90vw;
-    }
-
-    .oauth-img-container {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        gap: 15px;
-    }
-
-    .oauth-img-container .oauth-img {
-        width: 90vw;
-        height: auto;
+    .login-container {
+        padding: 2rem 1.5rem;
     }
 
     .header {
-        font-size: 1.5em; /* 모바일에서는 헤더 폰트 크기 축소 */
-        padding: 1vw;
+        padding: 1rem;
+    }
+
+    .header-brand {
+        font-size: 1.8rem;
+    }
+
+    .header-logo {
+        height: 2.5rem;
     }
 }
