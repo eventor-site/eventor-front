@@ -91,3 +91,5 @@ jobs:
           script: |
             cd eventor/eventor-front
             source deploy.sh
+
+#배포테스트
