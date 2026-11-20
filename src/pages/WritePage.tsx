@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { lazy, Suspense, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, Navigate, useNavigate, useParams, useSearchParams } from 'react-router';
 import { insightsApi, postsApi, writeApi } from '@/api/endpoints';
 import type { PostDetail, PostForm, PostImage } from '@/api/types';
@@ -10,6 +10,8 @@ import { useToast } from '@/components/Toast';
 import { getViewerId } from '@/lib/viewer';
 import { isEventCategory, useCategories } from '@/lib/useCategories';
 import { useDocumentTitle } from '@/lib/useDocumentTitle';
+import { refreshAfterPostChange } from '@/lib/postCache';
+import { BOARDS, LEGACY_CATEGORY_TO_DOMAIN } from '@/lib/domains';
 
 const RichEditor = lazy(() => import('@/components/RichEditor'));
 
@@ -77,19 +79,9 @@ export function WritePage() {
   const editorRef = useRef<RichEditorHandle>(null);
   const creating = useRef<Promise<number> | null>(null);
 
-  // 쓸 수 있는 카테고리 목록
-  const options = useMemo(() => {
-    if (!isAdmin) return MEMBER_CATEGORIES;
-    const names: string[] = [];
-    const walk = (nodes: typeof categories.data, prefix = '') =>
-      nodes?.forEach((n) => {
-        names.push(prefix + n.name);
-        walk(n.children, `${prefix}${n.name} › `);
-      });
-    walk(categories.data);
-    return names;
-  }, [isAdmin, categories.data]);
-  const optionValue = (label: string) => label.split(' › ').pop() ?? label;
+  // 쓸 수 있는 게시판(2026-11-20: 옛 34개 카테고리 대신 게시판 4개. 이벤트 분야는 AI 가 자동으로 정한다)
+  const options: readonly string[] = isAdmin ? BOARDS : MEMBER_CATEGORIES;
+  const optionValue = (label: string) => label;
 
   const isEvent = isEventCategory(categories.data, categoryName);
   const isHotDeal = categoryName === '핫딜';
@@ -133,7 +125,8 @@ export function WritePage() {
   }, [editing, isLoggedIn]);
 
   function fill(p: PostDetail) {
-    setCategoryName(p.categoryName);
+    // 옛 세부 카테고리(피자·스킨케어 …) 글은 이벤트 게시판으로. 저장하면 AI 가 분야를 다시 정한다
+    setCategoryName(LEGACY_CATEGORY_TO_DOMAIN[p.categoryName] ? '이벤트' : p.categoryName);
     setTitle(p.title ?? '');
     setInitialHtml(p.content ?? '');
     setLink(p.link ?? '');
@@ -258,8 +251,7 @@ export function WritePage() {
         toast(res.message);
       }
       if (!isTemp && id) {
-        await queryClient.invalidateQueries({ queryKey: ['post', id] });
-        await queryClient.invalidateQueries({ queryKey: ['posts'] });
+        await refreshAfterPostChange(queryClient, id);
         navigate(`/posts/${id}`, { replace: true });
       }
     } catch (e) {
@@ -310,7 +302,7 @@ export function WritePage() {
           <div className="field">
             <label htmlFor="category">카테고리</label>
             <select id="category" className="select" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} disabled={editing && !isAdmin}>
-              <option value="">카테고리를 고르세요</option>
+              <option value="">게시판을 고르세요</option>
               {options.map((label) => (
                 <option key={label} value={optionValue(label)}>
                   {label}
@@ -318,6 +310,7 @@ export function WritePage() {
               ))}
             </select>
             {!isAdmin && <span className="help">이벤트·공지 글은 운영진이 올려요. 회원은 자유·핫딜 게시판에 쓸 수 있어요.</span>}
+            {isAdmin && categoryName === '이벤트' && <span className="help">✦ 분야(음식·카페, 패션·뷰티 …)와 혜택 유형은 저장 뒤 AI가 3분 안에 자동으로 정해요.</span>}
           </div>
 
           <div className="field">
@@ -339,7 +332,7 @@ export function WritePage() {
               </div>
               <div className="field" style={{ gridColumn: '1 / -1' }}>
                 <label>종료 유형(종료일이 정해지지 않은 경우)</label>
-                <div className="chips">
+                <div className="chips" style={{ flexWrap: 'wrap' }}>
                   {['', ...END_TYPES].map((t) => (
                     <button key={t || 'none'} type="button" className={`chip chip-sm ${endType === t ? 'active' : ''}`} onClick={() => setEndType(t)}>
                       {t || '종료일 있음'}
@@ -370,7 +363,7 @@ export function WritePage() {
           {(isEvent || isHotDeal) && (
             <div className="field">
               <label htmlFor="link">{isEvent ? '이벤트 링크' : '구매 링크'}</label>
-              <div className="input-row">
+              <div className="input-row link-row">
                 <input id="link" className="input" type="url" value={link} onChange={(e) => setLink(e.target.value)} placeholder="https://" />
                 <button type="button" className="btn btn-outline" style={{ height: 48, flexShrink: 0 }} disabled={filling || !/^https?:\/\//.test(link.trim())}
                   onClick={fillFromLink}>

@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from 'react-router';
 import { useAuth } from '@/auth/AuthContext';
-import { categoryHref, useCategories } from '@/lib/useCategories';
+import { categoryHref } from '@/lib/useCategories';
 import { Icon } from './Icon';
+import { useQuery } from '@tanstack/react-query';
+import { insightsApi } from '@/api/endpoints';
+import { BENEFITS, DOMAINS } from '@/api/types';
+import { benefitHref, DOMAIN_META, domainHref } from '@/lib/domains';
 
 function SearchBox({ large, autoFocus }: { large?: boolean; autoFocus?: boolean }) {
   const navigate = useNavigate();
@@ -39,31 +43,40 @@ function SearchBox({ large, autoFocus }: { large?: boolean; autoFocus?: boolean 
 export { SearchBox };
 
 function MegaMenu({ onClose }: { onClose: () => void }) {
-  const { data } = useCategories();
-  const event = data?.find((c) => c.name === '이벤트');
-  if (!event) return null;
+  // 2026-11-20: 옛 3단계 카테고리 대신 AI 분야 8개 + 혜택 유형
+  const overview = useQuery({ queryKey: ['insights', 'overview'], queryFn: insightsApi.overview, staleTime: 5 * 60_000 });
   return (
     <div className="mega" onMouseLeave={onClose}>
       <div className="container">
-        <div className="mega-grid">
-          {event.children.map((group) => (
-            <div key={group.categoryId}>
-              <h5>
-                <Link to={categoryHref(group.name)} onClick={onClose}>
-                  {group.name}
+        <div className="mega-domains">
+          <div className="mega-domain-grid">
+            {DOMAINS.map((d) => (
+              <Link key={d} to={domainHref(d)} className="mega-domain" onClick={onClose}>
+                <span className="mega-domain-emoji" aria-hidden="true">{DOMAIN_META[d].emoji}</span>
+                <span className="mega-domain-text">
+                  <b>{d}</b>
+                  <small>{DOMAIN_META[d].desc}</small>
+                </span>
+                {overview.data && <span className="mega-domain-count">{overview.data.byDomain[d] ?? 0}</span>}
+              </Link>
+            ))}
+          </div>
+          <div className="mega-side">
+            <h5>혜택 유형</h5>
+            <div className="cat-links">
+              {BENEFITS.map((b) => (
+                <Link key={b} to={benefitHref(b)} className="chip chip-sm" onClick={onClose}>
+                  #{b}
                 </Link>
-              </h5>
-              <ul>
-                {group.children.map((c) => (
-                  <li key={c.categoryId}>
-                    <Link to={categoryHref(c.name)} onClick={onClose}>
-                      {c.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              ))}
             </div>
-          ))}
+            <Link to={categoryHref('이벤트')} className="mega-all" onClick={onClose}>
+              이벤트 전체 보기 →
+            </Link>
+            <Link to="/insights" className="mega-all" onClick={onClose}>
+              ✦ 혜택 트렌드 →
+            </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -71,7 +84,6 @@ function MegaMenu({ onClose }: { onClose: () => void }) {
 }
 
 function Drawer({ onClose }: { onClose: () => void }) {
-  const { data } = useCategories();
   const { isLoggedIn, logout } = useAuth();
   return (
     <>
@@ -88,29 +100,28 @@ function Drawer({ onClose }: { onClose: () => void }) {
             <Icon name="close" />
           </button>
         </div>
-        {data?.map((top) => (
-          <div className="cat-group" key={top.categoryId}>
-            <h4>
-              <Link to={categoryHref(top.name)} onClick={onClose}>
-                {top.name}
+        <div className="cat-group">
+          <h4>
+            <Link to={categoryHref('이벤트')} onClick={onClose}>이벤트</Link>
+          </h4>
+          <div className="cat-links">
+            {DOMAINS.map((d) => (
+              <Link key={d} to={domainHref(d)} className="chip chip-sm" onClick={onClose}>
+                {DOMAIN_META[d].emoji} {d}
               </Link>
-            </h4>
-            {top.children.map((group) => (
-              <div key={group.categoryId} style={{ marginBottom: 10 }}>
-                <div className="cat-links">
-                  <Link to={categoryHref(group.name)} className="chip chip-sm" onClick={onClose}>
-                    <strong>{group.name}</strong>
-                  </Link>
-                  {group.children.map((c) => (
-                    <Link key={c.categoryId} to={categoryHref(c.name)} className="chip chip-sm" onClick={onClose}>
-                      {c.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
             ))}
           </div>
-        ))}
+        </div>
+        <div className="cat-group">
+          <h4>게시판</h4>
+          <div className="cat-links">
+            {['핫딜', '자유', '공지'].map((b) => (
+              <Link key={b} to={categoryHref(b)} className="chip chip-sm" onClick={onClose}>
+                {b === '자유' ? '커뮤니티' : b}
+              </Link>
+            ))}
+          </div>
+        </div>
         <div className="cat-group">
           <h4>축제</h4>
           <div className="cat-links">

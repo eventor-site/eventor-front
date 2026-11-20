@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { ApiError } from '@/api/client';
-import { commentsApi, postsApi } from '@/api/endpoints';
+import { commentsApi, insightsApi, postsApi } from '@/api/endpoints';
 import type { Comment, PostDetail } from '@/api/types';
 import { useAuth } from '@/auth/AuthContext';
 import { ErrorBox } from '@/components/Feedback';
@@ -15,6 +15,8 @@ import { categoryHref, categoryPath, useCategories } from '@/lib/useCategories';
 import { useDocumentTitle } from '@/lib/useDocumentTitle';
 import { getViewerId } from '@/lib/viewer';
 import { InsightCard, SimilarEvents } from '@/components/InsightCard';
+import { refreshAfterPostChange } from '@/lib/postCache';
+import { domainHref } from '@/lib/domains';
 
 function useLoginGuard() {
   const { isLoggedIn } = useAuth();
@@ -257,6 +259,7 @@ export function PostDetailPage() {
   const guard = useLoginGuard();
   const { isLoggedIn } = useAuth();
   const queryClient = useQueryClient();
+  const insight = useQuery({ queryKey: ['insight', postId], queryFn: () => insightsApi.post(postId), staleTime: 5 * 60_000, enabled: postId > 0 });
   const categories = useCategories();
   const [reporting, setReporting] = useState(false);
 
@@ -340,10 +343,14 @@ export function PostDetailPage() {
           <article>
             <nav className="breadcrumb" aria-label="위치">
               <Link to="/">홈</Link>
-              {(path.length ? path : [{ categoryId: 0, name: post.categoryName }]).map((c) => (
+              {/* 이벤트는 옛 세부 카테고리 대신 "이벤트 › AI 분야"로 보여 준다(2026-11-20) */}
+              {(path[0]?.name === '이벤트'
+                ? [{ name: '이벤트', href: categoryHref('이벤트') }, ...(insight.data?.analyzed && insight.data.domain ? [{ name: insight.data.domain, href: domainHref(insight.data.domain) }] : [])]
+                : (path.length ? path : [{ name: post.categoryName }]).map((c) => ({ name: c.name, href: categoryHref(c.name) }))
+              ).map((c) => (
                 <span key={c.name} style={{ display: 'contents' }}>
                   <Icon name="chevron-right" size={14} />
-                  <Link to={categoryHref(c.name)}>{c.name}</Link>
+                  <Link to={c.href}>{c.name}</Link>
                 </span>
               ))}
             </nav>
@@ -417,6 +424,8 @@ export function PostDetailPage() {
                       try {
                         const res = await postsApi.remove(postId);
                         toast(res.message);
+                        // 목록으로 가기 전에 캐시를 정리해 지운 글이 남아 보이지 않게
+                        await refreshAfterPostChange(queryClient, postId, true);
                         navigate(categoryHref(post.categoryName), { replace: true });
                       } catch (e) {
                         toast((e as Error).message, 'error');

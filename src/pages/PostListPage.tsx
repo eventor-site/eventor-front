@@ -1,6 +1,6 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { Link, useNavigate, useSearchParams } from 'react-router';
-import { bookmarksApi, postsApi, searchApi } from '@/api/endpoints';
+import { Link, Navigate, useNavigate, useSearchParams } from 'react-router';
+import { bookmarksApi, insightsApi, postsApi, searchApi } from '@/api/endpoints';
 import { useAuth } from '@/auth/AuthContext';
 import { useToast } from '@/components/Toast';
 import { useQueryClient } from '@tanstack/react-query';
@@ -12,10 +12,11 @@ import { PostCard } from '@/components/PostCard';
 import { CommunityItem, HotDealCard, NoticeItem, SearchItem } from '@/components/BoardItems';
 import { Dropdown, SortIcon } from '@/components/Dropdown';
 import { formatNumber } from '@/lib/format';
-import { categoryHref, categoryPath, findCategory, isEventCategory, useCategories } from '@/lib/useCategories';
+import { categoryHref, categoryPath, isEventCategory, useCategories } from '@/lib/useCategories';
 import { useDocumentTitle } from '@/lib/useDocumentTitle';
 import { BENEFITS, DOMAINS } from '@/api/types';
 import '@/styles/insights.css';
+import { DOMAIN_META, LEGACY_CATEGORY_TO_DOMAIN } from '@/lib/domains';
 
 const PAGE_SIZE = 20;
 const STATUS_TABS = ['', '진행중', '예정', '마감'] as const;
@@ -54,17 +55,17 @@ export function PostListPage({ mode }: { mode: 'category' | 'search' }) {
   const canWrite = mode === 'category' && (isAdmin || (isLoggedIn && ['자유', '핫딜'].includes(categoryName)));
   const tree = categories.data;
   const isEvent = mode === 'category' && isEventCategory(tree, categoryName);
-  const current = findCategory(tree, categoryName);
   const path = categoryPath(tree, categoryName);
-  const parent = path.length > 1 ? path[path.length - 2] : undefined;
-  const subChips = current && current.children.length > 0 ? current.children : parent?.name !== '이벤트' && parent ? parent.children : [];
-  const chipParent = current && current.children.length > 0 ? current : parent;
+  // 옛 이벤트 카테고리(음식·피자 …) 주소는 이벤트 + AI 분야로 넘긴다(검색엔진·즐겨찾기 링크 보존)
+  const legacyDomain = mode === 'category' ? LEGACY_CATEGORY_TO_DOMAIN[categoryName] : undefined;
+  const overview = useQuery({ queryKey: ['insights', 'overview'], queryFn: insightsApi.overview, staleTime: 5 * 60_000, enabled: isEvent });
 
   useDocumentTitle(mode === 'search' ? (keyword ? `"${keyword}" 검색` : '검색') : categoryName);
 
   const enabled = mode === 'category' || keyword.length > 0;
   const query = useQuery({
-    queryKey: ['posts', 'search', { mode, categoryName, keyword, page, eventStatusName, sort, domain, benefit }],
+    // isEvent 는 카테고리 트리가 와야 정해진다. 키에 넣고 트리를 받은 뒤에 요청해야 분야·혜택·진행 상태 필터가 빠지지 않는다
+    queryKey: ['posts', 'search', { mode, categoryName, keyword, page, eventStatusName, sort, domain, benefit, isEvent }],
     queryFn: ({ signal }) =>
       postsApi.search(
         {
@@ -79,7 +80,7 @@ export function PostListPage({ mode }: { mode: 'category' | 'search' }) {
         },
         signal,
       ),
-    enabled,
+    enabled: enabled && (mode === 'search' || !!tree),
     placeholderData: keepPreviousData,
   });
   const topKeywords = useQuery({
@@ -97,11 +98,16 @@ export function PostListPage({ mode }: { mode: 'category' | 'search' }) {
   };
 
   const data = query.data;
+  if (legacyDomain) {
+    const next = new URLSearchParams(params);
+    next.set('categoryName', '이벤트');
+    next.set('domain', legacyDomain);
+    return <Navigate to={`/posts?${next.toString()}`} replace />;
+  }
   const board = mode === 'search' ? 'search' : isEvent ? 'event' : categoryName === '핫딜' ? 'deal' : categoryName === '공지' ? 'notice' : 'community';
   const intro = BOARD_INTRO[board] ?? BOARD_INTRO.community;
   const sortOptions = (isEvent ? EVENT_SORTS : SORTS).map((o) => ({ ...o, icon: SORT_ICON[o.value] }));
   const activeFilters = [
-    domain && { key: 'domain', label: domain },
     benefit && { key: 'benefit', label: `#${benefit}` },
   ].filter(Boolean) as { key: string; label: string }[];
 
@@ -156,17 +162,19 @@ export function PostListPage({ mode }: { mode: 'category' | 'search' }) {
                 )}
               </div>
             </header>
-            {subChips.length > 0 && chipParent && (
-              <div className="chips" style={{ marginTop: 14 }}>
-                <Link to={categoryHref(chipParent.name)} className={`chip ${categoryName === chipParent.name ? 'active' : ''}`}>
-                  전체
-                </Link>
-                {subChips.map((c) => (
-                  <Link key={c.categoryId} to={categoryHref(c.name)} className={`chip ${categoryName === c.name ? 'active' : ''}`}>
-                    {c.name}
-                  </Link>
+            {isEvent && (
+              <nav className="bd-domains" aria-label="분야">
+                <button type="button" className={`bd-domain ${!domain ? 'active' : ''}`} onClick={() => setParam('domain', '')}>
+                  <span aria-hidden="true">✨</span>전체
+                </button>
+                {DOMAINS.map((d) => (
+                  <button key={d} type="button" className={`bd-domain ${domain === d ? 'active' : ''}`} onClick={() => setParam('domain', d)}>
+                    <span aria-hidden="true">{DOMAIN_META[d].emoji}</span>
+                    {d}
+                    {overview.data && <small>{overview.data.byDomain[d] ?? 0}</small>}
+                  </button>
                 ))}
-              </div>
+              </nav>
             )}
           </>
         )}
@@ -187,8 +195,6 @@ export function PostListPage({ mode }: { mode: 'category' | 'search' }) {
             <div className="bd-hero-actions" style={{ gap: 6, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
               {isEvent && (
                 <>
-                  <Dropdown label="분야" value={domain} align="end" onChange={(v) => setParam('domain', v)}
-                    options={[{ value: '', label: '분야 전체' }, ...DOMAINS.map((d) => ({ value: d as string, label: d }))]} />
                   <Dropdown label="혜택 유형" value={benefit} align="end" onChange={(v) => setParam('benefit', v)}
                     options={[{ value: '', label: '혜택 전체' }, ...BENEFITS.map((b) => ({ value: b as string, label: `#${b}` }))]} />
                 </>
@@ -200,7 +206,7 @@ export function PostListPage({ mode }: { mode: 'category' | 'search' }) {
 
         {activeFilters.length > 0 && (
           <div className="bd-active">
-            <span>AI 분류 필터</span>
+            <span>혜택 필터</span>
             {activeFilters.map((f) => (
               <button key={f.key} type="button" onClick={() => setParam(f.key, '')} aria-label={`${f.label} 필터 빼기`}>
                 {f.label} ✕
