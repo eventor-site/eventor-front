@@ -658,3 +658,106 @@
     display: none;
   }
 }
+
+/* 이벤트 분야 칩(2026-11-20: 옛 3단계 카테고리 대신 AI 분야 8개) */
+.bd-domains {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.bd-domains::-webkit-scrollbar {
+  display: none;
+}
+
+.bd-domain {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.bd-domain:hover {
+  border-color: var(--line-strong);
+}
+
+.bd-domain small {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-domain.active {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+
+.bd-domain.active small {
+  color: var(--bg);
+  opacity: 0.7;
+}
+
+/* ----- 모바일 다듬기(2026-11-20) ----- */
+/* 도구 막대: 좁은 화면에서 상태 탭 한 줄(꽉 차게) + 드롭다운 한 줄. "마감" 탭이 잘리고 드롭다운이 세로로 쌓이던 것 */
+.bd-toolbar {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 639px) {
+  .bd-toolbar > .bd-segment {
+    flex: 1 1 100%;
+  }
+
+  .bd-segment button {
+    flex: 1;
+    padding: 0 8px;
+  }
+
+  .bd-toolbar > .bd-hero-actions {
+    flex: 1 1 100%;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .bd-toolbar > .bd-count + .bd-hero-actions {
+    flex: 0 0 auto;
+  }
+}
+
+/* 커뮤니티 머리줄: 작성자 이름만 줄이고 등급·날짜는 한 덩어리로(두 줄로 깨지던 것) */
+.bd-feed-head > * {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.bd-feed-head .bd-writer {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.bd-feed-head .bd-chip-hot {
+  margin-left: auto;
+}
+
+.bd-grade,
+.bd-stale,
+.bd-fresh,
+.bd-chip {
+  font-size: 12px;
+}

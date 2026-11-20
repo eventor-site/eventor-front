@@ -37,7 +37,7 @@ export function Pagination({ page, totalPages }: { page: number; totalPages: num
             {p}
           </span>
         ) : (
-          <Link key={p} to={href(p)}>
+          <Link key={p} to={href(p)} className={Math.abs(p - page) > 1 ? 'far' : undefined}>
             {p}
           </Link>
         ),

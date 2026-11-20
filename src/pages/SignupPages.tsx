@@ -142,7 +142,7 @@ export function SignupPage() {
           {busy ? '가입 중…' : '가입하기'}
         </button>
         <p className="help" style={{ textAlign: 'center', margin: 0 }}>
-          이미 계정이 있나요? <Link to="/auth/login" style={{ textDecoration: 'underline' }}>로그인</Link>
+          이미 계정이 있나요? <Link to="/auth/login" style={{ textDecoration: 'underline', display: 'inline-block', padding: '10px 6px' }}>로그인</Link>
         </p>
       </form>
     </div>

@@ -574,3 +574,18 @@ a.in-bar:hover {
   color: var(--text-3);
   width: 52px;
 }
+
+/* ----- 모바일 다듬기(2026-11-20) ----- */
+/* 숫자 칸: 날짜처럼 긴 값이 두 줄로 깨지지 않게 */
+.in-tile b {
+  white-space: nowrap;
+  font-size: clamp(20px, 6.2vw, 28px);
+}
+
+/* 지난 이벤트: 좁으면 제목 아래에 날짜 */
+@media (max-width: 519px) {
+  .in-past li {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
