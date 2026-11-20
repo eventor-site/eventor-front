@@ -8,7 +8,9 @@ import { RowSkeletons } from '@/components/Feedback';
 import { Icon } from '@/components/Icon';
 import { PostRow } from '@/components/PostCard';
 import { Thumb } from '@/components/Thumb';
-import { categoryHref, useCategories } from '@/lib/useCategories';
+import { categoryHref } from '@/lib/useCategories';
+import { DOMAIN_META, domainHref } from '@/lib/domains';
+import { DOMAINS } from '@/api/types';
 import { useDocumentTitle } from '@/lib/useDocumentTitle';
 import { formatDate, formatNumber, splitBracketPrefix, timeAgo } from '@/lib/format';
 import '@/styles/home.css';
@@ -94,34 +96,84 @@ const ongoing = (sort: string, size: number, extra: Record<string, string> = {})
 // ===================================================================== 히어로
 
 function Spotlight({ posts }: { posts: PostSummary[] }) {
+  // 2026-11-20: 스크롤 스냅 방식은 화살표를 누르면 부드럽게 스크롤되는 도중 onScroll 이 번호를 되돌려
+  // 다음 슬라이드로 넘어가지 못했다 → translate 방식으로 바꾸고, 다음 슬라이드를 옆에 살짝 보여 준다(미리보기).
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [width, setWidth] = useState(0);
+  const [drag, setDrag] = useState(0);
   const reduced = useReducedMotion();
-  const trackRef = useRef<HTMLDivElement>(null);
+  const viewRef = useRef<HTMLDivElement>(null);
+  const start = useRef<{ x: number; y: number; moved: boolean; horizontal: boolean | null; id: number } | null>(null);
+  const dragRef = useRef(0); // 손을 뗄 때 최신 끌기 거리(상태는 한 박자 늦을 수 있어 ref 로도 둔다)
   const count = posts.length;
+  const go = (i: number) => setIndex(((i % count) + count) % count);
 
-  // 자동 넘김(5초). 마우스를 올리거나 포커스가 있으면 멈춘다
+  // 너비를 재서 슬라이드 크기·미리보기 폭을 정한다
   useEffect(() => {
-    if (paused || reduced || count < 2) return;
-    const t = window.setInterval(() => setIndex((i) => (i + 1) % count), 5000);
+    const el = viewRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => setWidth(e.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [count]);
+
+  // 자동 넘김(6초). 마우스를 올리거나 포커스·끌기 중에는 멈춘다
+  useEffect(() => {
+    if (paused || reduced || count < 2 || drag !== 0) return;
+    const t = window.setInterval(() => setIndex((i) => (i + 1) % count), 6000);
     return () => window.clearInterval(t);
-  }, [paused, reduced, count]);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    const slide = track?.children[index] as HTMLElement | undefined;
-    if (track && slide) track.scrollTo({ left: slide.offsetLeft, behavior: reduced ? 'auto' : 'smooth' });
-  }, [index, reduced]);
-
-  // 손가락으로 넘긴 경우 현재 슬라이드 번호를 맞춘다
-  const onScroll = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    const i = Math.round(track.scrollLeft / track.clientWidth);
-    if (i !== index && i >= 0 && i < count) setIndex(i);
-  };
+  }, [paused, reduced, count, drag, index]);
 
   if (count === 0) return <div className="h-spot h-spot-skeleton skeleton" />;
+
+  const peek = width < 640 ? 28 : 84; // 다음 슬라이드가 보이는 폭
+  const gap = 12;
+  const slideW = Math.max(0, width - (count > 1 ? peek : 0));
+  const offset = -(index * (slideW + gap)) + drag;
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    start.current = { x: e.clientX, y: e.clientY, moved: false, horizontal: null, id: e.pointerId };
+    dragRef.current = 0;
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    const st = start.current;
+    if (!st) return;
+    const dx = e.clientX - st.x;
+    const dy = e.clientY - st.y;
+    if (st.horizontal === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+      st.horizontal = Math.abs(dx) > Math.abs(dy);
+      // 마우스는 가로 끌기로 정해지면 포인터를 잡는다: 슬라이더 밖에서 손을 떼도 끝까지 받는다.
+      // 터치는 브라우저가 이미 손가락 아래 요소로 잡아 두므로(implicit capture) 따로 잡지 않는다
+      if (st.horizontal && e.pointerType === 'mouse') {
+        try {
+          e.currentTarget.setPointerCapture(st.id);
+        } catch {
+          /* 이미 놓인 포인터 */
+        }
+      }
+    }
+    if (!st.horizontal) return; // 세로로 움직이면 페이지 스크롤에 맡긴다
+    st.moved = true;
+    // 처음·끝에서는 덜 끌리게
+    const edge = (index === 0 && dx > 0) || (index === count - 1 && dx < 0);
+    const next = edge ? dx / 3 : dx;
+    dragRef.current = next;
+    setDrag(next);
+  };
+  const onPointerUp = () => {
+    const st = start.current;
+    if (!st) return;
+    if (st.moved) {
+      if (dragRef.current < -50) go(index + 1);
+      else if (dragRef.current > 50) go(index - 1);
+    }
+    dragRef.current = 0;
+    setDrag(0);
+    // 끌기 뒤 따라오는 click 은 onClickCapture 가 막고, 그다음에 상태를 비운다
+    window.setTimeout(() => (start.current = null), 0);
+  };
 
   return (
     <section
@@ -132,65 +184,101 @@ function Spotlight({ posts }: { posts: PostSummary[] }) {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
+      onKeyDown={(e) => {
+        if (e.key === 'ArrowRight') go(index + 1);
+        if (e.key === 'ArrowLeft') go(index - 1);
+      }}
     >
-      <div className="h-spot-track" ref={trackRef} onScroll={onScroll}>
-        {posts.map((p, i) => {
-          const { prefix, rest } = splitBracketPrefix(p.title);
-          const d = ddayLabel(p.endTime, p.endType);
-          return (
-            <Link
-              key={p.postId}
-              to={`/posts/${p.postId}`}
-              className="h-spot-slide"
-              aria-roledescription="slide"
-              aria-label={`${i + 1} / ${count}: ${p.title}`}
-              tabIndex={i === index ? 0 : -1}
-            >
-              {p.imageUrl && <img className="h-spot-bg" src={p.imageUrl} alt="" aria-hidden="true" />}
-              <div className="h-spot-media">
-                <Thumb src={p.imageUrl} type={p.imageType} alt={p.title} />
-              </div>
-              <div className="h-spot-copy">
-                <div className="h-spot-tags">
-                  <span className="h-pill h-pill-live">진행 중</span>
-                  {prefix && <span className="h-pill">{prefix}</span>}
+      <div
+        className="h-spot-view"
+        ref={viewRef}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        // 슬라이더 자신이 잡은 포인터를 놓쳤을 때만(자식 요소의 이벤트가 올라온 것은 무시)
+        onLostPointerCapture={(e) => e.target === e.currentTarget && onPointerUp()}
+        // 마우스: 이미지·링크의 기본 끌어 놓기와 글자 선택을 막는다(이게 시작되면 브라우저가 pointercancel 을 보내 슬라이더가 멈췄다)
+        onMouseDown={(e) => e.button === 0 && e.preventDefault()}
+        onDragStart={(e) => e.preventDefault()}
+        onClickCapture={(e) => {
+          // 끌어서 넘긴 뒤 손을 뗄 때 링크가 열리지 않게
+          if (start.current?.moved) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        }}
+      >
+        <div
+          className={`h-spot-track ${drag !== 0 ? 'is-dragging' : ''}`}
+          style={{ transform: `translate3d(${offset}px, 0, 0)`, gap }}
+        >
+          {posts.map((p, i) => {
+            const { prefix, rest } = splitBracketPrefix(p.title);
+            const d = ddayLabel(p.endTime, p.endType);
+            const active = i === index;
+            return (
+              <Link
+                key={p.postId}
+                to={`/posts/${p.postId}`}
+                className={`h-spot-slide ${active ? 'is-active' : ''}`}
+                style={{ width: slideW || '100%' }}
+                aria-roledescription="slide"
+                aria-label={`${i + 1} / ${count}: ${p.title}`}
+                aria-hidden={!active}
+                tabIndex={active ? 0 : -1}
+                draggable={false}
+                onClick={(e) => {
+                  // 옆에 보이는 미리보기 슬라이드를 누르면 그 슬라이드로 넘긴다
+                  if (!active) {
+                    e.preventDefault();
+                    go(i);
+                  }
+                }}
+              >
+                {p.imageUrl && <img className="h-spot-bg" src={p.imageUrl} alt="" aria-hidden="true" draggable={false} />}
+                <div className="h-spot-media">
+                  <Thumb src={p.imageUrl} type={p.imageType} alt={p.title} />
                 </div>
-                <h2 className="h-spot-title">{rest}</h2>
-                <p className="h-spot-meta">
-                  <span className="h-dday">{d}</span>
-                  {p.endTime ? `${formatDate(p.endTime)} 마감` : '기한 없이 진행'}
-                  <span aria-hidden="true">·</span>
-                  <Icon name="eye" size={14} /> {formatNumber(p.viewCount)}
-                </p>
-                <span className="h-spot-cta">
-                  자세히 보기 <Icon name="chevron-right" size={16} />
-                </span>
-              </div>
-            </Link>
-          );
-        })}
+                <div className="h-spot-copy">
+                  <div className="h-spot-tags">
+                    <span className="h-pill h-pill-live">진행 중</span>
+                    {prefix && <span className="h-pill">{prefix}</span>}
+                  </div>
+                  <h2 className="h-spot-title">{rest}</h2>
+                  <p className="h-spot-meta">
+                    <span className="h-dday">{d}</span>
+                    <span>{p.endTime ? `${formatDate(p.endTime)} 마감` : '기한 없이 진행'}</span>
+                    <span className="h-spot-views">
+                      <Icon name="eye" size={14} /> {formatNumber(p.viewCount)}
+                    </span>
+                  </p>
+                  <span className="h-spot-cta">
+                    자세히 보기 <Icon name="chevron-right" size={16} />
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
       {count > 1 && (
         <div className="h-spot-nav">
-          <button type="button" aria-label="이전" onClick={() => setIndex((index - 1 + count) % count)}>
+          <button type="button" aria-label="이전 이벤트" onClick={() => go(index - 1)}>
             <Icon name="chevron-left" size={18} />
           </button>
-          <div className="h-spot-dots" role="tablist">
+          <div className="h-spot-dots" role="tablist" aria-label="슬라이드 선택">
             {posts.map((p, i) => (
-              <button
-                key={p.postId}
-                type="button"
-                role="tab"
-                aria-selected={i === index}
-                aria-label={`${i + 1}번째`}
-                className={i === index ? 'active' : ''}
-                onClick={() => setIndex(i)}
-              >
-                {i === index && !paused && !reduced && <span key={index} className="h-spot-progress" />}
+              <button key={p.postId} type="button" role="tab" aria-selected={i === index} aria-label={`${i + 1}번째`}
+                className={i === index ? 'active' : ''} onClick={() => go(i)}>
+                {i === index && !paused && !reduced && drag === 0 && <span key={index} className="h-spot-progress" />}
               </button>
             ))}
           </div>
-          <button type="button" aria-label="다음" onClick={() => setIndex((index + 1) % count)}>
+          <span className="h-spot-count" aria-hidden="true">
+            {index + 1} / {count}
+          </span>
+          <button type="button" aria-label="다음 이벤트" onClick={() => go(index + 1)}>
             <Icon name="chevron-right" size={18} />
           </button>
         </div>
@@ -318,40 +406,18 @@ function BrandStories({ posts }: { posts: PostSummary[] }) {
   );
 }
 
-const CATEGORY_EMOJI: [RegExp, string][] = [
-  [/카페|디저트|커피/, '☕'],
-  [/뷰티|스킨|메이크업|화장/, '💄'],
-  [/패션|의류|신발|잡화/, '👟'],
-  [/피자|치킨|버거|음식|외식|배달|식품/, '🍕'],
-  [/예|적금|카드|금융|은행|포인트|페이/, '💳'],
-  [/전자|가전|디지털|IT/, '📱'],
-  [/공연|콘서트|영화|전시|문화/, '🎤'],
-  [/스포츠|운동|아웃도어/, '⚽'],
-  [/여행|숙박|항공/, '✈️'],
-  [/팝업|굿즈/, '🛍️'],
-  [/생활|리빙|홈|라이프/, '🏠'],
-  [/엔터|방송|OTT|음악/, '🎬'],
-  [/게임/, '🎮'],
-  [/시즌|기획/, '🎉'],
-];
-
-function emojiFor(name: string) {
-  return CATEGORY_EMOJI.find(([re]) => re.test(name))?.[1] ?? '🎁';
-}
-
+/** 분야 8개(AI 자동 분류). 옛 카테고리 트리 대신(2026-11-20) */
 function CategoryTiles() {
-  const categories = useCategories();
-  const groups = categories.data?.find((c) => c.name === '이벤트')?.children ?? [];
-  if (groups.length === 0) return null;
+  const overview = useQuery({ queryKey: ['insights', 'overview'], queryFn: insightsApi.overview, staleTime: 5 * 60_000 });
   return (
-    <nav className="h-cats" aria-label="이벤트 카테고리">
+    <nav className="h-cats" aria-label="이벤트 분야">
       <Link to={categoryHref('이벤트')} className="h-cat">
         <span className="h-cat-emoji">✨</span>전체
       </Link>
-      {groups.map((g) => (
-        <Link key={g.categoryId} to={categoryHref(g.name)} className="h-cat">
-          <span className="h-cat-emoji">{emojiFor(g.name)}</span>
-          {g.name}
+      {DOMAINS.map((d) => (
+        <Link key={d} to={domainHref(d)} className="h-cat" title={`${DOMAIN_META[d].desc} · 진행 중 ${overview.data?.byDomain[d] ?? '–'}개`}>
+          <span className="h-cat-emoji">{DOMAIN_META[d].emoji}</span>
+          {d}
         </Link>
       ))}
       <Link to={categoryHref('핫딜')} className="h-cat">
