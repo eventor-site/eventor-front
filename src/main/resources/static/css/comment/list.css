@@ -1,5 +1,0 @@
-.comment {
-    word-wrap: break-word; /* 길이가 긴 단어를 강제로 줄바꿈 */
-    word-break: break-word; /* 긴 단어가 줄바꿈 없이 넘어가지 않게 처리 */
-    white-space: pre-line;
-}

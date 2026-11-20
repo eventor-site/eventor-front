@@ -1,0 +1,17 @@
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+Disallow: /me
+Disallow: /write
+
+Sitemap: https://eventor.duckdns.org/sitemap.xml

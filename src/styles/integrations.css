@@ -1,0 +1,325 @@
+/* 관리자 > 외부 연동 (접두사 ig-) */
+.ig-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+}
+
+.ig-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.ig-summary b {
+  font-size: 24px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.ig-summary span {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.ig-summary .ig-warn b {
+  color: #d97706;
+}
+
+.ig-summary .ig-bad b {
+  color: var(--hot);
+}
+
+.ig-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ig-group-title {
+  margin: 4px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+details.ig-group > summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text-3);
+  padding: 6px 0;
+}
+
+details.ig-group[open] > summary {
+  margin-bottom: 10px;
+}
+
+.ig-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 1100px) {
+  .ig-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ig-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--line-strong);
+}
+
+.ig-card.ig-on {
+  border-left-color: var(--green);
+}
+
+.ig-card.ig-ready {
+  border-left-color: var(--blue);
+}
+
+.ig-card.ig-off {
+  opacity: 0.72;
+}
+
+.ig-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ig-icon {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 4px;
+}
+
+.ig-icon-text {
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: var(--text-2);
+  background: var(--gray-soft);
+}
+
+.ig-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.ig-title h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.ig-title p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.ig-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--gray-soft);
+  color: var(--text-2);
+}
+
+.ig-status-0 {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.ig-status-1 {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.ig-purpose {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.ig-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ig-env {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.ig-badge.ig-ok,
+.ig-env.ig-ok {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.ig-badge.ig-bad,
+.ig-env.ig-bad {
+  background: rgba(255, 59, 48, 0.1);
+  color: var(--hot);
+}
+
+.ig-badge.ig-warn {
+  background: rgba(217, 119, 6, 0.12);
+  color: #d97706;
+}
+
+.ig-env.ig-muted {
+  font-family: inherit;
+  background: var(--gray-soft);
+  color: var(--text-3);
+}
+
+.ig-note,
+.ig-memo {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.ig-alert {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  background: rgba(217, 119, 6, 0.1);
+  color: #b45309;
+}
+
+.ig-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 6px 6px 12px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.ig-check.ig-ok {
+  border-color: rgba(18, 183, 106, 0.35);
+  color: var(--green);
+}
+
+.ig-check.ig-bad {
+  border-color: rgba(255, 59, 48, 0.35);
+  color: var(--hot);
+}
+
+.ig-check > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ig-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.ig-spacer {
+  flex: 1;
+}
+
+.ig-form {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Gemini 사용량 */
+.ig-ai {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(110deg, #ff6a00, #ff3d77, #a64dff) border-box;
+}
+
+.ig-ai-models {
+  display: grid;
+  gap: 10px;
+}
+
+@media (min-width: 900px) {
+  .ig-ai-models {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ig-ai-model {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.ig-ai-model small {
+  color: var(--text-3);
+  line-height: 1.5;
+}
+
+.ig-meter {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--gray-soft);
+  overflow: hidden;
+}
+
+.ig-meter span {
+  display: block;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  background: var(--brand);
+}
