@@ -10,6 +10,7 @@ import { formatDate, formatNumber } from '@/lib/format';
 import { useDocumentTitle } from '@/lib/useDocumentTitle';
 import { IntegrationsAdmin } from './IntegrationsAdmin';
 import { ResourceManager, type ResourceConfig } from './ResourceManager';
+import { refreshAfterPostChange } from '@/lib/postCache';
 
 type Row = Record<string, unknown>;
 
@@ -359,7 +360,8 @@ function Posts() {
   const run = async (fn: () => Promise<{ message: string | null }>) => {
     try {
       toast((await fn()).message ?? '처리했어요.');
-      await queryClient.invalidateQueries({ queryKey: ['admin', 'posts'] });
+      // 고정·종료·삭제는 사용자 목록·메인에도 바로 반영
+      await refreshAfterPostChange(queryClient);
     } catch (e) {
       toast((e as Error).message, 'error');
     }
